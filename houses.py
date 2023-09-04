@@ -10,7 +10,7 @@ class Houses:
     first_ = House("first", 1, "Aries", "I am")
     second_ = House("second", 2, "Taurus", "I possess")
     third_ = House("third", 3, "Gemini", "I think")
-    forth_ = House("forth", 4, "Cancer", "I belong")
+    forth_ = House("fourth", 4, "Cancer", "I belong")
     fifth_ = House("fifth", 5, "Leo", "I generate")
     sixth_ = House("sixth", 6, "Virgo", "I attend to")
     seventh_ = House("seventh", 7, "Libra", "I relate")
@@ -85,7 +85,7 @@ class Houses:
                 house = self.second_
             case "3" | "third" : 
                 house = self.third_
-            case "4" | "forth" : 
+            case "4" | "fourth" : 
                 house = self.forth_
             case "5" | "fifth" : 
                 house = self.fifth_
@@ -111,6 +111,6 @@ class Houses:
         House.print(house)
 
     def print_keywords(self, house_name):
-        print("Keyword list for house " + house_name + ":")
+        print("Keyword list for the " + house_name + " house:")
         for k in Houses.keywords_[house_name]:
             print("\t- " + k)
