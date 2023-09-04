@@ -124,58 +124,58 @@ class Signs:
     def print_mode(self, mode):
         list = []
         for s in self.signs_:
-            if s.mode == mode:
-                list.append(s.sign)
+            if s.mode_ == mode:
+                list.append(s.name_)
         print(mode, ": ", list)
 
     # Print the signs that match the given polarity
     def print_polarity(self, polarity):
         list = []
         for s in self.signs_:
-            if s.polarity == polarity:
-                list.append(s.sign)
+            if s.polarity_ == polarity:
+                list.append(s.name_)
         print(polarity, ": ", list)
 
     # Print the signs that match the given element
     def print_element(self, element):
         list = []
         for s in self.signs_:
-            if s.element == element:
-                list.append(s.sign)
+            if s.element_ == element:
+                list.append(s.name_)
         print(element, ": ", list)
 
     def print_arc(self, sign):
         for s in self.signs_:
-            if s.sign == sign:
-                print("[", s.degrees, s.degrees + 30, ")")
+            if s.name_ == sign:
+                print("[", s.degrees_, s.degrees_ + 30, ")")
 
     def print_polarity_element(self, polarity, element):
         list = []
         for s in self.signs_:
-            if s.polarity == polarity and s.element == element:
-                list.append(s.sign)
+            if s.polarity_ == polarity and s.element_ == element:
+                list.append(s.name_)
         print(polarity, "/", element, ": ", list)
 
     def print_polarity_mode(self, polarity, mode):
         list = []
         for s in self.signs_:
-            if s.polarity == polarity and s.mode == mode:
-                list.append(s.sign)
+            if s.polarity_ == polarity and s.mode_ == mode:
+                list.append(s.name_)
         print(polarity, "/", mode, ": ", list)
 
     def print_element_mode(self, element, mode):
         list = []
         for s in self.signs_:
-            if s.element == element and s.mode == mode:
-                list.append(s.sign)
+            if s.element_ == element and s.mode_ == mode:
+                list.append(s.name_)
         print(element, "/", mode, ": ", list)
 
     def print_2_commons(self, sign):
         list = []
         for s in self.signs_:
-            if s.sign == sign.sign:
+            if s.sign_ == sign.sign_:
                 pass
-            elif s.element == sign.element and (s.mode == sign.mode or s.polarity == sign.polarity):
-                list.append(s.sign)
-        print(sign.sign, "has 2 in common with", list)
+            elif s.element_ == sign.element_ and (s.mode_ == sign.mode_ or s.polarity_ == sign.polarity_):
+                list.append(s.name_)
+        print(sign.name_, "has 2 in common with", list)
 
