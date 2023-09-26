@@ -7,18 +7,47 @@ from planet import Planet
 # Planets class
 class Planets:
 
-    # Define all planets
-    sun_ = Planet("Sun")
-    moon_ = Planet("Moon")
-    mercury_ = Planet("Mercury")
-    venus_ = Planet("Venus")
-    mars_ = Planet("Mars")
-    jupiter_ = Planet("Jupiter")
-    saturn_ = Planet("Saturn")
-    chiron_ = Planet("Chiron")
-    uranus_ = Planet("uranus")
-    neptune_ = Planet("Neptune")
-    pluto_ = Planet("Pluto")
+    # Define all planets using the Planet class
+    sun_ = Planet("Sun", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A",
+                  "Leo", "Sunday", ["Bright majestic yellow", "Orange"], 
+                  ["Heart", "Spine", "Eyes"])
+    
+    moon_ = Planet("Moon", "365.25 days", "27.3 around Earth", "29.5 days", "N/A", "N/A", "N/A",
+                   "Cancer", "Monday", ["Silver", "Off-white"],
+                    ["Stomach", "Breasts", "Lymphatic system", "Automatic nervous system",
+                     "Milk and body fluids (except from blood)"])
+
+    mercury_ = Planet("Mercury", "88 days", "58.65 days", "116 days", "176 days", "7˚ 0'", "28˚",
+                      ["Gemini", "Virgo"], "Wednesday", "Multi-coloured", 
+                      ["Nervous system", "Arms", "Hands"])
+    
+    venus_ = Planet("Venus", "225 days", "243 days", "584 days", "118 days", "3˚ 24'", "48˚", 
+                    ["Taurus", "Libra"], "Friday", "Green", 
+                    ["Kidneys", "Throat"])
+    
+    mars_ = Planet("Mars", "687 days", "24h 37m", "780 days", "N/A", "1˚ 51'", "N/A",
+                   ["Aries", "Scorpio"], "Tuesday", "Red",
+                   ["Immune system", "Blood", "Muscles", "Head", "Genitals", "Sexual functioning"])
+    
+    jupiter_ = Planet("Jupiter", "11.86 years", "9h 55m", "399 days", "N/A", "1˚ 18'", "N/A",
+                      ["Sagittarius", "Pisces"], "Thursday", ["Purple", "Royal blue"],
+                      ["Liver", "Thighs"])
+    
+    saturn_ = Planet("Saturn", "29.5 years", "10h 14m", "378 days", "N/A", "2˚ 29'", "N/A",
+                     ["Capricorn", "Aquarius"], "Saturday", ["Black", "Brown", "Grey", "Bottle green"],
+                     ["Skeleton", "Bones", "Skin", "Teeth"])
+    
+    chiron_ = Planet("Chiron", "50.7 years", "6h", "N/A", "N/A", "N/A", "N/A",
+                     "N/A", "N/A", "N/A", "N/A")
+    
+    uranus_ = Planet("uranus", "84 years", "17h 14m", "370 days", "N/A", "0˚ 46'", "N/A",
+                     "Aquarius", "N/A", "Turquoise blue", "Ankles")
+    
+    neptune_ = Planet("Neptune", "164 years", "16h 7m", "368 days", "N/A", "1˚ 46'", "N/A",
+                      "Pisces", "N/A", "Sea green", "Feet")
+    
+    pluto_ = Planet("Pluto", "248 days", "6d 9h", "367 days", "153h", "17˚ 10'", "N/A",
+                    "Scorpio", "N/A", "Dark red", "Genitals")
 
     keywords_ = {
         "Sun": ["power", "vitality", "self-expression", "selfhood (ego-self)", "identity", 
@@ -62,6 +91,9 @@ class Planets:
                   "profound change", "intensity", "buried secrets"]
     }
     
+    planets_ = [sun_, moon_, mercury_, venus_, mars_, jupiter_, saturn_, chiron_, 
+                uranus_, neptune_, pluto_]
+
     def get(self, i):
         match(i):
             case "1" | "Sun" : 

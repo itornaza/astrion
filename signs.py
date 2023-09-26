@@ -9,26 +9,37 @@ class Signs:
     # Define all twelve signs using the Sign class
     aries_ = Sign("Aries", 1, 0, "+", "Fire", "Cardinal", 
                 "Mars", "Head", "I am")
+    
     taurus_ = Sign("Taurus", 2, 30, "-", "Earth", "Fixed", 
                  "Venus", "Neck and throat", "I possess")
+    
     gemini_ = Sign("Gemini", 3, 60, "+", "Air", "Mutable", 
                  "Mercury", "Arms hands and lungs", "I think")
+    
     cancer_ = Sign("Cancer", 4, 90, "-", "Water", "Cardinal", 
                  "Moon", "Breasts and stomach", "I feel")
+    
     leo_ = Sign("Leo", 5, 120, "+", "Fire", "Fixed", 
                  "Sun", "Heart", "I will")
+    
     virgo_ = Sign("Virgo", 6, 150, "-", "Earth", "Mutable", 
                  "Mercury", "Digestive system and bowel", "I analyze")
+    
     libra_ = Sign("Libra", 7, 180, "+", "Air", "Cardinal", 
                  "Venus", "Kidneys", "I balance")
+    
     scorpio_ = Sign("Scorpio", 8, 210, "-", "Water", "Fixed", 
                    "Mars and Pluto", "Reproductive organs", "I desire")
+    
     sagitarius_ = Sign("Sagitarius", 9, 230, "+", "Fire", "Mutable", 
                       "Jupiter", "Hips and thighs", "I seek")
+    
     capricorn_ = Sign("Capricorn", 10, 260, "-", "Earth", "Cardinal", 
                      "Saturn", "Knees", "I achieve")
+    
     aquarius_ = Sign("Aquarius", 11, 290, "+", "Air", "Fixed", 
                     "Saturn and Uranus", "Shins and ankles", "I know")
+    
     pisces_ = Sign("Pisces", 12, 330, "-", "Water", "Mutable", 
                   "Jupiter and Neptune", "Feet", "I believe")
 
