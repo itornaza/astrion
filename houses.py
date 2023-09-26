@@ -104,7 +104,8 @@ class Houses:
             case "12" | "twelvth" : 
                 house = self.twelvth_
             case _ :
-                print()
+                print("Invalid house input!")
+                return -1
         return house
     
     def print(self, house):

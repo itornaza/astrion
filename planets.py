@@ -40,7 +40,7 @@ class Planets:
     chiron_ = Planet("Chiron", "50.7 years", "6h", "N/A", "N/A", "N/A", "N/A",
                      "N/A", "N/A", "N/A", "N/A")
     
-    uranus_ = Planet("uranus", "84 years", "17h 14m", "370 days", "N/A", "0˚ 46'", "N/A",
+    uranus_ = Planet("Uranus", "84 years", "17h 14m", "370 days", "N/A", "0˚ 46'", "N/A",
                      "Aquarius", "N/A", "Turquoise blue", "Ankles")
     
     neptune_ = Planet("Neptune", "164 years", "16h 7m", "368 days", "N/A", "1˚ 46'", "N/A",
@@ -119,7 +119,8 @@ class Planets:
             case "11" | "Pluto" : 
                 planet = self.pluto_
             case _ :
-                print()
+                print("Invalid planet input!")
+                return -1
         return planet
 
     def print(self, planet):
