@@ -115,7 +115,8 @@ class Signs:
             case "Pisces" | "12" : 
                 sign = self.pisces_
             case _ :
-                print()
+                print("Invalid sign input!")
+                return -1
         return sign
 
     def print_all(self):

@@ -37,19 +37,31 @@ while (True):
     print_menu()
     match(c):
         case "1" : # Planet
-            p = input("Enter planet name or number: ") 
-            planet = Planets.get(Planets, p)
-            Planets.print(Planets, planet)
+            while (True):
+                p = input("Enter planet name or number: ") 
+                planet = Planets.get(Planets, p)
+                if planet == -1: 
+                    break
+                Planets.print(Planets, planet)
+                break
         
         case "2" : # Keywords for planet
-            p = input("Enter planet name or number: ") 
-            planet = Planets.get(Planets, p)
-            Planets.print_keywords(Planets, planet.name_)
+            while (True): 
+                p = input("Enter planet name or number: ") 
+                planet = Planets.get(Planets, p)
+                if planet == -1: 
+                    break
+                Planets.print_keywords(Planets, planet.name_)
+                break
         
         case "3" : # Sign
-            s = input("Enter sign name or number: ") 
-            sign = Signs.get(Signs, s)
-            Signs.print(Signs, sign)
+            while (True):
+                s = input("Enter sign name or number: ") 
+                sign = Signs.get(Signs, s)
+                if sign == -1: 
+                    break
+                Signs.print(Signs, sign)
+                break
         
         case "4" : # Polarity
             p = input("Enter polarity (ex. +): ")
@@ -64,20 +76,31 @@ while (True):
             Signs.print_element(Signs, e)
         
         case "7" : # Keywords for the given sign
-            s = input("Enter sign name or number: ") 
-            sign = Signs.get(Signs, s)
-            Signs.print_keywords(Signs, sign.name_)
+            while (True):
+                s = input("Enter sign name or number: ") 
+                sign = Signs.get(Signs, s)
+                if sign == -1: 
+                    break
+                Signs.print_keywords(Signs, sign.name_)
+                break
         
         case "8" : # House
-            i = input("Enter house name or number: ") 
-            h = Houses.get(Houses, i)
-            Houses.print(Houses, h)
-            pass
+            while (True):
+                h = input("Enter house name or number: ") 
+                house = Houses.get(Houses, h)
+                if house == -1: 
+                    break
+                Houses.print(Houses, house)
+                break
         
         case "9" : # Keywords for the given house
-            h = input("Enter house name or number: ")
-            house = Houses.get(Houses, h)
-            Houses.print_keywords(Houses, house.name_)
+            while (True):
+                h = input("Enter house name or number: ")
+                house = Houses.get(Houses, h)
+                if house == -1: 
+                    break
+                Houses.print_keywords(Houses, house.name_)
+                break
         
         case "10" : # Keywords for the given planet, sign, house
             # Get user input
@@ -103,6 +126,7 @@ while (True):
             print_menu()
 
         case "0" | "e" | "exit" : # Exit program
+            print("\n\nBye-bye!\n\n")
             sys.exit()
        
         case _ : # Default
