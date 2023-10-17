@@ -31,7 +31,7 @@ class Signs:
     scorpio_ = Sign("Scorpio", 8, 210, "-", "Water", "Fixed", 
                    "Mars and Pluto", "Reproductive organs", "I desire")
     
-    sagitarius_ = Sign("Sagitarius", 9, 230, "+", "Fire", "Mutable", 
+    sagittarius_ = Sign("Sagittarius", 9, 230, "+", "Fire", "Mutable", 
                       "Jupiter", "Hips and thighs", "I seek")
     
     capricorn_ = Sign("Capricorn", 10, 260, "-", "Earth", "Cardinal", 
@@ -86,7 +86,7 @@ class Signs:
     }
 
     signs_ = [aries_, taurus_, gemini_, cancer_, leo_, virgo_, libra_, 
-            scorpio_, sagitarius_, capricorn_, aquarius_, pisces_]
+            scorpio_, sagittarius_, capricorn_, aquarius_, pisces_]
 
     def get(self, s):
         match(s):
@@ -106,8 +106,8 @@ class Signs:
                 sign = self.libra_
             case "Scorpio" | "8" : 
                 sign = self.scorpio_
-            case "Sagitarius" | "9" : 
-                sign = self.sagitarius_
+            case "Sagittarius" | "9" : 
+                sign = self.sagittarius_
             case "Capricorn" | "10" : 
                 sign = self.capricorn_
             case "Aquarius" | "11" : 
