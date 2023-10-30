@@ -12,7 +12,7 @@ from houses import Houses
 def print_menu():
     os.system("clear")
     print("+---------------------------------------------------+")
-    print("|          ---===  * Astro Menu *  ===---           |")
+    print("|      ---===  * Astro Menu (v1.1.0) *  ===---      |")
     print("+---------------------------------------------------+")
     print("| 1. Planet                                         |")
     print("| 2. Keywords for planet                            |")
