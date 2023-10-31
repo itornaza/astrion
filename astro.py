@@ -4,10 +4,24 @@
 
 import sys  # sys.exit()
 import os # os.system()
+import time # time.sleep()
 
 from planets import Planets
 from signs import Signs
 from houses import Houses
+
+def print_header():
+    os.system("clear")
+    print("\n\n")
+    print("    **        ****    ********   *****       ****     ")
+    print(" **    **   ***         ***      **  ***   **    **   ")
+    print(" **    **    ***        ***      **   **   **    **   ")
+    print(" ********      ***      ***      ******    **    **   ")
+    print(" **    **       ***     ***      **   **   **    **   ")
+    print(" **    **     ***       ***      **   **   **    **   ")
+    print(" **    **   ****        ***      **   **     ****     ")
+    print("\n")
+    time.sleep(1)
 
 def print_menu():
     os.system("clear")
@@ -30,6 +44,8 @@ def print_menu():
 planets = Planets()
 signs = Signs()
 houses = Houses()
+
+print_header()
 
 print_menu()
 while (True):
