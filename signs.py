@@ -128,7 +128,7 @@ class Signs:
         Sign.print(sign)
 
     def print_keywords(self, sign_name):
-        print("Keyword list for sign " + sign_name + ":")
+        print("\nKeyword list for sign " + sign_name + ":")
         for k in Signs.keywords_[sign_name]:
             print("\t- " + k)
 

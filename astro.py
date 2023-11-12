@@ -9,6 +9,7 @@ import time # time.sleep()
 from planets import Planets
 from signs import Signs
 from houses import Houses
+from aspects import Aspects
 
 def print_header():
     os.system("clear")
@@ -38,12 +39,15 @@ def print_menu():
     print("| 8. House                                          |")
     print("| 9. Keywords for house                             |")
     print("| 10. Keywords for planet, sign and house           |")
+    print("| 11. Aspect                                        |")
+    print("| 12. Keywords for aspect                           |")
     print("| 0. Exit                                           |")
     print("+---------------------------------------------------+")
 
 planets = Planets()
 signs = Signs()
 houses = Houses()
+aspects = Aspects()
 
 print_header()
 
@@ -138,6 +142,24 @@ while (True):
             Houses.print_keywords(Houses, house.name_)
             print("\n")
        
+        case "11" : # Aspect
+            while (True):
+                a = input("Enter aspect name or number: ") 
+                aspect = Aspects.get(Aspects, a)
+                if aspect == -1: 
+                    break
+                Aspects.print(Aspects, aspect)
+                break
+
+        case "12" : # Keywords for aspect
+            while (True): 
+                a = input("Enter aspect name or number: ") 
+                aspect = Aspects.get(Aspects, a)
+                if aspect == -1: 
+                    break
+                Aspects.print_keywords(Aspects, aspect.name_)
+                break
+
         case "c" | "clear" : # Clear terminal
             print_menu()
 
