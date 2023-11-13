@@ -112,6 +112,6 @@ class Houses:
         House.print(house)
 
     def print_keywords(self, house_name):
-        print("\nKeyword list for the " + house_name + " house:")
+        print("\nKeyword list for the " + house_name.upper() + " house:\n")
         for k in Houses.keywords_[house_name]:
             print("\t- " + k)

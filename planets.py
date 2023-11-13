@@ -127,6 +127,6 @@ class Planets:
         Planet.print(planet)
 
     def print_keywords(self, planet_name):
-        print("\nKeyword list for planet " + planet_name + ":")
+        print("\nKeyword list for planet " + planet_name.upper() + ":\n")
         for k in Planets.keywords_[planet_name]:
             print("\t- " + k)
