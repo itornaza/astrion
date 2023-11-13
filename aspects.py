@@ -137,6 +137,6 @@ class Aspects:
         Aspect.print(aspect)
 
     def print_keywords(self, aspect_name):
-        print("\nKeyword list for planet " + aspect_name + ":")
+        print("\nKeyword list for a " + aspect_name.upper() + " aspect:\n")
         for k in Aspects.keywords_[aspect_name]:
             print("\n\t- " + k)
