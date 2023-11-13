@@ -56,7 +56,7 @@ class Aspects:
 
         "Square": [
             "He/she struggles to actively and effectively integrate ......",
-            "He/she is confronted by the need to ......"
+            "He/she is confronted by the need to ......",
             "He/she finds themselves challenged to ......",
             "He/she seems to be frustrated and blocked by ......",
             "It is a big challenge for him/her to ......",
