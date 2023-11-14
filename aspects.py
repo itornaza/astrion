@@ -8,23 +8,23 @@ from aspect import Aspect
 class Aspects:
 
     # Define all planets using the Planet class
-    conjunction_ = Aspect("Conjunction", "0°", "1:1", 1, "8°")
+    conjunction_ = Aspect("Conjunction", "0°", "1:1", 1, "8°", "Sign")
     
-    opposition_ = Aspect("Opposition", "180°", "1:2", 2, "8°")
+    opposition_ = Aspect("Opposition", "180°", "1:2", 2, "8°", "Polarity")
 
-    trine_ = Aspect("Trine", "120°", "1:3", 3, "8°")
+    trine_ = Aspect("Trine", "120°", "1:3", 3, "8°", "Element")
 
-    square_ = Aspect("Square", "90°", "1:4", 2, "8°")
+    square_ = Aspect("Square", "90°", "1:4", 2, "8°", "Mode")
 
-    sextile_ = Aspect("Sextile", "60°", "1:6", [2, 3], "4°")
+    sextile_ = Aspect("Sextile", "60°", "1:6", [2, 3], "4°", ["Polarity", "Compatible element"])
 
-    semisquare_ = Aspect("Semisquare", "45°", "1:8", 2, "2°")
+    semisquare_ = Aspect("Semisquare", "45°", "1:8", 2, "2°", "N/A")
 
-    sesquiquadrate_ = Aspect("Sesquiquadrate", "135°", "3:8", [2, 3], "2°")
+    sesquiquadrate_ = Aspect("Sesquiquadrate", "135°", "3:8", [2, 3], "2°", "N/A")
 
-    semisextile_ = Aspect("Semisextile", "30°", "1:12", [2, 3], "2°")
+    semisextile_ = Aspect("Semisextile", "30°", "1:12", [2, 3], "2°", "Nothing")
 
-    quincunx_ = Aspect("Quincunx", "150°", "5/12", [2, 3, 5], "2°")
+    quincunx_ = Aspect("Quincunx", "150°", "5:12", [2, 3, 5], "2°", "Nothing")
 
     keywords_ = {
         "Conjunction": [
