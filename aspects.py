@@ -10,7 +10,7 @@ class Aspects:
     # Define all planets using the Planet class
     conjunction_ = Aspect("Conjunction", "0°", "1:1", 1, "8°", "Sign")
     
-    opposition_ = Aspect("Opposition", "180°", "1:2", 2, "8°", "Polarity")
+    opposition_ = Aspect("Opposition", "180°", "1:2", 2, "8°", ["Polarity", "Mode"])
 
     trine_ = Aspect("Trine", "120°", "1:3", 3, "8°", "Element")
 
