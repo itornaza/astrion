@@ -68,7 +68,7 @@ class Signs:
                   "gracious", "co-operative", "peace-loving", "indecisive", "gushing", 
                   "confrontational", "over-compromising", "diplomatic", "fair play", "charming",
                   "grace"],
-        "Scorpio": ["resourceful", "intuitive", "insightful", "determined" "passionate", 
+        "Scorpio": ["resourceful", "intuitive", "insightful", "determined", "passionate", 
                     "private", "sensitive", "powerful", "jealous", "secretive", "unforgiving",
                     "overbearing", "powerful emotions", "intensity", "regeneration", "fighter"],
         "Sagittarius": ["οptimistic", "enthousiastic", "adventurous", "philosophical", 
