@@ -132,13 +132,13 @@ class Signs:
         for k in Signs.keywords_[sign_name]:
             print("\t- " + k)
 
-    # Print the signs that match the given mode
+     # Print the signs that match the given mode
     def print_mode(self, mode):
         list = []
         for s in self.signs_:
             if s.mode_ == mode:
                 list.append(s.name_)
-        print(mode, ": ", list)
+        print(mode, "signs : ", list)
 
     # Print the signs that match the given polarity
     def print_polarity(self, polarity):
@@ -146,7 +146,7 @@ class Signs:
         for s in self.signs_:
             if s.polarity_ == polarity:
                 list.append(s.name_)
-        print(polarity, ": ", list)
+        print(polarity, "signs : ", list)
 
     # Print the signs that match the given element
     def print_element(self, element):
@@ -154,7 +154,11 @@ class Signs:
         for s in self.signs_:
             if s.element_ == element:
                 list.append(s.name_)
-        print(element, ": ", list)
+        print(element, "signs : ", list)
+
+    ###########################################################################
+    # TODO: Integrate the following methods
+    ###########################################################################
 
     def print_arc(self, sign):
         for s in self.signs_:

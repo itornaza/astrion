@@ -10,6 +10,7 @@ from planets import Planets
 from signs import Signs
 from houses import Houses
 from aspects import Aspects
+from elements import Elements
 
 def print_header():
     os.system("clear")
@@ -27,33 +28,28 @@ def print_header():
 def print_menu():
     os.system("clear")
     print("+---------------------------------------------------+")
-    print("|      ---===  * Astro Menu (v1.1.2) *  ===---      |")
+    print("|      ---===  * Astro Menu (v1.1.3) *  ===---      |")
     print("+---------------------------------------------------+")
-    print("|                   ~ Keywords ~                    |")
     print("| 1.  Planet keywords                               |")
     print("| 2.  Sign keywords                                 |")
     print("| 3.  House keywords                                |")
     print("| 4.  Planet + Sign + House keywords                |")
     print("| 5.  Aspect keywords                               |")
-    print("+---------------------------------------------------+")
-    print("|                   ~ Technical ~                   |")
-    print("| 6.  Planet                                        |")
-    print("| 7.  Sign                                          |")
-    print("| 8.  Polarity                                      |")
-    print("| 9.  Mode                                          |")
-    print("| 10. Element                                       |")
-    print("| 11. House                                         |")
-    print("| 12. Aspect                                        |")
-    print("+---------------------------------------------------+")
-    print("|                  ~ Motherhood ~                   |")
-    print("| m.  Menu                                          |")
-    print("| e.  Exit                                          |")
-    print("+---------------------------------------------------+")
+    print("| 6.  Element keywords                              |")
+    print("+------------------------+--------------------------+")
+    print("| 7.  Planet             | 11.  Polarity            |")
+    print("| 8.  Sign               | 12.  Mode                |")
+    print("| 9.  House              | 13.  Element             |")
+    print("| 10. Aspect             |                          |")
+    print("+------------------------+--------------------------+")
+    print("| m.  Menu               | e.  Exit                 |")
+    print("+------------------------+--------------------------+")
 
 planets = Planets()
 signs = Signs()
 houses = Houses()
 aspects = Aspects()
+elements = Elements()
 
 print_header()
 
@@ -80,7 +76,7 @@ while (True):
                 Signs.print_keywords(Signs, sign.name_)
                 break
 
-        case "3" : # Keywords for the given house
+        case "3" : # Keywords for house
             while (True):
                 h = input("Enter house name or number: ")
                 house = Houses.get(Houses, h)
@@ -118,7 +114,16 @@ while (True):
                 Aspects.print_keywords(Aspects, aspect.name_)
                 break
 
-        case "6" : # Planet
+        case "6" : # Keywords for element
+            while (True):
+                e = input("Enter element name or number: ")
+                element = Elements.get(Elements, e)
+                if element == -1: 
+                    break
+                Elements.print_keywords(Elements, element.name_)
+                break
+
+        case "7" : # Planet
             while (True):
                 p = input("Enter planet name or number: ") 
                 planet = Planets.get(Planets, p)
@@ -127,7 +132,7 @@ while (True):
                 Planets.print(Planets, planet)
                 break
         
-        case "7" : # Sign
+        case "8" : # Sign
             while (True):
                 s = input("Enter sign name or number: ") 
                 sign = Signs.get(Signs, s)
@@ -136,19 +141,7 @@ while (True):
                 Signs.print(Signs, sign)
                 break
         
-        case "8" : # Polarity
-            p = input("Enter polarity (ex. +): ")
-            Signs.print_polarity(Signs, p)
-        
-        case "9" : # Mode
-            m = input("Enter mode (ex. Cardinal): ")
-            Signs.print_mode(Signs, m)
-        
-        case "10" : # Element
-            e = input("Enter element (ex. Fire): ")
-            Signs.print_element(Signs, e)
-        
-        case "11" : # House
+        case "12" : # House
             while (True):
                 h = input("Enter house name or number: ") 
                 house = Houses.get(Houses, h)
@@ -157,13 +150,31 @@ while (True):
                 Houses.print(Houses, house)
                 break
        
-        case "12" : # Aspect
+        case "13" : # Aspect
             while (True):
                 a = input("Enter aspect name or number: ") 
                 aspect = Aspects.get(Aspects, a)
                 if aspect == -1: 
                     break
                 Aspects.print(Aspects, aspect)
+                break
+
+        case "9" : # Polarity
+            p = input("Enter polarity (ex. +): ")
+            Signs.print_polarity(Signs, p)
+        
+        case "10" : # Mode
+            m = input("Enter mode (ex. Cardinal): ")
+            Signs.print_mode(Signs, m)
+        
+        case "11" : # Element
+            while (True):
+                e = input("Enter element name or number: ") 
+                element = Elements.get(Elements, e)
+                if element == -1: 
+                    break
+                Elements.print(Elements, element)
+                Signs.print_element(Signs, e)
                 break
 
         case "m" | "menu" | "Menu" : # Show menu
