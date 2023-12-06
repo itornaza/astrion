@@ -79,32 +79,31 @@ class Houses:
 
     def get(self, i):
         match(i):
-            case "1" | "first" : 
+            case "1" | "First" | "first" : 
                 house = self.first_
-            case "2" | "second" : 
+            case "2" | "Second" | "second" : 
                 house = self.second_
-            case "3" | "third" : 
+            case "3" | "Third" | "third" : 
                 house = self.third_
-            case "4" | "fourth" : 
+            case "4" | "Fourth" | "fourth" : 
                 house = self.forth_
-            case "5" | "fifth" : 
+            case "5" | "Fifth" | "fifth" : 
                 house = self.fifth_
-            case "6" | "sixth" : 
+            case "6" | "Sixth" | "sixth" : 
                 house = self.sixth_
-            case "7" | "seventh" : 
+            case "7" | "Seventh" | "seventh" : 
                 house = self.seventh_
-            case "8" | "eigth" : 
+            case "8" | "Eigth" | "eigth" : 
                 house = self.eight_
-            case "9" | "ninth" : 
+            case "9" | "Ninth" | "ninth" : 
                 house = self.ninth_
-            case "10" | "tenth" : 
+            case "10" | "Tenth" | "tenth" : 
                 house = self.tenth_
-            case "11" | "eleventh" : 
+            case "11" | "Eleventh" | "eleventh" : 
                 house = self.eleventh_
-            case "12" | "twelvth" : 
+            case "12" | "Twelvth" | "twelvth" : 
                 house = self.twelvth_
             case _ :
-                print("Invalid house input!")
                 return -1
         return house
     
