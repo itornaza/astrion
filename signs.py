@@ -90,32 +90,31 @@ class Signs:
 
     def get(self, s):
         match(s):
-            case "Aries" | "1" : 
+            case "Aries" | "aries" : 
                 sign = self.aries_
-            case "Taurus" | "2" : 
+            case "Taurus" | "taurus" : 
                 sign = self.taurus_
-            case "Gemini" | "3" : 
+            case "Gemini" | "gemini" : 
                 sign = self.gemini_
-            case "Cancer" | "4" : 
+            case "Cancer" | "cancer" : 
                 sign = self.cancer_
-            case "Leo" | "5" : 
+            case "Leo" | "leo" : 
                 sign = self.leo_
-            case "Virgo" | "6" : 
+            case "Virgo" | "virgo" : 
                 sign = self.virgo_
-            case "Libra" | "7" : 
+            case "Libra" | "libra" : 
                 sign = self.libra_
-            case "Scorpio" | "8" : 
+            case "Scorpio" | "scorpio" : 
                 sign = self.scorpio_
-            case "Sagittarius" | "9" : 
+            case "Sagittarius" | "sagittarius" : 
                 sign = self.sagittarius_
-            case "Capricorn" | "10" : 
+            case "Capricorn" | "capricorn" : 
                 sign = self.capricorn_
-            case "Aquarius" | "11" : 
+            case "Aquarius" | "aquarius" : 
                 sign = self.aquarius_
-            case "Pisces" | "12" : 
+            case "Pisces" | "pisces" : 
                 sign = self.pisces_
             case _ :
-                print("Invalid sign input!")
                 return -1
         return sign
 

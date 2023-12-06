@@ -96,30 +96,29 @@ class Planets:
 
     def get(self, i):
         match(i):
-            case "1" | "Sun" : 
+            case "Sun" | "sun" : 
                 planet = self.sun_
-            case "2" | "Moon" : 
+            case "Moon" | "moon" : 
                 planet = self.moon_
-            case "3" | "Mercury" : 
+            case "Mercury" | "mercury" : 
                 planet = self.mercury_
-            case "4" | "Venus" : 
+            case "Venus" | "venus" : 
                 planet = self.venus_
-            case "5" | "Mars" : 
+            case "Mars" | "mars" : 
                 planet = self.mars_
-            case "6" | "Jupiter" : 
+            case "Jupiter" | "jupiter" : 
                 planet = self.jupiter_
-            case "7" | "Saturn" : 
+            case "Saturn" | "saturn" : 
                 planet = self.saturn_
-            case "8" | "Chiron" : 
+            case "Chiron" | "chiron" : 
                 planet = self.chiron_
-            case "9" | "Uranus" : 
+            case "Uranus" | "uranus" : 
                 planet = self.uranus_
-            case "10" | "Neptune" : 
+            case "Neptune" | "neptune" : 
                 planet = self.neptune_
-            case "11" | "Pluto" : 
+            case "Pluto" | "pluto" : 
                 planet = self.pluto_
             case _ :
-                print("Invalid planet input!")
                 return -1
         return planet
 

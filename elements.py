@@ -27,16 +27,15 @@ class Elements:
 
     def get(self, e):
         match(e):
-            case "Fire" | "1" : 
+            case "Fire" | "fire" : 
                 element = self.fire_
-            case "Earth" | "2" : 
+            case "Earth" | "earth" : 
                 element = self.earth_
-            case "Air" | "3" : 
+            case "Air" | "aries" : 
                 element = self.air_
-            case "Water" | "4" : 
+            case "Water" | "water" : 
                 element = self.water_
             case _ :
-                print("Invalid element input!")
                 return -1
         return element
 

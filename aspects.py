@@ -110,26 +110,25 @@ class Aspects:
 
     def get(self, i):
         match(i):
-            case "1" | "Conjunction" : 
+            case "Conjunction" | "conjunction" | "CO" | "co" : 
                 aspect = self.conjunction_
-            case "2" | "Opposition" : 
+            case "Opposition" | "opposition" | "OP" | "op" : 
                 aspect = self.opposition_
-            case "3" | "Trine" : 
+            case "Trine" | "trine" | "TR" | "tr" : 
                 aspect = self.trine_
-            case "4" | "Square" : 
+            case "Square" | "square" | "SQ" | "sq" : 
                 aspect = self.square_
-            case "5" | "Sextile" : 
+            case "Sextile" | "sextile" | "SX" | "sx" : 
                 aspect = self.sextile_
-            case "6" | "Semisquare" : 
+            case "Semisquare" | "semisquare" | "SSQ" | "ssq" : 
                 aspect = self.semisquare_
-            case "7" | "Sesquiquadrate" : 
+            case "Sesquiquadrate" | "sesquiquadrate" | "SES" | "ses" : 
                 aspect = self.sesquiquadrate_
-            case "8" | "Semisextile" : 
+            case "Semisextile" | "semisextile" | "SS" | "ss" : 
                 aspect = self.semisextile_
-            case "9" | "Quincunx" : 
+            case "Quincunx" | "quincunx" | "QN" | "qn" : 
                 aspect = self.quincunx_
             case _ :
-                print("Invalid aspect input!")
                 return -1
         return aspect
 
