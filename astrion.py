@@ -15,32 +15,30 @@ from elements import Elements
 def print_header():
     os.system("clear")
     print("\n\n")
-    print("    **        ****    ********   *****       ****     ")
-    print(" **    **   ***         ***      **  ***   **    **   ")
-    print(" **    **    ***        ***      **   **   **    **   ")
-    print(" ********      ***      ***      ******    **    **   ")
-    print(" **    **       ***     ***      **   **   **    **   ")
-    print(" **    **     ***       ***      **   **   **    **   ")
-    print(" **    **   ****        ***      **   **     ****     ")
+    print("    ***       ****    ********   *****      ***     ****      **    *** ")
+    print(" **    **   ***         ***      **  ***    **    **    **    ** *  **  ")
+    print(" **    **    ***        ***      **   **    **    **    **    **  * **  ")
+    print(" ********      ***      ***      ******     **    **    **    **   ***  ")
+    print(" **    **       ***     ***      **   **    **    **    **    **    **  ")
+    print(" **    **     ***       ***      **   **    **    **    **    **    **  ")
+    print("***    **   ****       ****     ***   **   ***      ****     ***    **  ")
     print("\n")
     time.sleep(0.2)
-    print("                                >>> created by ion-   ")
+    print("                                                   >>> created by ion-  ")
     print("\n")
     time.sleep(0.8)
 
 def print_menu():
     os.system("clear")
     print("+---------------------------------------------------+")
-    print("|      ---===  * Astro Menu (v1.1.3) *  ===---      |")
-    print("+---------------------------------------------------+")
-    print("| 1.  Keywords                                      |")
+    print("|      ---===  * Astro Menu (v1.2.0) *  ===---      |")
     print("+------------------------+--------------------------+")
+    print("| 1.  Keywords           | 5.  Aspect               |")
     print("| 2.  Planet             | 6.  Polarity             |")
     print("| 3.  Sign               | 7.  Mode                 |")
     print("| 4.  House              | 8.  Element              |")
-    print("| 5. Aspect              |                          |")
     print("+------------------------+--------------------------+")
-    print("| m.  Menu               | 0, e, q.  Exit           |")
+    print("| m.  Menu               | q.  Quit                 |")
     print("+------------------------+--------------------------+")
 
 planets = Planets()
@@ -57,7 +55,7 @@ while (True):
     print_menu()
     match(c):
         case "1" : # Generic keyword list search         
-            user_input = input("Enter search terms separated by space:\n")
+            user_input = input("Enter terms separated by space: ")
             user_input_list = user_input.split()
             for term in user_input_list:
 
@@ -98,7 +96,7 @@ while (True):
 
         case "2" : # Planet
             while (True):
-                p = input("Enter planet name or number: ") 
+                p = input("Enter planet: ") 
                 planet = Planets.get(Planets, p)
                 if planet == -1: 
                     print("Invalid planet input!")
@@ -108,7 +106,7 @@ while (True):
         
         case "3" : # Sign
             while (True):
-                s = input("Enter sign name or number: ") 
+                s = input("Enter sign: ") 
                 sign = Signs.get(Signs, s)
                 if sign == -1: 
                     print("Invalid sign input!")
@@ -118,7 +116,7 @@ while (True):
         
         case "4" : # House
             while (True):
-                h = input("Enter house name or number: ") 
+                h = input("Enter house: ") 
                 house = Houses.get(Houses, h)
                 if house == -1: 
                     print("Invalid house input!")
@@ -128,7 +126,7 @@ while (True):
        
         case "5" : # Aspect
             while (True):
-                a = input("Enter aspect name or number: ") 
+                a = input("Enter aspect: ") 
                 aspect = Aspects.get(Aspects, a)
                 if aspect == -1: 
                     print("Invalid aspect input!")
@@ -146,7 +144,7 @@ while (True):
         
         case "8" : # Element
             while (True):
-                e = input("Enter element name or number: ") 
+                e = input("Enter element: ") 
                 element = Elements.get(Elements, e)
                 if element == -1: 
                     break
@@ -157,7 +155,7 @@ while (True):
         case "m" | "menu" | "Menu" : # Show menu
             print_menu()
 
-        case "0" | "e" | "E" | "q" | "Q" | "Exit" | "exit" : # Exit program
+        case "0" | "e" | "E" | "q" | "Q" | "Exit" | "exit" | "Quit" | "quit" : # Exit program
             print("\n\nBye-bye!\n\n")
             sys.exit()
        
