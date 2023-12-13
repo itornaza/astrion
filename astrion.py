@@ -6,10 +6,11 @@ import sys  # sys.exit()
 import os # os.system()
 import time # time.sleep()
 
-from planets import Planets
+from planets import Planets # Handles polarity and mode as well
 from signs import Signs
 from houses import Houses
 from aspects import Aspects
+from angles import Angles
 from elements import Elements
 
 def print_header():
@@ -31,12 +32,13 @@ def print_header():
 def print_menu():
     os.system("clear")
     print("+---------------------------------------------------+")
-    print("|      ---===  * Astro Menu (v1.2.0) *  ===---      |")
+    print("|      ---===  * Astro Menu (v1.3.0) *  ===---      |")
     print("+------------------------+--------------------------+")
-    print("| 1.  Keywords           | 5.  Aspect               |")
-    print("| 2.  Planet             | 6.  Polarity             |")
-    print("| 3.  Sign               | 7.  Mode                 |")
-    print("| 4.  House              | 8.  Element              |")
+    print("| 1.  Keywords           | 6.  Angle                |")
+    print("| 2.  Planet             | 7.  Polarity             |")
+    print("| 3.  Sign               | 8.  Mode                 |")
+    print("| 4.  House              | 9.  Element              |")
+    print("| 5.  Aspect             |                          |")
     print("+------------------------+--------------------------+")
     print("| m.  Menu               | q.  Quit                 |")
     print("+------------------------+--------------------------+")
@@ -59,38 +61,51 @@ while (True):
             user_input_list = user_input.split()
             for term in user_input_list:
 
-                is_valid_input = 5
+                is_valid_input = 6
 
+                # 1. Planet checks
                 valid_term = Planets.get(Planets, term)
                 if valid_term != -1: 
                     Planets.print_keywords(Planets, valid_term.name_)
                 else:
                     is_valid_input -= 1
                 
+                # 2. Sign checks
                 valid_term = Signs.get(Signs, term)
                 if valid_term != -1: 
                     Signs.print_keywords(Signs, valid_term.name_)
                 else:
                     is_valid_input -= 1
                 
+                # 3. Houses checks
                 valid_term = Houses.get(Houses, term)
                 if valid_term != -1: 
                     Houses.print_keywords(Houses, valid_term.name_)
                 else:
                     is_valid_input -= 1
                 
+                # 4. Aspects checks
                 valid_term = Aspects.get(Aspects, term)
                 if valid_term != -1: 
                     Aspects.print_keywords(Aspects, valid_term.name_)
                 else:
                     is_valid_input -= 1
                 
+                # 5. Angles checks
+                valid_term = Angles.get(Angles, term)
+                if valid_term != -1: 
+                    Angles.print_keywords(Angles, valid_term.name_)
+                else:
+                    is_valid_input -= 1
+
+                # 6. Elements checks
                 valid_term = Elements.get(Elements, term)
                 if valid_term != -1: 
                     Elements.print_keywords(Elements, valid_term.name_)
                 else:
                     is_valid_input -= 1
 
+                # Catch
                 if is_valid_input == 0:
                     print("\nInvalid input: " + term.upper())
 
@@ -133,16 +148,26 @@ while (True):
                     break
                 Aspects.print(Aspects, aspect)
                 break
+        
+        case "6" : # Angle
+            while (True):
+                a = input("Enter angle: ") 
+                angle = Angles.get(Angles, a)
+                if angle == -1: 
+                    print("Invalid angle input!")
+                    break
+                Angles.print(Angles, angle)
+                break
 
-        case "6" : # Polarity
+        case "7" : # Polarity
             p = input("Enter polarity (ex. +): ")
             Signs.print_polarity(Signs, p)
         
-        case "7" : # Mode
+        case "8" : # Mode
             m = input("Enter mode (ex. Cardinal): ")
             Signs.print_mode(Signs, m)
         
-        case "8" : # Element
+        case "9" : # Element
             while (True):
                 e = input("Enter element: ") 
                 element = Elements.get(Elements, e)

@@ -4,10 +4,8 @@
 
 from planet import Planet
 
-# Planets class
 class Planets:
 
-    # Define all planets using the Planet class
     sun_ = Planet("Sun", "N/A", "N/A", "N/A", "N/A", "N/A", "N/A",
                   "Leo", "Sunday", ["Bright majestic yellow", "Orange"], 
                   ["Heart", "Spine", "Eyes"])

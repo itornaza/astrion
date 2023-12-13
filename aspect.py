@@ -2,7 +2,6 @@
 # aspect
 #
 
-# Aspect class
 class Aspect:
    
     def __init__(self, name, angle, fraction, root_numbers, orb, same):
@@ -13,7 +12,6 @@ class Aspect:
         self.orb_ = orb
         self.same_ = same
     
-    # Print the details of a planet
     def print(self):
         print("\nName:\t\t", self.name_,
               "\nAngle:\t\t", self.angle_,

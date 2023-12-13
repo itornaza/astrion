@@ -2,7 +2,6 @@
 # element
 #
 
-# Sign element
 class Element:
 
     def __init__(self, element, plato, alchemy, humor, psychology, tarot, function, predominance):
@@ -15,7 +14,6 @@ class Element:
         self.function_ = function
         self.predominance_ = predominance
         
-    # Print the details of an element
     def print(self):
         print("\nName:\t\t", self.name_,
               "\nPlato:\t\t", self.plato_, 

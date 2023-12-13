@@ -2,7 +2,6 @@
 # house
 #
 
-# House class
 class House:
 
     def __init__(self, house, id, sign_affinity, moto):
@@ -11,7 +10,6 @@ class House:
         self.sign_affinity_ = sign_affinity
         self.moto_ = moto
 
-    # Print the details of a house
     def print(self):
         print("\nName:\t\t", self.name_, 
               "\nRank:\t\t", self.id_, 
