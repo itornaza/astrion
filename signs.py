@@ -6,7 +6,6 @@ from sign import Sign
 
 class Signs:
     
-    # Define all twelve signs using the Sign class
     aries_ = Sign("Aries", 1, 0, "+", "Fire", "Cardinal", 
                 "Mars", "Head", "I am")
     
@@ -122,7 +121,6 @@ class Signs:
         for s in self.signs_:
             Sign.print(s)
 
-    # Wrapper for the Sign.print method
     def print(self, sign):
         Sign.print(sign)
 
@@ -131,7 +129,6 @@ class Signs:
         for k in Signs.keywords_[sign_name]:
             print("\t- " + k)
 
-     # Print the signs that match the given mode
     def print_mode(self, mode):
         list = []
         for s in self.signs_:
@@ -139,7 +136,6 @@ class Signs:
                 list.append(s.name_)
         print(mode, "signs : ", list)
 
-    # Print the signs that match the given polarity
     def print_polarity(self, polarity):
         list = []
         for s in self.signs_:
@@ -147,7 +143,6 @@ class Signs:
                 list.append(s.name_)
         print(polarity, "signs : ", list)
 
-    # Print the signs that match the given element
     def print_element(self, element):
         list = []
         for s in self.signs_:

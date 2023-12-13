@@ -6,7 +6,6 @@ from house import House
 
 class Houses:
 
-    # Define all houses
     first_ = House("first", 1, "Aries", "I am")
     second_ = House("second", 2, "Taurus", "I possess")
     third_ = House("third", 3, "Gemini", "I think")

@@ -6,13 +6,15 @@ from element import Element
 
 class Elements:
     
-    # Define all twelve signs using the Sign class
     fire_ = Element("Fire", "Imagination", "Calcinatio", "Choleric", "Intuition", "Wands", 
                     "Conception", "So much confidence")
+    
     earth_ = Element("Earth", "Demonstration", "Coagulatio", "Melacholic", "Sensation", "Pentacles", 
                      "Incarnation", "So much security")
+    
     air_ = Element("Air", "Inteligence", "Sublimatio", "Sanguine", "Thinking", "Swords", 
                    "Separation and relationship", "So much thinking")
+    
     water_ = Element("Water", "Opinion", "Solutio", "Phlegmatic", "Feeling", "Cups", 
                      "Merging", "So much emotions")
 
@@ -43,7 +45,6 @@ class Elements:
         for e in self.elements_:
             Element.print(e)
 
-    # Wrapper for the Element.print method
     def print(self, element):
         Element.print(element)
 

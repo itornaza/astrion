@@ -2,7 +2,6 @@
 # sign
 #
 
-# Sign class
 class Sign:
 
     def __init__(self, sign, id, degrees, polarity ,element, mode, planet, body, moto):
@@ -16,7 +15,6 @@ class Sign:
         self.body_ = body
         self.moto_ = moto
 
-    # Print the details of a sign
     def print(self):
         print("\nName:\t\t", self.name_, 
               "\nRank:\t\t", self.id_, 

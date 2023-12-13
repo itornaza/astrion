@@ -2,7 +2,6 @@
 # planet
 #
 
-# Planet class
 class Planet:
    
     def __init__(self, name, orbit, rotation, synodic, solar_day, inclination, elongation, 
@@ -19,7 +18,6 @@ class Planet:
         self.color_ = color
         self.body_part_ = body_part
     
-    # Print the details of a planet
     def print(self):
         print("\nName:\t\t", self.name_,
               "\nOrbit:\t\t", self.orbit_,
