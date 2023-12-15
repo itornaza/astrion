@@ -22,5 +22,5 @@ class Element:
               "\nPsychology:\t", self.psychology_, 
               "\nTarot:\t\t", self.tarot_,
               "\nFunction:\t", self.function_,
-              "\nPredominance:\t", self.predominance_, "\n")
+              "\nPredominance:\t", self.predominance_)
 

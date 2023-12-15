@@ -3,21 +3,22 @@
 #
 
 from aspect import Aspect
+from constants import *
 
 class Aspects:
 
-    conjunction_ = Aspect("Conjunction", 0, "1:1", 1, "8°", "Sign")    
-    opposition_ = Aspect("Opposition", 180, "1:2", 2, "8°", ["Polarity", "Mode"])
-    trine_ = Aspect("Trine", 120, "1:3", 3, "8°", "Element")
-    square_ = Aspect("Square", 90, "1:4", 2, "8°", "Mode")
-    sextile_ = Aspect("Sextile", 60, "1:6", [2, 3], "4°", ["Polarity", "Compatible element"])
-    semisquare_ = Aspect("Semisquare", 45, "1:8", 2, "2°", "N/A")
-    sesquiquadrate_ = Aspect("Sesquiquadrate", 135, "3:8", [2, 3], "2°", "N/A")
-    semisextile_ = Aspect("Semisextile", 30, "1:12", [2, 3], "2°", "Nothing")
-    quincunx_ = Aspect("Quincunx", 150, "5:12", [2, 3, 5], "2°", "Nothing")
+    conjunction_ = Aspect(CONJUNCTION, 0, "1:1", 1, "8°", "Sign")    
+    opposition_ = Aspect(OPPOSITION, 180, "1:2", 2, "8°", ["Polarity", "Mode"])
+    trine_ = Aspect(TRINE, 120, "1:3", 3, "8°", "Element")
+    square_ = Aspect(SQUARE, 90, "1:4", 2, "8°", "Mode")
+    sextile_ = Aspect(SEXTILE, 60, "1:6", [2, 3], "4°", ["Polarity", "Compatible element"])
+    semisquare_ = Aspect(SEMISQUARE, 45, "1:8", 2, "2°", "N/A")
+    sesquiquadrate_ = Aspect(SESQUIQUADRATE, 135, "3:8", [2, 3], "2°", "N/A")
+    semisextile_ = Aspect(SEMISEXTILE, 30, "1:12", [2, 3], "2°", "Nothing")
+    quincunx_ = Aspect(QUINCUNX, 150, "5:12", [2, 3, 5], "2°", "Nothing")
 
     keywords_ = {
-        "Conjunction": [
+        CONJUNCTION: [
             "...... and ...... are at one with each other",
             "...... automatically combines with ......",
             "There is a synthesis between ...... and ......",
@@ -28,7 +29,7 @@ class Aspects:
             "There is a concentrated focus of ...... and ......"
         ],
 
-        "Opposition": [
+        OPPOSITION: [
             "An inner conflict between ...... and ......", 
             "Swinging between ...... and ......",
             "Feeling split between ...... and ......",
@@ -37,14 +38,14 @@ class Aspects:
             "Learning to recognise both ...... and ......"
         ],
 
-        "Trine": [
+        TRINE: [
             "He/she is easy and comfortable when it comes to ......", 
             "He/she enjoys and finds pleasure in ......",
             "He/she adopts the line of least resistance by ......", 
             "He/she takes it for granted that ......"
         ],
 
-        "Square": [
+        SQUARE: [
             "He/she struggles to actively and effectively integrate ......",
             "He/she is confronted by the need to ......",
             "He/she finds themselves challenged to ......",
@@ -53,14 +54,14 @@ class Aspects:
             "He/she gets a great deal of personal satisfaction when he/she achieves ......"            
         ],
 
-        "Sextile": [
+        SEXTILE: [
             "He/she is motivated to ......",
             "He/she can skilfully work towards ......",
             "He/she can ......",
             "He/she is able to combine ......"
         ],
         
-        "Semisquare": [
+        SEMISQUARE: [
             "He/she achieves productive and tangible results when he/she combines ......", 
             "He/she is determined to ......",
             "He/she finds it necessary to manifest ......",
@@ -69,7 +70,7 @@ class Aspects:
             "He/she struggles or works hard to achieve ......"
         ],
         
-        "Sesquiquadrate": [
+        SESQUIQUADRATE: [
             "He/she achieves productive and tangible results when he/she combines ......", 
             "He/she is determined to ......",
             "He/she finds it necessary to manifest ......",
@@ -78,7 +79,7 @@ class Aspects:
             "He/she struggles or works hard to achieve ......"
         ],
         
-        "Semisextile": [
+        SEMISEXTILE: [
             "He/she is constantly adjusting ......",
             "He/she feels uncomfortable with ......",
             "He/she is uneasy about ......",
@@ -86,7 +87,7 @@ class Aspects:
             "He/she makes attempts to accommodate both ...... and ......"
         ],
         
-        "Quincunx": [
+        QUINCUNX: [
             "He/she is constantly adjusting ......",
             "He/she feels uncomfortable with ......",
             "He/she is uneasy about ......",
