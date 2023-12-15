@@ -18,6 +18,7 @@ class Sign:
     def print(self):
         print("\nName:\t\t", self.name_, 
               "\nRank:\t\t", self.id_, 
+              "\nStarts at:\t", self.degrees_, "degrees",
               "\nPolarity:\t", self.polarity_, 
               "\nElement:\t", self.element_, 
               "\nMode:\t\t", self.mode_, 

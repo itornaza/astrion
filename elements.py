@@ -33,7 +33,7 @@ class Elements:
                 element = self.fire_
             case "Earth" | "earth" : 
                 element = self.earth_
-            case "Air" | "aries" : 
+            case "Air" | "air" : 
                 element = self.air_
             case "Water" | "water" : 
                 element = self.water_

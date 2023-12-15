@@ -150,14 +150,13 @@ class Signs:
                 list.append(s.name_)
         print(element, "signs : ", list)
 
+
+    def print_arc(self, sign):
+        print("Degrees: [", sign.degrees_, sign.degrees_ + 30, ")")
+
     ###########################################################################
     # TODO: Integrate the following methods
     ###########################################################################
-
-    def print_arc(self, sign):
-        for s in self.signs_:
-            if s.name_ == sign:
-                print("[", s.degrees_, s.degrees_ + 30, ")")
 
     def print_polarity_element(self, polarity, element):
         list = []
