@@ -14,7 +14,7 @@ class Aspect:
     
     def print(self):
         print("\nName:\t\t", self.name_,
-              "\nAngle:\t\t", self.angle_,
+              "\nAngle:\t\t", self.angle_, "degrees",
               "\nFraction:\t", self.fraction_,
               "\nRoot numbers:\t", self.root_numbers_,
               "\nOrb:\t\t", self.orb_,

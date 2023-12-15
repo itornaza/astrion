@@ -6,15 +6,15 @@ from aspect import Aspect
 
 class Aspects:
 
-    conjunction_ = Aspect("Conjunction", "0°", "1:1", 1, "8°", "Sign")    
-    opposition_ = Aspect("Opposition", "180°", "1:2", 2, "8°", ["Polarity", "Mode"])
-    trine_ = Aspect("Trine", "120°", "1:3", 3, "8°", "Element")
-    square_ = Aspect("Square", "90°", "1:4", 2, "8°", "Mode")
-    sextile_ = Aspect("Sextile", "60°", "1:6", [2, 3], "4°", ["Polarity", "Compatible element"])
-    semisquare_ = Aspect("Semisquare", "45°", "1:8", 2, "2°", "N/A")
-    sesquiquadrate_ = Aspect("Sesquiquadrate", "135°", "3:8", [2, 3], "2°", "N/A")
-    semisextile_ = Aspect("Semisextile", "30°", "1:12", [2, 3], "2°", "Nothing")
-    quincunx_ = Aspect("Quincunx", "150°", "5:12", [2, 3, 5], "2°", "Nothing")
+    conjunction_ = Aspect("Conjunction", 0, "1:1", 1, "8°", "Sign")    
+    opposition_ = Aspect("Opposition", 180, "1:2", 2, "8°", ["Polarity", "Mode"])
+    trine_ = Aspect("Trine", 120, "1:3", 3, "8°", "Element")
+    square_ = Aspect("Square", 90, "1:4", 2, "8°", "Mode")
+    sextile_ = Aspect("Sextile", 60, "1:6", [2, 3], "4°", ["Polarity", "Compatible element"])
+    semisquare_ = Aspect("Semisquare", 45, "1:8", 2, "2°", "N/A")
+    sesquiquadrate_ = Aspect("Sesquiquadrate", 135, "3:8", [2, 3], "2°", "N/A")
+    semisextile_ = Aspect("Semisextile", 30, "1:12", [2, 3], "2°", "Nothing")
+    quincunx_ = Aspect("Quincunx", 150, "5:12", [2, 3, 5], "2°", "Nothing")
 
     keywords_ = {
         "Conjunction": [
@@ -129,3 +129,17 @@ class Aspects:
         print("\nKeyword list for a " + aspect_name.upper() + " aspect:\n")
         for k in Aspects.keywords_[aspect_name]:
             print("\n\t- " + k)
+
+    def get_aspect_from_aspect_angle(aspect_angle):
+        match(aspect_angle):
+            case 0: return Aspects.conjunction_
+            case 30: return Aspects.semisextile_
+            case 45: return Aspects.semisquare_
+            case 60: return Aspects.sextile_
+            case 90: return Aspects.square_
+            case 120: return Aspects.trine_
+            case 135: return Aspects.sesquiquadrate_
+            case 150: return Aspects.quincunx_
+            case 180: return Aspects.opposition_
+            case _ :
+                return -1
