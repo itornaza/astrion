@@ -3,16 +3,17 @@
 #
 
 from angle import Angle
+from constants import *
 
 class Angles:
     
-    asc_ = Angle("Asc", "Ascendant", "Due East")
-    dsc_ = Angle("Dsc", "Descendant", "Due West")
-    mc_ = Angle("MC", ["Medium Coeli", "Midheaven"], "Due South")
-    ic_ = Angle("IC", "Imum Coeli", "Due North")
+    asc_ = Angle(ASC, "Ascendant", "Due East")
+    dsc_ = Angle(DSC, "Descendant", "Due West")
+    mc_ = Angle(MC, ["Medium Coeli", "Midheaven"], "Due South")
+    ic_ = Angle(IC, "Imum Coeli", "Due North")
 
     keywords_ = {
-        "Asc": ["The place of the rising sun and our birth and entry into the world",
+        ASC: ["The place of the rising sun and our birth and entry into the world",
                 "How we approach the world and how the world sees us",
                 "Beginnings – our birth moment",
                 "Our momentum into life",
@@ -20,13 +21,13 @@ class Angles:
                 "Our identity and journey of self discovery",
                 "Liminal space – the great threshold"],
 
-        "Dsc": ["The journey through relationships What relationship means to us",
+        DSC: ["The journey through relationships What relationship means to us",
                 "The experience we meet in relationship", 
                 "How we approach relationships Qualities we admire in others", 
                 "Attractions and what is attractive to us",
                 "Our projections"],
 
-        "MC": ["The middle of the heavens",
+        MC: ["The middle of the heavens",
                "Our vocation, our calling",
                "Our career and the work we do",
                "Our place in the world and what we have to offer the world – our journey into this", 
@@ -36,7 +37,7 @@ class Angles:
                "The parental axis – mother/father",
                "How the world sees us – and what we project onto the world"],
 
-        "IC": ["The bottom of the sky",
+        IC: ["The bottom of the sky",
                "Our roots and foundations - anchorage",
                "Our home and experience of belonging",
                "Family life, early experience of home, and security",

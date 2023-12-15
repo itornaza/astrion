@@ -141,12 +141,12 @@ def angle_handler():
         Angles.print(Angles, angle)
 
 def polarity_handler():
-    p = input("Enter polarity (ex. +): ")
-    Signs.print_polarity(Signs, p)
+    p = input("Enter polarity: ")
+    Signs.print_signs_in_polarity(Signs, p)
 
 def mode_handler():
-    m = input("Enter mode (ex. Cardinal): ")
-    Signs.print_mode(Signs, m)
+    m = input("Enter mode: ")
+    Signs.print_signs_in_mode(Signs, m)
 
 def element_handler():
     e = input("Enter element: ") 
@@ -155,7 +155,7 @@ def element_handler():
         print("Invalid element input!")
     else:
         Elements.print(Elements, element)
-        Signs.print_element(Signs, e)
+        Signs.print_signs_in_element(Signs, element.name_)
 
 def compare_signs_handler():
     user_input = input("Enter terms separated by space: ")
@@ -187,4 +187,4 @@ def compare_signs_handler():
     if sign_a.mode_ == sign_b.mode_:
         print("Same mode:\t ", sign_a.mode_)
     if sign_a.element_ == sign_b.element_:
-        print("Same element:\t ", sign_a.element_)
+        print("Same element:\t", sign_a.element_)

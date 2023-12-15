@@ -3,26 +3,20 @@
 #
 
 from element import Element
+from constants import *
 
 class Elements:
     
-    fire_ = Element("Fire", "Imagination", "Calcinatio", "Choleric", "Intuition", "Wands", 
-                    "Conception", "So much confidence")
-    
-    earth_ = Element("Earth", "Demonstration", "Coagulatio", "Melacholic", "Sensation", "Pentacles", 
-                     "Incarnation", "So much security")
-    
-    air_ = Element("Air", "Inteligence", "Sublimatio", "Sanguine", "Thinking", "Swords", 
-                   "Separation and relationship", "So much thinking")
-    
-    water_ = Element("Water", "Opinion", "Solutio", "Phlegmatic", "Feeling", "Cups", 
-                     "Merging", "So much emotions")
+    fire_ = Element(FIRE, "Imagination", "Calcinatio", "Choleric", "Intuition", "Wands", "Conception", "So much confidence")
+    earth_ = Element(EARTH, "Demonstration", "Coagulatio", "Melacholic", "Sensation", "Pentacles", "Incarnation", "So much security")
+    air_ = Element(AIR, "Inteligence", "Sublimatio", "Sanguine", "Thinking", "Swords", "Separation and relationship", "So much thinking")
+    water_ = Element(WATER, "Opinion", "Solutio", "Phlegmatic", "Feeling", "Cups", "Merging", "So much emotions")
 
     keywords_ = {
-        "Fire": ["enthusiastic", "optimistic", "confident", "dramatic", "warm"],
-        "Earth": ["practical", "sensible", "sensual", "realistic", "reliable", "down to earth"],
-        "Air": ["civilised", "detaches", "objective", "impersonal", "rational", "verbal"],
-        "Water": ["sympathetic", "receptive", "imaginative", "emotional", "intuitive"]
+        FIRE: ["enthusiastic", "optimistic", "confident", "dramatic", "warm"],
+        EARTH: ["practical", "sensible", "sensual", "realistic", "reliable", "down to earth"],
+        AIR: ["civilised", "detaches", "objective", "impersonal", "rational", "verbal"],
+        WATER: ["sympathetic", "receptive", "imaginative", "emotional", "intuitive"]
     }
 
     elements_ = [fire_, earth_, air_, water_]    
