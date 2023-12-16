@@ -74,3 +74,6 @@ FIRE = "Fire"
 EARTH = "Earth"
 AIR = "Air"
 WATER = "Water"
+
+# Misc
+NA = "N/A" # For Not Available

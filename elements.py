@@ -2,6 +2,7 @@
 # elements
 #
 
+import re
 from element import Element
 from constants import *
 
@@ -22,22 +23,22 @@ class Elements:
     elements_ = [fire_, earth_, air_, water_]    
 
     def get(self, e):
-        match(e):
-            case "Fire" | "fire" : 
-                element = self.fire_
-            case "Earth" | "earth" : 
-                element = self.earth_
-            case "Air" | "air" : 
-                element = self.air_
-            case "Water" | "water" : 
-                element = self.water_
-            case _ :
-                return -1
-        return element
+        fire = re.compile(r'fir', re.IGNORECASE)
+        earth = re.compile(r'ear', re.IGNORECASE)
+        air = re.compile(r'air', re.IGNORECASE)
+        water = re.compile(r'wat', re.IGNORECASE)
 
-    def print_all(self):
-        for e in self.elements_:
-            Element.print(e)
+        if fire.search(e) != None:
+            element = self.fire_
+        elif earth.search(e) != None:
+            element = self.earth_
+        elif air.search(e) != None:
+            element = self.air_
+        elif water.search(e) != None:
+            element = self.water_
+        else:
+            return -1
+        return element
 
     def print(self, element):
         Element.print(element)
@@ -46,3 +47,8 @@ class Elements:
         print("\nKeyword list for element " + element_name.upper() + ":\n")
         for k in Elements.keywords_[element_name]:
             print("\t- " + k)
+
+    # TODO: Implement
+    def print_all(self):
+        for e in self.elements_:
+            Element.print(e)

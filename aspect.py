@@ -13,10 +13,10 @@ class Aspect:
         self.same_ = same
     
     def print(self):
-        print("\nName:\t\t", self.name_,
-              "\nAngle:\t\t", self.angle_, "degrees",
-              "\nFraction:\t", self.fraction_,
-              "\nRoot numbers:\t", self.root_numbers_,
-              "\nOrb:\t\t", self.orb_,
-              "\nSame:\t\t", self.same_, "\n")
+        print("\nName\t\t\t:\t", self.name_.upper(),
+              "\nAngle\t\t\t:\t", self.angle_, "degrees",
+              "\nFraction\t\t:\t", self.fraction_,
+              "\nRoot numbers\t\t:\t", self.root_numbers_,
+              "\nOrb\t\t\t:\t", self.orb_,
+              "\nSame\t\t\t:\t", self.same_, "\n")
         

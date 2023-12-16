@@ -11,7 +11,7 @@ class House:
         self.moto_ = moto
 
     def print(self):
-        print("\nName:\t\t", self.name_, 
-              "\nRank:\t\t", self.id_, 
-              "\nSign:\t\t", self.sign_affinity_, 
-              "\nMoto:\t\t", self.moto_, "\n")
+        print("\nName\t\t\t:\t", self.name_.upper(), 
+              "\nRank\t\t\t:\t", self.id_, 
+              "\nSign\t\t\t:\t", self.sign_affinity_, 
+              "\nMoto\t\t\t:\t", self.moto_, "\n")
