@@ -10,7 +10,7 @@ class Angle:
         self.direction_ = direction
         
     def print(self):
-        print("\nName:\t\t", self.name_, 
-              "\nFull name:\t", self.full_name_,
-              "\nDirection:\t", self.direction_, "\n")
+        print("\nName\t\t\t:\t", self.name_.upper(), 
+              "\nFull name\t\t:\t", self.full_name_,
+              "\nDirection\t\t:\t", self.direction_, "\n")
 

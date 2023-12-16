@@ -16,12 +16,12 @@ class Sign:
         self.moto_ = moto
 
     def print(self):
-        print("\nName:\t\t", self.name_, 
-              "\nRank:\t\t", self.id_, 
-              "\nStarts at:\t", self.degrees_, "degrees",
-              "\nPolarity:\t", self.polarity_, 
-              "\nElement:\t", self.element_, 
-              "\nMode:\t\t", self.mode_, 
-              "\nPlanet:\t\t", self.planet_, 
-              "\nBody part:\t", self.body_, 
-              "\nMoto:\t\t", self.moto_, "\n")
+        print("\nName\t\t\t:\t", self.name_.upper(), 
+              "\nRank\t\t\t:\t", self.id_, 
+              "\nStarts at\t\t:\t", self.degrees_, "degrees",
+              "\nPolarity\t\t:\t", self.polarity_, 
+              "\nElement\t\t\t:\t", self.element_, 
+              "\nMode\t\t\t:\t", self.mode_, 
+              "\nPlanet\t\t\t:\t", self.planet_, 
+              "\nBody part\t\t:\t", self.body_, 
+              "\nMoto\t\t\t:\t", self.moto_)
