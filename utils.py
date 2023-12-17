@@ -48,10 +48,10 @@ def print_menu():
     print("| 2.  Planet            | 7.  Polarity             |")
     print("| 3.  Sign              | 8.  Mode                 |")
     print("| 4.  House             | 9.  Element              |")
-    print("| 5.  Aspect            | 10. Signs ops menu       |")
-    print("+-----------------------+--------------------------+")
-    print("| m.  Menu              | q.  Quit                 |")
-    print("+-----------------------+--------------------------+")
+    print("| 5.  Aspect            |                          |")
+    print("+-----------+-----------+----------+---------------+")
+    print("| m.  Menu  |  s.  Sign ops menu   | q.  Quit      |")
+    print("+-----------+-----------+----------+---------------+")
 
 def print_signs_ops_menu():
     os.system("clear")
@@ -62,9 +62,9 @@ def print_signs_ops_menu():
     print("| 2.  Sign              | 6.  Mode + element       |")
     print("| 3.  Compare signs     | 7.  Element + mode       |")
     print("| 4.  Two in common     | 8.  Dump all signs       |")
-    print("+---------------+-------+--------+-----------------+")
-    print("| m.  Menu      |  b.  Back      | q.  Quit        |")
-    print("+---------------+----------------+-----------------+")
+    print("+-----------+-----------+----------+---------------+")
+    print("| m.  Menu  |  s.  Sign ops menu   | q.  Quit      |")
+    print("+-----------+----------------------+---------------+")
 
 # Keywords
 def keywords_handler():
