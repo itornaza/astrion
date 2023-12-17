@@ -22,7 +22,7 @@ polarities = Polarities()
 modes = Modes()
 elements = Elements()
 
-def print_header(t1, t2):
+def print_header(t1_header, t2_credits):
     os.system("clear")
     print("\n\n")
     print("    ***       ****    ********   *****      ***     ****      **    *** ")
@@ -33,27 +33,40 @@ def print_header(t1, t2):
     print(" **    **     ***       ***      **   **    **    **    **    **    **  ")
     print("***    **   ****       ****     ***   **   ***      ****     ***    **  ")
     print("\n")
-    time.sleep(t1)
+    time.sleep(t1_header)
     print("                                                   >>> created by ion-  ")
     print("\n")
-    time.sleep(t2)
+    time.sleep(t2_credits)
     os.system("clear")
 
 def print_menu():
     os.system("clear")
     print("+--------------------------------------------------+")
-    print("|      ---===  * Astro Menu (v1.3.0) *  ===---     |")
+    print("|     ---===  * Astrion Menu (v1.3.2) *  ===---    |")
     print("+-----------------------+--------------------------+")
     print("| 1.  Keywords          | 6.  Angle                |")
     print("| 2.  Planet            | 7.  Polarity             |")
     print("| 3.  Sign              | 8.  Mode                 |")
     print("| 4.  House             | 9.  Element              |")
-    print("| 5.  Aspect            | 10. Compare two signs    |")
+    print("| 5.  Aspect            | 10. Signs ops menu       |")
     print("+-----------------------+--------------------------+")
     print("| m.  Menu              | q.  Quit                 |")
     print("+-----------------------+--------------------------+")
 
-# 1. Keywords
+def print_signs_ops_menu():
+    os.system("clear")
+    print("+--------------------------------------------------+")
+    print("|        ---===  * Signs Ops Menu *  ===---        |")
+    print("+-----------------------+--------------------------+")
+    print("| 1.  Keyword           | 5.  Polarity + mode      |")
+    print("| 2.  Sign              | 6.  Mode + element       |")
+    print("| 3.  Compare signs     | 7.  Element + mode       |")
+    print("| 4.  Two in common     | 8.  Dump all signs       |")
+    print("+---------------+-------+--------+-----------------+")
+    print("| m.  Menu      |  b.  Back      | q.  Quit        |")
+    print("+---------------+----------------+-----------------+")
+
+# Keywords
 def keywords_handler():
     user_keyword_input = input("Enter terms separated by space: ")
     user_input_list = user_keyword_input.split()
@@ -119,7 +132,7 @@ def keywords_handler():
         if valid_term == -1:
             print("\nInvalid keyword: " + term.upper())
 
-# 2. Planet
+# Planet
 def planet_handler():
     p = input("Enter planet: ") 
     planet = Planets.get(Planets, p)
@@ -128,7 +141,7 @@ def planet_handler():
     else:
         Planets.print(Planets, planet)
 
-# 3. Sign
+# Sign
 def sign_handler():
     s = input("Enter sign: ") 
     sign = Signs.get(Signs, s)
@@ -138,7 +151,7 @@ def sign_handler():
         Signs.print(Signs, sign)
         Signs.print_arc(Signs, sign)
 
-# 4. House
+# House
 def house_handler():
     h = input("Enter house: ") 
     house = Houses.get(Houses, h)
@@ -147,7 +160,7 @@ def house_handler():
     else:
         Houses.print(Houses, house)
 
-# 5. Aspect
+# Aspect
 def aspect_handler():
     a = input("Enter aspect: ") 
     aspect = Aspects.get(Aspects, a)
@@ -156,7 +169,7 @@ def aspect_handler():
     else:
         Aspects.print(Aspects, aspect)
 
-# 6. Angle
+# Angle
 def angle_handler():
     a = input("Enter angle: ") 
     angle = Angles.get(Angles, a)
@@ -165,7 +178,7 @@ def angle_handler():
     else:
         Angles.print(Angles, angle)
 
-# 7. Polarity
+# Polarity
 def polarity_handler():
     p = input("Enter polarity: ")
     polarity = Polarities.get(Polarities, p)
@@ -175,7 +188,7 @@ def polarity_handler():
         Polarities.print(Polarities, polarity)
         Signs.print_signs_in_polarity(Signs, polarity.name_)
 
-# 8. Mode
+# Mode
 def mode_handler():
     m = input("Enter mode: ")
     mode = Modes.get(Modes, m)
@@ -185,7 +198,7 @@ def mode_handler():
         Modes.print(Modes, mode)
         Signs.print_signs_in_mode(Signs, mode.name_)
 
-# 9. Element
+# Element
 def element_handler():
     e = input("Enter element: ") 
     element = Elements.get(Elements, e)
@@ -195,7 +208,7 @@ def element_handler():
         Elements.print(Elements, element)
         Signs.print_signs_in_element(Signs, element.name_)
 
-# 10. Compare two signs
+# Compare two signs
 def compare_signs_handler():
     user_input = input("Enter terms separated by space: ")
     signs_list = user_input.split()
@@ -211,34 +224,48 @@ def compare_signs_handler():
     # Check valid signs
     if (sign_a == -1) or (sign_b == -1):
         print("Invalid sign!")
-        return
-    
-    # Calculate aspect data
-    aspect_angle = Aspects.calculate_aspect_angle(Aspects, sign_a, sign_b)
-    aspect = Aspects.get_aspect_from_aspect_angle(aspect_angle)
-
-    # Print common and relating attribites of the signs
-    similarities = 0
-    print("\nSigns\t\t\t:\t", sign_a.name_.upper(), "and", sign_b.name_.upper())
-    if aspect != -1:
-        print("Aspect\t\t\t:\t", aspect.name_)
-    print("Aspect degrees\t\t:\t", aspect_angle)
-    
-    if sign_a.polarity_ == sign_b.polarity_:
-        print("Same polarity\t\t:\t", sign_a.polarity_)
-        similarities = similarities + 1
-    if sign_a.mode_ == sign_b.mode_:
-        print("Same mode\t\t:\t", sign_a.mode_)
-        similarities = similarities + 1
-    if sign_a.element_ == sign_b.element_:
-        print("Same element\t\t:\t", sign_a.element_)
-        similarities = similarities + 1
-    print("\n")
-
-    if similarities == 0:
-        print(sign_a.name_, "and", sign_b.name_, 
-              "do not have anything in common")
     else:
-        print(sign_a.name_, "and", sign_b.name_, 
-              "have", similarities, "out of 3 in common")
-    print("\n")
+        Signs.print_common_attributes(Signs, sign_a, sign_b)
+
+# Find signs with two common attributes
+def three_in_common_handler():
+    s = input("Enter sign: ") 
+    sign = Signs.get(Signs, s)
+    if sign == -1: 
+        print("Invalid sign!")
+    else:
+        list = Signs.find_two_common_attributes(Signs, sign)
+        if len(list) > 0:
+            sign_names = []
+            for s in list:
+                sign_names.append(s.name_)
+            print("\nFound", len(list), "matching signs:", sign_names)
+            for s in list:
+                Signs.print_common_attributes(Signs, sign, s)
+
+# Find polarity and mode equivalent sign
+def polarity_and_mode_handler():
+    s = input("Enter sign: ") 
+    sign = Signs.get(Signs, s)
+    if sign == -1: 
+        print("Invalid sign!")
+    else:
+        Signs.print_polarity_mode(Signs, sign.polarity_, sign.mode_)
+
+# Find polarity and mode equivalent sign
+def mode_and_element_handler():
+    s = input("Enter sign: ") 
+    sign = Signs.get(Signs, s)
+    if sign == -1: 
+        print("Invalid sign!")
+    else:
+        Signs.print_mode_element(Signs, sign.mode_, sign.element_)
+
+# Find element and polarity equivalent sign
+def element_and_polarity_handler():
+    s = input("Enter sign: ") 
+    sign = Signs.get(Signs, s)
+    if sign == -1: 
+        print("Invalid sign!")
+    else:
+        Signs.print_element_polarity(Signs,  sign.element_, sign.polarity_)
