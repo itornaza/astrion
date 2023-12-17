@@ -8,6 +8,7 @@ from sign import Sign
 from elements import Elements
 from polarities import Polarities
 from modes import Modes
+from aspects import Aspects
 
 class Signs:
     
@@ -137,6 +138,35 @@ class Signs:
             return -1
         return sign
 
+    def find_common_planet(self, sign_a, sign_b):
+        planet = -1
+        planet_a_is_list = False
+        planet_b_is_list = False
+
+        if isinstance(sign_a.planet_, list):
+            planet_a_is_list = True
+        if isinstance(sign_b.planet_, list):
+            planet_b_is_list = True
+
+        if (planet_a_is_list == True) and (planet_b_is_list == True):
+            for i in range(0, 1):
+                for j in range(0, 1):
+                    if sign_a.planet_[i] == sign_b.planet_[j]:
+                        planet = sign_a.planet_[i]
+        elif (planet_a_is_list == True) and (planet_b_is_list == False):
+            for i in range(0, 1):
+                if sign_b.planet_ == sign_a.planet_[i]:
+                    planet = sign_b.planet_
+        elif (planet_a_is_list == False) and (planet_b_is_list == True):
+            for i in range(0, 1):
+                if sign_a.planet_ == sign_b.planet_[i]:
+                    planet = sign_a.planet_
+        else:
+            if sign_a.planet_ == sign_b.planet_:
+                planet = sign_a.planet_
+
+        return planet
+
     def print(self, sign):
         Sign.print(sign)
 
@@ -184,41 +214,93 @@ class Signs:
         print(element.name_, "signs\t\t:\t", list)
         print("\n")
 
-    ###########################################################################
-    # TODO: Integrate the following methods
-    ###########################################################################
-
-    def print_all(self):
-        for s in self.signs_:
-            Sign.print(s)
-
-    def print_polarity_element(self, polarity, element):
+    def find_two_common_attributes(self, sign):
         list = []
-        for s in self.signs_:
-            if s.polarity_ == polarity and s.element_ == element:
-                list.append(s.name_)
-        print(polarity, "/", element, ": ", list)
+        for s in Signs.signs_:
+            similarities = 0
+            if sign.name_ == s.name_:
+                continue
+            if sign.polarity_ == s.polarity_:
+                similarities = similarities + 1
+            if sign.mode_ == s.mode_:
+                similarities = similarities + 1
+            if sign.element_ == s.element_:
+                similarities = similarities + 1
+            planet = Signs.find_common_planet(Signs, sign, s)
+            if planet != -1:
+                similarities = similarities + 1
+            if similarities > 1:
+                list.append(s)
+        return list
+
+    def print_common_attributes(self, sign_a, sign_b):
+        similarities = 0
+
+        # Print common and relating attribites of the signs
+        print("\nSigns\t\t\t:\t", sign_a.name_.upper(), "and", sign_b.name_.upper())
+        
+        # 1. Check aspect
+        aspect_angle = Aspects.calculate_aspect_angle(Aspects, sign_a, sign_b)
+        aspect = Aspects.get_aspect_from_aspect_angle(aspect_angle)
+        if aspect != -1:
+            print("Aspect\t\t\t:\t", aspect.name_)
+        print("Aspect degrees\t\t:\t", aspect_angle)
+        
+        # 2. Check polarity
+        if sign_a.polarity_ == sign_b.polarity_:
+            print("Same polarity\t\t:\t", sign_a.polarity_)
+            similarities = similarities + 1
+
+        # 3. Check mode
+        if sign_a.mode_ == sign_b.mode_:
+            print("Same mode\t\t:\t", sign_a.mode_)
+            similarities = similarities + 1
+
+        # 4. Check element
+        if sign_a.element_ == sign_b.element_:
+            print("Same element\t\t:\t", sign_a.element_)
+            similarities = similarities + 1
+
+        # 5. Check planet
+        planet = Signs.find_common_planet(Signs, sign_a, sign_b)
+        if planet != -1:
+            print ("Same ruler\t\t:\t", planet)
+            similarities = similarities + 1
+
+        # 6. Sum up
+        print("\n")
+        if similarities == 0:
+            print(sign_a.name_, "and", sign_b.name_, 
+                "do not have anything in common")
+        else:
+            print(sign_a.name_, "and", sign_b.name_, 
+                "have", similarities, "out of 4 attributes in common")
+        print("\n")
 
     def print_polarity_mode(self, polarity, mode):
         list = []
         for s in self.signs_:
             if s.polarity_ == polarity and s.mode_ == mode:
                 list.append(s.name_)
-        print(polarity, "/", mode, ": ", list)
+        print(polarity, "and", mode, "\t:\t", list)
 
-    def print_element_mode(self, element, mode):
+    def print_mode_element(self, mode, element):
         list = []
         for s in self.signs_:
             if s.element_ == element and s.mode_ == mode:
                 list.append(s.name_)
-        print(element, "/", mode, ": ", list)
+        print(mode, "/", element, "\t:\t", list)
 
-    def print_2_commons(self, sign):
+    def print_element_polarity(self, element, polarity):
         list = []
         for s in self.signs_:
-            if s.sign_ == sign.sign_:
-                pass
-            elif s.element_ == sign.element_ and (s.mode_ == sign.mode_ or s.polarity_ == sign.polarity_):
+            if s.polarity_ == polarity and s.element_ == element:
                 list.append(s.name_)
-        print(sign.name_, "has 2 in common with", list)
+        print(element, "/", polarity, "\t:\t", list)
+
+    def print_all(self):
+        for s in self.signs_:
+            Sign.print(s)
+            print("+--------------------------------------------------+")
+
 
