@@ -11,9 +11,9 @@ print_menu()
 
 # Main loop
 while (True):
-    user_menu_input = input("> ") 
-    
+
     # Main menu
+    user_menu_input = input("> ") 
     print_menu()
 
     match(user_menu_input):
@@ -35,7 +35,9 @@ while (True):
             mode_handler()
         case "9" : 
             element_handler()
-        case "10": 
+        case "M" | "m" | "Menu" | "menu" : 
+            print_menu()
+        case "S" | "s" : 
 
             # Signs Ops Menu
             print_signs_ops_menu() 
@@ -61,20 +63,15 @@ while (True):
                         Signs.print_all(Signs)
                     case "M" | "m" | "Menu" | "menu" : 
                         print_menu()
+                        break
                     case "S" | "s" : 
                         print_signs_ops_menu() 
                     case "Q" | "q" | "Quit" | "quit" : 
                         print_header(0.2, 1.4)
                         sys.exit(0)
-                    case "B" | "b" | "Back" | "back" : 
-                        print_menu()
                     case _ : 
                         print("Invalid sign ops menu item!")
 
-        case "M" | "m" | "Menu" | "menu" : 
-            print_menu()
-        case "S" | "s" : 
-            print_signs_ops_menu() 
         case "Q" | "q" | "Quit" | "quit" : 
             print_header(0.2, 1.4)
             break
