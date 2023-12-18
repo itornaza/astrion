@@ -77,3 +77,14 @@ WATER = "Water"
 
 # Misc
 NA = "N/A" # For Not Available
+
+# Errors
+INVALID_PLANET = "Invalid planet!"
+INVALID_SIGN = "Invalid sign!"
+INVALID_HOUSE = "Invalid house!"
+INVALID_ASPECT = "Invalid aspect!"
+INVALID_ANGLE = "Invalid angle!"
+INVALID_POLARITY = "Invalid polarity!"
+INVALID_MODE = "Invalid mode!"
+INVALID_ELEMENT = "Invalid element"
+INVALID_NUMBER_OF_SIGNS = "Invalid number of signs, should be two!"
