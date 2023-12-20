@@ -3,8 +3,8 @@
 #
 
 import re
-from angle import Angle
 from constants import *
+from angle import Angle
 
 class Angles:
     
