@@ -12,7 +12,7 @@ class Angles:
     dsc_ = Angle(DSC, "Descendant", "Due West")
     mc_ = Angle(MC, ["Medium Coeli", "Midheaven"], "Due South")
     ic_ = Angle(IC, "Imum Coeli", "Due North")
-
+    angles_ = [asc_, dsc_, mc_, ic_]  
     keywords_ = {
         ASC: [
             "The place of the rising sun and our birth and entry into the world",
@@ -56,9 +56,7 @@ class Angles:
             "The end of the matter",
             "... and may be unconscious"
         ]
-    }
-
-    angles_ = [asc_, dsc_, mc_, ic_]    
+    }  
 
     def get(self, a):
         asc = re.compile(r'asc', re.IGNORECASE)

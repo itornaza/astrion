@@ -20,7 +20,8 @@ class Houses:
     tenth_ = House(TENTH, 10, CAPRICORN, "I aspire")
     eleventh_ = House(ELEVENTH, 11, AQUARIUS, "I participate")
     twelvth_ = House(TWELVTH, 12, PISCES, "I release")
-
+    houses_ = [first_, second_, third_, fourth_, fifth_, sixth_, seventh_, 
+               eight_, ninth_, tenth_, eleventh_, twelvth_]
     keywords_ = {
         FIRST: [
             "personal vitality", "birth", "self and self-development", "the body", "appearance", "gait or carriage", 
@@ -101,9 +102,6 @@ class Houses:
             "dissolution", "the unconscious", "higher service"
         ]
     }
-
-    houses_ = [first_, second_, third_, fourth_, fifth_, sixth_, seventh_, 
-               eight_, ninth_, tenth_, eleventh_, twelvth_]
 
     def get(self, h):
         first = re.compile(r'fir', re.IGNORECASE)

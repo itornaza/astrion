@@ -24,7 +24,8 @@ class Signs:
     capricorn_ = Sign(CAPRICORN, 10, 270, NEGATIVE, EARTH, CARDINAL, SATURN, "Knees", "I achieve")
     aquarius_ = Sign(AQUARIUS, 11, 300, POSITIVE, AIR, FIXED, [SATURN, URANUS],"Shins and ankles", "I know")
     pisces_ = Sign(PISCES, 12, 330, NEGATIVE, WATER, MUTABLE, [JUPITER, NEPTUNE], "Feet", "I believe")
-
+    signs_ = [aries_, taurus_, gemini_, cancer_, leo_, virgo_, libra_, 
+              scorpio_, sagittarius_, capricorn_, aquarius_, pisces_]
     keywords_ = {
         ARIES: [
             "enthusiasm", "initiative", "drive", "action", "courageous", "energetic", "sef-motivated", "decisive", 
@@ -92,9 +93,6 @@ class Signs:
             "sentimental", "unfocused", "neurotic", "submissive"
         ]
     }
-
-    signs_ = [aries_, taurus_, gemini_, cancer_, leo_, virgo_, libra_, 
-              scorpio_, sagittarius_, capricorn_, aquarius_, pisces_]
 
     def get(self, s):
         aries = re.compile(r'ari', re.IGNORECASE)
