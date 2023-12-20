@@ -181,7 +181,7 @@ class Signs:
     def print_signs_in_polarity(self, p):
         polarity = Polarities.get(Polarities, p)
         if polarity == -1:
-            print("Invalid polarity!")
+            print(E_POLARITY)
             return
         list = []
         for s in self.signs_:
@@ -193,7 +193,7 @@ class Signs:
     def print_signs_in_mode(self, m):
         mode = Modes.get(Modes, m)
         if mode == -1:
-            print("Invalid mode!")
+            print(E_MODE)
             return
         list = []
         for s in self.signs_:
@@ -205,7 +205,7 @@ class Signs:
     def print_signs_in_element(self, e):
         element = Elements.get(Elements, e)
         if element == -1:
-            print("Invalid element!")
+            print(E_ELEMENT)
             return
         list = []
         for s in self.signs_:
@@ -301,6 +301,6 @@ class Signs:
     def print_all(self):
         for s in self.signs_:
             Sign.print(s)
-            print("+--------------------------------------------------+")
+            print("\n+--------------------------------------------------+")
 
 

@@ -3,8 +3,8 @@
 #
 
 import re
-from mode import Mode
 from constants import *
+from mode import Mode
 
 class Modes:
     

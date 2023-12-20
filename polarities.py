@@ -3,8 +3,8 @@
 #
 
 import re
-from polarity import Polarity
 from constants import *
+from polarity import Polarity
 
 class Polarities:
     

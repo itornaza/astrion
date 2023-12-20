@@ -3,6 +3,7 @@
 #
 
 import sys
+from constants import *
 from utils import *
 
 # Print all headers
@@ -13,67 +14,68 @@ print_menu()
 while (True):
 
     # Main menu
-    user_menu_input = input("> ") 
+    menu_choice = input("> ") 
     print_menu()
 
-    match(user_menu_input):
-        case "1" : 
-            keywords_handler()
-        case "2" : 
-            planet_handler()
-        case "3" : 
-            sign_handler()
-        case "4" : 
-            house_handler()
-        case "5" : 
-            aspect_handler()
-        case "6" : 
-            angle_handler()
-        case "7" : 
-            polarity_handler()
-        case "8" : 
-            mode_handler()
-        case "9" : 
-            element_handler()
-        case "M" | "m" | "Menu" | "menu" : 
-            print_menu()
-        case "S" | "s" : 
+    if menu_choice == M_KEYWORD:
+        keywords_handler()
+    elif menu_choice == M_PLANET: 
+        planet_handler()
+    elif menu_choice == M_SIGN: 
+        sign_handler()
+    elif menu_choice == M_HOUSE: 
+        house_handler()
+    elif menu_choice == M_ASPECT: 
+        aspect_handler()
+    elif menu_choice == M_ANGLE: 
+        angle_handler()
+    elif menu_choice == M_POLARITY: 
+        polarity_handler()
+    elif menu_choice == M_MODE: 
+        mode_handler()
+    elif menu_choice == M_ELEMENT: 
+        element_handler()
+    elif menu_choice == "M" or menu_choice == "m" or \
+         menu_choice == "Menu" or menu_choice ==  "menu": 
+        print_menu()
+    elif menu_choice == "S" or menu_choice == "s": 
 
             # Signs Ops Menu
             print_signs_ops_menu() 
             while (True):
-                user_sign_ops_menu_input = input("> ")
+                sub_choice = input("> ")
                 print_signs_ops_menu() 
-                match(user_sign_ops_menu_input):
-                    case "1" : 
-                        keywords_handler()
-                    case "2" : 
-                        sign_handler()
-                    case "3" : 
-                        compare_signs_handler()
-                    case "4" : 
-                        three_in_common_handler()
-                    case "5" : 
-                        polarity_and_mode_handler()
-                    case "6" : 
-                        mode_and_element_handler()
-                    case "7" : 
-                        element_and_polarity_handler()
-                    case "8" :
-                        Signs.print_all(Signs)
-                    case "M" | "m" | "Menu" | "menu" : 
-                        print_menu()
-                        break
-                    case "S" | "s" : 
-                        print_signs_ops_menu() 
-                    case "Q" | "q" | "Quit" | "quit" : 
-                        print_header(0.2, 1.4)
-                        sys.exit(0)
-                    case _ : 
-                        print("Invalid sign ops menu item!")
+                if sub_choice == "1":
+                    keywords_handler()
+                elif sub_choice ==  "2": 
+                    sign_handler()
+                elif sub_choice == "3": 
+                    compare_signs_handler()
+                elif sub_choice == "4": 
+                    three_in_common_handler()
+                elif sub_choice == "5": 
+                    polarity_and_mode_handler()
+                elif sub_choice == "6": 
+                    mode_and_element_handler()
+                elif sub_choice == "7": 
+                    element_and_polarity_handler()
+                elif sub_choice ==  "8":
+                    Signs.print_all(Signs)
+                elif sub_choice == "M" or sub_choice == "m" or \
+                     sub_choice == "Menu" or sub_choice ==  "menu": 
+                    print_menu()
+                    break
+                elif sub_choice == "S" or sub_choice == "s": 
+                    print_signs_ops_menu() 
+                elif sub_choice == "Q" or sub_choice == "q" or \
+                     sub_choice == "Quit" or sub_choice == "quit": 
+                    print_header(0.2, 1.4)
+                    sys.exit(0)
+                else: 
+                    print(E_SUB_MENU)
 
-        case "Q" | "q" | "Quit" | "quit" : 
-            print_header(0.2, 1.4)
-            break
-        case _ : 
-            print("Invalid menu item!")
+    elif menu_choice == "Q" or menu_choice == "q" or menu_choice == "Quit" or menu_choice == "quit": 
+        print_header(0.2, 1.4)
+        break
+    else: 
+        print(E_MENU)

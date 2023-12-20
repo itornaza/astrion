@@ -3,8 +3,8 @@
 #
 
 import re
-from house import House
 from constants import *
+from house import House
 
 class Houses:
 

@@ -3,8 +3,8 @@
 #
 
 import re
-from element import Element
 from constants import *
+from element import Element
 
 class Elements:
     

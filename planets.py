@@ -3,8 +3,8 @@
 #
 
 import re
-from planet import Planet
 from constants import *
+from planet import Planet
 
 class Planets:
 

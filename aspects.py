@@ -3,9 +3,9 @@
 #
 
 import re
+from constants import *
 from aspect import Aspect
 from sign import Sign
-from constants import *
 
 class Aspects:
 
