@@ -12,15 +12,13 @@ class Elements:
     earth_ = Element(EARTH, "Demonstration", "Coagulatio", "Melacholic", "Sensation", "Pentacles", "Incarnation", "So much security")
     air_ = Element(AIR, "Inteligence", "Sublimatio", "Sanguine", "Thinking", "Swords", "Separation and relationship", "So much thinking")
     water_ = Element(WATER, "Opinion", "Solutio", "Phlegmatic", "Feeling", "Cups", "Merging", "So much emotions")
-
+    elements_ = [fire_, earth_, air_, water_]    
     keywords_ = {
         FIRE: ["enthusiastic", "optimistic", "confident", "dramatic", "warm"],
         EARTH: ["practical", "sensible", "sensual", "realistic", "reliable", "down to earth"],
         AIR: ["civilised", "detaches", "objective", "impersonal", "rational", "verbal"],
         WATER: ["sympathetic", "receptive", "imaginative", "emotional", "intuitive"]
     }
-
-    elements_ = [fire_, earth_, air_, water_]    
 
     def get(self, e):
         fire = re.compile(r'fir', re.IGNORECASE)

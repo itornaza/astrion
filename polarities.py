@@ -10,13 +10,11 @@ class Polarities:
     
     positive_ = Polarity(POSITIVE)
     negative_ = Polarity(NEGATIVE)
-    
+    polarities_ = [positive_, negative_]
     keywords_ = {
         POSITIVE: [NA],
         NEGATIVE: [NA],
-    }
-
-    polarities_ = [positive_, negative_]    
+    }    
 
     def get(self, p):
         positive = re.compile(r'pos', re.IGNORECASE)

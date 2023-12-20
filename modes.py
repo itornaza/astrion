@@ -11,14 +11,12 @@ class Modes:
     cardinal_ = Mode(CARDINAL)
     fixed_ = Mode(FIXED)
     mutable_ = Mode(MUTABLE)
-    
+    modes_ = [cardinal_, fixed_, mutable_]    
     keywords_ = {
         CARDINAL: [NA],
         FIXED: [NA],
         MUTABLE: [NA]
     }
-
-    modes_ = [cardinal_, fixed_, mutable_]    
 
     def get(self, m):
       cardinal = re.compile(r'car', re.IGNORECASE)

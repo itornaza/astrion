@@ -18,7 +18,8 @@ class Aspects:
     sesquiquadrate_ = Aspect(SESQUIQUADRATE, 135, "3:8", [2, 3], "2°", NA)
     semisextile_ = Aspect(SEMISEXTILE, 30, "1:12", [2, 3], "2°", "Nothing")
     quincunx_ = Aspect(QUINCUNX, 150, "5:12", [2, 3, 5], "2°", "Nothing")
-
+    aspects_ = [conjunction_, opposition_, trine_, square_, sextile_, 
+                semisquare_, sesquiquadrate_, semisextile_, quincunx_]
     keywords_ = {
         CONJUNCTION: [
             "...... and ...... are at one with each other",
@@ -97,9 +98,6 @@ class Aspects:
             "He/she makes attempts to accommodate both ...... and ......"
         ]
     }
-    
-    aspects_ = [conjunction_, opposition_, trine_, square_, sextile_, 
-                semisquare_, sesquiquadrate_, semisextile_, quincunx_]
 
     def get(self, a):    
         conjunction = re.compile(r'con', re.IGNORECASE)
