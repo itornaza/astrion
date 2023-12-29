@@ -107,37 +107,36 @@ class Signs:
         capricorn = re.compile(r'cap', re.IGNORECASE)
         aquarius = re.compile(r'aqu', re.IGNORECASE)
         pisces = re.compile(r'pis', re.IGNORECASE)
-
-        if aries.search(s) != None:
+        
+        sign = None
+        if aries.search(s):
             sign = self.aries_
-        elif taurus.search(s) != None:
+        elif taurus.search(s):
             sign = self.taurus_
-        elif gemini.search(s) != None:
+        elif gemini.search(s):
             sign = self.gemini_
-        elif cancer.search(s) != None:
+        elif cancer.search(s):
             sign = self.cancer_
-        elif leo.search(s) != None:
+        elif leo.search(s):
             sign = self.leo_
-        elif virgo.search(s) != None:
+        elif virgo.search(s):
             sign = self.virgo_
-        elif libra.search(s) != None:
+        elif libra.search(s):
             sign = self.libra_
-        elif scorpio.search(s) != None:
+        elif scorpio.search(s):
             sign = self.scorpio_
-        elif sagittarius.search(s) != None:
+        elif sagittarius.search(s):
             sign = self.sagittarius_
-        elif capricorn.search(s) != None:
+        elif capricorn.search(s):
             sign = self.capricorn_
-        elif aquarius.search(s) != None:
+        elif aquarius.search(s):
             sign = self.aquarius_
-        elif pisces.search(s) != None:
+        elif pisces.search(s):
             sign = self.pisces_
-        else:
-            return -1
         return sign
 
     def find_common_planet(self, sign_a, sign_b):
-        planet = -1
+        planet = None
         planet_a_is_list = False
         planet_b_is_list = False
 
@@ -178,7 +177,7 @@ class Signs:
 
     def print_signs_in_polarity(self, p):
         polarity = Polarities.get(Polarities, p)
-        if polarity == -1:
+        if polarity == None:
             print(E_POLARITY)
             return
         list = []
@@ -190,7 +189,7 @@ class Signs:
 
     def print_signs_in_mode(self, m):
         mode = Modes.get(Modes, m)
-        if mode == -1:
+        if mode == None:
             print(E_MODE)
             return
         list = []
@@ -202,7 +201,7 @@ class Signs:
 
     def print_signs_in_element(self, e):
         element = Elements.get(Elements, e)
-        if element == -1:
+        if element == None:
             print(E_ELEMENT)
             return
         list = []
@@ -225,7 +224,7 @@ class Signs:
             if sign.element_ == s.element_:
                 similarities = similarities + 1
             planet = Signs.find_common_planet(Signs, sign, s)
-            if planet != -1:
+            if planet != None:
                 similarities = similarities + 1
             if similarities > 1:
                 list.append(s)
@@ -240,7 +239,7 @@ class Signs:
         # 1. Check aspect
         aspect_angle = Aspects.calculate_aspect_angle(Aspects, sign_a, sign_b)
         aspect = Aspects.get_aspect_from_aspect_angle(aspect_angle)
-        if aspect != -1:
+        if aspect != None:
             print("Aspect\t\t\t:\t", aspect.name_)
         print("Aspect degrees\t\t:\t", aspect_angle)
         
@@ -261,7 +260,7 @@ class Signs:
 
         # 5. Check planet
         planet = Signs.find_common_planet(Signs, sign_a, sign_b)
-        if planet != -1:
+        if planet != None:
             print ("Same ruler\t\t:\t", planet)
             similarities = similarities + 1
 

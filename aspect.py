@@ -4,13 +4,14 @@
 
 class Aspect:
    
-    def __init__(self, name, angle, fraction, root_numbers, orb, same):
+    def __init__(self, name, angle, fraction, root_numbers, orb, same, types):
         self.name_ = name
         self.angle_ = angle
         self.fraction_ = fraction
         self.root_numbers_ = root_numbers
         self.orb_ = orb
         self.same_ = same
+        self.types_ = types
     
     def print(self):
         print("\nName\t\t\t:\t", self.name_.upper(),
@@ -18,5 +19,6 @@ class Aspect:
               "\nFraction\t\t:\t", self.fraction_,
               "\nRoot numbers\t\t:\t", self.root_numbers_,
               "\nOrb\t\t\t:\t", self.orb_,
-              "\nSame\t\t\t:\t", self.same_, "\n")
+              "\nSame\t\t\t:\t", self.same_,
+              "\nTypes\t\t\t:\t", self.types_, "\n")
         
