@@ -21,21 +21,20 @@ class Elements:
     }
 
     def get(self, e):
-        fire = re.compile(r'fir', re.IGNORECASE)
+        fire = re.compile(r'fire', re.IGNORECASE)
         earth = re.compile(r'ear', re.IGNORECASE)
         air = re.compile(r'air', re.IGNORECASE)
         water = re.compile(r'wat', re.IGNORECASE)
-
-        if fire.search(e) != None:
+        
+        element = None
+        if fire.search(e):
             element = self.fire_
-        elif earth.search(e) != None:
+        elif earth.search(e):
             element = self.earth_
-        elif air.search(e) != None:
+        elif air.search(e):
             element = self.air_
-        elif water.search(e) != None:
+        elif water.search(e):
             element = self.water_
-        else:
-            return -1
         return element
 
     def print(self, element):

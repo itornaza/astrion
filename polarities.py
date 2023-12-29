@@ -12,20 +12,19 @@ class Polarities:
     negative_ = Polarity(NEGATIVE)
     polarities_ = [positive_, negative_]
     keywords_ = {
-        POSITIVE: [NA],
-        NEGATIVE: [NA],
+        POSITIVE: ["outward-moving", "doing", "yang", "extravert", "assertive"],
+        NEGATIVE: ["inward-moving", "being", "yin", "introvert", "self-reflective"],
     }    
 
     def get(self, p):
         positive = re.compile(r'pos', re.IGNORECASE)
         negative = re.compile(r'neg', re.IGNORECASE)
-
-        if (positive.search(p) != None) or (p == "+") :
+        
+        polarity = None
+        if positive.search(p) or (p == "+") :
             polarity = self.positive_
-        elif (negative.search(p) != None) or (p == "-") :
+        elif negative.search(p) or (p == "-") :
             polarity = self.negative_
-        else:
-            return -1
         return polarity
 
     def print(self, polarity):

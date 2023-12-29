@@ -9,15 +9,15 @@ from sign import Sign
 
 class Aspects:
 
-    conjunction_ = Aspect(CONJUNCTION, 0, "1:1", 1, "8°", "Sign")    
-    opposition_ = Aspect(OPPOSITION, 180, "1:2", 2, "8°", ["Polarity", "Mode"])
-    trine_ = Aspect(TRINE, 120, "1:3", 3, "8°", "Element")
-    square_ = Aspect(SQUARE, 90, "1:4", 2, "8°", "Mode")
-    sextile_ = Aspect(SEXTILE, 60, "1:6", [2, 3], "4°", ["Polarity", "Compatible element"])
-    semisquare_ = Aspect(SEMISQUARE, 45, "1:8", 2, "2°", NA)
-    sesquiquadrate_ = Aspect(SESQUIQUADRATE, 135, "3:8", [2, 3], "2°", NA)
-    semisextile_ = Aspect(SEMISEXTILE, 30, "1:12", [2, 3], "2°", "Nothing")
-    quincunx_ = Aspect(QUINCUNX, 150, "5:12", [2, 3, 5], "2°", "Nothing")
+    conjunction_ = Aspect(CONJUNCTION, 0, "1:1", 1, "8°", "Sign", NA)    
+    opposition_ = Aspect(OPPOSITION, 180, "1:2", 2, "8°", ["Polarity", "Mode"], [["Cardinal", "Fixed", "Mutable"], ["Positive", "Negative"]])
+    trine_ = Aspect(TRINE, 120, "1:3", 3, "8°", "Element", ["Fire", "Earth", "Air", "Water"])
+    square_ = Aspect(SQUARE, 90, "1:4", 2, "8°", "Mode", ["Cardinal", "Fixed", "Mutable"])
+    sextile_ = Aspect(SEXTILE, 60, "1:6", [2, 3], "4°", ["Polarity", "Compatible element"], [["Positive", "Negative"], ["Fire to Air", "Air to Fire", "Earth to water", "Water to earth"]])
+    semisquare_ = Aspect(SEMISQUARE, 45, "1:8", 2, "2°", NA, NA)
+    sesquiquadrate_ = Aspect(SESQUIQUADRATE, 135, "3:8", [2, 3], "2°", NA, NA)
+    semisextile_ = Aspect(SEMISEXTILE, 30, "1:12", [2, 3], "2°", "Nothing", NA)
+    quincunx_ = Aspect(QUINCUNX, 150, "5:12", [2, 3, 5], "2°", "Nothing", NA)
     aspects_ = [conjunction_, opposition_, trine_, square_, sextile_, 
                 semisquare_, sesquiquadrate_, semisextile_, quincunx_]
     keywords_ = {
@@ -109,27 +109,26 @@ class Aspects:
         sesquiquadrate = re.compile(r'ses', re.IGNORECASE)
         semisextile = re.compile(r'semise', re.IGNORECASE)
         quincunx = re.compile(r'qui', re.IGNORECASE)
-
-        if conjunction.search(a) != None:
+        
+        aspect = None
+        if conjunction.search(a):
             aspect = self.conjunction_
-        elif opposition.search(a) != None:
+        elif opposition.search(a):
             aspect = self.opposition_
-        elif trine.search(a) != None:
+        elif trine.search(a):
             aspect = self.trine_
-        elif square.search(a) != None:
+        elif square.search(a):
             aspect = self.square_
-        elif sextile.search(a) != None:
+        elif sextile.search(a):
             aspect = self.sextile_
-        elif semisquare.search(a) != None:
+        elif semisquare.search(a):
             aspect = self.semisquare_
-        elif sesquiquadrate.search(a) != None:
+        elif sesquiquadrate.search(a):
             aspect = self.sesquiquadrate_
-        elif semisextile.search(a) != None:
+        elif semisextile.search(a):
             aspect = self.semisextile_
-        elif quincunx.search(a) != None:
+        elif quincunx.search(a):
             aspect = self.quincunx_
-        else:
-            return -1
         return aspect
 
     def get_aspect_from_aspect_angle(aspect_angle):
@@ -144,7 +143,7 @@ class Aspects:
             case 150: return Aspects.quincunx_
             case 180: return Aspects.opposition_
             case _ :
-                return -1
+                return None
             
     def calculate_aspect_angle(self, sign_a, sign_b):
         aspect_angle = abs(sign_a.degrees_ - sign_b.degrees_)

@@ -13,24 +13,23 @@ class Modes:
     mutable_ = Mode(MUTABLE)
     modes_ = [cardinal_, fixed_, mutable_]    
     keywords_ = {
-        CARDINAL: [NA],
-        FIXED: [NA],
-        MUTABLE: [NA]
+        CARDINAL: ["instigating", "initiating", "initiate and generate energy", "doing", "motion", "pioneering", "start things up", "accept challenges", "goal oriented", "centrifugal radiating energy"],
+        FIXED: ["steadfast", "stable", "concentrate energy and sustain it", "consolidate", "put down roots", "preservation and continuation", "stamina", "loyalty", "persistence", "perseverence", "constant", "patience", "self-control", "endurance"],
+        MUTABLE: ["adaptable", "flexible", "disperse, distribute and transform energy", "state of flux", "restless", "changeable", "going with the flow", "changing direction", "resolve stalemates", "versatile", "restless"]
     }
 
     def get(self, m):
       cardinal = re.compile(r'car', re.IGNORECASE)
       fixed = re.compile(r'fix', re.IGNORECASE)
       mutable = re.compile(r'mut', re.IGNORECASE)
-
-      if cardinal.search(m) != None:
+      
+      mode = None
+      if cardinal.search(m):
           mode = self.cardinal_
-      elif fixed.search(m) != None:
+      elif fixed.search(m):
           mode =  self.fixed_
-      elif mutable.search(m) != None:
+      elif mutable.search(m):
           mode = self.mutable_
-      else:
-          return -1
       return mode
 
     def print(self, mode):

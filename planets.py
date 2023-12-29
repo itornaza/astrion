@@ -97,30 +97,30 @@ class Planets:
         neptune = re.compile(r'nep', re.IGNORECASE)
         pluto = re.compile(r'plu', re.IGNORECASE)
 
-        if sun.search(p) != None:
+        if sun.search(p):
             planet = self.sun_
-        elif moon.search(p) != None:
+        elif moon.search(p):
             planet = self.moon_
-        elif mercury.search(p) != None:
+        elif mercury.search(p):
             planet = self.mercury_
-        elif venus.search(p) != None:
+        elif venus.search(p):
             planet = self.venus_
-        elif mars.search(p) != None:
+        elif mars.search(p):
             planet = self.mars_
-        elif jupiter.search(p) != None:
+        elif jupiter.search(p):
             planet = self.jupiter_
-        elif saturn.search(p) != None:
+        elif saturn.search(p):
             planet = self.saturn_
-        elif chiron.search(p) != None:
+        elif chiron.search(p):
             planet = self.chiron_
-        elif uranus.search(p) != None:
+        elif uranus.search(p):
             planet = self.uranus_
-        elif neptune.search(p) != None:
+        elif neptune.search(p):
             planet = self.neptune_
-        elif pluto.search(p) != None:
+        elif pluto.search(p):
             planet = self.pluto_
         else:
-            return -1
+            return None
         return planet
 
     def print(self, planet):

@@ -104,7 +104,7 @@ class Houses:
     }
 
     def get(self, h):
-        first = re.compile(r'fir', re.IGNORECASE)
+        first = re.compile(r'firs', re.IGNORECASE)
         second = re.compile(r'sec', re.IGNORECASE)
         third = re.compile(r'thi', re.IGNORECASE)
         fourth = re.compile(r'fou', re.IGNORECASE)
@@ -116,33 +116,32 @@ class Houses:
         tenth = re.compile(r'ten', re.IGNORECASE)
         eleventh = re.compile(r'ele', re.IGNORECASE)
         twelvth = re.compile(r'twe', re.IGNORECASE)
-
-        if (first.search(h) != None) or (h == "1"):
+        
+        house = None
+        if (first.search(h)) or (h == "1"):
             house = self.first_
-        elif (second.search(h) != None) or (h == "2"):
+        elif (second.search(h)) or (h == "2"):
             house = self.second_
-        elif (third.search(h) != None) or (h == "3"):
+        elif (third.search(h)) or (h == "3"):
             house = self.third_
-        elif (fourth.search(h) != None) or (h == "4"):
+        elif (fourth.search(h)) or (h == "4"):
             house = self.fourth_
-        elif (fifth.search(h) != None) or (h == "5"):
+        elif (fifth.search(h)) or (h == "5"):
             house = self.fifth_
-        elif (sixth.search(h) != None) or (h == "6"):
+        elif (sixth.search(h)) or (h == "6"):
             house = self.sixth_
-        elif (seventh.search(h) != None) or (h == "7"):
+        elif (seventh.search(h)) or (h == "7"):
             house = self.seventh_
-        elif (eight.search(h) != None) or (h == "8"):
+        elif (eight.search(h)) or (h == "8"):
             house = self.eight_
-        elif (ninth.search(h) != None) or (h == "9"):
+        elif (ninth.search(h)) or (h == "9"):
             house = self.ninth_
-        elif (tenth.search(h) != None) or (h == "10"):
+        elif (tenth.search(h)) or (h == "10"):
             house = self.tenth_
-        elif (eleventh.search(h) != None) or (h == "11"):
+        elif (eleventh.search(h)) or (h == "11"):
             house = self.eleventh_
-        elif (twelvth.search(h) != None) or (h == "12"):
+        elif (twelvth.search(h)) or (h == "12"):
             house = self.twelvth_
-        else:
-            return -1
         return house
     
     def print(self, house):

@@ -63,17 +63,16 @@ class Angles:
         dsc = re.compile(r'dsc', re.IGNORECASE)
         mc = re.compile(r'mc', re.IGNORECASE)
         ic = re.compile(r'ic', re.IGNORECASE)
-
-        if asc.search(a) != None:
+        
+        angle = None
+        if asc.search(a):
             angle = self.asc_
-        elif dsc.search(a) != None:
+        elif dsc.search(a):
             angle = self.dsc_
-        elif mc.search(a) != None:
+        elif mc.search(a):
             angle = self.mc_
-        elif ic.search(a) != None:
+        elif ic.search(a):
             angle = self.ic_
-        else:
-            return -1
         return angle
 
     def print(self, angle):
