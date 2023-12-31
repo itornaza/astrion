@@ -2,6 +2,8 @@
 # constants
 #
 
+VERSION = "v1.4.1"
+
 # Menu map
 M_ASTRION = "0"
 M_KEYWORD = "1"
