@@ -4,6 +4,7 @@
 
 import re
 from constants import *
+from keywords import Keywords
 from planet import Planet
 
 class Planets:
@@ -21,68 +22,6 @@ class Planets:
     pluto_ = Planet(PLUTO, "248 days", "6d 9h", "367 days", "153h", "17˚ 10'", NA, SCORPIO, NA, "Dark red", "Genitals")
     planets_ = [sun_, moon_, mercury_, venus_, mars_, jupiter_, saturn_, 
                 chiron_, uranus_, neptune_, pluto_]
-    keywords_ = {
-        SUN: [
-            "power", "vitality", "self-expression", "selfhood (ego-self)", "identity", "purpose", "goal", "father", 
-            "leadership and authority", "creative impulse","self awareness"
-        ],
-        
-        MOON: [
-            "safety and security", "instinctive responses", "the unconscious", "basic needs", "mother", "caretaking", 
-            "food and feeding", "rhythms", "tides", "fluctuation", "emotions", "nurturing", "memories", "the past",
-            "family", "instincts"
-        ],
-        
-        MERCURY: [
-            "communication",  "learning", "language", "writing", "the mind", "the trickster", "youth", "transport", 
-            "connections", "siblings", "twins", "networking", "connecting", "thinking", "mental restlessness", 
-            "mentality", "movement"
-        ],
-
-        VENUS: [
-            "love", "relationship", "desire", "beauty", "peace", "harmony", "comparison", "art", "artistic expression", 
-            "personal values", "worth","relating to others", "giving and receiving love", "self expression", 
-            "appreciation"
-        ],
-        
-        MARS: [
-            "action", "daring", "courage", "drive", "will", "assertion or anger", "fighting and defending", 
-            "sexuality", "desire", "survival", "sharpness"
-        ],
-        
-        JUPITER: [
-            "authority", "opportunity", "vision", "philosophy", "expansion", "inflation", "abundance", "philanthropy", 
-            "adventure", "exploration", "enthusiasm", "trust", "faith", "search for meaning", "growth"
-        ],
-        
-        SATURN: [
-            "authority", "realism", "intention", "structure", "organisation", "method", "ambition", "experience", 
-            "responsibility", "commitment", "formality", "convention", "tradition", "discipline", "limitations",
-            "practicality", "control"
-        ],
-        
-        CHIRON: [
-            "vulnerability", "self-awareness", "unique talents", "maverick/outsider","integration", "contribution", 
-            "process of maturing", "wounded healer", "teacher of wisdom"
-        ],
-        
-        URANUS: [
-            "innovation", "rebellion", "autonomy", "eccentricity", "independence", "alienation", "mechanisation", 
-            "technology", "breakthrough", "revolution", "awakening", "insight", "extremes"
-        ],
-        
-        NEPTUNE: [
-            "the sea", "transcendence", "the sublime", "divine longing", "the intangible", "imagination", 
-            "enchantment and seduction", "dreams", "illusion and glamour", "fantasy, magic and myth", 
-            "yearning for perfection", "merging", "idealism and romance", "compassion", "intuition", "escapism"
-        ],
-        
-        PLUTO: [
-            "the underworld", "darkness", "cycle of death and re-birth", "sexual attraction", "transformation", 
-            "catharsis", "survival", "strong determination", "power and control", "purging and elimination",
-            "profound change", "intensity", "buried secrets"
-        ]
-    }
 
     def get(self, p):
         sun = re.compile(r'sun', re.IGNORECASE)
@@ -128,7 +67,7 @@ class Planets:
 
     def print_keywords(self, planet_name):
         print("\nKeyword list for planet " + planet_name.upper() + ":\n")
-        for k in Planets.keywords_[planet_name]:
+        for k in Keywords.planets_[planet_name]:
             print("\t- " + k)
 
     # TODO: Implement

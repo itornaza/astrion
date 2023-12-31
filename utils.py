@@ -51,7 +51,7 @@ def print_header(t1_header, t2_credits):
 def print_menu():
     os.system("clear")
     print("+--------------------------------------------------+")
-    print("|     ---===  * Astrion Menu (1.3.3) *  ===---     |")
+    print("|   ---===  * Astrion Menu (", VERSION, ") *  ===---    |")
     print("+-----------------------+--------------------------+")
     print("| 1.  Keywords          | 6.  Angle                |")
     print("| 2.  Planet            | 7.  Polarity             |")
@@ -81,19 +81,13 @@ def keywords_handler():
     keywords_list = keywords_raw.split()
     for k in keywords_list:
         object = get_object_from_keyword(k)
-        if object:
-            print_object(object)
-        else:
-            print("\n", E_KEYWORD, ": " + k.upper())
+        print_object(object) if object else print("\n", E_KEYWORD, ": " + k.upper())
 
 # Planet
 def planet_handler():
     p = input(I_PLANET) 
     planet = Planets.get(Planets, p)
-    if planet: 
-        Planets.print(Planets, planet)
-    else:
-        print(E_PLANET)
+    Planets.print(Planets, planet) if planet else print(E_PLANET)
 
 # Sign
 def sign_handler():
@@ -109,28 +103,19 @@ def sign_handler():
 def house_handler():
     h = input(I_HOUSE) 
     house = Houses.get(Houses, h)
-    if house: 
-        Houses.print(Houses, house)
-    else:
-        print(E_HOUSE)
+    Houses.print(Houses, house) if house else print(E_HOUSE)
 
 # Aspect
 def aspect_handler():
     a = input(I_ASPECT) 
     aspect = Aspects.get(Aspects, a)
-    if aspect: 
-        Aspects.print(Aspects, aspect)
-    else:
-        print(E_ASPECT)
+    Aspects.print(Aspects, aspect) if aspect else print(E_ASPECT)
 
 # Angle
 def angle_handler():
     a = input(I_ANGLE) 
     angle = Angles.get(Angles, a)
-    if angle: 
-        Angles.print(Angles, angle)
-    else:
-        print(E_ANGLE)
+    Angles.print(Angles, angle) if angle else print(E_ANGLE)
 
 # Polarity
 def polarity_handler():
@@ -228,31 +213,14 @@ def element_and_polarity_handler():
 def get_object_from_keyword(k):
     object = None 
     tmp = None
-
-    tmp = Planets.get(Planets, k)
-    if tmp: 
-        object = tmp
-    tmp = Signs.get(Signs, k)
-    if tmp: 
-        object = tmp
-    tmp = Houses.get(Houses, k)
-    if tmp: 
-        object = tmp
-    tmp = Aspects.get(Aspects, k)
-    if tmp: 
-        object = tmp
-    tmp = Angles.get(Angles, k)
-    if tmp: 
-        object = tmp
-    tmp = Polarities.get(Polarities, k)
-    if tmp: 
-        object = tmp
-    tmp = Modes.get(Modes, k)
-    if tmp: 
-        object = tmp
-    tmp = Elements.get(Elements, k)
-    if tmp: 
-        object = tmp
+    if tmp := Planets.get(Planets, k): object = tmp
+    if tmp := Signs.get(Signs, k): object = tmp
+    if tmp := Houses.get(Houses, k): object = tmp
+    if tmp := Aspects.get(Aspects, k): object = tmp
+    if tmp := Angles.get(Angles, k): object = tmp
+    if tmp := Polarities.get(Polarities, k): object = tmp
+    if tmp := Modes.get(Modes, k): object = tmp
+    if tmp := Elements.get(Elements, k): object = tmp
     return object
 
 # Generic version to print any valid object

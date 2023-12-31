@@ -4,6 +4,7 @@
 
 import re
 from constants import *
+from keywords import Keywords
 from sign import Sign
 from elements import Elements
 from polarities import Polarities
@@ -26,73 +27,6 @@ class Signs:
     pisces_ = Sign(PISCES, 12, 330, NEGATIVE, WATER, MUTABLE, [JUPITER, NEPTUNE], "Feet", "I believe")
     signs_ = [aries_, taurus_, gemini_, cancer_, leo_, virgo_, libra_, 
               scorpio_, sagittarius_, capricorn_, aquarius_, pisces_]
-    keywords_ = {
-        ARIES: [
-            "enthusiasm", "initiative", "drive", "action", "courageous", "energetic", "sef-motivated", "decisive", 
-            "rash", "wilful", "selfish", "coarse", "locking horns", "battering ram", "zestful", "exuberant", 
-            "outgoing", "work alone", "lead", "imppatient", "childlike behaviour", "spontaneous"
-        ],
-        
-        TAURUS: [
-            "deliberate", "patient", "placid", "practical", "persistent", "grounded", "acquisitive", "sensual", 
-            "stubborn", "unimaginative", "possessive", "self-indulgent", "simplistic", "comfort", "considered", 
-            "formidable temper", "red rug to a bull", "stability", "resistance to change"
-        ],
-        
-        GEMINI: [
-            "versatile", "intellectual", "rational", "communicative", "sociable", "adaptable", "diverse", 
-            "quick-witted", "flirtarious", "unpredictable", "duplicitous", "shallow", "restless", "charming", 
-            "movement", "stimulation", "emotional changeability"
-        ],
-        
-        CANCER: [
-            "emotional", "receptive", "tenacious", "caring", "sensitive", "nurturing", "imaginative", "supportive", 
-            "moody", "smothering", "neurotic", "domineering", "mothering", "creative", "assertive in a covert way", 
-            "empathy"
-        ],
-        
-        LEO: [
-            "grand", "playful", "loyal", "creative", "generous", "confident", "authoritative", "performer", 
-            "self-centered", "arrogant", "authoritarian", "attention-seeker"
-        ],
-        
-        VIRGO: [
-            "discriminating", "analytical", "methodical", "practical", "fastidious", "efficient", "compliant", 
-            "effective", "fussy", "perfectionist", "submissive", "neurotic", "self-contained thinker"
-        ],
-        
-        LIBRA: [
-            "loving", "balanced", "sociable", "relationship-oriented", "fair-minded", "gracious", "co-operative", 
-            "peace-loving", "indecisive", "gushing", "confrontational", "over-compromising", "diplomatic", 
-            "fair play", "charming", "grace"
-        ],
-        
-        SCORPIO: [
-            "resourceful", "intuitive", "insightful", "determined", "passionate", "private", "sensitive", "powerful",
-            "jealous", "secretive", "unforgiving", "overbearing", "powerful emotions", "intensity", "regeneration", 
-            "fighter"
-        ],
-        
-        SAGITTARIUS: [
-            "οptimistic", "enthousiastic", "adventurous", "philosophical", "freedom-loving", "honest", "outgoing", 
-            "wise", "non-committal", "blunt", "indiscriminate", "dogmatic"
-        ],
-        
-        CAPRICORN: [
-            "patient", "organised", "serious", "conservative", "controlled", "frugal", "ambitious", "strategic", 
-            "guarded", "ungenerous", "ruthless", "calculating", "duty", "responsibility", "realistic", "careful"
-        ],
-        
-        AQUARIUS: [
-            "society-oriented", "independent", "rational", "detached", "unconventional", "humanitarian", "friendly", 
-            "idealistic", "eccentric", "distant", "impersonal", "inflexible"
-        ],
-        
-        PISCES: [
-            "sensitive", "compassionate", "receptive", "imaginative", "sympathetic", "dreamy", "psychic", "passive", 
-            "sentimental", "unfocused", "neurotic", "submissive"
-        ]
-    }
 
     def get(self, s):
         aries = re.compile(r'ari', re.IGNORECASE)
@@ -169,7 +103,7 @@ class Signs:
 
     def print_keywords(self, sign_name):
         print("\nKeyword list for sign " + sign_name.upper() + ":\n")
-        for k in Signs.keywords_[sign_name]:
+        for k in Keywords.signs_[sign_name]:
             print("\t- " + k)
 
     def print_arc(self, sign):

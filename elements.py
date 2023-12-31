@@ -4,6 +4,7 @@
 
 import re
 from constants import *
+from keywords import Keywords
 from element import Element
 
 class Elements:
@@ -13,12 +14,6 @@ class Elements:
     air_ = Element(AIR, "Inteligence", "Sublimatio", "Sanguine", "Thinking", "Swords", "Separation and relationship", "So much thinking")
     water_ = Element(WATER, "Opinion", "Solutio", "Phlegmatic", "Feeling", "Cups", "Merging", "So much emotions")
     elements_ = [fire_, earth_, air_, water_]    
-    keywords_ = {
-        FIRE: ["enthusiastic", "optimistic", "confident", "dramatic", "warm"],
-        EARTH: ["practical", "sensible", "sensual", "realistic", "reliable", "down to earth"],
-        AIR: ["civilised", "detaches", "objective", "impersonal", "rational", "verbal"],
-        WATER: ["sympathetic", "receptive", "imaginative", "emotional", "intuitive"]
-    }
 
     def get(self, e):
         fire = re.compile(r'fire', re.IGNORECASE)
@@ -42,7 +37,7 @@ class Elements:
 
     def print_keywords(self, element_name):
         print("\nKeyword list for element " + element_name.upper() + ":\n")
-        for k in Elements.keywords_[element_name]:
+        for k in Keywords.elements_[element_name]:
             print("\t- " + k)
 
     # TODO: Implement

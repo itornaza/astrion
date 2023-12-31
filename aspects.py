@@ -4,6 +4,7 @@
 
 import re
 from constants import *
+from keywords import Keywords
 from aspect import Aspect
 from sign import Sign
 
@@ -20,84 +21,6 @@ class Aspects:
     quincunx_ = Aspect(QUINCUNX, 150, "5:12", [2, 3, 5], "2°", "Nothing", NA)
     aspects_ = [conjunction_, opposition_, trine_, square_, sextile_, 
                 semisquare_, sesquiquadrate_, semisextile_, quincunx_]
-    keywords_ = {
-        CONJUNCTION: [
-            "...... and ...... are at one with each other",
-            "...... automatically combines with ......",
-            "There is a synthesis between ...... and ......",
-            "The expression of ...... is obscured by ......",
-            "It is impossible to ...... without also ......",
-            "The individual cannot differentiate between ...... and ...... ",
-            "There is a natural affinity between ...... and ......",
-            "There is a concentrated focus of ...... and ......"
-        ],
-
-        OPPOSITION: [
-            "An inner conflict between ...... and ......", 
-            "Swinging between ...... and ......",
-            "Feeling split between ...... and ......",
-            "Unable to decide whether to ...... or ......",
-            "The ability to develop a healthy balance between ...... and ...... ",
-            "Learning to recognise both ...... and ......"
-        ],
-
-        TRINE: [
-            "He/she is easy and comfortable when it comes to ......", 
-            "He/she enjoys and finds pleasure in ......",
-            "He/she adopts the line of least resistance by ......", 
-            "He/she takes it for granted that ......"
-        ],
-
-        SQUARE: [
-            "He/she struggles to actively and effectively integrate ......",
-            "He/she is confronted by the need to ......",
-            "He/she finds themselves challenged to ......",
-            "He/she seems to be frustrated and blocked by ......",
-            "It is a big challenge for him/her to ......",
-            "He/she gets a great deal of personal satisfaction when he/she achieves ......"            
-        ],
-
-        SEXTILE: [
-            "He/she is motivated to ......",
-            "He/she can skilfully work towards ......",
-            "He/she can ......",
-            "He/she is able to combine ......"
-        ],
-        
-        SEMISQUARE: [
-            "He/she achieves productive and tangible results when he/she combines ......", 
-            "He/she is determined to ......",
-            "He/she finds it necessary to manifest ......",
-            "He/she can produce ......",
-            "He/she puts effort into ......",
-            "He/she struggles or works hard to achieve ......"
-        ],
-        
-        SESQUIQUADRATE: [
-            "He/she achieves productive and tangible results when he/she combines ......", 
-            "He/she is determined to ......",
-            "He/she finds it necessary to manifest ......",
-            "He/she can produce ......",
-            "He/she puts effort into ......",
-            "He/she struggles or works hard to achieve ......"
-        ],
-        
-        SEMISEXTILE: [
-            "He/she is constantly adjusting ......",
-            "He/she feels uncomfortable with ......",
-            "He/she is uneasy about ......",
-            "He/she finds it difficult to see how ...... can work effectively together with ......",
-            "He/she makes attempts to accommodate both ...... and ......"
-        ],
-        
-        QUINCUNX: [
-            "He/she is constantly adjusting ......",
-            "He/she feels uncomfortable with ......",
-            "He/she is uneasy about ......",
-            "He/she finds it difficult to see how ...... can work effectively together with ......",
-            "He/she makes attempts to accommodate both ...... and ......"
-        ]
-    }
 
     def get(self, a):    
         conjunction = re.compile(r'con', re.IGNORECASE)
@@ -157,7 +80,7 @@ class Aspects:
 
     def print_keywords(self, aspect_name):
         print("\nKeyword list for a " + aspect_name.upper() + " aspect:\n")
-        for k in Aspects.keywords_[aspect_name]:
+        for k in Keywords.aspects_[aspect_name]:
             print("\n\t- " + k)
 
     # TODO: Integrate

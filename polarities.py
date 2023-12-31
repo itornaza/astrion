@@ -4,6 +4,7 @@
 
 import re
 from constants import *
+from keywords import Keywords
 from polarity import Polarity
 
 class Polarities:
@@ -11,10 +12,6 @@ class Polarities:
     positive_ = Polarity(POSITIVE)
     negative_ = Polarity(NEGATIVE)
     polarities_ = [positive_, negative_]
-    keywords_ = {
-        POSITIVE: ["outward-moving", "doing", "yang", "extravert", "assertive"],
-        NEGATIVE: ["inward-moving", "being", "yin", "introvert", "self-reflective"],
-    }    
 
     def get(self, p):
         positive = re.compile(r'pos', re.IGNORECASE)
@@ -32,7 +29,7 @@ class Polarities:
 
     def print_keywords(self, polarity_name):
         print("\nKeyword list for polarity " + polarity_name.upper() + ":\n")
-        for k in Polarities.keywords_[polarity_name]:
+        for k in Keywords.polarities_[polarity_name]:
             print("\t- " + k)
 
     def print_all(self):
