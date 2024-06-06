@@ -2,10 +2,6 @@
 # planet_position.py
 #
 
-###############################################################################
-#                               HELPER FUNCTIONS                              #
-###############################################################################
-
 def degrees_and_minutes_to_minutes(degrees, minutes):
     """Convert degrees and minutes to total minutes."""
     return degrees * 60 + minutes
@@ -51,16 +47,16 @@ def get_bool(prompt):
     elif user_input in ['no', 'n', 'false', 'f']:
         return False
     else:
-        print("Invalid input. Please enter 'yes', 'no', 'true', or 'false'.")
+        print("Invalid input! Please enter 'yes', 'no', 'y', or 'n'.")
 
-def get_hours_minutes(prompt):
+def get_hours_or_degrees_and_minutes(prompt):
     while True:
       try:
           user_input = input(prompt)
           num1, num2 = map(float, user_input.split())
           return (num1, num2)
       except ValueError:
-          print("Invalid input. Please enter two valid numbers separated by a space.")
+          print("Invalid input! Please enter two valid numbers separated by a space.")
 
 def get_integer(prompt):
     while True:
@@ -69,49 +65,33 @@ def get_integer(prompt):
           integer_value = int(user_input)
           return integer_value
       except ValueError:
-          print("Invalid input. Please enter a valid integer.")
+          print("Invalid input! Please enter a valid integer.")
 
 def display_angle(a, prompt):
-    print(f"{prompt}:\t {a[0]:.0f}° {a[1]:.0f}\'")
+    print(f"{prompt}: {a[0]:.0f}° {a[1]:.0f}\'")
 
 def display_percentage(f):
-    print(f"Day percentage:\t\t {f:.4f}")
+    print(f"Percentage: {f:.4f}")
 
-###############################################################################
-#                                   USER INPUT                                #
-###############################################################################
+def calculate_position():
+    """Calculate the planet position at a given date and time from ephimeris"""
+    # User input
+    t = get_hours_or_degrees_and_minutes("Time: ")
+    rx = get_bool("Retrograde: ")
+    a = get_hours_or_degrees_and_minutes("First angle (deg min): ")
+    b = get_hours_or_degrees_and_minutes("Second angle (deg min): ")
+    
+    # Calculations
+    d = subtract_angles(a, b) if rx else subtract_angles(b, a)
+    f = time_to_percentage(t)
+    theta_rel = multiply_angle_by_percentage(d, f)
+    theta_abs = subtract_angles(a, theta_rel) if rx else add_angles(a, theta_rel)
 
-# Get the time we want to calculate the angle for
-t = get_hours_minutes("Time? ")
+    # Display all calculation outputs
+    display_angle(d, "Difference")
+    display_percentage(f)
+    display_angle(theta_rel, "Relative position")
+    display_angle(theta_abs, "Absolute position")
 
-# Is the planet in retrograde motion? 
-rx = get_bool("Retrograde? ")
-
-# Get the angles from ephimeris in the order they appear there
-a = get_hours_minutes("Set the first angle in degrees and minutes: ")
-b = get_hours_minutes("Set the second angle in degrees and minutes: ")
-
-###############################################################################
-#                                  CALCULATIONS                               #
-###############################################################################
-
-# Calculate the difference between the angles
-d = subtract_angles(a, b) if rx else subtract_angles(b, a)
-
-# Get the percentage of the day as a factor
-f = time_to_percentage(t)
-
-# Calculate the angle difference from that time to the previous angle
-theta = multiply_angle_by_percentage(d, f)
-
-# Calculate the resulting absolute angle
-phi = subtract_angles(a, theta) if rx else add_angles(a, theta)
-
-###############################################################################
-#                                     REPORT                                  #
-###############################################################################
-
-display_angle(d, "Angles difference")
-display_percentage(f)
-display_angle(theta, "Angle diff at time")
-display_angle(phi, "Position at time")
+if __name__ == "__main__":
+    calculate_position()
