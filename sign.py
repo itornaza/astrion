@@ -4,14 +4,18 @@
 
 class Sign:
 
-    def __init__(self, sign, id, degrees, polarity ,element, mode, planet, body, moto):
+    def __init__(self, sign, id, degrees, polarity, element, mode, ruler, 
+                 detriment, exalted, fall, body, moto):
         self.name_ = sign
         self.id_ = id
         self.degrees_ = degrees
         self.polarity_ = polarity
         self.element_ = element
         self.mode_ = mode
-        self.planet_ = planet
+        self.ruler_ = ruler
+        self.detriment_ = detriment
+        self.exalted_ = exalted
+        self.fall_ = fall
         self.body_ = body
         self.moto_ = moto
 
@@ -22,6 +26,9 @@ class Sign:
               "\nPolarity\t\t:\t", self.polarity_, 
               "\nElement\t\t\t:\t", self.element_, 
               "\nMode\t\t\t:\t", self.mode_, 
-              "\nPlanet\t\t\t:\t", self.planet_, 
+              "\nRuler\t\t\t:\t", self.ruler_,
+              "\nDetriment\t\t:\t", self.detriment_,
+              "\nExalted\t\t\t:\t", self.exalted_,
+              "\nFall\t\t\t:\t", self.fall_, 
               "\nBody part\t\t:\t", self.body_, 
               "\nMoto\t\t\t:\t", self.moto_)

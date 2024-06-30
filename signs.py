@@ -13,18 +13,18 @@ from aspects import Aspects
 
 class Signs:
     
-    aries_ = Sign(ARIES, 1, 0, POSITIVE, FIRE, CARDINAL, MARS, "Head", "I am")
-    taurus_ = Sign(TAURUS, 2, 30, NEGATIVE, EARTH, FIXED, VENUS, "Neck and throat", "I possess")
-    gemini_ = Sign(GEMINI, 3, 60, POSITIVE, AIR, MUTABLE, MERCURY, "Arms hands and lungs", "I think")
-    cancer_ = Sign(CANCER, 4, 90, NEGATIVE, WATER, CARDINAL, MOON, "Breasts and stomach", "I feel")
-    leo_ = Sign(LEO, 5, 120, POSITIVE, FIRE, FIXED, SUN, "Heart", "I will")
-    virgo_ = Sign(VIRGO, 6, 150, NEGATIVE, EARTH, MUTABLE, MERCURY, "Digestive system and bowel", "I analyze")
-    libra_ = Sign(LIBRA, 7, 180, POSITIVE, AIR, CARDINAL, VENUS, "Kidneys", "I balance")
-    scorpio_ = Sign(SCORPIO, 8, 210, NEGATIVE, WATER, FIXED, [MARS, PLUTO], "Reproductive organs", "I desire")
-    sagittarius_ = Sign(SAGITTARIUS, 9, 240, POSITIVE, FIRE, MUTABLE, JUPITER, "Hips and thighs", "I seek")
-    capricorn_ = Sign(CAPRICORN, 10, 270, NEGATIVE, EARTH, CARDINAL, SATURN, "Knees", "I achieve")
-    aquarius_ = Sign(AQUARIUS, 11, 300, POSITIVE, AIR, FIXED, [SATURN, URANUS],"Shins and ankles", "I know")
-    pisces_ = Sign(PISCES, 12, 330, NEGATIVE, WATER, MUTABLE, [JUPITER, NEPTUNE], "Feet", "I believe")
+    aries_ = Sign(ARIES, 1, 0, POSITIVE, FIRE, CARDINAL, MARS, VENUS, SUN, SATURN, "Head", "I am")
+    taurus_ = Sign(TAURUS, 2, 30, NEGATIVE, EARTH, FIXED, VENUS, MARS, MOON, NA, "Neck and throat", "I possess")
+    gemini_ = Sign(GEMINI, 3, 60, POSITIVE, AIR, MUTABLE, MERCURY, JUPITER, NA, NA, "Arms hands and lungs", "I think")
+    cancer_ = Sign(CANCER, 4, 90, NEGATIVE, WATER, CARDINAL, MOON, SATURN, JUPITER, MARS, "Breasts and stomach", "I feel")
+    leo_ = Sign(LEO, 5, 120, POSITIVE, FIRE, FIXED, SUN, SATURN, NA, NA, "Heart", "I will")
+    virgo_ = Sign(VIRGO, 6, 150, NEGATIVE, EARTH, MUTABLE, MERCURY, JUPITER, NA, VENUS, "Digestive system and bowel", "I analyze")
+    libra_ = Sign(LIBRA, 7, 180, POSITIVE, AIR, CARDINAL, VENUS, MARS, SATURN, SUN, "Kidneys", "I balance")
+    scorpio_ = Sign(SCORPIO, 8, 210, NEGATIVE, WATER, FIXED, [MARS, PLUTO], VENUS, NA, MOON,  "Reproductive organs", "I desire")
+    sagittarius_ = Sign(SAGITTARIUS, 9, 240, POSITIVE, FIRE, MUTABLE, JUPITER, MERCURY, NA, NA, "Hips and thighs", "I seek")
+    capricorn_ = Sign(CAPRICORN, 10, 270, NEGATIVE, EARTH, CARDINAL, SATURN, MOON, MARS, JUPITER, "Knees", "I achieve")
+    aquarius_ = Sign(AQUARIUS, 11, 300, POSITIVE, AIR, FIXED, [SATURN, URANUS], SUN, NA, NA, "Shins and ankles", "I know")
+    pisces_ = Sign(PISCES, 12, 330, NEGATIVE, WATER, MUTABLE, [JUPITER, NEPTUNE], MERCURY, VENUS, NA, "Feet", "I believe")
     signs_ = [aries_, taurus_, gemini_, cancer_, leo_, virgo_, libra_, 
               scorpio_, sagittarius_, capricorn_, aquarius_, pisces_]
 
