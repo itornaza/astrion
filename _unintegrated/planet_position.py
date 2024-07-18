@@ -68,7 +68,8 @@ def get_integer(prompt):
           print("Invalid input! Please enter a valid integer.")
 
 def display_angle(a, prompt):
-    print(f"{prompt}: {a[0]:.0f}° {a[1]:.0f}\'")
+    """Look here if you want to change the precision"""
+    print(f"{prompt}: {a[0]:.0f}° {a[1]:.2f}\'")
 
 def display_percentage(f):
     print(f"Percentage: {f:.4f}")
@@ -76,10 +77,10 @@ def display_percentage(f):
 def calculate_position():
     """Calculate the planet position at a given date and time from ephimeris"""
     # User input
-    t = get_hours_or_degrees_and_minutes("Time: ")
-    rx = get_bool("Retrograde: ")
-    a = get_hours_or_degrees_and_minutes("First angle (deg min): ")
-    b = get_hours_or_degrees_and_minutes("Second angle (deg min): ")
+    t = get_hours_or_degrees_and_minutes("Time in HH MM: ")
+    rx = get_bool("Retrograde (y or n): ")
+    a = get_hours_or_degrees_and_minutes("First angle (DD MM): ")
+    b = get_hours_or_degrees_and_minutes("Second angle (DD MM): ")
     
     # Calculations
     d = subtract_angles(a, b) if rx else subtract_angles(b, a)

@@ -293,6 +293,10 @@ class Keywords:
         ]
     }
 
+    patterns_ = {
+        # TODO
+    }
+
     angles_ = {
         ASC: [
             "The place of the rising sun and our birth and entry into the world",
