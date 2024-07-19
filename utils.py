@@ -57,7 +57,7 @@ def print_menu():
     print("| 2.  Planet            | 7.  Polarity             |")
     print("| 3.  Sign              | 8.  Mode                 |")
     print("| 4.  House             | 9.  Element              |")
-    print("| 5.  Aspect            |                          |")
+    print("| 5.  Aspect            | 10. Pattern              |")
     print("+-----------+-----------+----------+---------------+")
     print("| m.  Menu  |  s.  Sign ops menu   | q.  Quit      |")
     print("+-----------+-----------+----------+---------------+")
@@ -146,6 +146,11 @@ def element_handler():
         Signs.print_signs_in_element(Signs, element.name_)
     else:
         print(E_ELEMENT)
+
+# Pattern
+def pattern_handler():
+    # TODO
+    pass
 
 # Compare two signs
 def compare_signs_handler():
