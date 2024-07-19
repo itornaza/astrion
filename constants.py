@@ -2,7 +2,7 @@
 # constants
 #
 
-VERSION = "v1.4.1"
+VERSION = "v1.4.2"
 
 # Menu map
 M_ASTRION = "0"
@@ -15,6 +15,7 @@ M_ANGLE = "6"
 M_POLARITY = "7"
 M_MODE = "8"
 M_ELEMENT = "9"
+M_PATTERN = "10"
 
 # Planets
 SUN = "Sun"
@@ -89,6 +90,24 @@ EARTH = "Earth"
 AIR = "Air"
 WATER = "Water"
 
+# Patterns
+T_SQUARE = "T-square"
+GRAND_CROSS = "Grand cross"
+FINGER_OF_WORLD = "Finger of the world"
+HARD_RECTANGLE = "Hard rectangle"
+GRAND_TRINE = "Grand trine"
+MINOR_GRAND_TRINE = "Minor grand trine"
+KITE = "Kite"
+YOD = "Yod, aka Finger of fate"
+MYSTIC_RECTANGLE = "Mystic rectangle"
+GRAND_SEXTILE = "Grand sextile"
+STELLIUM = "Stellium"
+
+# Type
+SOFT = "Soft"
+HARD = "Hard"
+MIXED = "Mixed"
+
 # Misc
 NA = "N/A" # For Not Available
 
@@ -102,6 +121,7 @@ I_ANGLE = "Enter angle: "
 I_POLARITY = "Enter polarity: "
 I_MODE = "Enter mode: "
 I_ELEMENT = "Enter element: "
+I_PATTERN = "Enter patern: "
 
 # Errors
 E_MENU = "Invalid menu choice!"
@@ -115,4 +135,5 @@ E_ANGLE = "Invalid angle!"
 E_POLARITY = "Invalid polarity!"
 E_MODE = "Invalid mode!"
 E_ELEMENT = "Invalid element"
+E_PATTERN = "Invalid pattern"
 E_NUMBER_OF_SIGNS = "Invalid number of signs, should be two!"
