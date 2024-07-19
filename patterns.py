@@ -1,11 +1,10 @@
 #
-# planets
+# patterns
 #
 
 import re
 from constants import *
 from keywords import Keywords
-from aspect import Aspect
 from pattern import Pattern
 
 class Patterns:
@@ -13,14 +12,14 @@ class Patterns:
     t_square_ = Pattern(T_SQUARE, HARD, [SQUARE, OPPOSITION])
     grand_cross_ = Pattern(GRAND_CROSS, HARD, [SQUARE, OPPOSITION])
     finger_of_world_ = Pattern(FINGER_OF_WORLD, HARD, [SESQUIQUADRATE, SQUARE])
-    hard_rectangle_ = Pattern(HARD_RECTANGLE, HARD, SEMISQUARE, SESQUIQUADRATE, OPPOSITION)
-    grand_trine_ = Pattern(GRAND_TRINE, SOFT, TRINE)
+    hard_rectangle_ = Pattern(HARD_RECTANGLE, HARD, [SEMISQUARE, SESQUIQUADRATE, OPPOSITION])
+    grand_trine_ = Pattern(GRAND_TRINE, SOFT, [TRINE])
     minor_grand_trine_ = Pattern(MINOR_GRAND_TRINE, SOFT, [SEXTILE, TRINE])
     kite_ = Pattern(KITE, MIXED, [SEXTILE, TRINE, OPPOSITION])
     yod_ = Pattern(YOD, MIXED, [QUINCUNX, SEXTILE])
-    mystic_rectangle_ = Pattern(MYSTIC_RECTANGLE, MIXED, SEXTILE, TRINE, OPPOSITION)
-    grand_sextile_ = Pattern(GRAND_SEXTILE, SOFT, SEXTILE)
-    stellium_ = Pattern(STELLIUM, SOFT, CONJUNCTION)
+    mystic_rectangle_ = Pattern(MYSTIC_RECTANGLE, MIXED, [SEXTILE, TRINE, OPPOSITION])
+    grand_sextile_ = Pattern(GRAND_SEXTILE, SOFT, [SEXTILE])
+    stellium_ = Pattern(STELLIUM, SOFT, [CONJUNCTION])
     
     patterns_ = [t_square_, grand_cross_, finger_of_world_, hard_rectangle_, 
                  grand_trine_, minor_grand_trine_, kite_, yod_, 
@@ -67,9 +66,6 @@ class Patterns:
 
     def print(self, pattern):
         Pattern.print(pattern)
-        # TODO: Print associated aspects to get all the associated info
-        for aspect in pattern:
-            Aspect.print(aspect)
 
     def print_keywords(self, pattern_name):
         print("\nKeyword list for pattern " + pattern_name.upper() + ":\n")
