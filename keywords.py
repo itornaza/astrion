@@ -368,25 +368,103 @@ class Keywords:
     }
 
     patterns_ = {
-        T_SQUARE: ["TODO t-square"],
+        T_SQUARE: ["Inner tension and drive for active integration and manifestation",
+                   "The principle of the apex planet may seem to highlight the differences between the opposing "
+                   "planets and to exacerbate the tension and conflicts between them",
+                   "The apex may experienced as an obstacle which stands in the way of reconciliation and balance "
+                   "between those planets in the opposition",
+                   "The apex planet may be the unlikely mediator or catalyst between the opposing principles",
+                   "Cardinal: demand to be actively integrated and resolved",
+                   "Fixed: particularly difficult to integrate, tremendous internal pressure and capacity for "
+                   "creativity", 
+                   "Mutable: least resistant to integration, restless motion to move forward but difficulty in "
+                   "following through"
+        ],
 
-        GRAND_CROSS: ["TODO grand cross"],
+        GRAND_CROSS: ["Describes a person that is driven and fiercely self-sufficient, who may have to learn the "
+                      "hard way but who is also capable of remarkable achievements",
+                      "A great deal of striving and effort to overcome challenges",
+                      "By no means indicative of an easy life",
+                      "May experience life as a great challenge",
+                      "May see other people and the matterial world as obstacles to their progress"
+        ],
 
-        FINGER_OF_WORLD: ["TODO finger of the world"],
+        FINGER_OF_WORLD: ["The active challenge of the sesquiquadrates will tend to drive the individual to integrate "
+                          "and resolve through the focal point",
+                          "The inherent conflict of the square is further aggrevated by the more minor frictions and "
+                          "obstacles indicated by both the sesquiquadrates",
+                          "Although the subject may never feel close to achieving their aims, they are likely to "
+                          "remain driven",
+                          "The purpose of life may lie in the struggle itself rather than in the end result"
+        ],
 
-        HARD_RECTANGLE: ["TODO hard rectangle"],
+        HARD_RECTANGLE: ["As in the T-square, the conflicts and strengths of the oppositions are likely to be "
+                         "intensified by the additional strain of the semisquares and sesquiquadrates"                 
+        ],
 
-        GRAND_TRINE: ["TODO grand trine"],
+        GRAND_TRINE: ["The emphasis on 3-ness indicates a high degree of harmony, enjoyment and contentment",
+                      "Natural talent that enables a hugh degree of achievement with relative low effort",
+                      "The person might become lazy or complacent",
+                      "There is not Apex which resists the kind of action or dynamic instability present in "
+                      "T-square or grand cross",
+                      "Fire: The individual will have an innate and instinctive faith and optimism. Warmth and "
+                      "generosity of spirit, center stage",
+                      "Earth: The individual will be instinctively well grounded, capable and practical",
+                      "Air: The individual will be able to draw on their natural ability to detach and assess "
+                      "a situation, balancing and weighting up options, natural skills in communicating and "
+                      "socializing",
+                      "Water: The individual will have a deep reservoir of comfort and emotional support from "
+                      "which to draw, natural reservoir of empathetic feeling, attuned to the emotional "
+                      "undercurrents of a situation"
+        ],
 
-        MINOR_GRAND_TRINE: ["TODO minor grand trine"],
+        MINOR_GRAND_TRINE: ["The principle of focal planet forming the sextiles, brings extra opportunity for "
+                            "an active realization of the potential ease and enjoyment constrained with the "
+                            "trine",
+                            "It can represent significant creative impulse",
+                            "The reservoir of natural skill and easy integration of the planets in trine can be "
+                            "funneled through the apex, fueled by easy activeness of the sextile energy"
+        ],
 
-        KITE: ["TODO sextile"],
+        KITE: ["Combines the ease, comfort and natural talent of the grand rine with the activity of the two "
+               "sextiles and the dynamic tension of the opposition",
+               "The apex planet forming the two sextiles will be in different element from the planets in the "
+               "grand trine and provides an outlet for the expression of the potential shown by the overall "
+               "configuration",
+               "More effort may be exerted in the pursuit of rewards promised by the easy integration of "
+               "planetary principles in the grand trine"
+        ],
 
-        YOD: ["TODO quincunx"],
+        YOD: ["The focal point stabilizes and drives this configuration",
+              "It may be difficult at first to see how this can be done",
+              "Fate may intervene in this respect throwing the person into situation where he must develop...",
+              "The principle of the focal point is engaged in a struggle to become more whole by embracing "
+              "the relatively alien principles of the other two planets",
+              "The sextile aspect may indicate an opportunity for the above proposition to be accomplished "
+              "with relatively less effort than might be usually be the case with the quincunx aspects",
+              "Not until the apex planet is engaged with actively and continuously, and the irritations of "
+              "the quincunxes faced, that the potential of the yod trully come alive",
+              "A kind of fatedness is associated with yod"
+        ],
 
-        MYSTIC_RECTANGLE: ["TODO mystic rectangle"],
+        MYSTIC_RECTANGLE: ["The two trines and two sextiles enable the inner tensions of the oppositions to "
+                           "be resolved",
+                           "The individual has exceptional innate talents and gifts which demand to be "
+                           "harvested and actively expressed in the world",
+                           "There seems to be an element of responsibility. The individual is responsible "
+                           "for using rather than ignoring their considerable gifts",
+                           "The person will be good at finding creative solutions to difficult dilemmas",
+                           "Their life may contain many paradoxes and situations which might on the surface "
+                           "seem irreconciable, but there seems to be a facility for working creatively "
+                           "with such situations"
+        ],
 
-        GRAND_SEXTILE: ["TODO grand sextile"],
+        GRAND_SEXTILE: ["This very rear pattern indicates a markedly versatile character who with little "
+                        "effort may be especially able to create or discover opportunities to utilise the "
+                        "full range of their considerable resources",
+        ],
 
-        STELLIUM: ["TODO stellium"]
+        STELLIUM: ["Caution: 3 or more planets in the same sign and house in conjunction by association",
+                   "The person will often be single minded, self-contained and self-driven"
+        ]
     }

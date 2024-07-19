@@ -9,17 +9,17 @@ from pattern import Pattern
 
 class Patterns:
 
-    t_square_ = Pattern(T_SQUARE, HARD, [SQUARE, OPPOSITION])
-    grand_cross_ = Pattern(GRAND_CROSS, HARD, [SQUARE, OPPOSITION])
-    finger_of_world_ = Pattern(FINGER_OF_WORLD, HARD, [SESQUIQUADRATE, SQUARE])
-    hard_rectangle_ = Pattern(HARD_RECTANGLE, HARD, [SEMISQUARE, SESQUIQUADRATE, OPPOSITION])
-    grand_trine_ = Pattern(GRAND_TRINE, SOFT, [TRINE])
-    minor_grand_trine_ = Pattern(MINOR_GRAND_TRINE, SOFT, [SEXTILE, TRINE])
-    kite_ = Pattern(KITE, MIXED, [SEXTILE, TRINE, OPPOSITION])
-    yod_ = Pattern(YOD, MIXED, [QUINCUNX, SEXTILE])
-    mystic_rectangle_ = Pattern(MYSTIC_RECTANGLE, MIXED, [SEXTILE, TRINE, OPPOSITION])
-    grand_sextile_ = Pattern(GRAND_SEXTILE, SOFT, [SEXTILE])
-    stellium_ = Pattern(STELLIUM, SOFT, [CONJUNCTION])
+    t_square_ = Pattern(T_SQUARE, HARD, [SQUARE, OPPOSITION], [CARDINAL, FIXED, MUTABLE])
+    grand_cross_ = Pattern(GRAND_CROSS, HARD, [SQUARE, OPPOSITION], [CARDINAL, FIXED, MUTABLE])
+    finger_of_world_ = Pattern(FINGER_OF_WORLD, HARD, [SESQUIQUADRATE, SQUARE], [NA])
+    hard_rectangle_ = Pattern(HARD_RECTANGLE, HARD, [SEMISQUARE, SESQUIQUADRATE, OPPOSITION], [NA])
+    grand_trine_ = Pattern(GRAND_TRINE, SOFT, [TRINE], [FIRE, EARTH, AIR, WATER])
+    minor_grand_trine_ = Pattern(MINOR_GRAND_TRINE, SOFT, [SEXTILE, TRINE], [NA])
+    kite_ = Pattern(KITE, MIXED, [SEXTILE, TRINE, OPPOSITION], [NA])
+    yod_ = Pattern(YOD, MIXED, [QUINCUNX, SEXTILE], [NA])
+    mystic_rectangle_ = Pattern(MYSTIC_RECTANGLE, MIXED, [SEXTILE, TRINE, OPPOSITION], [NA])
+    grand_sextile_ = Pattern(GRAND_SEXTILE, SOFT, [SEXTILE], [NA])
+    stellium_ = Pattern(STELLIUM, NA, [CONJUNCTION], [NA])
     
     patterns_ = [t_square_, grand_cross_, finger_of_world_, hard_rectangle_, 
                  grand_trine_, minor_grand_trine_, kite_, yod_, 
@@ -70,7 +70,7 @@ class Patterns:
     def print_keywords(self, pattern_name):
         print("\nKeyword list for pattern " + pattern_name.upper() + ":\n")
         for k in Keywords.patterns_[pattern_name]:
-            print("\t- " + k)
+            print("\n\t- " + k)
 
     # TODO: Implement
     def print_all(self):
