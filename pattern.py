@@ -11,5 +11,5 @@ class Pattern:
     def print(self):
         print("\nName\t\t\t:\t", self.name_.upper(),
               "\nType\t\t\t:\t", self.type_,
-              "\nAspects\t\t:\t", self.aspects_, "\n")
+              "\nAspects\t\t\t:\t", self.aspects_, "\n")
         

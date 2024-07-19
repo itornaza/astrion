@@ -35,6 +35,8 @@ while (True):
         mode_handler()
     elif menu_choice == M_ELEMENT: 
         element_handler()
+    elif menu_choice == M_PATTERN:
+        pattern_handler()
     elif menu_choice == "M" or menu_choice == "m" or \
          menu_choice == "Menu" or menu_choice ==  "menu": 
         print_menu()
@@ -75,7 +77,7 @@ while (True):
                     print(E_SUB_MENU)
 
     elif menu_choice == "Q" or menu_choice == "q" or menu_choice == "Quit" or menu_choice == "quit": 
-        print_header(0.2, 1.4)
+        os.system("clear")
         break
     else: 
         print(E_MENU)

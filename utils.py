@@ -13,6 +13,7 @@ from angle import Angle
 from polarity import Polarity
 from mode import Mode
 from element import Element
+from pattern import Pattern
 from planets import Planets
 from signs import Signs
 from houses import Houses
@@ -21,6 +22,7 @@ from angles import Angles
 from elements import Elements
 from polarities import Polarities
 from modes import Modes
+from patterns import Patterns
 
 planets = Planets()
 signs = Signs()
@@ -78,7 +80,7 @@ def print_signs_ops_menu():
 # Keywords
 def keywords_handler():
     keywords_raw = input(I_KEYWORDS)
-    keywords_list = keywords_raw.split()
+    keywords_list = keywords_raw.split(',')
     for k in keywords_list:
         object = get_object_from_keyword(k)
         print_object(object) if object else print("\n", E_KEYWORD, ": " + k.upper())
@@ -149,8 +151,15 @@ def element_handler():
 
 # Pattern
 def pattern_handler():
-    # TODO
-    pass
+    p = input(I_PATTERN)
+    pattern = Patterns.get(Patterns, p)
+    if pattern:
+        Patterns.print(Patterns, pattern)
+        for a in pattern.aspects_:
+            aspect = Aspects.get(Aspects, a)
+            Aspect.print(aspect)
+    else:
+        print(E_PATTERN)
 
 # Compare two signs
 def compare_signs_handler():
@@ -226,6 +235,7 @@ def get_object_from_keyword(k):
     if tmp := Polarities.get(Polarities, k): object = tmp
     if tmp := Modes.get(Modes, k): object = tmp
     if tmp := Elements.get(Elements, k): object = tmp
+    if tmp := Patterns.get(Patterns, k): object = tmp
     return object
 
 # Generic version to print any valid object
@@ -247,5 +257,7 @@ def print_object(object):
             Modes.print_keywords(Modes, object.name_) 
         if isinstance(object, Element):
             Elements.print_keywords(Elements, object.name_) 
+        if isinstance(object, Pattern):
+            Patterns.print_keywords(Patterns, object.name_)
     else:
         print(E_KEYWORD)

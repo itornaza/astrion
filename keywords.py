@@ -293,10 +293,6 @@ class Keywords:
         ]
     }
 
-    patterns_ = {
-        # TODO
-    }
-
     angles_ = {
         ASC: [
             "The place of the rising sun and our birth and entry into the world",
@@ -371,3 +367,26 @@ class Keywords:
         WATER: ["sympathetic", "receptive", "imaginative", "emotional", "intuitive"]
     }
 
+    patterns_ = {
+        T_SQUARE: ["TODO t-square"],
+
+        GRAND_CROSS: ["TODO grand cross"],
+
+        FINGER_OF_WORLD: ["TODO finger of the world"],
+
+        HARD_RECTANGLE: ["TODO hard rectangle"],
+
+        GRAND_TRINE: ["TODO grand trine"],
+
+        MINOR_GRAND_TRINE: ["TODO minor grand trine"],
+
+        KITE: ["TODO sextile"],
+
+        YOD: ["TODO quincunx"],
+
+        MYSTIC_RECTANGLE: ["TODO mystic rectangle"],
+
+        GRAND_SEXTILE: ["TODO grand sextile"],
+
+        STELLIUM: ["TODO stellium"]
+    }

@@ -98,7 +98,7 @@ HARD_RECTANGLE = "Hard rectangle"
 GRAND_TRINE = "Grand trine"
 MINOR_GRAND_TRINE = "Minor grand trine"
 KITE = "Kite"
-YOD = "Yod, aka Finger of fate"
+YOD = "Yod"
 MYSTIC_RECTANGLE = "Mystic rectangle"
 GRAND_SEXTILE = "Grand sextile"
 STELLIUM = "Stellium"
@@ -112,7 +112,7 @@ MIXED = "Mixed"
 NA = "N/A" # For Not Available
 
 # Input prompts
-I_KEYWORDS = "Enter terms separated by space: "
+I_KEYWORDS = "Enter terms separated by comma: "
 I_PLANET = "Enter planet: "
 I_SIGN = "Enter sign: "
 I_HOUSE = "Enter house: "
