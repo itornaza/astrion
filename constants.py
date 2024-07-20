@@ -126,6 +126,7 @@ I_PATTERN = "Enter patern: "
 # Errors
 E_MENU = "Invalid menu choice!"
 E_SUB_MENU = "Invalid sign ops menu choice!"
+E_CALC_MENU = "Invalid calculator menu choice!"
 E_KEYWORD = "Invalid keyword!"
 E_PLANET = "Invalid planet!"
 E_SIGN = "Invalid sign!"

@@ -23,6 +23,7 @@ from elements import Elements
 from polarities import Polarities
 from modes import Modes
 from patterns import Patterns
+from planet_position import *
 
 planets = Planets()
 signs = Signs()
@@ -60,9 +61,9 @@ def print_menu():
     print("| 3.  Sign              | 8.  Mode                 |")
     print("| 4.  House             | 9.  Element              |")
     print("| 5.  Aspect            | 10. Pattern              |")
-    print("+-----------+-----------+----------+---------------+")
-    print("| m.  Menu  |  s.  Sign ops menu   | q.  Quit      |")
-    print("+-----------+-----------+----------+---------------+")
+    print("+-----------+---------------+-----------+----------+")
+    print("| m.  Menu  |  s.  Sign ops |  c. Calc  | q.  Quit |")
+    print("+-----------+---------------+-----------+----------+")
 
 def print_signs_ops_menu():
     os.system("clear")
@@ -73,9 +74,19 @@ def print_signs_ops_menu():
     print("| 2.  Sign              | 6.  Mode + element       |")
     print("| 3.  Compare signs     | 7.  Element + mode       |")
     print("| 4.  Two in common     | 8.  Dump all signs       |")
-    print("+-----------+-----------+----------+---------------+")
-    print("| m.  Menu  |  s.  Sign ops menu   | q.  Quit      |")
-    print("+-----------+----------------------+---------------+")
+    print("+-----------+---------------+-----------+----------+")
+    print("| m.  Menu  |  s.  Sign ops |  c. Calc  | q.  Quit |")
+    print("+-----------+---------------+-----------+----------+")
+
+def print_calculator_menu():
+    os.system("clear")
+    print("+--------------------------------------------------+")
+    print("|        ---===  * Calculator Menu *  ===---       |")
+    print("+-----------------------+--------------------------+")
+    print("| 1. Planet positions   |                          |")
+    print("+-----------+---------------+-----------+----------+")
+    print("| m.  Menu  |  s.  Sign ops |  c. Calc  | q.  Quit |")
+    print("+-----------+---------------+-----------+----------+")
 
 # Keywords
 def keywords_handler():
@@ -261,3 +272,7 @@ def print_object(object):
             Patterns.print_keywords(Patterns, object.name_)
     else:
         print(E_KEYWORD)
+
+# Planet calculator handler
+def planet_calculator_handler():
+    calculate_position()
