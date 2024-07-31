@@ -108,6 +108,9 @@ SOFT = "Soft"
 HARD = "Hard"
 MIXED = "Mixed"
 
+# Lunar cycles
+NEW_MOON = "New Moon"
+
 # Misc
 NA = "N/A" # For Not Available
 
