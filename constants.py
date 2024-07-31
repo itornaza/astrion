@@ -109,7 +109,17 @@ HARD = "Hard"
 MIXED = "Mixed"
 
 # Lunar cycles
+WAXING = "Waxing"
+WANNING = "Wanning"
+
 NEW_MOON = "New Moon"
+CRESCENT = "Crescent"
+FIRST_QUARTER = "First quarter"
+GIBBOUS = "Gibbous"
+FULL_MOON = "Full Moon"
+DISSEMINATING = "Disseminating"
+LAST_QUARTER = "Last quarter"
+BALSAMIC = "Balsamic"
 
 # Misc
 NA = "N/A" # For Not Available

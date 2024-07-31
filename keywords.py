@@ -470,5 +470,12 @@ class Keywords:
     }
 
     lunar_cycles_ = {
-        NEW_MOON: [""]
+        NEW_MOON: [""],
+        CRESCENT: [""],
+        FIRST_QUARTER: [""],
+        GIBBOUS: [""],
+        FULL_MOON: [""],
+        DISSEMINATING: [""],
+        LAST_QUARTER: [""],
+        BALSAMIC: [""]
     }
