@@ -468,3 +468,7 @@ class Keywords:
                    "The person will often be single minded, self-contained and self-driven"
         ]
     }
+
+    lunar_cycles_ = {
+        NEW_MOON: [""]
+    }

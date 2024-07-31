@@ -63,6 +63,8 @@ while (True):
                 element_and_polarity_handler()
             elif sub_choice ==  "8":
                 Signs.print_all(Signs)
+            
+            # Exit submenu options
             elif sub_choice == "M" or sub_choice == "m" or \
                     sub_choice == "Menu" or sub_choice ==  "menu": 
                 print_menu()
@@ -85,6 +87,8 @@ while (True):
             print_calculator_menu()
             if sub_choice == "1":
                 planet_calculator_handler()
+
+            # Exit submenu options
             elif sub_choice == "M" or sub_choice == "m" or \
                     sub_choice == "Menu" or sub_choice ==  "menu": 
                 print_menu()
@@ -98,6 +102,7 @@ while (True):
             else: 
                 print(E_CALC_MENU)
 
+    # Exit menu options
     elif menu_choice == "Q" or menu_choice == "q" or \
          menu_choice == "Quit" or menu_choice == "quit": 
         os.system("clear")
