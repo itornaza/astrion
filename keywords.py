@@ -469,7 +469,7 @@ class Keywords:
         ]
     }
 
-    lunar_cycles_ = {
+    lunar_phases_ = {
         NEW_MOON: [""],
         CRESCENT: [""],
         FIRST_QUARTER: [""],

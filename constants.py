@@ -16,6 +16,7 @@ M_POLARITY = "7"
 M_MODE = "8"
 M_ELEMENT = "9"
 M_PATTERN = "10"
+M_LUNAR_PHASE = "11"
 
 # Planets
 SUN = "Sun"
@@ -108,10 +109,9 @@ SOFT = "Soft"
 HARD = "Hard"
 MIXED = "Mixed"
 
-# Lunar cycles
+# Lunar phases
 WAXING = "Waxing"
 WANNING = "Wanning"
-
 NEW_MOON = "New Moon"
 CRESCENT = "Crescent"
 FIRST_QUARTER = "First quarter"
@@ -135,6 +135,7 @@ I_POLARITY = "Enter polarity: "
 I_MODE = "Enter mode: "
 I_ELEMENT = "Enter element: "
 I_PATTERN = "Enter patern: "
+I_LUNAR_PHASE = "Entel lunar phase: "
 
 # Errors
 E_MENU = "Invalid menu choice!"
@@ -148,6 +149,7 @@ E_ASPECT = "Invalid aspect!"
 E_ANGLE = "Invalid angle!"
 E_POLARITY = "Invalid polarity!"
 E_MODE = "Invalid mode!"
-E_ELEMENT = "Invalid element"
-E_PATTERN = "Invalid pattern"
+E_ELEMENT = "Invalid element!"
+E_PATTERN = "Invalid pattern!"
 E_NUMBER_OF_SIGNS = "Invalid number of signs, should be two!"
+E_LUNAR_PHASE = "Invalid lunar phase!"

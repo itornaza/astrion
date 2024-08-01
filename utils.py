@@ -14,6 +14,7 @@ from polarity import Polarity
 from mode import Mode
 from element import Element
 from pattern import Pattern
+from lunar_phase import LunarPhase
 from planets import Planets
 from signs import Signs
 from houses import Houses
@@ -24,6 +25,7 @@ from polarities import Polarities
 from modes import Modes
 from patterns import Patterns
 from planet_position import *
+from lunar_phases import LunarPhases
 
 planets = Planets()
 signs = Signs()
@@ -33,6 +35,7 @@ angles = Angles()
 polarities = Polarities()
 modes = Modes()
 elements = Elements()
+lunar_phases = LunarPhases()
 
 def print_header(t1_header, t2_credits):
     os.system("clear")
@@ -61,6 +64,7 @@ def print_menu():
     print("| 3.  Sign              | 8.  Mode                 |")
     print("| 4.  House             | 9.  Element              |")
     print("| 5.  Aspect            | 10. Pattern              |")
+    print("|                       | 11. Lunar phase          |")
     print("+-----------+---------------+-----------+----------+")
     print("| m.  Menu  |  s.  Sign ops |  c. Calc  | q.  Quit |")
     print("+-----------+---------------+-----------+----------+")
@@ -172,6 +176,12 @@ def pattern_handler():
     else:
         print(E_PATTERN)
 
+# Lunar phase
+def lunar_phase_handler():
+    lp = input(I_LUNAR_PHASE)
+    lunar_phase = LunarPhases.get(LunarPhases, lp)
+    LunarPhases.print(LunarPhases, lunar_phase) if lunar_phase else print(E_LUNAR_PHASE)
+
 # Compare two signs
 def compare_signs_handler():
     user_input = input(I_KEYWORDS)
@@ -247,6 +257,7 @@ def get_object_from_keyword(k):
     if tmp := Modes.get(Modes, k): object = tmp
     if tmp := Elements.get(Elements, k): object = tmp
     if tmp := Patterns.get(Patterns, k): object = tmp
+    if tmp := LunarPhases.get(LunarPhases, k): object = tmp
     return object
 
 # Generic version to print any valid object
@@ -270,6 +281,8 @@ def print_object(object):
             Elements.print_keywords(Elements, object.name_) 
         if isinstance(object, Pattern):
             Patterns.print_keywords(Patterns, object.name_)
+        if isinstance(object, LunarPhase):
+            LunarPhases.print_keywords(LunarPhases, object.name_)
     else:
         print(E_KEYWORD)
 

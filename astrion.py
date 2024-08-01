@@ -36,10 +36,11 @@ while (True):
         element_handler()
     elif menu_choice == M_PATTERN:
         pattern_handler()
+    elif menu_choice == M_LUNAR_PHASE:
+        lunar_phase_handler()
     elif menu_choice == "M" or menu_choice == "m" or \
          menu_choice == "Menu" or menu_choice ==  "menu": 
         print_menu()
-    
     elif menu_choice == "S" or menu_choice == "s": 
 
         # Signs Ops Menu
