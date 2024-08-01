@@ -10,15 +10,16 @@ from sign import Sign
 
 class Aspects:
 
-    conjunction_ = Aspect(CONJUNCTION, 0, "1:1", 1, "8°", "Sign", NA)    
-    opposition_ = Aspect(OPPOSITION, 180, "1:2", 2, "8°", ["Polarity", "Mode"], [["Cardinal", "Fixed", "Mutable"], ["Positive", "Negative"]])
-    trine_ = Aspect(TRINE, 120, "1:3", 3, "8°", "Element", ["Fire", "Earth", "Air", "Water"])
-    square_ = Aspect(SQUARE, 90, "1:4", 2, "8°", "Mode", ["Cardinal", "Fixed", "Mutable"])
-    sextile_ = Aspect(SEXTILE, 60, "1:6", [2, 3], "4°", ["Polarity", "Compatible element"], [["Positive", "Negative"], ["Fire to Air", "Air to Fire", "Earth to water", "Water to earth"]])
-    semisquare_ = Aspect(SEMISQUARE, 45, "1:8", 2, "2°", NA, NA)
-    sesquiquadrate_ = Aspect(SESQUIQUADRATE, 135, "3:8", [2, 3], "2°", NA, NA)
-    semisextile_ = Aspect(SEMISEXTILE, 30, "1:12", [2, 3], "2°", "Nothing", NA)
-    quincunx_ = Aspect(QUINCUNX, 150, "5:12", [2, 3, 5], "2°", "Nothing", NA)
+    conjunction_ = Aspect(CONJUNCTION, 0, "1:1", 1, 8, "Sign", NA)    
+    opposition_ = Aspect(OPPOSITION, 180, "1:2", 2, 8, ["Polarity", "Mode"], [["Cardinal", "Fixed", "Mutable"], ["Positive", "Negative"]])
+    trine_ = Aspect(TRINE, 120, "1:3", 3, 8, "Element", ["Fire", "Earth", "Air", "Water"])
+    square_ = Aspect(SQUARE, 90, "1:4", 2, 8, "Mode", ["Cardinal", "Fixed", "Mutable"])
+    sextile_ = Aspect(SEXTILE, 60, "1:6", [2, 3], 4, ["Polarity", "Compatible element"], [["Positive", "Negative"], ["Fire to Air", "Air to Fire", "Earth to water", "Water to earth"]])
+    semisquare_ = Aspect(SEMISQUARE, 45, "1:8", 2, 2, NA, NA)
+    sesquiquadrate_ = Aspect(SESQUIQUADRATE, 135, "3:8", [2, 3], 2, NA, NA)
+    semisextile_ = Aspect(SEMISEXTILE, 30, "1:12", [2, 3], 2, "Nothing", NA)
+    quincunx_ = Aspect(QUINCUNX, 150, "5:12", [2, 3, 5], 2, "Nothing", NA)
+    
     aspects_ = [conjunction_, opposition_, trine_, square_, sextile_, 
                 semisquare_, sesquiquadrate_, semisextile_, quincunx_]
 
@@ -55,7 +56,7 @@ class Aspects:
         return aspect
 
     def get_aspect_from_aspect_angle(aspect_angle):
-        match(aspect_angle):
+        match aspect_angle:
             case 0: return Aspects.conjunction_
             case 30: return Aspects.semisextile_
             case 45: return Aspects.semisquare_
@@ -67,14 +68,45 @@ class Aspects:
             case 180: return Aspects.opposition_
             case _ :
                 return None
-            
+    
+    def get_aspect_from_angle(angle):
+        if angle <= Aspects.conjunction_.angle_ + Aspects.conjunction_.orb_ and \
+            angle >= Aspects.conjunction_.angle_ - Aspects.conjunction_.orb_:
+            return Aspects.conjunction_
+        elif angle <= Aspects.semisextile_.angle_ + Aspects.semisextile_.orb_ and \
+            angle >= Aspects.semisextile_.angle_ - Aspects.semisextile_.orb_:
+            return Aspects.semisextile_
+        elif angle <= Aspects.semisquare_.angle_ + Aspects.semisquare_.orb_ and \
+            angle >= Aspects.semisquare_.angle_ - Aspects.semisquare_.orb_:
+            return Aspects.semisquare_
+        elif angle <= Aspects.sextile_.angle_ + Aspects.sextile_.orb_ and \
+            angle >= Aspects.sextile_.angle_ - Aspects.sextile_.orb_:
+            return Aspects.sextile_
+        elif angle <= Aspects.square_.angle_ + Aspects.square_.orb_ and \
+            angle >= Aspects.square_.angle_ - Aspects.square_.orb_:
+            return Aspects.square_
+        elif angle <= Aspects.trine_.angle_+ Aspects.trine_.orb_ and \
+            angle >= Aspects.trine_.angle_ - Aspects.trine_.orb_:
+            return Aspects.trine_
+        elif angle <= Aspects.sesquiquadrate_.angle_ + Aspects.sesquiquadrate_.orb_ and \
+            angle >= Aspects.sesquiquadrate_.angle_ - Aspects.sesquiquadrate_.orb_:
+            return Aspects.sesquiquadrate_
+        elif angle <= Aspects.quincunx_.angle_ + Aspects.quincunx_.orb_ and \
+            angle >= Aspects.quincunx_.angle_ - Aspects.quincunx_.orb_:
+            return Aspects.quincunx_
+        elif angle <= Aspects.opposition_.angle_ + Aspects.opposition_.orb_ and \
+            angle >= Aspects.opposition_.angle_ - Aspects.opposition_.orb_:
+            return Aspects.opposition_
+        else:
+            return None
+
     def calculate_aspect_angle(self, sign_a, sign_b):
         aspect_angle = abs(sign_a.degrees_ - sign_b.degrees_)
         if aspect_angle > 180:
             d_180 = aspect_angle - 180
             aspect_angle = 180 - d_180
         return aspect_angle
-    
+
     def print(self, aspect):
         Aspect.print(aspect)
 

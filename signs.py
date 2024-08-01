@@ -25,6 +25,7 @@ class Signs:
     capricorn_ = Sign(CAPRICORN, 10, 270, NEGATIVE, EARTH, CARDINAL, SATURN, MOON, MARS, JUPITER, "Knees", "I achieve")
     aquarius_ = Sign(AQUARIUS, 11, 300, POSITIVE, AIR, FIXED, [SATURN, URANUS], SUN, NA, NA, "Shins and ankles", "I know")
     pisces_ = Sign(PISCES, 12, 330, NEGATIVE, WATER, MUTABLE, [JUPITER, NEPTUNE], MERCURY, VENUS, NA, "Feet", "I believe")
+    
     signs_ = [aries_, taurus_, gemini_, cancer_, leo_, virgo_, libra_, 
               scorpio_, sagittarius_, capricorn_, aquarius_, pisces_]
 
