@@ -470,12 +470,106 @@ class Keywords:
     }
 
     lunar_phases_ = {
-        NEW_MOON: [""],
-        CRESCENT: [""],
-        FIRST_QUARTER: [""],
-        GIBBOUS: [""],
-        FULL_MOON: [""],
-        DISSEMINATING: [""],
-        LAST_QUARTER: [""],
-        BALSAMIC: [""]
+        NEW_MOON: ["Involved at the beginnings of things", 
+                   "May meet many new situations",
+                   "Impulsive and operating on instinct and spontaneity",
+                   "Sowers of seeds",
+                   "Enthusiastic", 
+                   "Impulsive",
+                   "Spontaneous",
+                   "Subjective",
+                   "Energy levels likely to fluctuate",
+                   "Inner life may be more real than their external experiences",
+                   "Perceive situations in symbolic terms making a network of ocnnections instinctively"
+        ],
+        
+        CRESCENT: ["Searching for a dream",
+                   "Breaking new ground",
+                   "Working hard to gain a foothold yet their pioneering spirit is somehow dashed against "
+                   "the rocks of destiny",
+                   "Ahead of their time",
+                   "Heighly motivated and succesful if they can persist in the face of resistance",
+                   "May feel as if life is frequently two steps forward and one step back"
+        ],
+        
+        FIRST_QUARTER: ["Builders or activists of one sort or another",
+                        "Strong willed",
+                        "Energetic",
+                        "Have more than their fair share of challenges in life",
+                        "Adventurous",
+                        "Willing to explore new ground",
+                        "Hold theirselves back through overreflection or inner uncertainties",
+                        "Trine or No aspect type: Are willing to embrace new potentials but less forcefull "
+                        "on the dissmantling of the old",
+                        "Square or cuspal Sesquiquadrate type: Burning bridges behind them as they thrive "
+                        "by tearing down the outmoded structures"
+        ],
+        
+        GIBBOUS: ["Idealistic",
+                  "Seeking for personal meaning",
+                  "Are on a some quest to reach their current goal",
+                  "Devote themselves to a cause",
+                  "Seeking insight or understanding through pulling different threads together",
+                  "May choose to work for a joint venture",
+                  "May act as an inspiration to others as well",
+                  "Tendency to perfectionism and self questioning",
+                  "Aim height at tasks they have set themselves",
+                  "If it is worth doing, it is worth doing well"
+        ],
+        
+        FULL_MOON: ["Capacity for visionary thought",
+                    "Taking the objective stance",
+                    "Having a clear sense of themselves or a conscious sense of purpose",
+                    "Vital importance of personal relationships",
+                    "Relationships might be important in their lives or rejected altogether",
+                    "Pattern of life experiences rising to a peak folowed by a crisis",
+                    "Illumination or revelation through psychic insight for some",
+                    "Know the joy of fullfilment, reconciliation and achievement or the pull or stalking opposing "
+                    "circumstances especially for opposition types",
+                    "Perceive ways to rise above difficulties",
+                    "Move forward and transform themselves and possibly other people",
+                    "The gift of seeking to find the next step beyond the present"
+        ],
+        
+        DISSEMINATING: ["Teachers",
+                        "Communicators",
+                        "The crusadres of the lunation cycle",
+                        "Passionate desire to share experiences that make impression on them",
+                        "Want to demonstrate their acquired knowledge",
+                        "Awareness of participating on a greater whole",
+                        "Owned inspired visions",
+                        "Sweep others along with them with the fire of their emotions",
+                        "Uplifted by a cause, movement, religion or philosophy",
+                        "Capacity to translate vision to action",
+                        "Difficulties if emotional climate rises too fast or too height",
+                        "Tempering of passion with dissernment is neccessary for lasting achievement",
+                        "May become lost within their own cause or loose touch with personal responsibility "
+                        "creating a sense of pwerlessness"
+        ],
+        
+        LAST_QUARTER: ["Thoughtfull",
+                       "Philosophical",
+                       "Want to consolidate and actualize their ideologies",
+                       "Important to conserve a personal or social principle that they fight to maintain if neccessary",
+                       "Inflexible and defensive in the face of criticism",
+                       "Can perceive a seed future arising from the ashes of the past",
+                       "Pioneering spirit obehind future systems of thought or concrete manifestations that may "
+                       "outlast them individually",
+                       "Reformers attuned to the nature of progress setting up some lasting legacy",
+                       "Ironic sense of humour"
+        ],
+        
+        BALSAMIC: ["Need for space, quite and solitude",
+                   "Capable of immense sacrifice surrendering even this need if occasion calls for it",
+                   "Feeling like a melting pot in which something grester than themselves is being gestated",
+                   "Creative inspiration",
+                   "Prophetic vision",
+                   "May simply feel confused, lost or overstretched",
+                   "Desire to revolutionize and transform intensly felt sometimes to the extreme",
+                   "Reaches out to the future and outgrows the past in a conscious manner",
+                   "Bridge between past and future",
+                   "Aware both of the endings inherent in the beginnings and the beginnings inherent in endings",
+                   "Applying conjunction types: Feeling as if the past is sweeping them towards a new and better "
+                   "future"
+        ]
     }
