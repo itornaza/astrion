@@ -88,6 +88,8 @@ while (True):
             print_calculator_menu()
             if sub_choice == "1":
                 planet_calculator_handler()
+            elif sub_choice == "2":
+                aspect_from_positions_handler()
 
             # Exit submenu options
             elif sub_choice == "M" or sub_choice == "m" or \
