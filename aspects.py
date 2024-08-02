@@ -54,20 +54,6 @@ class Aspects:
         elif quincunx.search(a):
             aspect = self.quincunx_
         return aspect
-
-    def get_aspect_from_aspect_angle(aspect_angle):
-        match aspect_angle:
-            case 0: return Aspects.conjunction_
-            case 30: return Aspects.semisextile_
-            case 45: return Aspects.semisquare_
-            case 60: return Aspects.sextile_
-            case 90: return Aspects.square_
-            case 120: return Aspects.trine_
-            case 135: return Aspects.sesquiquadrate_
-            case 150: return Aspects.quincunx_
-            case 180: return Aspects.opposition_
-            case _ :
-                return None
     
     def get_aspect_from_angle(angle):
         if angle <= Aspects.conjunction_.angle_ + Aspects.conjunction_.orb_ and \

@@ -1,8 +1,8 @@
 # 
-# aspect_calculations.py
+# angle_calculations.py
 #
 
-# __all__ = ['calculate_aspect']
+__all__ = ['get_aspect_from_angle']
 
 from signs import Signs
 from aspects import Aspects
@@ -14,30 +14,28 @@ def _angle_to_decimal(deg: float, sign: str, min: float):
 def _get_angle():
     while True:
       try:
-          user_input = input("Enter Angle in format `DD SIGN MM` example 07 Aries 01: ")
+          user_input = input("Enter Angle `dd sign mm`: ")
           deg, s, min = map(str, user_input.split())
           return (float(deg), s, float(min))
       except ValueError:
-          print("Invalid input! Please enter DEG SIGN MIN separated by a spaces.")
+          print("Invalid input! Please enter `dd sign mm` separated by a spaces.")
 
-def calculate_difference():
-    # Convert the angles to decimal degrees
+def _calculate_angle_diff():
     a = _get_angle()
     b = _get_angle()
-
     alpha = _angle_to_decimal(a[0], a[1], a[2])
     beta = _angle_to_decimal(b[0], b[1], b[2])
-
-    # Calculate the difference
     dif = abs(alpha - beta)
     return dif
 
-def get_aspect():
-    angle = calculate_difference()
-    
+def get_aspect_from_angle():
+    angle = _calculate_angle_diff()
     aspect = Aspects.get_aspect_from_angle(angle)
-    print(f"The difference between the two angles is {angle:.2f} degrees.")
-    print(f"Aspected in {aspect.name_}!")
+    if aspect != None:
+        print(f"\n{angle:.2f} degrees -- {aspect.name_}")
+    else:
+        # TODO debug and validate difference and aspect
+        print(f"\n{angle:.2f} degrees -- Unaspected")
 
 if __name__ == "__main__":
-    get_aspect()
+    get_aspect_from_angle()
