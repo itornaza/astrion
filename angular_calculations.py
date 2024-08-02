@@ -25,17 +25,18 @@ def _calculate_angle_diff():
     b = _get_angle()
     alpha = _angle_to_decimal(a[0], a[1], a[2])
     beta = _angle_to_decimal(b[0], b[1], b[2])
-    dif = abs(alpha - beta)
-    return dif
+    d = abs(alpha - beta)
+    if d > 180:
+        d = 360 - d
+    return d
 
 def get_aspect_from_angle():
     angle = _calculate_angle_diff()
     aspect = Aspects.get_aspect_from_angle(angle)
     if aspect != None:
-        print(f"\n{angle:.2f} degrees -- {aspect.name_}")
+        print(f"\n\t{angle:.2f} degrees -- {aspect.name_}")
     else:
-        # TODO debug and validate difference and aspect
-        print(f"\n{angle:.2f} degrees -- Unaspected")
+        print(f"\n\t{angle:.2f} degrees -- Unaspected")
 
 if __name__ == "__main__":
     get_aspect_from_angle()
