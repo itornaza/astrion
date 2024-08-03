@@ -5,7 +5,6 @@
 import sys
 from constants import *
 from utils import *
-from planet_position import *
 
 # Print all headers
 print_header(0.2, 0.8)
@@ -89,7 +88,7 @@ while (True):
             if sub_choice == "1":
                 planet_calculator_handler()
             elif sub_choice == "2":
-                aspect_from_positions_handler()
+                aspect_from_ecliptic_angless_handler()
 
             # Exit submenu options
             elif sub_choice == "M" or sub_choice == "m" or \

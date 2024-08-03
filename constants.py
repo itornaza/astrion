@@ -2,7 +2,7 @@
 # constants
 #
 
-VERSION = "v1.4.2"
+VERSION = "v2.0"
 
 # Menu map
 M_ASTRION = "0"

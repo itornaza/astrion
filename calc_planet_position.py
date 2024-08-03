@@ -1,5 +1,5 @@
 # 
-# planet_position.py
+# calc_planet_position.py
 #
 
 __all__ = ['calculate_position']
@@ -59,15 +59,6 @@ def _get_hours_or_degrees_and_minutes(prompt):
           return (num1, num2)
       except ValueError:
           print("Invalid input! Please enter two valid numbers separated by a space.")
-
-def _get_integer(prompt):
-    while True:
-      try:
-          user_input = input(prompt)
-          integer_value = int(user_input)
-          return integer_value
-      except ValueError:
-          print("Invalid input! Please enter a valid integer.")
 
 def _display_angle(a, prompt):
     """Look here if you want to change the precision"""
