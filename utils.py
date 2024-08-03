@@ -24,9 +24,9 @@ from elements import Elements
 from polarities import Polarities
 from modes import Modes
 from patterns import Patterns
-from planet_position import *
 from lunar_phases import LunarPhases
-from angular_calculations import *
+from calc_planet_position import *
+from calc_ecliptic_angles import *
 
 planets = Planets()
 signs = Signs()
@@ -291,6 +291,6 @@ def print_object(object):
 def planet_calculator_handler():
     calculate_position()
 
-# Aspect from positions handler
-def aspect_from_positions_handler():
-    get_aspect_from_angle()
+# Aspect from ecliptic angles handler
+def aspect_from_ecliptic_angless_handler():
+    calculate_aspect_from_angle()

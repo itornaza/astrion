@@ -1,8 +1,8 @@
 # 
-# angle_calculations.py
+# calc_ecliptic_angles.py
 #
 
-__all__ = ['get_aspect_from_angle']
+__all__ = ['calculate_aspect_from_angle']
 
 from signs import Signs
 from aspects import Aspects
@@ -26,17 +26,21 @@ def _calculate_angle_diff():
     alpha = _angle_to_decimal(a[0], a[1], a[2])
     beta = _angle_to_decimal(b[0], b[1], b[2])
     d = abs(alpha - beta)
-    if d > 180:
-        d = 360 - d
-    return d
+    return d if d <=180 else 360 - d
 
-def get_aspect_from_angle():
+def _decimal_to_degrees_minutes(a):
+    deg = int(a)
+    min = (a - deg) * 60
+    return deg, min
+
+def calculate_aspect_from_angle():
     angle = _calculate_angle_diff()
     aspect = Aspects.get_aspect_from_angle(angle)
+    deg, min = _decimal_to_degrees_minutes(angle)
     if aspect != None:
-        print(f"\n\t{angle:.2f} degrees -- {aspect.name_}")
+        print(f"\n\t{deg:.0f} deg {min:.0f} min -- {aspect.name_}")
     else:
-        print(f"\n\t{angle:.2f} degrees -- Unaspected")
+        print(f"\n\t{deg:.0f} deg {min:.0f} min -- Unaspected")
 
 if __name__ == "__main__":
-    get_aspect_from_angle()
+    calculate_aspect_from_angle()
