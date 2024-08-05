@@ -24,39 +24,39 @@ class Planets:
                 chiron_, uranus_, neptune_, pluto_]
 
     def get(self, p):
-        sun = re.compile(r'sun', re.IGNORECASE)
-        moon = re.compile(r'moo', re.IGNORECASE)
-        mercury = re.compile(r'mer', re.IGNORECASE)
-        venus = re.compile(r'ven', re.IGNORECASE)
-        mars = re.compile(r'mar', re.IGNORECASE)
-        jupiter = re.compile(r'jup', re.IGNORECASE)
-        saturn = re.compile(r'sat', re.IGNORECASE)
-        chiron = re.compile(r'chi', re.IGNORECASE)
-        uranus = re.compile(r'ura', re.IGNORECASE)
-        neptune = re.compile(r'nep', re.IGNORECASE)
-        pluto = re.compile(r'plu', re.IGNORECASE)
+        sun = re.compile(rf'{SUN}', re.IGNORECASE)
+        moon = re.compile(rf'{MOON}', re.IGNORECASE)
+        mercury = re.compile(rf'{MERCURY}', re.IGNORECASE)
+        venus = re.compile(rf'{VENUS}', re.IGNORECASE)
+        mars = re.compile(rf'{MARS}', re.IGNORECASE)
+        jupiter = re.compile(rf'{JUPITER}', re.IGNORECASE)
+        saturn = re.compile(rf'{SATURN}', re.IGNORECASE)
+        chiron = re.compile(rf'{CHIRON}', re.IGNORECASE)
+        uranus = re.compile(rf'{URANUS}', re.IGNORECASE)
+        neptune = re.compile(rf'{NEPTUNE}', re.IGNORECASE)
+        pluto = re.compile(rf'{PLUTO}', re.IGNORECASE)
 
-        if sun.search(p):
+        if sun.fullmatch(p):
             planet = self.sun_
-        elif moon.search(p):
+        elif moon.fullmatch(p):
             planet = self.moon_
-        elif mercury.search(p):
+        elif mercury.fullmatch(p):
             planet = self.mercury_
-        elif venus.search(p):
+        elif venus.fullmatch(p):
             planet = self.venus_
-        elif mars.search(p):
+        elif mars.fullmatch(p):
             planet = self.mars_
-        elif jupiter.search(p):
+        elif jupiter.fullmatch(p):
             planet = self.jupiter_
-        elif saturn.search(p):
+        elif saturn.fullmatch(p):
             planet = self.saturn_
-        elif chiron.search(p):
+        elif chiron.fullmatch(p):
             planet = self.chiron_
-        elif uranus.search(p):
+        elif uranus.fullmatch(p):
             planet = self.uranus_
-        elif neptune.search(p):
+        elif neptune.fullmatch(p):
             planet = self.neptune_
-        elif pluto.search(p):
+        elif pluto.fullmatch(p):
             planet = self.pluto_
         else:
             return None

@@ -16,19 +16,19 @@ class Angles:
     angles_ = [asc_, dsc_, mc_, ic_]  
 
     def get(self, a):
-        asc = re.compile(r'asc', re.IGNORECASE)
-        dsc = re.compile(r'dsc', re.IGNORECASE)
-        mc = re.compile(r'mc', re.IGNORECASE)
-        ic = re.compile(r'ic', re.IGNORECASE)
-        
+        asc = re.compile(rf'{ASC}', re.IGNORECASE)
+        dsc = re.compile(rf'{DSC}', re.IGNORECASE)
+        mc = re.compile(rf'{MC}', re.IGNORECASE)
+        ic = re.compile(rf'{IC}', re.IGNORECASE)
+
         angle = None
-        if asc.search(a):
+        if asc.fullmatch(a):
             angle = self.asc_
-        elif dsc.search(a):
+        elif dsc.fullmatch(a):
             angle = self.dsc_
-        elif mc.search(a):
+        elif mc.fullmatch(a):
             angle = self.mc_
-        elif ic.search(a):
+        elif ic.fullmatch(a):
             angle = self.ic_
         return angle
 

@@ -16,19 +16,19 @@ class Elements:
     elements_ = [fire_, earth_, air_, water_]    
 
     def get(self, e):
-        fire = re.compile(r'fire', re.IGNORECASE)
-        earth = re.compile(r'ear', re.IGNORECASE)
-        air = re.compile(r'air', re.IGNORECASE)
-        water = re.compile(r'wat', re.IGNORECASE)
+        fire = re.compile(rf'{FIRE}', re.IGNORECASE)
+        earth = re.compile(rf'{EARTH}', re.IGNORECASE)
+        air = re.compile(rf'{AIR}', re.IGNORECASE)
+        water = re.compile(rf'{WATER}', re.IGNORECASE)
         
         element = None
-        if fire.search(e):
+        if fire.fullmatch(e):
             element = self.fire_
-        elif earth.search(e):
+        elif earth.fullmatch(e):
             element = self.earth_
-        elif air.search(e):
+        elif air.fullmatch(e):
             element = self.air_
-        elif water.search(e):
+        elif water.fullmatch(e):
             element = self.water_
         return element
 

@@ -30,43 +30,43 @@ class Signs:
               scorpio_, sagittarius_, capricorn_, aquarius_, pisces_]
 
     def get(self, s):
-        aries = re.compile(r'ari', re.IGNORECASE)
-        taurus = re.compile(r'tau', re.IGNORECASE)
-        gemini = re.compile(r'gem', re.IGNORECASE)
-        cancer = re.compile(r'can', re.IGNORECASE)
-        leo = re.compile(r'leo', re.IGNORECASE)
-        virgo = re.compile(r'vir', re.IGNORECASE)
-        libra = re.compile(r'lib', re.IGNORECASE)
-        scorpio = re.compile(r'sco', re.IGNORECASE)
-        sagittarius = re.compile(r'sag', re.IGNORECASE)
-        capricorn = re.compile(r'cap', re.IGNORECASE)
-        aquarius = re.compile(r'aqu', re.IGNORECASE)
-        pisces = re.compile(r'pis', re.IGNORECASE)
+        aries = re.compile(rf'{ARIES}', re.IGNORECASE)
+        taurus = re.compile(rf'{TAURUS}', re.IGNORECASE)
+        gemini = re.compile(rf'{GEMINI}', re.IGNORECASE)
+        cancer = re.compile(rf'{CANCER}', re.IGNORECASE)
+        leo = re.compile(rf'{LEO}', re.IGNORECASE)
+        virgo = re.compile(rf'{VIRGO}', re.IGNORECASE)
+        libra = re.compile(rf'{LIBRA}', re.IGNORECASE)
+        scorpio = re.compile(rf'{SCORPIO}', re.IGNORECASE)
+        sagittarius = re.compile(rf'{SAGITTARIUS}', re.IGNORECASE)
+        capricorn = re.compile(rf'{CAPRICORN}', re.IGNORECASE)
+        aquarius = re.compile(rf'{AQUARIUS}', re.IGNORECASE)
+        pisces = re.compile(rf'{PISCES}', re.IGNORECASE)
         
         sign = None
-        if aries.search(s):
+        if aries.fullmatch(s):
             sign = self.aries_
-        elif taurus.search(s):
+        elif taurus.fullmatch(s):
             sign = self.taurus_
-        elif gemini.search(s):
+        elif gemini.fullmatch(s):
             sign = self.gemini_
-        elif cancer.search(s):
+        elif cancer.fullmatch(s):
             sign = self.cancer_
-        elif leo.search(s):
+        elif leo.fullmatch(s):
             sign = self.leo_
-        elif virgo.search(s):
+        elif virgo.fullmatch(s):
             sign = self.virgo_
-        elif libra.search(s):
+        elif libra.fullmatch(s):
             sign = self.libra_
-        elif scorpio.search(s):
+        elif scorpio.fullmatch(s):
             sign = self.scorpio_
-        elif sagittarius.search(s):
+        elif sagittarius.fullmatch(s):
             sign = self.sagittarius_
-        elif capricorn.search(s):
+        elif capricorn.fullmatch(s):
             sign = self.capricorn_
-        elif aquarius.search(s):
+        elif aquarius.fullmatch(s):
             sign = self.aquarius_
-        elif pisces.search(s):
+        elif pisces.fullmatch(s):
             sign = self.pisces_
         return sign
 
