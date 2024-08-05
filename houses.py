@@ -25,43 +25,43 @@ class Houses:
                eight_, ninth_, tenth_, eleventh_, twelvth_]
 
     def get(self, h):
-        first = re.compile(r'firs', re.IGNORECASE)
-        second = re.compile(r'sec', re.IGNORECASE)
-        third = re.compile(r'thi', re.IGNORECASE)
-        fourth = re.compile(r'fou', re.IGNORECASE)
-        fifth = re.compile(r'fif', re.IGNORECASE)
-        sixth = re.compile(r'six', re.IGNORECASE)
-        seventh = re.compile(r'sev', re.IGNORECASE)
-        eight = re.compile(r'eig', re.IGNORECASE)
-        ninth = re.compile(r'nin', re.IGNORECASE)
-        tenth = re.compile(r'ten', re.IGNORECASE)
-        eleventh = re.compile(r'ele', re.IGNORECASE)
-        twelvth = re.compile(r'twe', re.IGNORECASE)
+        first = re.compile(rf'{FIRST}|{"1"}', re.IGNORECASE)
+        second = re.compile(rf'{SECOND}|{"2"}', re.IGNORECASE)
+        third = re.compile(rf'{THIRD}|{"3"}', re.IGNORECASE)
+        fourth = re.compile(rf'{FOURTH}|{"4"}', re.IGNORECASE)
+        fifth = re.compile(rf'{FIFTH}|{"5"}', re.IGNORECASE)
+        sixth = re.compile(rf'{SIXTH}|{"6"}', re.IGNORECASE)
+        seventh = re.compile(rf'{SEVENTH}|{"7"}', re.IGNORECASE)
+        eight = re.compile(rf'{EIGHT}|{"8"}', re.IGNORECASE)
+        ninth = re.compile(rf'{NINTH}|{"9"}', re.IGNORECASE)
+        tenth = re.compile(rf'{TENTH}|{"10"}', re.IGNORECASE)
+        eleventh = re.compile(rf'{ELEVENTH}|{"11"}', re.IGNORECASE)
+        twelvth = re.compile(rf'{TWELVTH}|{"12"}', re.IGNORECASE)
         
         house = None
-        if (first.search(h)) or (h == "1"):
+        if (first.fullmatch(h)):
             house = self.first_
-        elif (second.search(h)) or (h == "2"):
+        elif (second.fullmatch(h)):
             house = self.second_
-        elif (third.search(h)) or (h == "3"):
+        elif (third.fullmatch(h)):
             house = self.third_
-        elif (fourth.search(h)) or (h == "4"):
+        elif (fourth.fullmatch(h)):
             house = self.fourth_
-        elif (fifth.search(h)) or (h == "5"):
+        elif (fifth.fullmatch(h)):
             house = self.fifth_
-        elif (sixth.search(h)) or (h == "6"):
+        elif (sixth.fullmatch(h)):
             house = self.sixth_
-        elif (seventh.search(h)) or (h == "7"):
+        elif (seventh.fullmatch(h)):
             house = self.seventh_
-        elif (eight.search(h)) or (h == "8"):
+        elif (eight.fullmatch(h)):
             house = self.eight_
-        elif (ninth.search(h)) or (h == "9"):
+        elif (ninth.fullmatch(h)):
             house = self.ninth_
-        elif (tenth.search(h)) or (h == "10"):
+        elif (tenth.fullmatch(h)):
             house = self.tenth_
-        elif (eleventh.search(h)) or (h == "11"):
+        elif (eleventh.fullmatch(h)):
             house = self.eleventh_
-        elif (twelvth.search(h)) or (h == "12"):
+        elif (twelvth.fullmatch(h)):
             house = self.twelvth_
         return house
     

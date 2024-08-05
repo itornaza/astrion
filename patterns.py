@@ -26,39 +26,39 @@ class Patterns:
                  mystic_rectangle_, grand_sextile_, stellium_]
 
     def get(self, p):
-        t_square = re.compile(r't-square', re.IGNORECASE)
-        grand_cross = re.compile(r'grand cross', re.IGNORECASE)
-        finger_of_world = re.compile(r'finger of the world', re.IGNORECASE)
-        hard_rectangle = re.compile(r'hard rectangle', re.IGNORECASE)
-        grand_trine = re.compile(r'grand trine', re.IGNORECASE)
-        minor_grand_trine = re.compile(r'minor grand trine', re.IGNORECASE)
-        kite = re.compile(r'kite', re.IGNORECASE)
-        yod = re.compile(r'yod', re.IGNORECASE)
-        mystic_rectangle = re.compile(r'mystic rectangle', re.IGNORECASE)
-        grand_sextile = re.compile(r'grand sextile', re.IGNORECASE)
-        stellium = re.compile(r'stellium', re.IGNORECASE)
+        t_square = re.compile(rf'{T_SQUARE}', re.IGNORECASE)
+        grand_cross = re.compile(rf'{GRAND_CROSS}', re.IGNORECASE)
+        finger_of_world = re.compile(rf'{FINGER_OF_WORLD}', re.IGNORECASE)
+        hard_rectangle = re.compile(rf'{HARD_RECTANGLE}', re.IGNORECASE)
+        grand_trine = re.compile(rf'{GRAND_TRINE}', re.IGNORECASE)
+        minor_grand_trine = re.compile(rf'{MINOR_GRAND_TRINE}', re.IGNORECASE)
+        kite = re.compile(rf'{KITE}', re.IGNORECASE)
+        yod = re.compile(rf'{YOD}', re.IGNORECASE)
+        mystic_rectangle = re.compile(rf'{MYSTIC_RECTANGLE}', re.IGNORECASE)
+        grand_sextile = re.compile(rf'{GRAND_SEXTILE}', re.IGNORECASE)
+        stellium = re.compile(rf'{STELLIUM}', re.IGNORECASE)
         
-        if t_square.search(p):
+        if t_square.fullmatch(p):
             pattern = self.t_square_
-        elif grand_cross.search(p):
+        elif grand_cross.fullmatch(p):
             pattern = self.grand_cross_
-        elif finger_of_world.search(p):
+        elif finger_of_world.fullmatch(p):
             pattern =self.finger_of_world_
-        elif hard_rectangle.search(p):
+        elif hard_rectangle.fullmatch(p):
             pattern = self.hard_rectangle_
-        elif grand_trine.search(p):
+        elif grand_trine.fullmatch(p):
             pattern = self.grand_trine_
-        elif minor_grand_trine.search(p):
+        elif minor_grand_trine.fullmatch(p):
             pattern = self.minor_grand_trine_
-        elif kite.search(p):
+        elif kite.fullmatch(p):
             pattern = self.kite_
-        elif yod.search(p):
+        elif yod.fullmatch(p):
             pattern = self.yod_
-        elif mystic_rectangle.search(p):
+        elif mystic_rectangle.fullmatch(p):
             pattern = self.grand_sextile_
-        elif grand_sextile.search(p):
+        elif grand_sextile.fullmatch(p):
             pattern = self.grand_sextile_
-        elif stellium.search(p):
+        elif stellium.fullmatch(p):
             pattern = self.stellium_
         else:
             return None

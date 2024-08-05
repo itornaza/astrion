@@ -19,30 +19,30 @@ class LunarPhases:
     balsamic_ = LunarPhase(BALSAMIC, WANNING, [315.0, 0.0], [24.5, 28.0], [SEMISQUARE, SEMISEXTILE, CONJUNCTION])
 
     def get(self, lp):
-        new_moon = re.compile(r'new moon', re.IGNORECASE)
-        crescent = re.compile(r'crescent', re.IGNORECASE)
-        first_quarter = re.compile(r'first quarter', re.IGNORECASE)
-        gibbous = re.compile(r'gibbous', re.IGNORECASE)
-        full_moon = re.compile(r'full moon', re.IGNORECASE)
-        disseminating = re.compile(r'disseminating', re.IGNORECASE)
-        last_quarter = re.compile(r'last quarter', re.IGNORECASE)
-        balsamic = re.compile(r'balsamic', re.IGNORECASE)
+        new_moon = re.compile(rf'{NEW_MOON}', re.IGNORECASE)
+        crescent = re.compile(rf'{CRESCENT}', re.IGNORECASE)
+        first_quarter = re.compile(rf'{FIRST_QUARTER}', re.IGNORECASE)
+        gibbous = re.compile(rf'{GIBBOUS}', re.IGNORECASE)
+        full_moon = re.compile(rf'{FULL_MOON}', re.IGNORECASE)
+        disseminating = re.compile(rf'{DISSEMINATING}', re.IGNORECASE)
+        last_quarter = re.compile(rf'{LAST_QUARTER}', re.IGNORECASE)
+        balsamic = re.compile(rf'{BALSAMIC}', re.IGNORECASE)
 
-        if new_moon.search(lp):
+        if new_moon.fullmatch(lp):
             lunar_phase = self.new_moon_
-        elif crescent.search(lp):
+        elif crescent.fullmatch(lp):
             lunar_phase = self.crescent_
-        elif first_quarter.search(lp):
+        elif first_quarter.fullmatch(lp):
             lunar_phase = self.firs_quarter_
-        elif gibbous.search(lp):
+        elif gibbous.fullmatch(lp):
             lunar_phase = self.gibbous_
-        elif full_moon.search(lp):
+        elif full_moon.fullmatch(lp):
             lunar_phase = self.full_moon_
-        elif disseminating.search(lp):
+        elif disseminating.fullmatch(lp):
             lunar_phase = self.disseminating_
-        elif last_quarter.search(lp):
+        elif last_quarter.fullmatch(lp):
             lunar_phase = self.last_quarter_
-        elif balsamic.search(lp):
+        elif balsamic.fullmatch(lp):
             lunar_phase = self.balsamic_
         else:
             return None

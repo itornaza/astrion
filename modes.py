@@ -15,16 +15,16 @@ class Modes:
     modes_ = [cardinal_, fixed_, mutable_]    
 
     def get(self, m):
-      cardinal = re.compile(r'car', re.IGNORECASE)
-      fixed = re.compile(r'fix', re.IGNORECASE)
-      mutable = re.compile(r'mut', re.IGNORECASE)
+      cardinal = re.compile(rf'{CARDINAL}', re.IGNORECASE)
+      fixed = re.compile(rf'{FIXED}', re.IGNORECASE)
+      mutable = re.compile(rf'{MUTABLE}', re.IGNORECASE)
       
       mode = None
-      if cardinal.search(m):
+      if cardinal.fullmatch(m):
           mode = self.cardinal_
-      elif fixed.search(m):
+      elif fixed.fullmatch(m):
           mode =  self.fixed_
-      elif mutable.search(m):
+      elif mutable.fullmatch(m):
           mode = self.mutable_
       return mode
 

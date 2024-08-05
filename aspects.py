@@ -24,34 +24,34 @@ class Aspects:
                 semisquare_, sesquiquadrate_, semisextile_, quincunx_]
 
     def get(self, a):    
-        conjunction = re.compile(r'con', re.IGNORECASE)
-        opposition = re.compile(r'opp', re.IGNORECASE)
-        trine = re.compile(r'tri', re.IGNORECASE)
-        square = re.compile(r'squ', re.IGNORECASE)
-        sextile = re.compile(r'sex', re.IGNORECASE)
-        semisquare = re.compile(r'semisq', re.IGNORECASE)
-        sesquiquadrate = re.compile(r'ses', re.IGNORECASE)
-        semisextile = re.compile(r'semise', re.IGNORECASE)
-        quincunx = re.compile(r'qui', re.IGNORECASE)
+        conjunction = re.compile(rf'{CONJUNCTION}', re.IGNORECASE)
+        opposition = re.compile(rf'{OPPOSITION}', re.IGNORECASE)
+        trine = re.compile(rf'{TRINE}', re.IGNORECASE)
+        square = re.compile(rf'{SQUARE}', re.IGNORECASE)
+        sextile = re.compile(rf'{SEXTILE}', re.IGNORECASE)
+        semisquare = re.compile(rf'{SEMISQUARE}', re.IGNORECASE)
+        sesquiquadrate = re.compile(rf'{SESQUIQUADRATE}', re.IGNORECASE)
+        semisextile = re.compile(rf'{SEMISEXTILE}', re.IGNORECASE)
+        quincunx = re.compile(rf'{QUINCUNX}', re.IGNORECASE)
         
         aspect = None
-        if conjunction.search(a):
+        if conjunction.fullmatch(a):
             aspect = self.conjunction_
-        elif opposition.search(a):
+        elif opposition.fullmatch(a):
             aspect = self.opposition_
-        elif trine.search(a):
+        elif trine.fullmatch(a):
             aspect = self.trine_
-        elif square.search(a):
+        elif square.fullmatch(a):
             aspect = self.square_
-        elif sextile.search(a):
+        elif sextile.fullmatch(a):
             aspect = self.sextile_
-        elif semisquare.search(a):
+        elif semisquare.fullmatch(a):
             aspect = self.semisquare_
-        elif sesquiquadrate.search(a):
+        elif sesquiquadrate.fullmatch(a):
             aspect = self.sesquiquadrate_
-        elif semisextile.search(a):
+        elif semisextile.fullmatch(a):
             aspect = self.semisextile_
-        elif quincunx.search(a):
+        elif quincunx.fullmatch(a):
             aspect = self.quincunx_
         return aspect
     
