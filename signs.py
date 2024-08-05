@@ -30,18 +30,18 @@ class Signs:
               scorpio_, sagittarius_, capricorn_, aquarius_, pisces_]
 
     def get(self, s):
-        aries = re.compile(rf'{ARIES}', re.IGNORECASE)
-        taurus = re.compile(rf'{TAURUS}', re.IGNORECASE)
-        gemini = re.compile(rf'{GEMINI}', re.IGNORECASE)
-        cancer = re.compile(rf'{CANCER}', re.IGNORECASE)
-        leo = re.compile(rf'{LEO}', re.IGNORECASE)
-        virgo = re.compile(rf'{VIRGO}', re.IGNORECASE)
-        libra = re.compile(rf'{LIBRA}', re.IGNORECASE)
-        scorpio = re.compile(rf'{SCORPIO}', re.IGNORECASE)
-        sagittarius = re.compile(rf'{SAGITTARIUS}', re.IGNORECASE)
-        capricorn = re.compile(rf'{CAPRICORN}', re.IGNORECASE)
-        aquarius = re.compile(rf'{AQUARIUS}', re.IGNORECASE)
-        pisces = re.compile(rf'{PISCES}', re.IGNORECASE)
+        aries = re.compile(rf'^\s*{ARIES}\s*$', re.IGNORECASE)
+        taurus = re.compile(rf'^\s*{TAURUS}\s*$', re.IGNORECASE)
+        gemini = re.compile(rf'^\s*{GEMINI}\s*$', re.IGNORECASE)
+        cancer = re.compile(rf'^\s*{CANCER}\s*$', re.IGNORECASE)
+        leo = re.compile(rf'^\s*{LEO}\s*$', re.IGNORECASE)
+        virgo = re.compile(rf'^\s*{VIRGO}\s*$', re.IGNORECASE)
+        libra = re.compile(rf'^\s*{LIBRA}\s*$', re.IGNORECASE)
+        scorpio = re.compile(rf'^\s*{SCORPIO}\s*$', re.IGNORECASE)
+        sagittarius = re.compile(rf'^\s*{SAGITTARIUS}\s*$', re.IGNORECASE)
+        capricorn = re.compile(rf'^\s*{CAPRICORN}\s*$', re.IGNORECASE)
+        aquarius = re.compile(rf'^\s*{AQUARIUS}\s*$', re.IGNORECASE)
+        pisces = re.compile(rf'^\s*{PISCES}\s*$', re.IGNORECASE)
         
         sign = None
         if aries.fullmatch(s):

@@ -15,9 +15,9 @@ class Modes:
     modes_ = [cardinal_, fixed_, mutable_]    
 
     def get(self, m):
-      cardinal = re.compile(rf'{CARDINAL}', re.IGNORECASE)
-      fixed = re.compile(rf'{FIXED}', re.IGNORECASE)
-      mutable = re.compile(rf'{MUTABLE}', re.IGNORECASE)
+      cardinal = re.compile(rf'^\s*{CARDINAL}\s*$', re.IGNORECASE)
+      fixed = re.compile(rf'^\s*{FIXED}\s*$', re.IGNORECASE)
+      mutable = re.compile(rf'^\s*{MUTABLE}\s*$', re.IGNORECASE)
       
       mode = None
       if cardinal.fullmatch(m):

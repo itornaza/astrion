@@ -25,18 +25,18 @@ class Houses:
                eight_, ninth_, tenth_, eleventh_, twelvth_]
 
     def get(self, h):
-        first = re.compile(rf'{FIRST}|{"1"}', re.IGNORECASE)
-        second = re.compile(rf'{SECOND}|{"2"}', re.IGNORECASE)
-        third = re.compile(rf'{THIRD}|{"3"}', re.IGNORECASE)
-        fourth = re.compile(rf'{FOURTH}|{"4"}', re.IGNORECASE)
-        fifth = re.compile(rf'{FIFTH}|{"5"}', re.IGNORECASE)
-        sixth = re.compile(rf'{SIXTH}|{"6"}', re.IGNORECASE)
-        seventh = re.compile(rf'{SEVENTH}|{"7"}', re.IGNORECASE)
-        eight = re.compile(rf'{EIGHT}|{"8"}', re.IGNORECASE)
-        ninth = re.compile(rf'{NINTH}|{"9"}', re.IGNORECASE)
-        tenth = re.compile(rf'{TENTH}|{"10"}', re.IGNORECASE)
-        eleventh = re.compile(rf'{ELEVENTH}|{"11"}', re.IGNORECASE)
-        twelvth = re.compile(rf'{TWELVTH}|{"12"}', re.IGNORECASE)
+        first = re.compile(rf'^\s*({FIRST}|{"1"})\s*$', re.IGNORECASE)
+        second = re.compile(rf'^\s*({SECOND}|{"2"})\s*$', re.IGNORECASE)
+        third = re.compile(rf'^\s*({THIRD}|{"3"})\s*$', re.IGNORECASE)
+        fourth = re.compile(rf'^\s*({FOURTH}|{"4"})\s*$', re.IGNORECASE)
+        fifth = re.compile(rf'^\s*({FIFTH}|{"5"})\s*$', re.IGNORECASE)
+        sixth = re.compile(rf'^\s*({SIXTH}|{"6"})\s*$', re.IGNORECASE)
+        seventh = re.compile(rf'^\s*({SEVENTH}|{"7"})\s*$', re.IGNORECASE)
+        eight = re.compile(rf'^\s*({EIGHT}|{"8"})\s*$', re.IGNORECASE)
+        ninth = re.compile(rf'^\s*({NINTH}|{"9"})\s*$', re.IGNORECASE)
+        tenth = re.compile(rf'^\s*({TENTH}|{"10"})\s*$', re.IGNORECASE)
+        eleventh = re.compile(rf'^\s*({ELEVENTH}|{"11"})\s*$', re.IGNORECASE)
+        twelvth = re.compile(rf'^\s*({TWELVTH}|{"12"})\s*$', re.IGNORECASE)
         
         house = None
         if (first.fullmatch(h)):

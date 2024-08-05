@@ -14,8 +14,8 @@ class Polarities:
     polarities_ = [positive_, negative_]
 
     def get(self, p):
-        positive = re.compile(rf'{POSITIVE}', re.IGNORECASE)
-        negative = re.compile(rf'{NEGATIVE}', re.IGNORECASE)
+        positive = re.compile(rf'^\s*{POSITIVE}\s*$', re.IGNORECASE)
+        negative = re.compile(rf'^\s*{NEGATIVE}\s*$', re.IGNORECASE)
         
         polarity = None
         if positive.fullmatch(p) or (p == "+") :
