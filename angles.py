@@ -16,10 +16,10 @@ class Angles:
     angles_ = [asc_, dsc_, mc_, ic_]  
 
     def get(self, a):
-        asc = re.compile(rf'{ASC}', re.IGNORECASE)
-        dsc = re.compile(rf'{DSC}', re.IGNORECASE)
-        mc = re.compile(rf'{MC}', re.IGNORECASE)
-        ic = re.compile(rf'{IC}', re.IGNORECASE)
+        asc = re.compile(rf'^\s*{ASC}\s*$', re.IGNORECASE)
+        dsc = re.compile(rf'^\s*{DSC}\s*$', re.IGNORECASE)
+        mc = re.compile(rf'^\s*{MC}\s*$', re.IGNORECASE)
+        ic = re.compile(rf'^\s*{IC}\s*$', re.IGNORECASE)
 
         angle = None
         if asc.fullmatch(a):

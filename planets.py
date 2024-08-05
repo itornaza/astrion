@@ -24,17 +24,17 @@ class Planets:
                 chiron_, uranus_, neptune_, pluto_]
 
     def get(self, p):
-        sun = re.compile(rf'{SUN}', re.IGNORECASE)
-        moon = re.compile(rf'{MOON}', re.IGNORECASE)
-        mercury = re.compile(rf'{MERCURY}', re.IGNORECASE)
-        venus = re.compile(rf'{VENUS}', re.IGNORECASE)
-        mars = re.compile(rf'{MARS}', re.IGNORECASE)
-        jupiter = re.compile(rf'{JUPITER}', re.IGNORECASE)
-        saturn = re.compile(rf'{SATURN}', re.IGNORECASE)
-        chiron = re.compile(rf'{CHIRON}', re.IGNORECASE)
-        uranus = re.compile(rf'{URANUS}', re.IGNORECASE)
-        neptune = re.compile(rf'{NEPTUNE}', re.IGNORECASE)
-        pluto = re.compile(rf'{PLUTO}', re.IGNORECASE)
+        sun = re.compile(rf'^\s*{SUN}\s*$', re.IGNORECASE)
+        moon = re.compile(rf'^\s*{MOON}\s*$', re.IGNORECASE)
+        mercury = re.compile(rf'^\s*{MERCURY}\s*$', re.IGNORECASE)
+        venus = re.compile(rf'^\s*{VENUS}\s*$', re.IGNORECASE)
+        mars = re.compile(rf'^\s*{MARS}\s*$', re.IGNORECASE)
+        jupiter = re.compile(rf'^\s*{JUPITER}\s*$', re.IGNORECASE)
+        saturn = re.compile(rf'^\s*{SATURN}\s*$', re.IGNORECASE)
+        chiron = re.compile(rf'^\s*{CHIRON}\s*$', re.IGNORECASE)
+        uranus = re.compile(rf'^\s*{URANUS}\s*$', re.IGNORECASE)
+        neptune = re.compile(rf'^\s*{NEPTUNE}\s*$', re.IGNORECASE)
+        pluto = re.compile(rf'^\s*{PLUTO}\s*$', re.IGNORECASE)
 
         if sun.fullmatch(p):
             planet = self.sun_

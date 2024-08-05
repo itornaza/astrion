@@ -24,15 +24,15 @@ class Aspects:
                 semisquare_, sesquiquadrate_, semisextile_, quincunx_]
 
     def get(self, a):    
-        conjunction = re.compile(rf'{CONJUNCTION}', re.IGNORECASE)
-        opposition = re.compile(rf'{OPPOSITION}', re.IGNORECASE)
-        trine = re.compile(rf'{TRINE}', re.IGNORECASE)
-        square = re.compile(rf'{SQUARE}', re.IGNORECASE)
-        sextile = re.compile(rf'{SEXTILE}', re.IGNORECASE)
-        semisquare = re.compile(rf'{SEMISQUARE}', re.IGNORECASE)
-        sesquiquadrate = re.compile(rf'{SESQUIQUADRATE}', re.IGNORECASE)
-        semisextile = re.compile(rf'{SEMISEXTILE}', re.IGNORECASE)
-        quincunx = re.compile(rf'{QUINCUNX}', re.IGNORECASE)
+        conjunction = re.compile(rf'^\s*{CONJUNCTION}\s*$', re.IGNORECASE)
+        opposition = re.compile(rf'^\s*{OPPOSITION}\s*$', re.IGNORECASE)
+        trine = re.compile(rf'^\s*{TRINE}\s*$', re.IGNORECASE)
+        square = re.compile(rf'^\s*{SQUARE}\s*$', re.IGNORECASE)
+        sextile = re.compile(rf'^\s*{SEXTILE}\s*$', re.IGNORECASE)
+        semisquare = re.compile(rf'^\s*{SEMISQUARE}\s*$', re.IGNORECASE)
+        sesquiquadrate = re.compile(rf'^\s*{SESQUIQUADRATE}\s*$', re.IGNORECASE)
+        semisextile = re.compile(rf'^\s*{SEMISEXTILE}\s*$', re.IGNORECASE)
+        quincunx = re.compile(rf'^\s*{QUINCUNX}\s*$', re.IGNORECASE)
         
         aspect = None
         if conjunction.fullmatch(a):

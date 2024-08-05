@@ -26,17 +26,17 @@ class Patterns:
                  mystic_rectangle_, grand_sextile_, stellium_]
 
     def get(self, p):
-        t_square = re.compile(rf'{T_SQUARE}', re.IGNORECASE)
-        grand_cross = re.compile(rf'{GRAND_CROSS}', re.IGNORECASE)
-        finger_of_world = re.compile(rf'{FINGER_OF_WORLD}', re.IGNORECASE)
-        hard_rectangle = re.compile(rf'{HARD_RECTANGLE}', re.IGNORECASE)
-        grand_trine = re.compile(rf'{GRAND_TRINE}', re.IGNORECASE)
-        minor_grand_trine = re.compile(rf'{MINOR_GRAND_TRINE}', re.IGNORECASE)
-        kite = re.compile(rf'{KITE}', re.IGNORECASE)
-        yod = re.compile(rf'{YOD}', re.IGNORECASE)
-        mystic_rectangle = re.compile(rf'{MYSTIC_RECTANGLE}', re.IGNORECASE)
-        grand_sextile = re.compile(rf'{GRAND_SEXTILE}', re.IGNORECASE)
-        stellium = re.compile(rf'{STELLIUM}', re.IGNORECASE)
+        t_square = re.compile(rf'^\s*{T_SQUARE}\s*$', re.IGNORECASE)
+        grand_cross = re.compile(rf'^\s*{GRAND_CROSS}\s*$', re.IGNORECASE)
+        finger_of_world = re.compile(rf'^\s*{FINGER_OF_WORLD}\s*$', re.IGNORECASE)
+        hard_rectangle = re.compile(rf'^\s*{HARD_RECTANGLE}\s*$', re.IGNORECASE)
+        grand_trine = re.compile(rf'^\s*{GRAND_TRINE}\s*$', re.IGNORECASE)
+        minor_grand_trine = re.compile(rf'^\s*{MINOR_GRAND_TRINE}\s*$', re.IGNORECASE)
+        kite = re.compile(rf'^\s*{KITE}\s*$', re.IGNORECASE)
+        yod = re.compile(rf'^\s*{YOD}\s*$', re.IGNORECASE)
+        mystic_rectangle = re.compile(rf'^\s*{MYSTIC_RECTANGLE}\s*$', re.IGNORECASE)
+        grand_sextile = re.compile(rf'^\s*{GRAND_SEXTILE}\s*$', re.IGNORECASE)
+        stellium = re.compile(rf'^\s*{STELLIUM}\s*$', re.IGNORECASE)
         
         if t_square.fullmatch(p):
             pattern = self.t_square_

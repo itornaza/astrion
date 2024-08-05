@@ -19,14 +19,14 @@ class LunarPhases:
     balsamic_ = LunarPhase(BALSAMIC, WANNING, [315.0, 0.0], [24.5, 28.0], [SEMISQUARE, SEMISEXTILE, CONJUNCTION])
 
     def get(self, lp):
-        new_moon = re.compile(rf'{NEW_MOON}', re.IGNORECASE)
-        crescent = re.compile(rf'{CRESCENT}', re.IGNORECASE)
-        first_quarter = re.compile(rf'{FIRST_QUARTER}', re.IGNORECASE)
-        gibbous = re.compile(rf'{GIBBOUS}', re.IGNORECASE)
-        full_moon = re.compile(rf'{FULL_MOON}', re.IGNORECASE)
-        disseminating = re.compile(rf'{DISSEMINATING}', re.IGNORECASE)
-        last_quarter = re.compile(rf'{LAST_QUARTER}', re.IGNORECASE)
-        balsamic = re.compile(rf'{BALSAMIC}', re.IGNORECASE)
+        new_moon = re.compile(rf'^\s*{NEW_MOON}\s*$', re.IGNORECASE)
+        crescent = re.compile(rf'^\s*{CRESCENT}\s*$', re.IGNORECASE)
+        first_quarter = re.compile(rf'^\s*{FIRST_QUARTER}\s*$', re.IGNORECASE)
+        gibbous = re.compile(rf'^\s*{GIBBOUS}\s*$', re.IGNORECASE)
+        full_moon = re.compile(rf'^\s*{FULL_MOON}\s*$', re.IGNORECASE)
+        disseminating = re.compile(rf'^\s*{DISSEMINATING}\s*$', re.IGNORECASE)
+        last_quarter = re.compile(rf'^\s*{LAST_QUARTER}\s*$', re.IGNORECASE)
+        balsamic = re.compile(rf'^\s*{BALSAMIC}\s*$', re.IGNORECASE)
 
         if new_moon.fullmatch(lp):
             lunar_phase = self.new_moon_
