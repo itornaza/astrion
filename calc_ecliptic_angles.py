@@ -5,20 +5,23 @@
 __all__ = ['calculate_aspect_from_angle']
 
 from signs import Signs
+from sign import Sign
 from aspects import Aspects
 
-def _angle_to_decimal(deg: float, sign: str, min: float):
-    s = Signs.get(Signs, sign)
-    return s.degrees_ + deg + (min / 60.0)
+def _angle_to_decimal(deg: float, sign: Sign, min: float):
+    return sign.degrees_ + deg + (min / 60.0)
 
 def _get_angle():
     while True:
-      try:
-          user_input = input("Enter Angle `dd sign mm`: ")
-          deg, s, min = map(str, user_input.split())
-          return (float(deg), s, float(min))
-      except ValueError:
-          print("Invalid input! Please enter `dd sign mm` separated by a spaces.")
+        user_input = input("Enter Angle `dd sign mm`: ")
+        deg, s, min = map(str, user_input.split())
+        sign = Signs.get(Signs, s)
+        if sign != None:
+            return (float(deg), sign, float(min))
+        elif sign == None:
+            print("There is no such sign! Give it another try.")
+        else:
+            print("Invalid input! Please enter `dd sign mm` separated by a spaces.")
 
 def _calculate_angle_diff():
     a = _get_angle()
