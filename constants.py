@@ -121,6 +121,11 @@ DISSEMINATING = "Disseminating"
 LAST_QUARTER = "Last quarter"
 BALSAMIC = "Balsamic"
 
+# Lunar nodes
+NODAL_AXIS = "Nodal Axis"
+NORTH_NODE = "North Node"
+SOUTH_NODE = "South Node"
+
 # Misc
 NA = "N/A" # For Not Available
 
