@@ -25,21 +25,21 @@ from polarities import Polarities
 from modes import Modes
 from patterns import Patterns
 from lunar_phases import LunarPhases
+from lunar_nodes import LunarNodes
 import calc_planet_position
 import calc_ecliptic_angles
 
-# from calc_planet_position import *
-# from calc_ecliptic_angles import *
-
-planets = Planets()
-signs = Signs()
-houses = Houses()
-aspects = Aspects()
-angles = Angles()
-polarities = Polarities()
-modes = Modes()
-elements = Elements()
-lunar_phases = LunarPhases()
+# TODO: Test without and remove!
+# planets = Planets()
+# signs = Signs()
+# houses = Houses()
+# aspects = Aspects()
+# angles = Angles()
+# polarities = Polarities()
+# modes = Modes()
+# elements = Elements()
+# lunar_phases = LunarPhases()
+# lunar_nodes = LunarNodes()
 
 def print_header(t1_header, t2_credits):
     os.system("clear")
@@ -262,9 +262,10 @@ def get_object_from_keyword(k):
     if tmp := Elements.get(Elements, k): object = tmp
     if tmp := Patterns.get(Patterns, k): object = tmp
     if tmp := LunarPhases.get(LunarPhases, k): object = tmp
+    if tmp := LunarNodes.get(LunarNodes, k): object = tmp
     return object
 
-# Generic version to print any valid object
+# Generic version to print any valid object's keywords
 def print_object(object):
     if object:
         if isinstance(object, Planet):
@@ -287,6 +288,8 @@ def print_object(object):
             Patterns.print_keywords(Patterns, object.name_)
         if isinstance(object, LunarPhase):
             LunarPhases.print_keywords(LunarPhases, object.name_)
+        if isinstance(object, LunarNodes):
+            LunarNodes.print_keywords(LunarNodes, object.name_)
     else:
         print(E_KEYWORD)
 
