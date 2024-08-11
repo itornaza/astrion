@@ -5,6 +5,7 @@
 import re
 from constants import *
 from keywords import Keywords
+from lunar_node import LunarNode
 
 # Only supports keywords and no extra information about the nodes
 class LunarNodes:
@@ -27,6 +28,9 @@ class LunarNodes:
             return None
         return lunar_node
     
+    def print(self, lunar_node):
+        LunarNode.print(lunar_node)
+
     def print_keywords(self, lunar_node_name):
         print("\nKeyword list for lunar node " + lunar_node_name.upper() + ":\n")
         for k in Keywords.lunar_nodes_[lunar_node_name]:
