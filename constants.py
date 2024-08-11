@@ -141,6 +141,7 @@ I_MODE = "Enter mode: "
 I_ELEMENT = "Enter element: "
 I_PATTERN = "Enter patern: "
 I_LUNAR_PHASE = "Entel lunar phase: "
+I_LUNAR_NODES = "Entel lunar node: "
 
 # Errors
 E_MENU = "Invalid menu choice!"
@@ -158,3 +159,4 @@ E_ELEMENT = "Invalid element!"
 E_PATTERN = "Invalid pattern!"
 E_NUMBER_OF_SIGNS = "Invalid number of signs, should be two!"
 E_LUNAR_PHASE = "Invalid lunar phase!"
+E_LUANR_NODE = "Invalid lunar node!"

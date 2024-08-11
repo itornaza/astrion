@@ -25,10 +25,6 @@ class LunarNodes:
         else:
             return None
         return lunar_node
-        
-    def print(self, lunar_phase):
-        # TODO implement
-        pass
     
     def print_keywords(self, lunar_phase_name):
         print("\nKeyword list for lunar phase " + lunar_phase_name.upper() + ":\n")
