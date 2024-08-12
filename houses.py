@@ -21,8 +21,6 @@ class Houses:
     tenth_ = House(TENTH, 10, CAPRICORN, "I aspire")
     eleventh_ = House(ELEVENTH, 11, AQUARIUS, "I participate")
     twelvth_ = House(TWELVTH, 12, PISCES, "I release")
-    houses_ = [first_, second_, third_, fourth_, fifth_, sixth_, seventh_, 
-               eight_, ninth_, tenth_, eleventh_, twelvth_]
 
     def get(self, h):
         first = re.compile(rf'^\s*({FIRST}|{"1"})\s*$', re.IGNORECASE)
@@ -38,7 +36,6 @@ class Houses:
         eleventh = re.compile(rf'^\s*({ELEVENTH}|{"11"})\s*$', re.IGNORECASE)
         twelvth = re.compile(rf'^\s*({TWELVTH}|{"12"})\s*$', re.IGNORECASE)
         
-        house = None
         if (first.fullmatch(h)):
             house = self.first_
         elif (second.fullmatch(h)):
@@ -63,17 +60,14 @@ class Houses:
             house = self.eleventh_
         elif (twelvth.fullmatch(h)):
             house = self.twelvth_
+        else:
+            return None
         return house
     
     def print(self, house):
         House.print(house)
 
-    def print_keywords(self, house_name):
-        print("\nKeyword list for the " + house_name.upper() + " house:\n")
-        for k in Keywords.houses_[house_name]:
+    def print_keywords(self, keyword):
+        print("\nKeyword list for the " + keyword.upper() + " house:\n")
+        for k in Keywords.houses_[keyword]:
             print("\t- " + k)
-
-    # TODO: Implement
-    def print_all(self):
-        for h in self.houses_:
-            House.print(h)

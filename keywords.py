@@ -576,7 +576,9 @@ class Keywords:
 
     lunar_nodes_ = {
         NODAL_AXIS: ["TODO: Nodal axis"],
+
         NORTH_NODE: ["TODO: North node"],
+        
         SOUTH_NODE: ["TODO: South node"]
     }
     

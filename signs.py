@@ -25,9 +25,6 @@ class Signs:
     capricorn_ = Sign(CAPRICORN, 10, 270, NEGATIVE, EARTH, CARDINAL, SATURN, MOON, MARS, JUPITER, "Knees", "I achieve")
     aquarius_ = Sign(AQUARIUS, 11, 300, POSITIVE, AIR, FIXED, [SATURN, URANUS], SUN, NA, NA, "Shins and ankles", "I know")
     pisces_ = Sign(PISCES, 12, 330, NEGATIVE, WATER, MUTABLE, [JUPITER, NEPTUNE], MERCURY, VENUS, NA, "Feet", "I believe")
-    
-    signs_ = [aries_, taurus_, gemini_, cancer_, leo_, virgo_, libra_, 
-              scorpio_, sagittarius_, capricorn_, aquarius_, pisces_]
 
     def get(self, s):
         aries = re.compile(rf'^\s*{ARIES}\s*$', re.IGNORECASE)
@@ -43,7 +40,6 @@ class Signs:
         aquarius = re.compile(rf'^\s*{AQUARIUS}\s*$', re.IGNORECASE)
         pisces = re.compile(rf'^\s*{PISCES}\s*$', re.IGNORECASE)
         
-        sign = None
         if aries.fullmatch(s):
             sign = self.aries_
         elif taurus.fullmatch(s):
@@ -68,6 +64,8 @@ class Signs:
             sign = self.aquarius_
         elif pisces.fullmatch(s):
             sign = self.pisces_
+        else:
+            return None
         return sign
 
     def find_common_planet(self, sign_a, sign_b):
@@ -102,9 +100,9 @@ class Signs:
     def print(self, sign):
         Sign.print(sign)
 
-    def print_keywords(self, sign_name):
-        print("\nKeyword list for sign " + sign_name.upper() + ":\n")
-        for k in Keywords.signs_[sign_name]:
+    def print_keywords(self, keyword):
+        print("\nKeyword list for sign " + keyword.upper() + ":\n")
+        for k in Keywords.signs_[keyword]:
             print("\t- " + k)
 
     def print_arc(self, sign):
@@ -229,10 +227,3 @@ class Signs:
             if s.polarity_ == polarity and s.element_ == element:
                 list.append(s.name_)
         print(element, "/", polarity, "\t:\t", list)
-
-    def print_all(self):
-        for s in self.signs_:
-            Sign.print(s)
-            print("\n+--------------------------------------------------+")
-
-

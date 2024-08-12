@@ -11,27 +11,23 @@ class Polarities:
     
     positive_ = Polarity(POSITIVE)
     negative_ = Polarity(NEGATIVE)
-    polarities_ = [positive_, negative_]
 
     def get(self, p):
         positive = re.compile(rf'^\s*{POSITIVE}\s*$', re.IGNORECASE)
         negative = re.compile(rf'^\s*{NEGATIVE}\s*$', re.IGNORECASE)
         
-        polarity = None
         if positive.fullmatch(p) or (p == "+") :
             polarity = self.positive_
         elif negative.fullmatch(p) or (p == "-") :
             polarity = self.negative_
+        else:
+            return None
         return polarity
 
     def print(self, polarity):
         Polarity.print(polarity)
 
-    def print_keywords(self, polarity_name):
-        print("\nKeyword list for polarity " + polarity_name.upper() + ":\n")
-        for k in Keywords.polarities_[polarity_name]:
+    def print_keywords(self, keyword):
+        print("\nKeyword list for polarity " + keyword.upper() + ":\n")
+        for k in Keywords.polarities_[keyword]:
             print("\t- " + k)
-
-    def print_all(self):
-        for p in self.polarities_:
-            Polarity.print(p)
