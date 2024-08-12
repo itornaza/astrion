@@ -1109,15 +1109,36 @@ class Keywords:
 
     lunar_nodes_ = {
         NODAL_AXIS: [
-            "TODO: Nodal axis"
+            "Life journey",
+            "Evolution process",
+            "Connection between past, present and future",
+            "An alchemical factory to transform deeply engraved behaviours into new sources of energy",
+            "Soft aspects: Indicate a flow of energy that is likely to provide support for the journey "
+            "of the Nodal Axis",
+            "Hard aspects: Are likely to be experienced as a more active force"
         ],
 
         NORTH_NODE: [
-            "TODO: North node"
+            "Aspiration to be more than already are",
+            "Experiences that stimulate us and inspire our progress",
+            "Pathway towards personal wisedom",
+            "Where we break new ground",
+            "Engage with something that we do not feel  naturally well equipped",
+            "Takes work and application of intention and will",
+            "We draw uppon energies greater than ourselves",
+            "Allow unrecognised possibilities to come to light",
+            "Becomming aware of the dreams we have but never realized"
         ],
         
         SOUTH_NODE: [
-            "TODO: South node"
+            "Innate skills, abilities and personal qualities",
+            "Instinctive and familiar response",
+            "Safety net",
+            "Comfort zone",
+            "Heritage, legacy, what you bring with you",
+            "Aptitude or gift without any precedent in family",
+            "Qualities we carry from past lives",
+            "Considerable talent, skill strength which we take for granted"
         ]
     }
     
