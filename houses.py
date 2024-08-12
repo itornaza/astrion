@@ -22,7 +22,7 @@ class Houses:
     eleventh_ = House(ELEVENTH, 11, AQUARIUS, "I participate")
     twelvth_ = House(TWELVTH, 12, PISCES, "I release")
 
-    def get(self, h):
+    def get(self, input):
         first = re.compile(rf'^\s*({FIRST}|{"1"})\s*$', re.IGNORECASE)
         second = re.compile(rf'^\s*({SECOND}|{"2"})\s*$', re.IGNORECASE)
         third = re.compile(rf'^\s*({THIRD}|{"3"})\s*$', re.IGNORECASE)
@@ -36,29 +36,29 @@ class Houses:
         eleventh = re.compile(rf'^\s*({ELEVENTH}|{"11"})\s*$', re.IGNORECASE)
         twelvth = re.compile(rf'^\s*({TWELVTH}|{"12"})\s*$', re.IGNORECASE)
         
-        if (first.fullmatch(h)):
+        if first.fullmatch(input):
             house = self.first_
-        elif (second.fullmatch(h)):
+        elif second.fullmatch(input):
             house = self.second_
-        elif (third.fullmatch(h)):
+        elif third.fullmatch(input):
             house = self.third_
-        elif (fourth.fullmatch(h)):
+        elif fourth.fullmatch(input):
             house = self.fourth_
-        elif (fifth.fullmatch(h)):
+        elif fifth.fullmatch(input):
             house = self.fifth_
-        elif (sixth.fullmatch(h)):
+        elif sixth.fullmatch(input):
             house = self.sixth_
-        elif (seventh.fullmatch(h)):
+        elif seventh.fullmatch(input):
             house = self.seventh_
-        elif (eight.fullmatch(h)):
+        elif eight.fullmatch(input):
             house = self.eight_
-        elif (ninth.fullmatch(h)):
+        elif ninth.fullmatch(input):
             house = self.ninth_
-        elif (tenth.fullmatch(h)):
+        elif tenth.fullmatch(input):
             house = self.tenth_
-        elif (eleventh.fullmatch(h)):
+        elif eleventh.fullmatch(input):
             house = self.eleventh_
-        elif (twelvth.fullmatch(h)):
+        elif twelvth.fullmatch(input):
             house = self.twelvth_
         else:
             return None

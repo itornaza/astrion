@@ -21,7 +21,7 @@ class Patterns:
     grand_sextile_ = Pattern(GRAND_SEXTILE, SOFT, [SEXTILE], [NA])
     stellium_ = Pattern(STELLIUM, NA, [CONJUNCTION], [NA])
 
-    def get(self, p):
+    def get(self, input):
         t_square = re.compile(rf'^\s*{T_SQUARE}\s*$', re.IGNORECASE)
         grand_cross = re.compile(rf'^\s*{GRAND_CROSS}\s*$', re.IGNORECASE)
         finger_of_world = re.compile(rf'^\s*{FINGER_OF_WORLD}\s*$', re.IGNORECASE)
@@ -34,27 +34,27 @@ class Patterns:
         grand_sextile = re.compile(rf'^\s*{GRAND_SEXTILE}\s*$', re.IGNORECASE)
         stellium = re.compile(rf'^\s*{STELLIUM}\s*$', re.IGNORECASE)
         
-        if t_square.fullmatch(p):
+        if t_square.fullmatch(input):
             pattern = self.t_square_
-        elif grand_cross.fullmatch(p):
+        elif grand_cross.fullmatch(input):
             pattern = self.grand_cross_
-        elif finger_of_world.fullmatch(p):
+        elif finger_of_world.fullmatch(input):
             pattern =self.finger_of_world_
-        elif hard_rectangle.fullmatch(p):
+        elif hard_rectangle.fullmatch(input):
             pattern = self.hard_rectangle_
-        elif grand_trine.fullmatch(p):
+        elif grand_trine.fullmatch(input):
             pattern = self.grand_trine_
-        elif minor_grand_trine.fullmatch(p):
+        elif minor_grand_trine.fullmatch(input):
             pattern = self.minor_grand_trine_
-        elif kite.fullmatch(p):
+        elif kite.fullmatch(input):
             pattern = self.kite_
-        elif yod.fullmatch(p):
+        elif yod.fullmatch(input):
             pattern = self.yod_
-        elif mystic_rectangle.fullmatch(p):
+        elif mystic_rectangle.fullmatch(input):
             pattern = self.grand_sextile_
-        elif grand_sextile.fullmatch(p):
+        elif grand_sextile.fullmatch(input):
             pattern = self.grand_sextile_
-        elif stellium.fullmatch(p):
+        elif stellium.fullmatch(input):
             pattern = self.stellium_
         else:
             return None

@@ -20,7 +20,7 @@ class Aspects:
     semisextile_ = Aspect(SEMISEXTILE, 30, "1:12", [2, 3], 2, "Nothing", NA)
     quincunx_ = Aspect(QUINCUNX, 150, "5:12", [2, 3, 5], 2, "Nothing", NA)
 
-    def get(self, a):    
+    def get(self, input):    
         conjunction = re.compile(rf'^\s*{CONJUNCTION}\s*$', re.IGNORECASE)
         opposition = re.compile(rf'^\s*{OPPOSITION}\s*$', re.IGNORECASE)
         trine = re.compile(rf'^\s*{TRINE}\s*$', re.IGNORECASE)
@@ -31,23 +31,23 @@ class Aspects:
         semisextile = re.compile(rf'^\s*{SEMISEXTILE}\s*$', re.IGNORECASE)
         quincunx = re.compile(rf'^\s*{QUINCUNX}\s*$', re.IGNORECASE)
         
-        if conjunction.fullmatch(a):
+        if conjunction.fullmatch(input):
             aspect = self.conjunction_
-        elif opposition.fullmatch(a):
+        elif opposition.fullmatch(input):
             aspect = self.opposition_
-        elif trine.fullmatch(a):
+        elif trine.fullmatch(input):
             aspect = self.trine_
-        elif square.fullmatch(a):
+        elif square.fullmatch(input):
             aspect = self.square_
-        elif sextile.fullmatch(a):
+        elif sextile.fullmatch(input):
             aspect = self.sextile_
-        elif semisquare.fullmatch(a):
+        elif semisquare.fullmatch(input):
             aspect = self.semisquare_
-        elif sesquiquadrate.fullmatch(a):
+        elif sesquiquadrate.fullmatch(input):
             aspect = self.sesquiquadrate_
-        elif semisextile.fullmatch(a):
+        elif semisextile.fullmatch(input):
             aspect = self.semisextile_
-        elif quincunx.fullmatch(a):
+        elif quincunx.fullmatch(input):
             aspect = self.quincunx_
         else:
             return None

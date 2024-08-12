@@ -21,7 +21,7 @@ class Planets:
     neptune_ = Planet(NEPTUNE, "164 years", "16h 7m", "368 days", NA, "1˚ 46'", NA, PISCES,  NA, NA, NA, NA, "Sea green", "Feet")
     pluto_ = Planet(PLUTO, "248 days", "6d 9h", "367 days", "153h", "17˚ 10'", NA, SCORPIO,  NA, NA, NA, NA, "Dark red", "Genitals")
 
-    def get(self, p):
+    def get(self, input):
         sun = re.compile(rf'^\s*{SUN}\s*$', re.IGNORECASE)
         moon = re.compile(rf'^\s*{MOON}\s*$', re.IGNORECASE)
         mercury = re.compile(rf'^\s*{MERCURY}\s*$', re.IGNORECASE)
@@ -34,27 +34,27 @@ class Planets:
         neptune = re.compile(rf'^\s*{NEPTUNE}\s*$', re.IGNORECASE)
         pluto = re.compile(rf'^\s*{PLUTO}\s*$', re.IGNORECASE)
 
-        if sun.fullmatch(p):
+        if sun.fullmatch(input):
             planet = self.sun_
-        elif moon.fullmatch(p):
+        elif moon.fullmatch(input):
             planet = self.moon_
-        elif mercury.fullmatch(p):
+        elif mercury.fullmatch(input):
             planet = self.mercury_
-        elif venus.fullmatch(p):
+        elif venus.fullmatch(input):
             planet = self.venus_
-        elif mars.fullmatch(p):
+        elif mars.fullmatch(input):
             planet = self.mars_
-        elif jupiter.fullmatch(p):
+        elif jupiter.fullmatch(input):
             planet = self.jupiter_
-        elif saturn.fullmatch(p):
+        elif saturn.fullmatch(input):
             planet = self.saturn_
-        elif chiron.fullmatch(p):
+        elif chiron.fullmatch(input):
             planet = self.chiron_
-        elif uranus.fullmatch(p):
+        elif uranus.fullmatch(input):
             planet = self.uranus_
-        elif neptune.fullmatch(p):
+        elif neptune.fullmatch(input):
             planet = self.neptune_
-        elif pluto.fullmatch(p):
+        elif pluto.fullmatch(input):
             planet = self.pluto_
         else:
             return None

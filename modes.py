@@ -13,16 +13,16 @@ class Modes:
     fixed_ = Mode(FIXED)
     mutable_ = Mode(MUTABLE)
 
-    def get(self, m):
+    def get(self, input):
         cardinal = re.compile(rf'^\s*{CARDINAL}\s*$', re.IGNORECASE)
         fixed = re.compile(rf'^\s*{FIXED}\s*$', re.IGNORECASE)
         mutable = re.compile(rf'^\s*{MUTABLE}\s*$', re.IGNORECASE)
 
-        if cardinal.fullmatch(m):
+        if cardinal.fullmatch(input):
             mode = self.cardinal_
-        elif fixed.fullmatch(m):
+        elif fixed.fullmatch(input):
             mode =  self.fixed_
-        elif mutable.fullmatch(m):
+        elif mutable.fullmatch(input):
             mode = self.mutable_
         else:
             return None
