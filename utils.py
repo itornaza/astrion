@@ -50,7 +50,7 @@ def print_header(t1_header, t2_credits):
 def print_menu():
     os.system("clear")
     print("+--------------------------------------------------+")
-    print("|   ---===  * Astrion Menu (", VERSION, ") *  ===---    |")
+    print("|   ---===  * Astrion Menu (", VERSION, ") *  ===---      |")
     print("+-----------------------+--------------------------+")
     print("| 1.  Keywords          | 6.  Angle                |")
     print("| 2.  Planet            | 7.  Polarity             |")

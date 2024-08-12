@@ -750,7 +750,8 @@ class Keywords:
         ],
 
         DSC: [
-            "The journey through relationships What relationship means to us",
+            "The journey through relationships", 
+            "What relationship means to us",
             "The experience we meet in relationship", 
             "How we approach relationships Qualities we admire in others", 
             "Attractions and what is attractive to us",
