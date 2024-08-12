@@ -26,7 +26,7 @@ class Signs:
     aquarius_ = Sign(AQUARIUS, 11, 300, POSITIVE, AIR, FIXED, [SATURN, URANUS], SUN, NA, NA, "Shins and ankles", "I know")
     pisces_ = Sign(PISCES, 12, 330, NEGATIVE, WATER, MUTABLE, [JUPITER, NEPTUNE], MERCURY, VENUS, NA, "Feet", "I believe")
 
-    def get(self, s):
+    def get(self, input):
         aries = re.compile(rf'^\s*{ARIES}\s*$', re.IGNORECASE)
         taurus = re.compile(rf'^\s*{TAURUS}\s*$', re.IGNORECASE)
         gemini = re.compile(rf'^\s*{GEMINI}\s*$', re.IGNORECASE)
@@ -40,29 +40,29 @@ class Signs:
         aquarius = re.compile(rf'^\s*{AQUARIUS}\s*$', re.IGNORECASE)
         pisces = re.compile(rf'^\s*{PISCES}\s*$', re.IGNORECASE)
         
-        if aries.fullmatch(s):
+        if aries.fullmatch(input):
             sign = self.aries_
-        elif taurus.fullmatch(s):
+        elif taurus.fullmatch(input):
             sign = self.taurus_
-        elif gemini.fullmatch(s):
+        elif gemini.fullmatch(input):
             sign = self.gemini_
-        elif cancer.fullmatch(s):
+        elif cancer.fullmatch(input):
             sign = self.cancer_
-        elif leo.fullmatch(s):
+        elif leo.fullmatch(input):
             sign = self.leo_
-        elif virgo.fullmatch(s):
+        elif virgo.fullmatch(input):
             sign = self.virgo_
-        elif libra.fullmatch(s):
+        elif libra.fullmatch(input):
             sign = self.libra_
-        elif scorpio.fullmatch(s):
+        elif scorpio.fullmatch(input):
             sign = self.scorpio_
-        elif sagittarius.fullmatch(s):
+        elif sagittarius.fullmatch(input):
             sign = self.sagittarius_
-        elif capricorn.fullmatch(s):
+        elif capricorn.fullmatch(input):
             sign = self.capricorn_
-        elif aquarius.fullmatch(s):
+        elif aquarius.fullmatch(input):
             sign = self.aquarius_
-        elif pisces.fullmatch(s):
+        elif pisces.fullmatch(input):
             sign = self.pisces_
         else:
             return None

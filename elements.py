@@ -14,19 +14,19 @@ class Elements:
     air_ = Element(AIR, "Inteligence", "Sublimatio", "Sanguine", "Thinking", "Swords", "Separation and relationship", "So much thinking")
     water_ = Element(WATER, "Opinion", "Solutio", "Phlegmatic", "Feeling", "Cups", "Merging", "So much emotions")
 
-    def get(self, e):
+    def get(self, input):
         fire = re.compile(rf'^\s*{FIRE}\s*$', re.IGNORECASE)
         earth = re.compile(rf'^\s*{EARTH}\s*$', re.IGNORECASE)
         air = re.compile(rf'^\s*{AIR}\s*$', re.IGNORECASE)
         water = re.compile(rf'^\s*{WATER}\s*$', re.IGNORECASE)
         
-        if fire.fullmatch(e):
+        if fire.fullmatch(input):
             element = self.fire_
-        elif earth.fullmatch(e):
+        elif earth.fullmatch(input):
             element = self.earth_
-        elif air.fullmatch(e):
+        elif air.fullmatch(input):
             element = self.air_
-        elif water.fullmatch(e):
+        elif water.fullmatch(input):
             element = self.water_
         else:
             return None

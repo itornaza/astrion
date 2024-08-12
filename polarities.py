@@ -12,13 +12,13 @@ class Polarities:
     positive_ = Polarity(POSITIVE)
     negative_ = Polarity(NEGATIVE)
 
-    def get(self, p):
+    def get(self, input):
         positive = re.compile(rf'^\s*{POSITIVE}\s*$', re.IGNORECASE)
         negative = re.compile(rf'^\s*{NEGATIVE}\s*$', re.IGNORECASE)
         
-        if positive.fullmatch(p) or (p == "+") :
+        if positive.fullmatch(input) or (input == "+") :
             polarity = self.positive_
-        elif negative.fullmatch(p) or (p == "-") :
+        elif negative.fullmatch(input) or (input == "-") :
             polarity = self.negative_
         else:
             return None

@@ -14,16 +14,16 @@ class LunarNodes:
     north_node_ = LunarNode(NORTH_NODE)
     south_node_ = LunarNode(SOUTH_NODE)
 
-    def get(self, ln):
+    def get(self, input):
         nodal_axis = re.compile(rf'^\s*{NODAL_AXIS}\s*$', re.IGNORECASE)
         north_node = re.compile(rf'^\s*{NORTH_NODE}\s*$', re.IGNORECASE)
         south_node = re.compile(rf'^\s*{SOUTH_NODE}\s*$', re.IGNORECASE)
 
-        if nodal_axis.fullmatch(ln):
+        if nodal_axis.fullmatch(input):
             lunar_node = self.nodal_axis_
-        elif north_node.fullmatch(ln):
+        elif north_node.fullmatch(input):
             lunar_node = self.north_node_
-        elif south_node.fullmatch(ln):
+        elif south_node.fullmatch(input):
             lunar_node = self.south_node_
         else:
             return None

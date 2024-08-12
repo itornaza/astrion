@@ -14,19 +14,19 @@ class Angles:
     mc_ = Angle(MC, ["Medium Coeli", "Midheaven"], "Due South")
     ic_ = Angle(IC, "Imum Coeli", "Due North")
 
-    def get(self, a):
+    def get(self, input):
         asc = re.compile(rf'^\s*{ASC}\s*$', re.IGNORECASE)
         dsc = re.compile(rf'^\s*{DSC}\s*$', re.IGNORECASE)
         mc = re.compile(rf'^\s*{MC}\s*$', re.IGNORECASE)
         ic = re.compile(rf'^\s*{IC}\s*$', re.IGNORECASE)
 
-        if asc.fullmatch(a):
+        if asc.fullmatch(input):
             angle = self.asc_
-        elif dsc.fullmatch(a):
+        elif dsc.fullmatch(input):
             angle = self.dsc_
-        elif mc.fullmatch(a):
+        elif mc.fullmatch(input):
             angle = self.mc_
-        elif ic.fullmatch(a):
+        elif ic.fullmatch(input):
             angle = self.ic_
         else:
             return None
