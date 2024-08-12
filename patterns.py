@@ -20,10 +20,6 @@ class Patterns:
     mystic_rectangle_ = Pattern(MYSTIC_RECTANGLE, MIXED, [SEXTILE, TRINE, OPPOSITION], [NA])
     grand_sextile_ = Pattern(GRAND_SEXTILE, SOFT, [SEXTILE], [NA])
     stellium_ = Pattern(STELLIUM, NA, [CONJUNCTION], [NA])
-    
-    patterns_ = [t_square_, grand_cross_, finger_of_world_, hard_rectangle_, 
-                 grand_trine_, minor_grand_trine_, kite_, yod_, 
-                 mystic_rectangle_, grand_sextile_, stellium_]
 
     def get(self, p):
         t_square = re.compile(rf'^\s*{T_SQUARE}\s*$', re.IGNORECASE)
@@ -67,12 +63,7 @@ class Patterns:
     def print(self, pattern):
         Pattern.print(pattern)
 
-    def print_keywords(self, pattern_name):
-        print("\nKeyword list for pattern " + pattern_name.upper() + ":\n")
-        for k in Keywords.patterns_[pattern_name]:
+    def print_keywords(self, keyword):
+        print("\nKeyword list for pattern " + keyword.upper() + ":\n")
+        for k in Keywords.patterns_[keyword]:
             print("\n\t- " + k)
-
-    # TODO: Implement
-    def print_all(self):
-        for p in self.patterns_:
-            Pattern.print(p)

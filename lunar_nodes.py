@@ -9,9 +9,10 @@ from lunar_node import LunarNode
 
 # Only supports keywords and no extra information about the nodes
 class LunarNodes:
-    nodal_axis_ = NODAL_AXIS
-    north_node_ = NORTH_NODE
-    south_node_ = SOUTH_NODE
+    
+    nodal_axis_ = LunarNode(NODAL_AXIS)
+    north_node_ = LunarNode(NORTH_NODE)
+    south_node_ = LunarNode(SOUTH_NODE)
 
     def get(self, ln):
         nodal_axis = re.compile(rf'^\s*{NODAL_AXIS}\s*$', re.IGNORECASE)
@@ -31,7 +32,7 @@ class LunarNodes:
     def print(self, lunar_node):
         LunarNode.print(lunar_node)
 
-    def print_keywords(self, lunar_node_name):
-        print("\nKeyword list for lunar node " + lunar_node_name.upper() + ":\n")
-        for k in Keywords.lunar_nodes_[lunar_node_name]:
+    def print_keywords(self, keyword):
+        print("\nKeyword list for lunar node " + keyword.upper() + ":\n")
+        for k in Keywords.lunar_nodes_[keyword]:
             print("\n\t- " + k)

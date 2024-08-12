@@ -51,12 +51,7 @@ class LunarPhases:
     def print(self, lunar_phase):
         LunarPhase.print(lunar_phase)
     
-    def print_keywords(self, lunar_phase_name):
-        print("\nKeyword list for lunar phase " + lunar_phase_name.upper() + ":\n")
-        for k in Keywords.lunar_phases_[lunar_phase_name]:
+    def print_keywords(self, keyword):
+        print("\nKeyword list for lunar phase " + keyword.upper() + ":\n")
+        for k in Keywords.lunar_phases_[keyword]:
             print("\n\t- " + k)
-
-    # TODO: Implement
-    def print_all(self):
-        for p in self.lunar_phase_:
-            LunarPhase.print(p)

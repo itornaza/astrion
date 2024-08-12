@@ -20,9 +20,6 @@ class Planets:
     uranus_ = Planet(URANUS, "84 years", "17h 14m", "370 days", NA, "0˚ 46'", NA, AQUARIUS,  NA, NA, NA, NA, "Turquoise blue", "Ankles")
     neptune_ = Planet(NEPTUNE, "164 years", "16h 7m", "368 days", NA, "1˚ 46'", NA, PISCES,  NA, NA, NA, NA, "Sea green", "Feet")
     pluto_ = Planet(PLUTO, "248 days", "6d 9h", "367 days", "153h", "17˚ 10'", NA, SCORPIO,  NA, NA, NA, NA, "Dark red", "Genitals")
-    
-    planets_ = [sun_, moon_, mercury_, venus_, mars_, jupiter_, saturn_, 
-                chiron_, uranus_, neptune_, pluto_]
 
     def get(self, p):
         sun = re.compile(rf'^\s*{SUN}\s*$', re.IGNORECASE)
@@ -66,12 +63,7 @@ class Planets:
     def print(self, planet):
         Planet.print(planet)
 
-    def print_keywords(self, planet_name):
-        print("\nKeyword list for planet " + planet_name.upper() + ":\n")
-        for k in Keywords.planets_[planet_name]:
+    def print_keywords(self, keyword):
+        print("\nKeyword list for planet " + keyword.upper() + ":\n")
+        for k in Keywords.planets_[keyword]:
             print("\t- " + k)
-
-    # TODO: Implement
-    def print_all(self):
-        for p in self.planets_:
-            Planet.print(p)

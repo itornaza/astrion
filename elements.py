@@ -13,7 +13,6 @@ class Elements:
     earth_ = Element(EARTH, "Demonstration", "Coagulatio", "Melacholic", "Sensation", "Pentacles", "Incarnation", "So much security")
     air_ = Element(AIR, "Inteligence", "Sublimatio", "Sanguine", "Thinking", "Swords", "Separation and relationship", "So much thinking")
     water_ = Element(WATER, "Opinion", "Solutio", "Phlegmatic", "Feeling", "Cups", "Merging", "So much emotions")
-    elements_ = [fire_, earth_, air_, water_]    
 
     def get(self, e):
         fire = re.compile(rf'^\s*{FIRE}\s*$', re.IGNORECASE)
@@ -21,7 +20,6 @@ class Elements:
         air = re.compile(rf'^\s*{AIR}\s*$', re.IGNORECASE)
         water = re.compile(rf'^\s*{WATER}\s*$', re.IGNORECASE)
         
-        element = None
         if fire.fullmatch(e):
             element = self.fire_
         elif earth.fullmatch(e):
@@ -30,17 +28,14 @@ class Elements:
             element = self.air_
         elif water.fullmatch(e):
             element = self.water_
+        else:
+            return None
         return element
 
     def print(self, element):
         Element.print(element)
 
-    def print_keywords(self, element_name):
-        print("\nKeyword list for element " + element_name.upper() + ":\n")
-        for k in Keywords.elements_[element_name]:
+    def print_keywords(self, keyword):
+        print("\nKeyword list for element " + keyword.upper() + ":\n")
+        for k in Keywords.elements_[keyword]:
             print("\t- " + k)
-
-    # TODO: Implement
-    def print_all(self):
-        for e in self.elements_:
-            Element.print(e)

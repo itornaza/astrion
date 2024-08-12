@@ -19,9 +19,6 @@ class Aspects:
     sesquiquadrate_ = Aspect(SESQUIQUADRATE, 135, "3:8", [2, 3], 2, NA, NA)
     semisextile_ = Aspect(SEMISEXTILE, 30, "1:12", [2, 3], 2, "Nothing", NA)
     quincunx_ = Aspect(QUINCUNX, 150, "5:12", [2, 3, 5], 2, "Nothing", NA)
-    
-    aspects_ = [conjunction_, opposition_, trine_, square_, sextile_, 
-                semisquare_, sesquiquadrate_, semisextile_, quincunx_]
 
     def get(self, a):    
         conjunction = re.compile(rf'^\s*{CONJUNCTION}\s*$', re.IGNORECASE)
@@ -34,7 +31,6 @@ class Aspects:
         semisextile = re.compile(rf'^\s*{SEMISEXTILE}\s*$', re.IGNORECASE)
         quincunx = re.compile(rf'^\s*{QUINCUNX}\s*$', re.IGNORECASE)
         
-        aspect = None
         if conjunction.fullmatch(a):
             aspect = self.conjunction_
         elif opposition.fullmatch(a):
@@ -53,6 +49,8 @@ class Aspects:
             aspect = self.semisextile_
         elif quincunx.fullmatch(a):
             aspect = self.quincunx_
+        else:
+            return None
         return aspect
     
     def get_aspect_from_angle(angle):
@@ -96,12 +94,7 @@ class Aspects:
     def print(self, aspect):
         Aspect.print(aspect)
 
-    def print_keywords(self, aspect_name):
-        print("\nKeyword list for a " + aspect_name.upper() + " aspect:\n")
-        for k in Keywords.aspects_[aspect_name]:
+    def print_keywords(self, keyword):
+        print("\nKeyword list for a " + keyword.upper() + " aspect:\n")
+        for k in Keywords.aspects_[keyword]:
             print("\n\t- " + k)
-
-    # TODO: Integrate
-    def print_all(self):
-        for a in self.aspects_:
-            Aspect.print(a)
