@@ -1142,4 +1142,55 @@ class Keywords:
             "Considerable talent, skill strength which we take for granted"
         ]
     }
+
+    hemispheres_ = {
+        NORTH: [
+            ""
+        ],
+
+        SOUTH: [
+            ""
+        ],
+
+        EAST: [
+            ""
+        ],
+
+        WEST: [
+            ""
+        ]
+
+    }
+
+    trisectors_ = {
+        PERSONAL: [
+            ""
+        ],
+
+        SOCIAL: [
+            ""
+        ],
+
+        UNIVERSAL: [
+            ""
+        ]
+    }
+
+    quadrants = {
+        SELF_DEVELOPMENT: [
+            ""
+        ],
+
+        SELF_EXPRESSION: [
+            ""
+        ],
+
+        SELF_EXPANSION: [
+            ""
+        ],
+
+        SELF_TRANSENDENCE: [
+            ""
+        ]
+    }
     

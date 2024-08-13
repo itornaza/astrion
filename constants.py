@@ -126,6 +126,23 @@ NODAL_AXIS = "Nodal Axis"
 NORTH_NODE = "North Node"
 SOUTH_NODE = "South Node"
 
+# Hemispheres
+NORTH = "North"
+SOUTH = "South"
+EAST = "East"
+WEST = "West"
+
+# Trisectors
+PERSONAL = "Personal"
+SOCIAL = "Social"
+UNIVERSAL = "Universal"
+
+# Quadrants
+SELF_DEVELOPMENT = "Self development"
+SELF_EXPRESSION = "Self expression"
+SELF_EXPANSION = "Self expansion"
+SELF_TRANSENDENCE = "Self transcendence"
+
 # Misc
 NA = "N/A" # For Not Available
 
@@ -142,6 +159,9 @@ I_ELEMENT = "Enter element: "
 I_PATTERN = "Enter patern: "
 I_LUNAR_PHASE = "Entel lunar phase: "
 I_LUNAR_NODES = "Entel lunar node: "
+I_HEMISPHERE = "Entel hemisphere: "
+I_TRISECTOR = "Enter trisector: "
+I_QUADRANT = "Enter quadrant: "
 
 # Errors
 E_MENU = "Invalid menu choice!"
@@ -159,4 +179,7 @@ E_ELEMENT = "Invalid element!"
 E_PATTERN = "Invalid pattern!"
 E_NUMBER_OF_SIGNS = "Invalid number of signs, should be two!"
 E_LUNAR_PHASE = "Invalid lunar phase!"
-E_LUANR_NODE = "Invalid lunar node!"
+E_LUNAR_NODE = "Invalid lunar node!"
+E_HEMISPHERE = "Invalid hemisphere!"
+E_TRISECTOR = "Invalid trisector!"
+E_QUADRANT = "Invalid quadrant!"

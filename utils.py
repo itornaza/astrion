@@ -98,7 +98,10 @@ def keywords_handler():
         keywords += phrases.split('in')
     for keyword in keywords:
         object = get_object_from_keyword(keyword)
-        print_object(object) if object else print("\n", E_KEYWORD, ": " + keyword.upper())
+        if object:
+            print_object(object)
+        else:
+            print("\n", E_KEYWORD, ": " + keyword.upper())
 
 # Planet
 def planet_handler():
