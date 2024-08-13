@@ -90,11 +90,15 @@ def print_calculator_menu():
 
 # Keywords
 def keywords_handler():
+    """Extract keywords using ',' and 'in' as delimetters"""
     keywords_raw = input(I_KEYWORDS)
-    keywords_list = keywords_raw.split(',')
-    for k in keywords_list:
-        object = get_object_from_keyword(k)
-        print_object(object) if object else print("\n", E_KEYWORD, ": " + k.upper())
+    keywords_comma = keywords_raw.split(',')
+    keywords = []
+    for phrases in keywords_comma:
+        keywords += phrases.split('in')
+    for keyword in keywords:
+        object = get_object_from_keyword(keyword)
+        print_object(object) if object else print("\n", E_KEYWORD, ": " + keyword.upper())
 
 # Planet
 def planet_handler():
