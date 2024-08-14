@@ -3,7 +3,6 @@
 #
 
 import sys
-from constants import *
 from utils import *
 
 # Print all headers

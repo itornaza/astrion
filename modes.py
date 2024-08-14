@@ -5,13 +5,22 @@
 import re
 from constants import *
 from keywords import Keywords
-from mode import Mode
+
+class Mode:
+
+    def __init__(self, mode):
+        self.name_ = mode
+        
+    def print(self):
+        print("\nName\t\t\t:\t", self.name_.upper())
 
 class Modes:
     
     cardinal_ = Mode(CARDINAL)
     fixed_ = Mode(FIXED)
     mutable_ = Mode(MUTABLE)
+
+    modes_ = [cardinal_, fixed_, mutable_]
 
     def get(self, input):
         cardinal = re.compile(rf'^\s*{CARDINAL}\s*$', re.IGNORECASE)

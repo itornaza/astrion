@@ -5,7 +5,22 @@
 import re
 from constants import *
 from keywords import Keywords
-from lunar_phase import LunarPhase
+
+class LunarPhase:
+
+    def __init__(self, name, phase, arc_ahead_of_sun, days_ahead_of_sun, aspects):
+        self.name_ = name
+        self.phase_ = phase
+        self.arc_ahead_of_sun_ = arc_ahead_of_sun # From-to angles ahead
+        self.days_ahead_of_sun_ = days_ahead_of_sun # From-to days ahead
+        self.aspects_ = aspects 
+
+    def print(self):
+        print("\nName\t\t\t:\t", self.name_.upper(), 
+              "\nPhase\t\t\t:\t", self.phase_, 
+              "\nArc ahead\t\t:\t", self.arc_ahead_of_sun_, 
+              "\nDays ahead\t\t:\t", self.days_ahead_of_sun_, 
+              "\nAspects\t\t\t:\t", self.aspects_, "\n")
 
 class LunarPhases:
 
@@ -17,6 +32,9 @@ class LunarPhases:
     disseminating_ = LunarPhase(DISSEMINATING, WANNING, [225.0, 270.0], [17.5, 21.0], [SESQUIQUADRATE, TRINE, SQUARE])
     last_quarter_ = LunarPhase(LAST_QUARTER, WANNING, [270.0, 315.0], [21.0, 24.5], [SQUARE, SEXTILE, SEMISQUARE])
     balsamic_ = LunarPhase(BALSAMIC, WANNING, [315.0, 0.0], [24.5, 28.0], [SEMISQUARE, SEMISEXTILE, CONJUNCTION])
+
+    lunar_phases_ = [new_moon_, crescent_, firs_quarter_, gibbous_,
+                     full_moon_, disseminating_, last_quarter_, balsamic_]
 
     def get(self, input):
         new_moon = re.compile(rf'^\s*{NEW_MOON}\s*$', re.IGNORECASE)
