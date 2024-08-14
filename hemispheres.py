@@ -14,7 +14,7 @@ class Hemisphere:
     def print(self):
         print("\nName\t\t\t:\t", self.name_.upper(), "\n")
 
-# Only supports keywords and no extra information about the nodes
+# Only supports keywords and no extra information about the hemispheres
 class Hemispheres:
     
     north_ = Hemisphere(NORTH)
@@ -25,10 +25,10 @@ class Hemispheres:
     hemispheres_ = [north_, south_, east_, west_]
 
     def get(self, input):
-        north = re.compile(rf'^\s*{NORTH}\s*$', re.IGNORECASE)
-        south = re.compile(rf'^\s*{SOUTH}\s*$', re.IGNORECASE)
-        east = re.compile(rf'^\s*{EAST}\s*$', re.IGNORECASE)
-        west = re.compile(rf'^\s*{WEST}\s*$', re.IGNORECASE)
+        north = re.compile(rf'^\s*({NORTH}|{"H1"})\s*$', re.IGNORECASE)
+        south = re.compile(rf'^\s*({SOUTH}|{"H2"})\s*$', re.IGNORECASE)
+        east = re.compile(rf'^\s*({EAST}|{"H3"})\s*$', re.IGNORECASE)
+        west = re.compile(rf'^\s*({WEST}|{"H4"})\s*$', re.IGNORECASE)
 
         if north.fullmatch(input):
             hemisphere = self.north_
