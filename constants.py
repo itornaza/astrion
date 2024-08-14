@@ -147,7 +147,7 @@ SELF_TRANSENDENCE = "Self transcendence"
 NA = "N/A" # For Not Available
 
 # Input prompts
-I_KEYWORDS = "Enter terms separated by comma: "
+I_KEYWORDS = "Enter keywords (,) : "
 I_PLANET = "Enter planet: "
 I_SIGN = "Enter sign: "
 I_HOUSE = "Enter house: "
