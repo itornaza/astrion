@@ -60,8 +60,6 @@ while (True):
                 mode_and_element_handler()
             elif sub_choice == "7": 
                 element_and_polarity_handler()
-            elif sub_choice ==  "8":
-                Signs.print_all(Signs)
             
             # Exit submenu options
             elif sub_choice == "M" or sub_choice == "m" or \

@@ -63,7 +63,7 @@ def print_signs_ops_menu():
     print("| 1.  Keyword           | 5.  Polarity + mode      |")
     print("| 2.  Sign              | 6.  Mode + element       |")
     print("| 3.  Compare signs     | 7.  Element + mode       |")
-    print("| 4.  Two in common     | 8.  Dump all signs       |")
+    print("| 4.  Two in common     |                          |")
     print("|                       |                          |")
     print("+-----------+-----------+---+-----------+----------+")
     print("| m.  Menu  |  s.  Sign ops |  c. Calc  | q.  Quit |")
