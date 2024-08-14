@@ -5,7 +5,20 @@
 import re
 from constants import *
 from keywords import Keywords
-from pattern import Pattern
+
+class Pattern:
+   
+    def __init__(self, name, type, aspects, categories):
+        self.name_ = name
+        self.type_ = type
+        self.aspects_ = aspects
+        self.categories_ = categories
+    
+    def print(self):
+        print("\nName\t\t\t:\t", self.name_.upper(),
+              "\nType\t\t\t:\t", self.type_,
+              "\nAspects\t\t\t:\t", self.aspects_, 
+              "\nCategories\t\t:\t", self.categories_, "\n")
 
 class Patterns:
 
@@ -20,6 +33,10 @@ class Patterns:
     mystic_rectangle_ = Pattern(MYSTIC_RECTANGLE, MIXED, [SEXTILE, TRINE, OPPOSITION], [NA])
     grand_sextile_ = Pattern(GRAND_SEXTILE, SOFT, [SEXTILE], [NA])
     stellium_ = Pattern(STELLIUM, NA, [CONJUNCTION], [NA])
+
+    patterns_ = [t_square_, grand_cross_, finger_of_world_, 
+                 hard_rectangle_, grand_trine_, minor_grand_trine_,
+                 kite_, yod_, mystic_rectangle_, grand_sextile_, stellium_]
 
     def get(self, input):
         t_square = re.compile(rf'^\s*{T_SQUARE}\s*$', re.IGNORECASE)

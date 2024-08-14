@@ -1145,52 +1145,52 @@ class Keywords:
 
     hemispheres_ = {
         NORTH: [
-            ""
+            "TODO North"
         ],
 
         SOUTH: [
-            ""
+            "TODO South"
         ],
 
         EAST: [
-            ""
+            "TODO East"
         ],
 
         WEST: [
-            ""
+            "TODO West"
         ]
 
     }
 
     trisectors_ = {
         PERSONAL: [
-            ""
+            "TODO Personal"
         ],
 
         SOCIAL: [
-            ""
+            "TODO Social"
         ],
 
         UNIVERSAL: [
-            ""
+            "TODO Universal"
         ]
     }
 
     quadrants = {
         SELF_DEVELOPMENT: [
-            ""
+            "TODO Self development"
         ],
 
         SELF_EXPRESSION: [
-            ""
+            "TODO Self expression"
         ],
 
         SELF_EXPANSION: [
-            ""
+            "TODO Self expansion"
         ],
 
         SELF_TRANSENDENCE: [
-            ""
+            "TODO Self transcendence"
         ]
     }
     

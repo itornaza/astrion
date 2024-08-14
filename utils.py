@@ -4,29 +4,21 @@
 
 import os # os.system()
 import time # time.sleep()
+
 from constants import *
-from planet import Planet
-from sign import Sign
-from house import House
-from aspect import Aspect
-from angle import Angle
-from polarity import Polarity
-from mode import Mode
-from element import Element
-from pattern import Pattern
-from lunar_phase import LunarPhase
-from lunar_node import LunarNode
-from planets import Planets
-from signs import Signs
-from houses import Houses
-from aspects import Aspects
-from angles import Angles
-from elements import Elements
-from polarities import Polarities
-from modes import Modes
-from patterns import Patterns
-from lunar_phases import LunarPhases
-from lunar_nodes import LunarNodes
+from planets import *
+from signs import *
+from houses import *
+from aspects import *
+from angles import *
+from elements import *
+from polarities import *
+from modes import *
+from patterns import *
+from lunar_phases import *
+from lunar_nodes import *
+from hemispheres import *
+
 import calc_planet_position
 import calc_ecliptic_angles
 
@@ -95,7 +87,7 @@ def keywords_handler():
     keywords_comma = keywords_raw.split(',')
     keywords = []
     for phrases in keywords_comma:
-        keywords += phrases.split('in')
+        keywords += phrases.split(' in ')
     for keyword in keywords:
         object = get_object_from_keyword(keyword)
         if object:
@@ -188,7 +180,7 @@ def lunar_phase_handler():
 # Compare two signs
 def compare_signs_handler():
     user_input = input(I_KEYWORDS)
-    signs_list = user_input.split()
+    signs_list = user_input.split(',')
     
     # Check number of signs
     if len(signs_list) != 2:
@@ -262,6 +254,7 @@ def get_object_from_keyword(k):
     if tmp := Patterns.get(Patterns, k): object = tmp
     if tmp := LunarPhases.get(LunarPhases, k): object = tmp
     if tmp := LunarNodes.get(LunarNodes, k): object = tmp
+    if tmp := Hemispheres.get(Hemispheres, k): object = tmp
     return object
 
 # Generic version to print any valid object's keywords
@@ -289,6 +282,8 @@ def print_object(object):
             LunarPhases.print_keywords(LunarPhases, object.name_)
         if isinstance(object, LunarNode):
             LunarNodes.print_keywords(LunarNodes, object.name_)
+        if isinstance(object, Hemisphere):
+            Hemispheres.print_keywords(Hemispheres, object.name_)
     else:
         print(E_KEYWORD)
 

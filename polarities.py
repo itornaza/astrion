@@ -5,12 +5,21 @@
 import re
 from constants import *
 from keywords import Keywords
-from polarity import Polarity
+
+class Polarity:
+
+    def __init__(self, polarity):
+        self.name_ = polarity
+        
+    def print(self):
+        print("\nName\t\t\t:\t", self.name_.upper())
 
 class Polarities:
     
     positive_ = Polarity(POSITIVE)
     negative_ = Polarity(NEGATIVE)
+
+    polarities_ = [positive_, negative_]
 
     def get(self, input):
         positive = re.compile(rf'^\s*{POSITIVE}\s*$', re.IGNORECASE)

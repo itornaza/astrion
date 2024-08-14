@@ -5,7 +5,14 @@
 import re
 from constants import *
 from keywords import Keywords
-from lunar_node import LunarNode
+
+class LunarNode:
+
+    def __init__(self, name):
+        self.name_ = name
+
+    def print(self):
+        print("\nName\t\t\t:\t", self.name_.upper(), "\n")
 
 # Only supports keywords and no extra information about the nodes
 class LunarNodes:
@@ -13,6 +20,8 @@ class LunarNodes:
     nodal_axis_ = LunarNode(NODAL_AXIS)
     north_node_ = LunarNode(NORTH_NODE)
     south_node_ = LunarNode(SOUTH_NODE)
+
+    lunar_nodes_ = [nodal_axis_, north_node_, south_node_]
 
     def get(self, input):
         nodal_axis = re.compile(rf'^\s*{NODAL_AXIS}\s*$', re.IGNORECASE)

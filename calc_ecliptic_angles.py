@@ -4,9 +4,8 @@
 
 __all__ = ['calculate_aspect_from_angle']
 
-from signs import Signs
-from sign import Sign
-from aspects import Aspects
+from signs import *
+from aspects import *
 
 def _angle_to_decimal(deg: float, sign: Sign, min: float):
     return sign.degrees_ + deg + (min / 60.0)

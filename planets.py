@@ -5,7 +5,42 @@
 import re
 from constants import *
 from keywords import Keywords
-from planet import Planet
+
+class Planet:
+   
+    def __init__(self, name, orbit, rotation, synodic, solar_day, inclination, 
+                 elongation, ruler, detriment, exaltation, fall, day, color, 
+                 body_part):
+        self.name_ = name
+        self.orbit_ = orbit
+        self.rotation_ = rotation
+        self.synodic_ = synodic
+        self.solar_day_ = solar_day
+        self.inclination_ = inclination
+        self.elongation_ = elongation
+        self.ruler_ = ruler
+        self.detriment_ = detriment
+        self.exaltated_ = exaltation
+        self.fall_ = fall
+        self.day_ = day
+        self.color_ = color
+        self.body_part_ = body_part
+    
+    def print(self):
+        print("\nName\t\t\t:\t", self.name_.upper(),
+              "\nOrbit\t\t\t:\t", self.orbit_,
+              "\nRotation\t\t:\t", self.rotation_,
+              "\nSynodic\t\t\t:\t", self.synodic_,
+              "\nSolar day\t\t:\t", self.solar_day_,
+              "\nInclination\t\t:\t", self.inclination_,
+              "\nMax elongation\t\t:\t", self.elongation_,
+              "\nRuler\t\t\t:\t", self.ruler_,
+              "\nDetriment\t\t:\t", self.detriment_,
+              "\nExalted\t\t\t:\t", self.exaltated_,
+              "\nFall\t\t\t:\t", self.fall_,
+              "\nDay\t\t\t:\t", self.day_,
+              "\nColor\t\t\t:\t", self.color_,
+              "\nBody part\t\t:\t", self.body_part_, "\n")
 
 class Planets:
 
@@ -20,6 +55,11 @@ class Planets:
     uranus_ = Planet(URANUS, "84 years", "17h 14m", "370 days", NA, "0˚ 46'", NA, AQUARIUS,  NA, NA, NA, NA, "Turquoise blue", "Ankles")
     neptune_ = Planet(NEPTUNE, "164 years", "16h 7m", "368 days", NA, "1˚ 46'", NA, PISCES,  NA, NA, NA, NA, "Sea green", "Feet")
     pluto_ = Planet(PLUTO, "248 days", "6d 9h", "367 days", "153h", "17˚ 10'", NA, SCORPIO,  NA, NA, NA, NA, "Dark red", "Genitals")
+
+    planets_ = [sun_, moon_,
+                mercury_, venus_, mars_,
+                jupiter_, saturn_, 
+                chiron_, uranus_, neptune_, pluto_]
 
     def get(self, input):
         sun = re.compile(rf'^\s*{SUN}\s*$', re.IGNORECASE)

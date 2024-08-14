@@ -5,8 +5,26 @@
 import re
 from constants import *
 from keywords import Keywords
-from aspect import Aspect
-from sign import Sign
+
+class Aspect:
+   
+    def __init__(self, name, angle, fraction, root_numbers, orb, same, types):
+        self.name_ = name
+        self.angle_ = angle
+        self.fraction_ = fraction
+        self.root_numbers_ = root_numbers
+        self.orb_ = orb
+        self.same_ = same
+        self.types_ = types
+    
+    def print(self):
+        print("\nName\t\t\t:\t", self.name_.upper(),
+              "\nAngle\t\t\t:\t", self.angle_, "degrees",
+              "\nFraction\t\t:\t", self.fraction_,
+              "\nRoot numbers\t\t:\t", self.root_numbers_,
+              "\nOrb\t\t\t:\t", self.orb_,
+              "\nSame\t\t\t:\t", self.same_,
+              "\nTypes\t\t\t:\t", self.types_, "\n")
 
 class Aspects:
 
@@ -19,6 +37,10 @@ class Aspects:
     sesquiquadrate_ = Aspect(SESQUIQUADRATE, 135, "3:8", [2, 3], 2, NA, NA)
     semisextile_ = Aspect(SEMISEXTILE, 30, "1:12", [2, 3], 2, "Nothing", NA)
     quincunx_ = Aspect(QUINCUNX, 150, "5:12", [2, 3, 5], 2, "Nothing", NA)
+
+    aspects_ = [conjunction_, opposition_, trine_, square_,
+                sextile_, semisquare_, sesquiquadrate_, 
+                semisextile_, quincunx_]
 
     def get(self, input):    
         conjunction = re.compile(rf'^\s*{CONJUNCTION}\s*$', re.IGNORECASE)
