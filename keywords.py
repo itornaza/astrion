@@ -1145,52 +1145,85 @@ class Keywords:
 
     hemispheres_ = {
         NORTH: [
-            "TODO North"
+            "Personal inner life",
+            "Private life",
+            "Introversion",
+            "(-) Little or no natural connection to outer or public world "
+            "or social issues"
         ],
 
         SOUTH: [
-            "TODO South"
+            "Relationships with external world",
+            "Public life style",
+            "(-) Difficullty exploring the inner world"
         ],
 
         EAST: [
-            "TODO East"
+            "Primarily subjective approach to life",
+            "Focus on personal rresponse to experiences",
+            "(-) Relationships to others dominate their lives" 
         ],
 
         WEST: [
-            "TODO West"
+            "Emphasis on relationships of all kinds",
+            "Measure themselves by the nature of their interactions with others",
+            "(-) Lack of sense of personal identity and subjective self definition"
         ]
 
     }
 
     trisectors_ = {
         PERSONAL: [
-            "TODO Personal"
+            "Me-in-here",
+            "Individual sense of self and own experience",
+            "Inner awareness of their body",
+            "Mind and thinking processes",
+            "Family background or environment",
+            "Personal emotional life"
         ],
 
         SOCIAL: [
-            "TODO Social"
+            "Me-in-here meets you-out-there",
+            "Self expression through creative inspirations on personal level "
+            "or through work",
+            "Reaching out to others in one-to-one relationships",
+            "(-) Uncomfortable with own creativity"
         ],
 
         UNIVERSAL: [
-            "TODO Universal"
+            "us-in-here",
+            "Exploring the wider world and relating to society through aquiring knowledge",
+            "Interaction with wider society and humanity",
+            "Seeking integration with the greater whole"
         ]
     }
 
-    quadrants = {
+    quadrants_ = {
         SELF_DEVELOPMENT: [
-            "TODO Self development"
+            "Rawness, youthfulness and embracing of life",
+            "Carry new energy and will to explore life",
+            "The individual is becomming a distinct personality",
+            "Possession of physical body and questioning mind",
+            "Seeks to understand through rational thinking"
         ],
 
         SELF_EXPRESSION: [
-            "TODO Self expression"
+            "Emerginf identity seeks to express itself",
+            "Will work to discover personal talents",
+            "Refines and seeks to perfect talents"
         ],
 
         SELF_EXPANSION: [
-            "TODO Self expansion"
+            "Continues to expand awareness through merging ego with somene else",
+            "Finds philosophies which encompasses individual relationship",
+            "Seek to widen one's thinking will be a quest for life"
         ],
 
         SELF_TRANSENDENCE: [
-            "TODO Self transcendence"
+            "Concerns for issues larger than the individual experience will be marked in life",
+            "May take a social role",
+            "Involve self with group of others",
+            "Seek for a spiritual identity through submerging ego in transcendent view of life"
         ]
     }
     

@@ -18,6 +18,8 @@ from patterns import *
 from lunar_phases import *
 from lunar_nodes import *
 from hemispheres import *
+from trisectors import *
+from quadrants import *
 
 import calc_planet_position
 import calc_ecliptic_angles
@@ -255,6 +257,8 @@ def get_object_from_keyword(k):
     if tmp := LunarPhases.get(LunarPhases, k): object = tmp
     if tmp := LunarNodes.get(LunarNodes, k): object = tmp
     if tmp := Hemispheres.get(Hemispheres, k): object = tmp
+    if tmp := Trisectors.get(Trisectors, k): object = tmp
+    if tmp := Quadrants.get(Quadrants, k): object = tmp
     return object
 
 # Generic version to print any valid object's keywords
@@ -284,6 +288,10 @@ def print_object(object):
             LunarNodes.print_keywords(LunarNodes, object.name_)
         if isinstance(object, Hemisphere):
             Hemispheres.print_keywords(Hemispheres, object.name_)
+        if isinstance(object, Trisector):
+            Trisectors.print_keywords(Trisectors, object.name_)
+        if isinstance(object, Quadrant):
+            Quadrants.print_keywords(Quadrants, object.name_)
     else:
         print(E_KEYWORD)
 
@@ -294,3 +302,4 @@ def planet_calculator_handler():
 # Aspect from ecliptic angles handler
 def aspect_from_ecliptic_angless_handler():
     calc_ecliptic_angles.calculate_aspect_from_angle()
+    
