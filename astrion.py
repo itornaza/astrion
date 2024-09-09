@@ -67,7 +67,9 @@ while (True):
                 print_menu()
                 break
             elif sub_choice == "S" or sub_choice == "s": 
-                print_signs_ops_menu() 
+                print_signs_ops_menu()
+            elif sub_choice == "C" or sub_choice == "c": 
+                print_calculator_menu() 
             elif sub_choice == "Q" or sub_choice == "q" or \
                  sub_choice == "Quit" or sub_choice == "quit": 
                 os.system("clear")
@@ -86,6 +88,10 @@ while (True):
                 planet_calculator_handler()
             elif sub_choice == "2":
                 aspect_from_ecliptic_angless_handler()
+            elif sub_choice == "3":
+                decimal_to_ecliptic_handler()
+            elif sub_choice == "4":
+                ecliptic_to_decimal_handler()
 
             # Exit submenu options
             elif sub_choice == "M" or sub_choice == "m" or \
@@ -94,6 +100,8 @@ while (True):
                 break
             elif sub_choice == "S" or sub_choice == "s": 
                 print_signs_ops_menu() 
+            elif sub_choice == "C" or sub_choice == "c": 
+                print_calculator_menu() 
             elif sub_choice == "Q" or sub_choice == "q" or \
                  sub_choice == "Quit" or sub_choice == "quit": 
                 os.system("clear")

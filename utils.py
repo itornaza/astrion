@@ -50,7 +50,7 @@ def print_menu():
     print("| 2.  Planet            | 7.  Polarity             |")
     print("| 3.  Sign              | 8.  Mode                 |")
     print("| 4.  House             | 9.  Element              |")
-    print("| 5.  Aspect            | 10. Pattern              |")
+    print("| 5.  Aspect            | 10. Aspects in pattern   |")
     print("|                       | 11. Lunar phase          |")
     print("|                       |                          |")
     print("+-----------+-----------+---+-----------+----------+")
@@ -289,7 +289,8 @@ def print_calculator_menu():
     print("+--------------------------------------------------+")
     print("|        ---===  * Calculator Menu *  ===---       |")
     print("+-----------------------+--------------------------+")
-    print("| 1. Planet positions   | 2. Aspect from positions |")
+    print("| 1. Planet positions   | 3. Decmial from ecliptic |")
+    print("| 2. Aspect from posit  | 4. Eclptic from decimal  |")
     print("|                       |                          |")
     print("+-----------+-----------+---+-----------+----------+")
     print("| m.  Menu  |  s.  Sign ops |  c. Calc  | q.  Quit |")
@@ -303,3 +304,12 @@ def planet_calculator_handler():
 def aspect_from_ecliptic_angless_handler():
     calc_ecliptic_angles.calculate_aspect_from_angle()
     
+def decimal_to_ecliptic_handler():
+    (deg, min) = calc_ecliptic_angles.get_decimal_angle()
+    (deg, sign, min) = calc_ecliptic_angles.decimal_to_ecliptic(deg, min)
+    print(deg, sign.name_, min)
+
+def ecliptic_to_decimal_handler():
+    (deg, sign, min) = calc_ecliptic_angles.get_ecliptic_angle()
+    (deg, min) = calc_ecliptic_angles.ecliptic_to_decimal(deg, sign, min)
+    print(deg, min)
