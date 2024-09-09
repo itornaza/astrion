@@ -260,3 +260,33 @@ class Signs:
             if s.polarity_ == polarity and s.element_ == element:
                 list.append(s.name_)
         print(element, "/", polarity, "\t:\t", list)
+
+    def get_sign_from_degree(self, deg: float):
+        deg = deg % 360
+        if deg >= self.aries_.degrees_ and deg < self.taurus_.degrees_:
+            sign = self.aries_
+        elif deg >= self.taurus_.degrees_ and deg < self.gemini_.degrees_:
+            sign = self.taurus_
+        elif deg >= self.gemini_.degrees_ and deg < self.cancer_.degrees_:
+            sign = self.gemini_
+        elif deg >= self.cancer_.degrees_ and deg < self.leo_.degrees_:
+            sign = self.cancer_
+        elif deg >= self.leo_.degrees_ and deg < self.virgo_.degrees_:
+            sign = self.leo_
+        elif deg >= self.virgo_.degrees_ and deg < self.libra_.degrees_:
+            sign = self.virgo_
+        elif deg >= self.libra_.degrees_ and deg < self.scorpio_.degrees_:
+            sign = self.libra_
+        elif deg >= self.scorpio_.degrees_ and deg < self.sagittarius_.degrees_:
+            sign = self.scorpio_
+        elif deg >= self.sagittarius_.degrees_ and deg < self.capricorn_.degrees_:
+            sign = self.sagittarius_
+        elif deg >= self.capricorn_.degrees_ and deg < self.aquarius_.degrees_:
+            sign = self.capricorn_
+        elif deg >= self.aquarius_.degrees_ and deg < self.pisces_.degrees_:
+            sign = self.aquarius_
+        elif deg >= self.pisces_.degrees_ and deg < self.pisces_.degrees_ + 30: # = 360
+            sign = self.pisces_
+        else:
+            return None
+        return sign

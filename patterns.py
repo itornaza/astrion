@@ -68,7 +68,7 @@ class Patterns:
         elif yod.fullmatch(input):
             pattern = self.yod_
         elif mystic_rectangle.fullmatch(input):
-            pattern = self.grand_sextile_
+            pattern = self.mystic_rectangle_
         elif grand_sextile.fullmatch(input):
             pattern = self.grand_sextile_
         elif stellium.fullmatch(input):
