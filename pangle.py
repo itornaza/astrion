@@ -23,9 +23,6 @@ class Polar:
 
     # Members
 
-    def to_minutes(self) -> int:
-        return self.deg_ * 60 + self.min_
-
     def __add__(self, other):
         if isinstance(other, Polar) == False:
             raise TypeError("Argument must be an instance of Polar")
@@ -42,6 +39,9 @@ class Polar:
         m = self.to_minutes() * n
         return self.from_minutes(m)
 
+    def to_minutes(self) -> int:
+        return self.deg_ * 60 + self.min_
+
     def diff(self, other):
         if isinstance(other, Polar) == False:
             raise TypeError("Argument must be an instance of Polar")
@@ -50,8 +50,6 @@ class Polar:
 
     def print(self):
         print(f"{self.deg_} deg {self.min_} min")
-
-
 
 class Ecliptic:
     deg_: int
@@ -64,6 +62,45 @@ class Ecliptic:
         self.deg_ = deg
         self.sign_ = sign
         self.min_ = min
+
+    def from_polar(self, polar: Polar):
+        self.sign: Sign = Signs.get_sign_from_degree(polar.deg_)
+        self.deg_ = self.sign.degrees_ - polar.deg_
+        self.min_ = polar.min_
+
+    def from_minutes(self, min: int):
+        polar: Polar = Polar.from_minutes(Polar, min)
+        self.from_polar(self, polar)
+
+    def __add__(self, other):
+        if isinstance(other, Ecliptic) == False:
+            raise TypeError("Argument must be an instance of Ecliptic")
+        x = self.to_minutes(self) + other.to_minutes(other)
+        return self.from_minutes(x)
+
+    def __subtract__(self, other):
+        if isinstance(other, Ecliptic) == False:
+            raise TypeError("Argument must be an instance of Ecliptic")
+        x = self.to_minutes(self) - other.to_minutes(other)
+        return self.from_minutes(x)
+
+    def __mul__(self, n):
+        m = self.to_minutes() * n
+        return self.from_minutes(m)
+
+    def to_minutes(self) -> int:
+        return (self.deg_ + self.sign.degrees_) * 60 + self.min_
+
+    def diff(self, other):
+        if isinstance(other, Ecliptic) == False:
+            raise TypeError("Argument must be an instance of Ecliptic")
+        x = abs(self.to_minutes(self) - other.to_minutes(other))
+        return self.from_minutes(x)
+
+    def print(self):
+        print(f"{self.deg_} deg {self.sign_.name_} {self.min_} min")
+
+# Other utilities
 
 def num_to_angle():
     pass
