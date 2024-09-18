@@ -3,6 +3,7 @@
 #
 
 from signs import Sign, Signs
+import unittest
 
 class Polar:
     deg_: int
@@ -55,6 +56,20 @@ class Polar:
     def print(self):
         print(f"{self.deg_} deg {self.min_} min")
 
+class TestPolar(unittest.TestCase):
+    def test_polar():
+        p1 = Polar(55, 23)
+        assert p1.to_minutes() == 3323
+        p2 = Polar(10, 23)
+        r = p1 + p2
+        assert r == Polar(65, 46)
+        r = p1 - p2
+        assert r == Polar(45, 0)
+        assert Polar(330, 0).diff(Polar(350, 0)) == Polar(20, 0)
+        assert r == Polar(45, 0)
+        r = (p1 - p2) * 2 
+        assert r == Polar(90, 0)
+        print("TestPolar ... ok")
 class Ecliptic:
     deg_: int
     sign_: Sign
@@ -117,6 +132,19 @@ class Ecliptic:
     def print(self):
         print(f"{self.deg_} {self.sign_.name_} {self.min_}")
 
+class TestEcliptic(unittest.TestCase):
+    def test_ecliptic():
+        e1 = Ecliptic(25, Signs.taurus_, 23)
+        assert e1.to_minutes() == 3323
+        e2 = Ecliptic(10, Signs.aries_, 23)
+        r = e1 + e2
+        assert r == Ecliptic(5, Signs.gemini_, 46)
+        r = e1 - e2
+        assert r == Ecliptic(15, Signs.taurus_, 0)
+        assert Ecliptic(0, Signs.pisces_, 0).diff(Ecliptic(20, Signs.pisces_, 0)) == Ecliptic(20, Signs.aries_, 0)
+        r = (e1 - e2) * 2
+        assert r == Ecliptic(0, Signs.cancer_, 0)
+        print("TestEcliptic ... ok")
 
 # Utilities for conversions
 
@@ -131,34 +159,15 @@ def to_polar(e: Ecliptic) -> Polar:
     min = e.min_
     return Polar(deg, min)
 
-if __name__ == "__main__":
-    
-    # Test polar
-    p1 = Polar(55, 23)
-    assert p1.to_minutes() == 3323
-    p2 = Polar(10, 23)
-    r = p1 + p2
-    assert r == Polar(65, 46)
-    r = p1 - p2
-    assert r == Polar(45, 0)
-    assert Polar(330, 0).diff(Polar(350, 0)) == Polar(20, 0)
-    assert r == Polar(45, 0)
-    r = (p1 - p2) * 2 
-    assert r == Polar(90, 0)
-
-    # Test Ecliptic
-    e1 = Ecliptic(25, Signs.taurus_, 23)
-    assert e1.to_minutes() == 3323
-    e2 = Ecliptic(10, Signs.aries_, 23)
-    r = e1 + e2
-    assert r == Ecliptic(5, Signs.gemini_, 46)
-    r = e1 - e2
-    assert r == Ecliptic(15, Signs.taurus_, 0)
-    assert Ecliptic(0, Signs.pisces_, 0).diff(Ecliptic(20, Signs.pisces_, 0)) == Ecliptic(20, Signs.aries_, 0)
-    r = (e1 - e2) * 2
-    assert r == Ecliptic(0, Signs.cancer_, 0)
-
+def test_utilities():
     # Test utilities for conversions
+    p1 = Polar(55, 23)
+    e1 = Ecliptic(25, Signs.taurus_, 23)
     assert to_ecliptic(p1) == e1
     assert to_polar(e1) == p1
-    
+    print("TestUtilities ... ok")
+
+if __name__ == "__main__":
+    TestPolar.test_polar()
+    TestEcliptic.test_ecliptic()
+    test_utilities()
