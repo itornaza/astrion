@@ -16,9 +16,16 @@ def get_ecliptic(prompt):
             deg = int(deg_str)
             min = int(min_str)
             sign = Signs.get(Signs, s)
-            return (deg, sign, min)
+            if deg < 0 or deg > 29:
+                print("Degrees must be [0-30)")
+            elif sign == None:
+                print("Enter a valid sign")
+            elif min < 0 or min > 59:
+                print("Minutes must be [0-60)")
+            else:
+                return (deg, sign, min)
         except ValueError:
-            print("Invalid input! Please enter numberm sign number separated by a spaces.")
+            print("Invalid input! Please enter number-sign-number separated by a spaces.")
 
 def calculate_aspect_from_angle():
     """Calculates the aspect formed between two ecliptic angles"""
