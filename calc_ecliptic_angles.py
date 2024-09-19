@@ -11,6 +11,7 @@ __all__ = ['calculate_aspect_from_angle',
 
 from signs import *
 from aspects import *
+from pangle import Ecliptic, Polar, to_polar
 
 def get_decimal_angle():
     while True:
@@ -77,6 +78,23 @@ def calculate_aspect_from_angle():
         print(f"\n\t{deg:.0f} deg {min:.0f} min -- {aspect.name_}")
     else:
         print(f"\n\t{deg:.0f} deg {min:.0f} min -- Unaspected")
+
+# TODO test and replace the previous one
+def calculate_aspect_from_angle_2():
+    a = get_decimal_angle()
+    b = get_decimal_angle()
+
+    e1: Ecliptic = Ecliptic(a[0], a[1], a[2])
+    e2: Ecliptic = Ecliptic(b[0], b[1], b[2])
+    delta = to_polar(e1.diff(e2))    
+
+    # TODO, take min into the calculation as well
+
+    aspect = Aspects.get_aspect_from_angle(delta.deg_)
+    if aspect != None:
+        print(f"\n\t{delta.deg_:.0f}° {delta.min_:.0f}' -- {aspect.name_}")
+    else:
+        print(f"\n\t{delta.deg_:.0f}° {delta.min_:.0f}' -- Unaspected")
 
 if __name__ == "__main__":
     calculate_aspect_from_angle()
