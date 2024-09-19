@@ -54,7 +54,7 @@ class Polar:
         return self.from_minutes(n)
 
     def print(self):
-        print(f"{self.deg_} deg {self.min_} min")
+        print(f"{self.deg_}° {self.min_}'")
 
 class TestPolar(unittest.TestCase):
     def test_polar():
@@ -130,7 +130,7 @@ class Ecliptic:
         return self.from_minutes(x)
 
     def print(self):
-        print(f"{self.deg_} {self.sign_.name_} {self.min_}")
+        print(f"{self.deg_}° {self.sign_.name_} {self.min_}'")
 
 class TestEcliptic(unittest.TestCase):
     def test_ecliptic():
