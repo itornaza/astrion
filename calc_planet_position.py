@@ -30,12 +30,17 @@ def _display_percentage(f):
 
 def get_polar(prompt):
     while True:
-      try:
-          user_input = input(prompt)
-          num1, num2 = map(float, user_input.split())
-          return (num1, num2)
-      except ValueError:
-          print("Invalid input! Please enter two valid numbers separated by a space.")
+        try:
+            user_input = input(prompt)
+            deg, min = map(float, user_input.split())
+            if deg < 0 or deg > 359:
+                print("Degrees must be [0-360)")
+            elif min < 0 or min > 59:
+                print("Minutes must be [0-60)")
+            else:
+                return (deg, min)
+        except ValueError:
+            print("Invalid input! Please enter two valid numbers separated by a space.")
 
 def calculate_position():
     """Calculate the planet position at a given date and time from ephimeris"""
