@@ -75,6 +75,7 @@ class Aspects:
             return None
         return aspect
     
+    # TODO: Convert angle to pangle and take minutes into account
     def get_aspect_from_angle(angle):
         if angle <= Aspects.conjunction_.angle_ + Aspects.conjunction_.orb_ and \
             angle >= Aspects.conjunction_.angle_ - Aspects.conjunction_.orb_:

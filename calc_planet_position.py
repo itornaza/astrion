@@ -2,9 +2,9 @@
 # calc_planet_position.py
 #
 
-from pangle import Polar, Ecliptic
+from pangle import Polar
 
-__all__ = ['calculate_position']
+__all__ = ['calculate_position', 'get_polar']
 
 def _time_to_percentage(t):
     total_minutes_in_day = 24 * 60
@@ -21,7 +21,14 @@ def _get_bool(prompt):
     else:
         print("Invalid input! Please enter 'yes', 'no', 'y', or 'n'.")
 
-def _get_input(prompt):
+def _display_angle(a: Polar, prompt):
+    """Look here if you want to change the precision"""
+    print(f"{prompt}: {a.deg_:.0f}° {a.min_:.2f}\'")
+
+def _display_percentage(f):
+    print(f"Percentage: {f:.4f}")
+
+def get_polar(prompt):
     while True:
       try:
           user_input = input(prompt)
@@ -30,32 +37,24 @@ def _get_input(prompt):
       except ValueError:
           print("Invalid input! Please enter two valid numbers separated by a space.")
 
-def _display_angle(a: Polar, prompt):
-    """Look here if you want to change the precision"""
-    print(f"{prompt}: {a.deg_:.0f}° {a.min_:.2f}\'")
-
-def _display_percentage(f):
-    print(f"Percentage: {f:.4f}")
-
 def calculate_position():
     """Calculate the planet position at a given date and time from ephimeris"""
-    # User input
-    t = _get_input("Time in HH MM: ")
+    t = get_polar("Time in HH MM: ")
     rx = _get_bool("Retrograde (y or n): ")
-    a = _get_input("First angle (DD MM): ")
-    b = _get_input("Second angle (DD MM): ")
+    a = get_polar("Enter first angle `dd mm`: ")
+    b = get_polar("Enter second angle `dd mm`: ")
     
-    # Convert input to angles
+    assert isinstance(a[0], float) and isinstance(a[1], float)
+    assert isinstance(b[0], float) and isinstance(b[1], float)
+    
     p1 = Polar(a[0], a[1])
     p2 = Polar(b[0], b[1])
-
-    # Calculations
     d: Polar = p1 - p2 if rx else p2 - p1
+    
     f = _time_to_percentage(t)
     theta_rel: Polar = d * f
     theta_abs: Polar = p1 - theta_rel if rx else p1 + theta_rel
-
-    # Display all calculation outputs
+    
     _display_angle(d, "Difference")
     _display_percentage(f)
     _display_angle(theta_rel, "Relative position")

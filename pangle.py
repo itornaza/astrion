@@ -12,6 +12,8 @@ class Polar:
     def __init__(self, deg: int, min: int):
         if deg < 0 and deg >= 360:
             raise ValueError("Input must be [0-360)")
+        if min < 0 and min >= 59:
+            raise ValueError("Minutes must be [0-60)")
         self.deg_ = deg
         self.min_ = min
 
@@ -76,8 +78,12 @@ class Ecliptic:
     min_: int
 
     def __init__(self, deg: int, sign: Sign, min: int):
-        if deg < 0 and deg >= 30:
-            raise ValueError("Input must be [0-30)")
+        if deg < 0 and deg >= 29:
+            raise ValueError("Degrees must be [0-30)")
+        if sign == None:
+            raise ValueError("Enter a valid sign")
+        if min < 0 and min >= 59:
+            raise ValueError("Minutes must be [0-60)")
         self.deg_ = deg
         self.sign_ = sign
         self.min_ = min
