@@ -2,99 +2,41 @@
 # calc_ecliptic_angles.py
 #
 
-__all__ = ['calculate_aspect_from_angle', 
-           'get_decimal_angle',
-           'decimal_to_ecliptic',
-           'get_ecliptic_angle',
-           'ecliptic_to_decimal'
-           ]
+__all__ = ['calculate_aspect_from_angle', 'get_ecliptic']
 
 from signs import *
 from aspects import *
 from pangle import Ecliptic, Polar, to_polar
 
-def get_decimal_angle():
+def get_ecliptic(prompt):
     while True:
-        user_input = input("Enter Angle `dd  mm`: ")
-        deg, min = map(str, user_input.split())
-        deg = float(deg)
-        min = float(min)
-        rem = min // 60
-        min = min % 60
-        deg = (deg + rem) % 360
-        return (deg, min)
-
-def decimal_to_ecliptic(deg: float, min: float):
-    """Converts an angle from decimal format [0 - 360) to ecliptic format
-    00 Aries 00 - 29 Pisces 59"""
-    rem = min // 60
-    min = min % 60 
-    deg = (deg + rem) % 360
-    
-    sign: Sign = Signs.get_sign_from_degree(Signs, deg)
-    deg = deg - sign.degrees_
-    return (float(deg), sign, float(min))
-
-def get_ecliptic_angle():
-    while True:
-        user_input = input("Enter Angle `dd sign mm`: ")
-        deg, s, min = map(str, user_input.split())
-        sign = Signs.get(Signs, s)
-        if sign != None:
-            return (float(deg), sign, float(min))
-        elif sign == None:
-            print("There is no such sign! Give it another try.")
-        else:
-            print("Invalid input! Please enter `dd sign mm` separated by a spaces.")
-
-def ecliptic_to_decimal(deg: float, sign: Sign, min: float):
-    """Converts an angle from ecliptic format 00 Aries 00 - 29 Pisces 59 to
-    decimal format (0 - 360)"""
-
-    # TODO move min remainder to degrees
-
-    return (sign.degrees_ + deg, min)
-
-def calculate_angle_diff():
-    a = get_ecliptic_angle()
-    b = get_ecliptic_angle()
-    
-    # TODO: Fix subtraction of degrees and minutes
-    alpha = ecliptic_to_decimal(a[0], a[1], a[2])
-    beta = ecliptic_to_decimal(b[0], b[1], b[2])
-    d = abs(alpha - beta)
-    return d if d <=180 else 360 - d
-
-def decimal_to_degrees_minutes(a):
-    deg = int(a)
-    min = (a - deg) * 60
-    return deg, min
+        try:
+            user_input = input(prompt)
+            deg_str, s, min_str = map(str, user_input.split())
+            deg = int(deg_str)
+            min = int(min_str)
+            sign = Signs.get(Signs, s)
+            return (deg, sign, min)
+        except ValueError:
+            print("Invalid input! Please enter numberm sign number separated by a spaces.")
 
 def calculate_aspect_from_angle():
-    angle = calculate_angle_diff()
-    aspect = Aspects.get_aspect_from_angle(angle)
-    deg, min = decimal_to_degrees_minutes(angle)
-    if aspect != None:
-        print(f"\n\t{deg:.0f} deg {min:.0f} min -- {aspect.name_}")
-    else:
-        print(f"\n\t{deg:.0f} deg {min:.0f} min -- Unaspected")
-
-# TODO test and replace the previous one
-def calculate_aspect_from_angle_2():
-    a = get_decimal_angle()
-    b = get_decimal_angle()
-
+    """Calculates the aspect formed between two ecliptic angles"""
+    a = get_ecliptic("Enter first angle `dd sign mm`: ")
+    b = get_ecliptic("Enter second angle `dd sign mm`: ")
+    assert isinstance(a[0], int) and isinstance(a[1], Sign) and isinstance(a[2], int)
+    assert isinstance(b[0], int) and isinstance(b[1], Sign) and isinstance(b[2], int)
     e1: Ecliptic = Ecliptic(a[0], a[1], a[2])
     e2: Ecliptic = Ecliptic(b[0], b[1], b[2])
-    delta = to_polar(e1.diff(e2))    
+    d: Polar = to_polar(e1.diff(e2))    
 
-    # TODO, take min into the calculation as well
-
-    aspect = Aspects.get_aspect_from_angle(delta.deg_)
+    # TODO, take min into the calculation as well. The current implementation
+    # of Aspects.get_aspect_from_angle() takes just an int as angle
+    aspect = Aspects.get_aspect_from_angle(d.deg_)
     if aspect != None:
-        print(f"\n\t{delta.deg_:.0f}° {delta.min_:.0f}' -- {aspect.name_}")
+        print(f"\n\t{d.deg_:.0f}° {d.min_:.0f}' -- {aspect.name_}")
     else:
-        print(f"\n\t{delta.deg_:.0f}° {delta.min_:.0f}' -- Unaspected")
+        print(f"\n\t{d.deg_:.0f}° {d.min_:.0f}' -- Unaspected")
 
 if __name__ == "__main__":
     calculate_aspect_from_angle()

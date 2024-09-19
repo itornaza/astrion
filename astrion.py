@@ -89,9 +89,9 @@ while (True):
             elif sub_choice == "2":
                 aspect_from_ecliptic_angless_handler()
             elif sub_choice == "3":
-                decimal_to_ecliptic_handler()
+                polar_to_ecliptic_handler()
             elif sub_choice == "4":
-                ecliptic_to_decimal_handler()
+                ecliptic_to_polar_handler()
 
             # Exit submenu options
             elif sub_choice == "M" or sub_choice == "m" or \

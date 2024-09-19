@@ -21,6 +21,7 @@ from hemispheres import *
 from trisectors import *
 from quadrants import *
 
+from pangle import *
 import calc_planet_position
 import calc_ecliptic_angles
 
@@ -289,8 +290,8 @@ def print_calculator_menu():
     print("+--------------------------------------------------+")
     print("|        ---===  * Calculator Menu *  ===---       |")
     print("+-----------------------+--------------------------+")
-    print("| 1. Planet positions   | 3. Decmial from ecliptic |")
-    print("| 2. Aspect from posit  | 4. Eclptic from decimal  |")
+    print("| 1. Planet positions   | 3. Polar from ecliptic   |")
+    print("| 2. Aspect from angles | 4. Eclptic from polar    |")
     print("|                       |                          |")
     print("+-----------+-----------+---+-----------+----------+")
     print("| m.  Menu  |  s.  Sign ops |  c. Calc  | q.  Quit |")
@@ -304,12 +305,16 @@ def planet_calculator_handler():
 def aspect_from_ecliptic_angless_handler():
     calc_ecliptic_angles.calculate_aspect_from_angle()
     
-def decimal_to_ecliptic_handler():
-    (deg, min) = calc_ecliptic_angles.get_decimal_angle()
-    (deg, sign, min) = calc_ecliptic_angles.decimal_to_ecliptic(deg, min)
-    print(deg, sign.name_, min)
+def polar_to_ecliptic_handler():
+    a: Polar = calc_planet_position.get_polar("Enter angle `dd mm`: ")
+    assert isinstance(a[0], float) and isinstance(a[1], float)
+    p = Polar(a[0], a[1])
+    e: Ecliptic = to_ecliptic(p)
+    e.print()
 
-def ecliptic_to_decimal_handler():
-    (deg, sign, min) = calc_ecliptic_angles.get_ecliptic_angle()
-    (deg, min) = calc_ecliptic_angles.ecliptic_to_decimal(deg, sign, min)
-    print(deg, min)
+def ecliptic_to_polar_handler():
+    a: Ecliptic = calc_ecliptic_angles.get_ecliptic("Enter angle `dd sign mm`: ")
+    assert isinstance(a[0], int) and isinstance(a[1], Sign) and isinstance(a[2], int)
+    e = Ecliptic(a[0], a[1], a[2]) 
+    p: Polar = to_polar(e)
+    p.print()
