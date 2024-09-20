@@ -6,40 +6,22 @@ __all__ = ['calculate_aspect_from_angle', 'get_ecliptic']
 
 from signs import *
 from aspects import *
-from pangle import Ecliptic, Polar, to_polar
-
-def get_ecliptic(prompt):
-    while True:
-        try:
-            user_input = input(prompt)
-            deg_str, s, min_str = map(str, user_input.split())
-            deg = int(deg_str)
-            min = int(min_str)
-            sign = Signs.get(Signs, s)
-            if deg < 0 or deg > 29:
-                print("Degrees must be [0-30)")
-            elif sign == None:
-                print("Enter a valid sign")
-            elif min < 0 or min > 59:
-                print("Minutes must be [0-60)")
-            else:
-                return (deg, sign, min)
-        except ValueError:
-            print("Invalid input! Please enter number-sign-number separated by a spaces.")
+from pangle import Ecliptic, Polar, to_polar, get_ecliptic
 
 def calculate_aspect_from_angle():
     """Calculates the aspect formed between two ecliptic angles"""
+    
     a = get_ecliptic("Enter first angle `dd sign mm`: ")
     b = get_ecliptic("Enter second angle `dd sign mm`: ")
+    
     assert isinstance(a[0], int) and isinstance(a[1], Sign) and isinstance(a[2], int)
     assert isinstance(b[0], int) and isinstance(b[1], Sign) and isinstance(b[2], int)
+    
     e1: Ecliptic = Ecliptic(a[0], a[1], a[2])
     e2: Ecliptic = Ecliptic(b[0], b[1], b[2])
+    
     d: Polar = to_polar(e1.diff(e2))    
-
-    # TODO, take min into the calculation as well. The current implementation
-    # of Aspects.get_aspect_from_angle() takes just an int as angle
-    aspect = Aspects.get_aspect_from_angle(d.deg_)
+    aspect = Aspects.get_aspect_from_angle(d.to_decimal())
     if aspect != None:
         print(f"\n\t{d.deg_:.0f}° {d.min_:.0f}' -- {aspect.name_}")
     else:

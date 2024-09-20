@@ -48,6 +48,11 @@ class Polar:
 
     def to_minutes(self) -> int:
         return self.deg_ * 60 + self.min_
+    
+    def to_decimal(self) -> float:
+        self.deg_
+        decimal_min: float = self.min_ * 100.0 / 60.0
+        return  float(self.deg_ + decimal_min)
 
     def diff(self, other):
         if isinstance(other, Polar) == False:
@@ -129,6 +134,11 @@ class Ecliptic:
     def to_minutes(self) -> int:
         return (self.deg_ + self.sign_.degrees_) * 60 + self.min_
 
+    def to_decimal(self) -> float:
+        deg = self.deg_ + self.sign_.degrees_
+        decimal_min: float = self.min_ * 100.0 / 60.0
+        return float(deg + decimal_min)
+
     def diff(self, other):
         if isinstance(other, Ecliptic) == False:
             raise TypeError("Argument must be an instance of Ecliptic")
@@ -172,6 +182,41 @@ def test_utilities():
     assert to_ecliptic(p1) == e1
     assert to_polar(e1) == p1
     print("TestUtilities ... ok")
+
+# Utilities for user input
+
+def get_polar(prompt):
+    while True:
+        try:
+            user_input = input(prompt)
+            deg, min = map(float, user_input.split())
+            if deg < 0 or deg > 359:
+                print("Degrees must be [0-360)")
+            elif min < 0 or min > 59:
+                print("Minutes must be [0-60)")
+            else:
+                return (deg, min)
+        except ValueError:
+            print("Invalid input! Please enter two valid numbers separated by a space.")
+
+def get_ecliptic(prompt):
+    while True:
+        try:
+            user_input = input(prompt)
+            deg_str, s, min_str = map(str, user_input.split())
+            deg = int(deg_str)
+            min = int(min_str)
+            sign = Signs.get(Signs, s)
+            if deg < 0 or deg > 29:
+                print("Degrees must be [0-30)")
+            elif sign == None:
+                print("Enter a valid sign")
+            elif min < 0 or min > 59:
+                print("Minutes must be [0-60)")
+            else:
+                return (deg, sign, min)
+        except ValueError:
+            print("Invalid input! Please enter number-sign-number separated by a spaces.")
 
 if __name__ == "__main__":
     TestPolar.test_polar()

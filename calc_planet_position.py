@@ -2,7 +2,7 @@
 # calc_planet_position.py
 #
 
-from pangle import Polar
+from pangle import Polar, get_polar
 
 __all__ = ['calculate_position', 'get_polar']
 
@@ -25,25 +25,9 @@ def _display_angle(a: Polar, prompt):
     """Look here if you want to change the precision"""
     print(f"{prompt}: {a.deg_:.0f}° {a.min_:.2f}\'")
 
-def _display_percentage(f):
-    print(f"Percentage: {f:.4f}")
-
-def get_polar(prompt):
-    while True:
-        try:
-            user_input = input(prompt)
-            deg, min = map(float, user_input.split())
-            if deg < 0 or deg > 359:
-                print("Degrees must be [0-360)")
-            elif min < 0 or min > 59:
-                print("Minutes must be [0-60)")
-            else:
-                return (deg, min)
-        except ValueError:
-            print("Invalid input! Please enter two valid numbers separated by a space.")
-
 def calculate_position():
     """Calculate the planet position at a given date and time from ephimeris"""
+    
     t = get_polar("Time in HH MM: ")
     rx = _get_bool("Retrograde (y or n): ")
     a = get_polar("Enter first angle `dd mm`: ")
@@ -54,14 +38,14 @@ def calculate_position():
     
     p1 = Polar(a[0], a[1])
     p2 = Polar(b[0], b[1])
-    d: Polar = p1 - p2 if rx else p2 - p1
+    d: Polar = (p1 - p2) if rx else (p2 - p1)
     
     f = _time_to_percentage(t)
     theta_rel: Polar = d * f
     theta_abs: Polar = p1 - theta_rel if rx else p1 + theta_rel
     
     _display_angle(d, "Difference")
-    _display_percentage(f)
+    print(f"Percentage: {f:.4f}")
     _display_angle(theta_rel, "Relative position")
     _display_angle(theta_abs, "Absolute position")
 

@@ -75,8 +75,9 @@ class Aspects:
             return None
         return aspect
     
-    # TODO: Convert angle to pangle and take minutes into account
-    def get_aspect_from_angle(angle):
+    def get_aspect_from_angle(angle: float):
+        """Gets the angle as a float to incorporate minutes and compares it
+        to the angle of the sign itself"""
         if angle <= Aspects.conjunction_.angle_ + Aspects.conjunction_.orb_ and \
             angle >= Aspects.conjunction_.angle_ - Aspects.conjunction_.orb_:
             return Aspects.conjunction_
