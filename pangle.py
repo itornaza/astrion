@@ -46,6 +46,26 @@ class Polar:
         else:
             return False
 
+    def __ge__(self, other):
+        if isinstance(other, Polar) == False:
+            raise TypeError("Argument must be an instance of Polar")
+        pass
+
+    def __gt__(self, other):
+        if isinstance(other, Polar) == False:
+            raise TypeError("Argument must be an instance of Polar")
+        pass
+
+    def __le__(self, other):
+        if isinstance(other, Polar) == False:
+            raise TypeError("Argument must be an instance of Polar")
+        pass
+
+    def __lt__(self, other):
+        if isinstance(other, Polar) == False:
+            raise TypeError("Argument must be an instance of Polar")
+        pass
+
     def to_minutes(self) -> int:
         return self.deg_ * 60 + self.min_
     
@@ -130,6 +150,26 @@ class Ecliptic:
             return True
         else:
             return False
+
+    def __ge__(self, other):
+        if isinstance(other, Ecliptic) == False:
+            raise TypeError("Argument must be an instance of Ecliptic")
+        pass
+
+    def __gt__(self, other):
+        if isinstance(other, Ecliptic) == False:
+            raise TypeError("Argument must be an instance of Ecliptic")
+        pass
+
+    def __le__(self, other):
+        if isinstance(other, Ecliptic) == False:
+            raise TypeError("Argument must be an instance of Ecliptic")
+        pass
+
+    def __lt__(self, other):
+        if isinstance(other, Ecliptic) == False:
+            raise TypeError("Argument must be an instance of Ecliptic")
+        pass
 
     def to_minutes(self) -> int:
         return (self.deg_ + self.sign_.degrees_) * 60 + self.min_

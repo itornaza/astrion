@@ -2,7 +2,7 @@
 # calc_ecliptic_angles.py
 #
 
-__all__ = ['calculate_aspect_from_angle', 'get_ecliptic']
+__all__ = ['calculate_aspect_from_angle']
 
 from signs import *
 from aspects import *
@@ -13,7 +13,7 @@ def calculate_aspect_from_angle():
     
     a = get_ecliptic("Enter first angle `dd sign mm`: ")
     b = get_ecliptic("Enter second angle `dd sign mm`: ")
-    
+
     assert isinstance(a[0], int) and isinstance(a[1], Sign) and isinstance(a[2], int)
     assert isinstance(b[0], int) and isinstance(b[1], Sign) and isinstance(b[2], int)
     

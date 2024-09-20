@@ -4,7 +4,7 @@
 
 from pangle import Polar, get_polar
 
-__all__ = ['calculate_position', 'get_polar']
+__all__ = ['calculate_position']
 
 def _time_to_percentage(t):
     total_minutes_in_day = 24 * 60
