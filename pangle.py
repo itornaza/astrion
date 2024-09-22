@@ -41,30 +41,27 @@ class Polar:
     def __eq__(self, other):
         if isinstance(other, Polar) == False:
             raise TypeError("Argument must be an instance of Polar")
-        if self.deg_ == other.deg_ and self.min_ == other.min_:
-            return True
-        else:
-            return False
+        return  self.deg_ == other.deg_ and self.min_ == other.min_
 
     def __ge__(self, other):
         if isinstance(other, Polar) == False:
             raise TypeError("Argument must be an instance of Polar")
-        pass
+        return self.to_minutes() >= other.to_minutes()
 
     def __gt__(self, other):
         if isinstance(other, Polar) == False:
             raise TypeError("Argument must be an instance of Polar")
-        pass
+        return self.to_minutes() > other.to_minutes()
 
     def __le__(self, other):
         if isinstance(other, Polar) == False:
             raise TypeError("Argument must be an instance of Polar")
-        pass
+        return self.to_minutes() <= other.to_minutes()
 
     def __lt__(self, other):
         if isinstance(other, Polar) == False:
             raise TypeError("Argument must be an instance of Polar")
-        pass
+        return self.to_minutes() < other.to_minutes()
 
     def to_minutes(self) -> int:
         return self.deg_ * 60 + self.min_
@@ -96,7 +93,7 @@ class TestPolar(unittest.TestCase):
         assert r == Polar(45, 0)
         r = (p1 - p2) * 2 
         assert r == Polar(90, 0)
-        print("TestPolar ... ok")
+        print("TestPolar...[ok]")
 class Ecliptic:
     deg_: int
     sign_: Sign
@@ -144,32 +141,29 @@ class Ecliptic:
     def __eq__(self, other):
         if isinstance(other, Ecliptic) == False:
             raise TypeError("Argument must be an instance of Ecliptic")
-        if self.deg_ == other.deg_ and \
+        return self.deg_ == other.deg_ and \
             self.sign_ == other.sign_ and \
-            self.min_ == other.min_:
-            return True
-        else:
-            return False
+            self.min_ == other.min_
 
     def __ge__(self, other):
         if isinstance(other, Ecliptic) == False:
             raise TypeError("Argument must be an instance of Ecliptic")
-        pass
+        return self.to_minutes() >= other.to_minutes()
 
     def __gt__(self, other):
         if isinstance(other, Ecliptic) == False:
             raise TypeError("Argument must be an instance of Ecliptic")
-        pass
+        return self.to_minutes() > other.to_minutes()
 
     def __le__(self, other):
         if isinstance(other, Ecliptic) == False:
             raise TypeError("Argument must be an instance of Ecliptic")
-        pass
+        return self.to_minutes() <= other.to_minutes()
 
     def __lt__(self, other):
         if isinstance(other, Ecliptic) == False:
             raise TypeError("Argument must be an instance of Ecliptic")
-        pass
+        return self.to_minutes() < other.to_minutes()
 
     def to_minutes(self) -> int:
         return (self.deg_ + self.sign_.degrees_) * 60 + self.min_
@@ -200,7 +194,7 @@ class TestEcliptic(unittest.TestCase):
         assert Ecliptic(0, Signs.pisces_, 0).diff(Ecliptic(20, Signs.pisces_, 0)) == Ecliptic(20, Signs.aries_, 0)
         r = (e1 - e2) * 2
         assert r == Ecliptic(0, Signs.cancer_, 0)
-        print("TestEcliptic ... ok")
+        print("TestEcliptic...[ok]")
 
 # Utilities for conversions
 
@@ -221,7 +215,7 @@ def test_utilities():
     e1 = Ecliptic(25, Signs.taurus_, 23)
     assert to_ecliptic(p1) == e1
     assert to_polar(e1) == p1
-    print("TestUtilities ... ok")
+    print("TestUtilities...[ok]")
 
 # Utilities for user input
 
