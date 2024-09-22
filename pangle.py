@@ -85,7 +85,10 @@ class TestPolar(unittest.TestCase):
         p1 = Polar(55, 23)
         assert p1.to_minutes() == 3323
         p2 = Polar(10, 23)
+        assert p1 > p2 and p1 >= p2
+        assert p2 < p1 and p2 <= p1
         r = p1 + p2
+        assert r >= p1 + p2 and r <= p1 + p2
         assert r == Polar(65, 46)
         r = p1 - p2
         assert r == Polar(45, 0)
@@ -187,7 +190,10 @@ class TestEcliptic(unittest.TestCase):
         e1 = Ecliptic(25, Signs.taurus_, 23)
         assert e1.to_minutes() == 3323
         e2 = Ecliptic(10, Signs.aries_, 23)
+        assert e1 > e2 and e1 >= e2
+        assert e2 < e1 and e2 <= e1
         r = e1 + e2
+        assert r >= e1 + e2 and r <= e1 + e2
         assert r == Ecliptic(5, Signs.gemini_, 46)
         r = e1 - e2
         assert r == Ecliptic(15, Signs.taurus_, 0)
