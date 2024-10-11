@@ -67,9 +67,7 @@ class Polar:
         return self.deg_ * 60 + self.min_
     
     def to_decimal(self) -> float:
-        self.deg_
-        decimal_min: float = self.min_ * 100.0 / 60.0
-        return  float(self.deg_ + decimal_min)
+        return float(((self.deg_ * 60) + self.min_) / 60.0)
 
     def diff(self, other):
         if isinstance(other, Polar) == False:
