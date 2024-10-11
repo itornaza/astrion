@@ -91,6 +91,7 @@ class TestPolar(unittest.TestCase):
         r = p1 - p2
         assert r == Polar(45, 0)
         assert Polar(330, 0).diff(Polar(350, 0)) == Polar(20, 0)
+        assert Polar(10, 0).diff(Polar(187, 13)) == Polar(177, 13)
         assert r == Polar(45, 0)
         r = (p1 - p2) * 2 
         assert r == Polar(90, 0)
@@ -196,6 +197,7 @@ class TestEcliptic(unittest.TestCase):
         r = e1 - e2
         assert r == Ecliptic(15, Signs.taurus_, 0)
         assert Ecliptic(0, Signs.pisces_, 0).diff(Ecliptic(20, Signs.pisces_, 0)) == Ecliptic(20, Signs.aries_, 0)
+        assert Ecliptic(10, Signs.aries_, 0).diff(Ecliptic(7, Signs.libra_, 13)) == Ecliptic(27, Signs.virgo_, 13)
         r = (e1 - e2) * 2
         assert r == Ecliptic(0, Signs.cancer_, 0)
         print("TestEcliptic...[ok]")
