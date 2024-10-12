@@ -2,7 +2,7 @@
 # chart
 #
 
-from pangle import Ecliptic, Polar, get_ecliptic, to_polar
+from pangle import Ecliptic, Polar, get_ecliptic, to_polar, to_ecliptic
 from planets import *
 from angles import *
 from houses import *
@@ -75,28 +75,28 @@ class Chart:
         self.north_node_ = ChartLunarNode(LunarNodes.north_node_, north_node_posit)
 
         # TODO: Fix adding and subtracting scalar from Ecliptic!
-
-        self.south_node_ = ChartLunarNode(LunarNodes.south_node_, north_node_posit - 180)
+        self.south_node_ = ChartLunarNode(LunarNodes.south_node_, 
+                                          north_node_posit - to_ecliptic(Polar(180, 0)))
 
         # Equal house system angles
         self.asc_ = ChartAngle(Angles.asc_, asc_posit)
-        self.dsc_ = ChartAngle(Angles.dsc_, asc_posit + 180)
+        self.dsc_ = ChartAngle(Angles.dsc_, asc_posit + to_ecliptic(Polar(180, 0)))
         self.mc_ = ChartAngle(Angles.ic_, mc_posit)
-        self.ic_ = ChartAngle(Angles.mc_, mc_posit -180)
+        self.ic_ = ChartAngle(Angles.mc_, mc_posit - to_ecliptic(Polar(180, 0)))
 
         # Equal house system cusps
         self.first_ = ChartHouse(Houses.first_, asc_posit)
-        self.second_ = ChartHouse(Houses.second_, asc_posit + 30)
-        self.third_ = ChartHouse(Houses.third_, asc_posit + 60)
-        self.fourth_ = ChartHouse(Houses.fourth_, asc_posit + 90)
-        self.fifth_ = ChartHouse(Houses.fifth_, asc_posit + 120)
-        self.sixth_ = ChartHouse(Houses.sixth_, asc_posit + 150)
-        self.seventh_ = ChartHouse(Houses.seventh_, asc_posit + 180)
-        self.eight_ = ChartHouse(Houses.eight_, asc_posit + 210)
-        self.ninth_ = ChartHouse(Houses.ninth_, asc_posit + 240)
-        self.tenth_ = ChartHouse(Houses.tenth_, asc_posit + 270)
-        self.eleventh_ = ChartHouse(Houses.eleventh_, asc_posit + 300)
-        self.twelvth_ = ChartHouse(Houses.twelvth_, asc_posit + 330)
+        self.second_ = ChartHouse(Houses.second_, asc_posit + to_ecliptic(Polar(30, 0)))
+        self.third_ = ChartHouse(Houses.third_, asc_posit + to_ecliptic(Polar(60, 0)))
+        self.fourth_ = ChartHouse(Houses.fourth_, asc_posit + to_ecliptic(Polar(90, 0)))
+        self.fifth_ = ChartHouse(Houses.fifth_, asc_posit + to_ecliptic(Polar(120, 0)))
+        self.sixth_ = ChartHouse(Houses.sixth_, asc_posit + to_ecliptic(Polar(150, 0)))
+        self.seventh_ = ChartHouse(Houses.seventh_, asc_posit + to_ecliptic(Polar(180, 0)))
+        self.eight_ = ChartHouse(Houses.eight_, asc_posit + to_ecliptic(Polar(210, 0)))
+        self.ninth_ = ChartHouse(Houses.ninth_, asc_posit + to_ecliptic(Polar(240, 0)))
+        self.tenth_ = ChartHouse(Houses.tenth_, asc_posit + to_ecliptic(Polar(270, 0)))
+        self.eleventh_ = ChartHouse(Houses.eleventh_, asc_posit + to_ecliptic(Polar(300, 0)))
+        self.twelvth_ = ChartHouse(Houses.twelvth_, asc_posit + to_ecliptic(Polar(330, 0)))
 
     def get_aspects(self, aspect: Aspect):
         entities = list(self.__dict__.items())[:-12] # Exlude house cusps
