@@ -376,4 +376,4 @@ if __name__ == "__main__":
     chart.get_polarity()
     chart.get_elements()
     
-    chart.load("nousia_giota.csv")
+    chart.load("giota.csv")
