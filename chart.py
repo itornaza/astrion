@@ -2,6 +2,8 @@
 # chart
 #
 
+import csv
+
 from pangle import Ecliptic, Polar, get_ecliptic, to_polar, to_ecliptic
 from planets import *
 from angles import *
@@ -58,7 +60,6 @@ class Chart:
                  pluto_posit: Ecliptic, chiron_posit: Ecliptic, 
                  asc_posit: Ecliptic, mc_posit: Ecliptic, north_node_posit: Ecliptic):
         
-        # Planets
         self.sun_ = ChartPlanet(Planets.sun_, sun_posit)
         self.moon_ = ChartPlanet(Planets.moon_, moon_posit)
         self.mercury_ = ChartPlanet(Planets.mercury_, mercury_posit)
@@ -70,30 +71,54 @@ class Chart:
         self.neptune_ = ChartPlanet(Planets.neptune_, neptune_posit)
         self.pluto_ = ChartPlanet(Planets.pluto_, pluto_posit)
         self.chiron_ = ChartPlanet(Planets.chiron_, chiron_posit)
-
-        # Nodes
         self.north_node_ = ChartLunarNode(LunarNodes.north_node_, north_node_posit)
-        self.south_node_ = ChartLunarNode(LunarNodes.south_node_, north_node_posit + 180)
-
-        # Equal house system angles
         self.asc_ = ChartAngle(Angles.asc_, asc_posit)
-        self.dsc_ = ChartAngle(Angles.dsc_, asc_posit + 180)
         self.mc_ = ChartAngle(Angles.mc_, mc_posit)
-        self.ic_ = ChartAngle(Angles.ic_, mc_posit - 180)
+        self.calc_rest_chart()
+
+    def load(self, path):
+        with open('./charts/' + path, newline='') as csvfile:
+            reader = csv.reader(csvfile)
+            lines = list(reader)
+            sun = ChartPlanet(Planets.get(Planets, str(lines[0][0])), Ecliptic(int(lines[0][1]), Signs.get(Signs, lines[0][2]) ,int(lines[0][3])))
+            moon = ChartPlanet(Planets.get(Planets, str(lines[1][0])), Ecliptic(int(lines[1][1]), Signs.get(Signs, lines[1][2]) ,int(lines[1][3])))
+            mercury = ChartPlanet(Planets.get(Planets, str(lines[2][0])), Ecliptic(int(lines[2][1]), Signs.get(Signs, lines[2][2]) ,int(lines[2][3])))
+            venus = ChartPlanet(Planets.get(Planets, str(lines[3][0])), Ecliptic(int(lines[3][1]), Signs.get(Signs, lines[3][2]) ,int(lines[3][3])))
+            mars = ChartPlanet(Planets.get(Planets, str(lines[4][0])), Ecliptic(int(lines[4][1]), Signs.get(Signs, lines[4][2]) ,int(lines[4][3])))
+            jupiter = ChartPlanet(Planets.get(Planets, str(lines[5][0])), Ecliptic(int(lines[5][1]), Signs.get(Signs, lines[5][2]) ,int(lines[5][3])))
+            saturn =  ChartPlanet(Planets.get(Planets, str(lines[6][0])), Ecliptic(int(lines[6][1]), Signs.get(Signs, lines[6][2]) ,int(lines[6][3])))
+            uranus = ChartPlanet(Planets.get(Planets, str(lines[7][0])), Ecliptic(int(lines[7][1]), Signs.get(Signs, lines[7][2]) ,int(lines[7][3])))
+            neptune = ChartPlanet(Planets.get(Planets, str(lines[8][0])), Ecliptic(int(lines[8][1]), Signs.get(Signs, lines[8][2]) ,int(lines[8][3])))
+            pluto = ChartPlanet(Planets.get(Planets, str(lines[9][0])), Ecliptic(int(lines[9][1]), Signs.get(Signs, lines[9][2]) ,int(lines[9][3])))
+            chiron = ChartPlanet(Planets.get(Planets, str(lines[10][0])), Ecliptic(int(lines[10][1]), Signs.get(Signs, lines[10][2]) ,int(lines[10][3])))
+            asc = ChartAngle(Angles.get(Angles, str(lines[11][0])), Ecliptic(int(lines[11][1]), Signs.get(Signs, lines[11][2]) ,int(lines[11][3])))
+            mc = ChartAngle(Angles.get(Angles, str(lines[12][0])), Ecliptic(int(lines[12][1]), Signs.get(Signs, lines[12][2]) ,int(lines[12][3])))
+            north_node = ChartLunarNode(LunarNodes.get(LunarNodes, str(lines[13][0])), Ecliptic(int(lines[13][1]), Signs.get(Signs, lines[13][2]) ,int(lines[13][3])))
+
+            # Call the default constructor with the data loaded from the csv
+            self.__init__(sun.posit_, moon.posit_, mercury.posit_, venus.posit_, 
+                  mars.posit_, jupiter.posit_, saturn.posit_, uranus.posit_, 
+                  neptune.posit_, pluto.posit_, chiron.posit_, 
+                  asc.posit_, mc.posit_, north_node.posit_)
+
+    def calc_rest_chart(self):
+        self.south_node_ = ChartLunarNode(LunarNodes.south_node_, self.north_node_.posit_ + 180)
+        self.dsc_ = ChartAngle(Angles.dsc_, self.asc_.posit_ + 180)
+        self.ic_ = ChartAngle(Angles.ic_, self.mc_.posit_ - 180)
 
         # Equal house system cusps
-        self.first_ = ChartHouse(Houses.first_, asc_posit)
-        self.second_ = ChartHouse(Houses.second_, asc_posit + 30)
-        self.third_ = ChartHouse(Houses.third_, asc_posit + 60)
-        self.fourth_ = ChartHouse(Houses.fourth_, asc_posit + 90)
-        self.fifth_ = ChartHouse(Houses.fifth_, asc_posit + 120)
-        self.sixth_ = ChartHouse(Houses.sixth_, asc_posit + 150)
-        self.seventh_ = ChartHouse(Houses.seventh_, asc_posit + 180)
-        self.eight_ = ChartHouse(Houses.eight_, asc_posit + 210)
-        self.ninth_ = ChartHouse(Houses.ninth_, asc_posit + 240)
-        self.tenth_ = ChartHouse(Houses.tenth_, asc_posit + 270)
-        self.eleventh_ = ChartHouse(Houses.eleventh_, asc_posit + 300)
-        self.twelvth_ = ChartHouse(Houses.twelvth_, asc_posit + 330)
+        self.first_ = ChartHouse(Houses.first_, self.asc_.posit_)
+        self.second_ = ChartHouse(Houses.second_, self.asc_.posit_ + 30)
+        self.third_ = ChartHouse(Houses.third_, self.asc_.posit_ + 60)
+        self.fourth_ = ChartHouse(Houses.fourth_, self.asc_.posit_ + 90)
+        self.fifth_ = ChartHouse(Houses.fifth_, self.asc_.posit_ + 120)
+        self.sixth_ = ChartHouse(Houses.sixth_, self.asc_.posit_ + 150)
+        self.seventh_ = ChartHouse(Houses.seventh_, self.asc_.posit_ + 180)
+        self.eight_ = ChartHouse(Houses.eight_, self.asc_.posit_ + 210)
+        self.ninth_ = ChartHouse(Houses.ninth_, self.asc_.posit_ + 240)
+        self.tenth_ = ChartHouse(Houses.tenth_, self.asc_.posit_ + 270)
+        self.eleventh_ = ChartHouse(Houses.eleventh_, self.asc_.posit_ + 300)
+        self.twelvth_ = ChartHouse(Houses.twelvth_, self.asc_.posit_ + 330)
 
     def traditional_asc_mc(self):
         return [self.sun_, self.moon_, self.mercury_, self.venus_, self.mars_, 
@@ -103,6 +128,11 @@ class Chart:
         return [self.sun_, self.moon_, self.mercury_, self.venus_, self.mars_, 
                 self.jupiter_, self.saturn_, self.uranus_, self.neptune_,
                 self.pluto_, self.chiron_]
+
+    def all_planets_asc_mc_nn(self):
+        return [self.sun_, self.moon_, self.mercury_, self.venus_, self.mars_, 
+                self.jupiter_, self.saturn_, self.uranus_, self.neptune_,
+                self.pluto_, self.chiron_, self.asc_, self.mc_, self.north_node_]
 
     def get_aspects(self, aspect: Aspect):
         entities = list(self.__dict__.items())[:-12] # Exlude house cusps
@@ -157,6 +187,8 @@ class Chart:
                     else:
                         print() # Add the missing end line
             
+                    # TODO: Check for angular, rising and culminating planets!
+
             print() # Separate entities with a new line
 
     def get_polarity(self):
@@ -269,6 +301,18 @@ class Chart:
         
         assert cardinal + fixed + mutable == 9
 
+    def get_hemispheres(self):
+        # TODO: Implement
+        pass
+
+    def get_triple_division(self):
+        # TODO: Implement
+        pass
+    
+    def get_quadrant_division(self):
+        # TODO: Implement
+        pass
+
 if __name__ == "__main__":
 
     eclipitc_format = " position in `dd sign mm`: "
@@ -290,29 +334,46 @@ if __name__ == "__main__":
     # mc_posit = get_ecliptic(Angles.mc_.name_ + eclipitc_format)
     # north_node_posit = get_ecliptic(LunarNodes.north_node_.name_ + eclipitc_format)
 
-    # TODO: Override with test data -> move to tests
-    sun_posit = Ecliptic(21, Signs.taurus_, 2)
-    moon_posit = Ecliptic(27, Signs.taurus_, 31)
-    mercury_posit = Ecliptic(8, Signs.taurus_, 6)
-    venus_posit = Ecliptic(18, Signs.aries_, 23)
-    mars_posit = Ecliptic(15, Signs.capricorn_, 47)
-    jupiter_posit = Ecliptic(9, Signs.cancer_, 0)
-    saturn_posit = Ecliptic(24, Signs.pisces_, 48)
-    uranus_posit = Ecliptic(12, Signs.capricorn_, 27)
-    neptune_posit = Ecliptic(10, Signs.cancer_, 33)
-    pluto_posit = Ecliptic(22, Signs.gemini_, 29)
-    chiron_posit = Ecliptic(18, Signs.aquarius_, 10)
-    asc_posit = Ecliptic(7, Signs.scorpio_, 57)
-    mc_posit = Ecliptic(16, Signs.leo_, 9)
-    north_node_posit = Ecliptic(26, Signs.cancer_, 48)
+    # TODO: Move to debug code
+    # print(f"{sun.planet_.name_}: ", end=" "); sun.posit_.print()
+    # print(f"{moon.planet_.name_}: ", end=" "); moon.posit_.print()
+    # print(f"{mercury.planet_.name_}: ", end=" "); mercury.posit_.print()
+    # print(f"{venus.planet_.name_}: ", end=" "); venus.posit_.print()
+    # print(f"{mars.planet_.name_}: ", end=" "); mars.posit_.print()
+    # print(f"{jupiter.planet_.name_}: ", end=" "); jupiter.posit_.print()
+    # print(f"{saturn.planet_.name_}: ", end=" "); saturn.posit_.print()
+    # print(f"{uranus.planet_.name_}: ", end=" "); uranus.posit_.print()
+    # print(f"{neptune.planet_.name_}: ", end=" "); neptune.posit_.print()
+    # print(f"{pluto.planet_.name_}: ", end=" "); pluto.posit_.print()
+    # print(f"{chiron.planet_.name_}: ", end=" "); chiron.posit_.print()
+    # print(f"{asc.angle_.name_}: ", end=" "); asc.posit_.print()
+    # print(f"{mc.angle_.name_}: ", end=" "); mc.posit_.print()
+    # print(f"{north_node.lunar_node_.name_}: ", end=" "); north_node.posit_.print()
 
-    # Set up the chart
+    # TODO: Override with test data -> move to tests (Γιώτα)
+    sun_posit = Ecliptic(15, Signs.libra_, 5)
+    moon_posit = Ecliptic(0, Signs.pisces_, 37)
+    mercury_posit = Ecliptic(7, Signs.scorpio_, 44)
+    venus_posit = Ecliptic(29, Signs.scorpio_, 4)
+    mars_posit = Ecliptic(6, Signs.taurus_, 46)
+    jupiter_posit = Ecliptic(2, Signs.aquarius_, 27)
+    saturn_posit = Ecliptic(4, Signs.cancer_, 41)
+    uranus_posit = Ecliptic(22, Signs.libra_, 54)
+    neptune_posit = Ecliptic(5, Signs.sagittarius_, 24)
+    pluto_posit = Ecliptic(4, Signs.libra_, 42)
+    chiron_posit = Ecliptic(18, Signs.aries_, 46)
+    asc_posit = Ecliptic(0, Signs.aquarius_, 45)
+    mc_posit = Ecliptic(21, Signs.scorpio_, 53)
+    north_node_posit = Ecliptic(2, Signs.capricorn_, 6)
+
+    # Set up the chart from user input
     chart = Chart(sun_posit, moon_posit, mercury_posit, venus_posit, 
                   mars_posit, jupiter_posit, saturn_posit, uranus_posit, 
                   neptune_posit, pluto_posit, chiron_posit, 
                   asc_posit, mc_posit, north_node_posit)
-    
+
     chart.get_aspects(Aspects.conjunction_)
     chart.get_polarity()
     chart.get_elements()
-    chart.get_modes()
+    
+    chart.load("nousia_giota.csv")
