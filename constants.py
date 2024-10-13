@@ -27,7 +27,7 @@ MARS = "Mars"
 JUPITER = "Jupiter"
 SATURN = "Saturn"
 CHIRON = "Chiron"
-URANUS = "uranus"
+URANUS = "Uranus"
 NEPTUNE = "Neptune"
 PLUTO = "Pluto"
 

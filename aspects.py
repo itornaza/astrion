@@ -106,7 +106,6 @@ class Aspects:
             angle >= Aspects.opposition_.angle_ - Aspects.opposition_.orb_:
             return Aspects.opposition_
         else:
-            print(angle)
             return None
 
     def calculate_aspect_angle(self, sign_a, sign_b):
