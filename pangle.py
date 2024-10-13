@@ -23,10 +23,13 @@ class Polar:
         return Polar(deg, min)
 
     def __add__(self, other):
-        if isinstance(other, Polar) == False:
-            raise TypeError("Argument must be an instance of Polar")
-        n = self.to_minutes() + other.to_minutes()
-        return self.from_minutes(n)
+        if isinstance(other, Polar):
+            x = self.to_minutes() + other.to_minutes()
+        elif isinstance(other, int):
+            x = self.to_minutes() + other * 60
+        else: 
+            raise TypeError("Argument must be an instance of int or Polar")
+        return self.from_minutes(x)
 
     def __sub__(self, other):
         if isinstance(other, Polar) == False:
@@ -125,15 +128,21 @@ class Ecliptic:
         return Ecliptic(deg, sign, min)
 
     def __add__(self, other):
-        if isinstance(other, Ecliptic) == False:
-            raise TypeError("Argument must be an instance of Ecliptic")
-        x = self.to_minutes() + other.to_minutes()
+        if isinstance(other, Ecliptic):
+            x = self.to_minutes() + other.to_minutes()
+        elif isinstance(other, int):
+            x = self.to_minutes() + other * 60
+        else: 
+            raise TypeError("Argument must be an instance of int or Ecliptic")
         return self.from_minutes(x)
 
     def __sub__(self, other):
-        if isinstance(other, Ecliptic) == False:
-            raise TypeError("Argument must be an instance of Ecliptic")
-        x = self.to_minutes() - other.to_minutes()
+        if isinstance(other, Ecliptic):
+            x = self.to_minutes() - other.to_minutes()
+        elif isinstance(other, int):
+            x = self.to_minutes() - other * 60
+        else: 
+            raise TypeError("Argument must be an instance of int or Ecliptic")
         return self.from_minutes(x)
 
     def __mul__(self, n):

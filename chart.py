@@ -36,7 +36,7 @@ class ChartLunarNode:
 
     def __init__(self, lunar_node: LunarNode, posit: Ecliptic):
         self.lunar_node_ = lunar_node
-        self.posit = posit
+        self.posit_ = posit
 
     def __eq__(self, other):
         if isinstance(other, ChartLunarNode):
@@ -67,54 +67,213 @@ class Chart:
         self.jupiter_ = ChartPlanet(Planets.jupiter_, jupiter_posit)
         self.saturn_ = ChartPlanet(Planets.saturn_, saturn_posit)
         self.uranus_ = ChartPlanet(Planets.uranus_, uranus_posit)
-        self.neptune = ChartPlanet(Planets.neptune_, neptune_posit)
-        self.pluto = ChartPlanet(Planets.pluto_, pluto_posit)
+        self.neptune_ = ChartPlanet(Planets.neptune_, neptune_posit)
+        self.pluto_ = ChartPlanet(Planets.pluto_, pluto_posit)
         self.chiron_ = ChartPlanet(Planets.chiron_, chiron_posit)
 
         # Nodes
         self.north_node_ = ChartLunarNode(LunarNodes.north_node_, north_node_posit)
-
-        # TODO: Fix adding and subtracting scalar from Ecliptic!
-        self.south_node_ = ChartLunarNode(LunarNodes.south_node_, 
-                                          north_node_posit - to_ecliptic(Polar(180, 0)))
+        self.south_node_ = ChartLunarNode(LunarNodes.south_node_, north_node_posit + 180)
 
         # Equal house system angles
         self.asc_ = ChartAngle(Angles.asc_, asc_posit)
-        self.dsc_ = ChartAngle(Angles.dsc_, asc_posit + to_ecliptic(Polar(180, 0)))
-        self.mc_ = ChartAngle(Angles.ic_, mc_posit)
-        self.ic_ = ChartAngle(Angles.mc_, mc_posit - to_ecliptic(Polar(180, 0)))
+        self.dsc_ = ChartAngle(Angles.dsc_, asc_posit + 180)
+        self.mc_ = ChartAngle(Angles.mc_, mc_posit)
+        self.ic_ = ChartAngle(Angles.ic_, mc_posit - 180)
 
         # Equal house system cusps
         self.first_ = ChartHouse(Houses.first_, asc_posit)
-        self.second_ = ChartHouse(Houses.second_, asc_posit + to_ecliptic(Polar(30, 0)))
-        self.third_ = ChartHouse(Houses.third_, asc_posit + to_ecliptic(Polar(60, 0)))
-        self.fourth_ = ChartHouse(Houses.fourth_, asc_posit + to_ecliptic(Polar(90, 0)))
-        self.fifth_ = ChartHouse(Houses.fifth_, asc_posit + to_ecliptic(Polar(120, 0)))
-        self.sixth_ = ChartHouse(Houses.sixth_, asc_posit + to_ecliptic(Polar(150, 0)))
-        self.seventh_ = ChartHouse(Houses.seventh_, asc_posit + to_ecliptic(Polar(180, 0)))
-        self.eight_ = ChartHouse(Houses.eight_, asc_posit + to_ecliptic(Polar(210, 0)))
-        self.ninth_ = ChartHouse(Houses.ninth_, asc_posit + to_ecliptic(Polar(240, 0)))
-        self.tenth_ = ChartHouse(Houses.tenth_, asc_posit + to_ecliptic(Polar(270, 0)))
-        self.eleventh_ = ChartHouse(Houses.eleventh_, asc_posit + to_ecliptic(Polar(300, 0)))
-        self.twelvth_ = ChartHouse(Houses.twelvth_, asc_posit + to_ecliptic(Polar(330, 0)))
+        self.second_ = ChartHouse(Houses.second_, asc_posit + 30)
+        self.third_ = ChartHouse(Houses.third_, asc_posit + 60)
+        self.fourth_ = ChartHouse(Houses.fourth_, asc_posit + 90)
+        self.fifth_ = ChartHouse(Houses.fifth_, asc_posit + 120)
+        self.sixth_ = ChartHouse(Houses.sixth_, asc_posit + 150)
+        self.seventh_ = ChartHouse(Houses.seventh_, asc_posit + 180)
+        self.eight_ = ChartHouse(Houses.eight_, asc_posit + 210)
+        self.ninth_ = ChartHouse(Houses.ninth_, asc_posit + 240)
+        self.tenth_ = ChartHouse(Houses.tenth_, asc_posit + 270)
+        self.eleventh_ = ChartHouse(Houses.eleventh_, asc_posit + 300)
+        self.twelvth_ = ChartHouse(Houses.twelvth_, asc_posit + 330)
+
+    def traditional_asc_mc(self):
+        return [self.sun_, self.moon_, self.mercury_, self.venus_, self.mars_, 
+                self.jupiter_, self.saturn_, self.asc_, self.mc_]
+
+    def all_planets(self):
+        return [self.sun_, self.moon_, self.mercury_, self.venus_, self.mars_, 
+                self.jupiter_, self.saturn_, self.uranus_, self.neptune_,
+                self.pluto_, self.chiron_]
 
     def get_aspects(self, aspect: Aspect):
         entities = list(self.__dict__.items())[:-12] # Exlude house cusps
-        for entity_a in enumerate(entities):
-            for entity_b in enumerate(entities):
-                if entity_a == entity_b:
+        
+        print()
+        print("*****************")
+        print("* ASPECTS TABLE *")
+        print("*****************")
+        print()
+
+        # For each entity compared to all other entities
+        for _, (_, value_a) in enumerate(entities):
+            for _, (_, value_b) in enumerate(entities):
+                if value_a == value_b:
                     continue
-                d: Polar = to_polar(entity_a.posit.diff(entity_b.posit))
-                aspect = Aspects.get_aspect_from_angle(d.to_decimal())
+                
+                delta: Polar = to_polar(value_a.posit_.diff(value_b.posit_))
+                aspect = Aspects.get_aspect_from_angle(delta.to_decimal())
                 if aspect != None:
-                    print(f"\n\t'{entity_a.name_} {aspect.name_} {entity_b.name_} = \
-                          {d.deg_:.0f}° {d.min_:.0f}")
+
+                    # Entity a
+                    if isinstance(value_a, ChartPlanet): 
+                        print(f"{value_a.planet_.name_}", end=" ")
+                    elif isinstance(value_a, ChartAngle): 
+                        print(f"{value_a.angle_.name_}", end=" ")
+                    elif isinstance(value_a, ChartLunarNode): 
+                        print(f"{value_a.lunar_node_.name_}", end=" ")
+                        
+                    # Aspect
+                    if aspect.name_ in [SQUARE, OPPOSITION, CONJUNCTION]:
+                        print(f"\033[1m\033[31m{aspect.name_}\033[0m", end=" ")
+                    elif aspect.name_ in [SEXTILE, TRINE]:
+                        print(f"\033[1m\033[34m{aspect.name_}\033[0m", end=" ")
+                    else:
+                        print(aspect.name_, end=" ")
+
+                    # Entity b
+                    if isinstance(value_b, ChartPlanet): 
+                        print(f"{value_b.planet_.name_}", end=" ")
+                    elif isinstance(value_b, ChartAngle): 
+                        print(f"{value_b.angle_.name_}", end=" ")
+                    elif isinstance(value_b, ChartLunarNode): 
+                        print(f"{value_b.lunar_node_.name_}", end=" ")
+                        
+                    # Aspect details
+                    aspect_polar: Polar = Polar(aspect.angle_, 0)
+                    orb = aspect_polar.diff(delta)
+
+                    print(f"({orb.deg_:.0f}° {orb.min_:.0f}')", end=" ")
+                    if orb <= Polar(1, 0):
+                        print("\033[1mTight\033[0m")
+                    else:
+                        print() # Add the missing end line
+            
+            print() # Separate entities with a new line
+
+    def get_polarity(self):
+        entities = self.traditional_asc_mc()
+        positive: int = 0
+        negative: int = 0
+
+        for entity in entities:
+            if entity.posit_.sign_ in [Signs.aries_, Signs.leo_, Signs.sagittarius_, 
+                                       Signs.gemini_, Signs.libra_, Signs.aquarius_]:
+                positive = positive + 1
+                if isinstance(entity, ChartPlanet): 
+                    print(f"\033[1m\033[31m{entity.planet_.name_}\033[0m")
+                elif isinstance(entity, ChartAngle): 
+                    print(f"\033[1m\033[31m{entity.angle_.name_}\033[0m")
+
+            if entity.posit_.sign_ in [Signs.taurus_, Signs.virgo_, Signs.capricorn_,
+                                       Signs.cancer_, Signs.scorpio_, Signs.pisces_]:
+                negative = negative + 1
+                if isinstance(entity, ChartPlanet): 
+                    print(f"\033[1m\033[34m{entity.planet_.name_}\033[0m")
+                elif isinstance(entity, ChartAngle): 
+                    print(f"\033[1m\033[34m{entity.angle_.name_}\033[0m")
+
+        print()
+        print(f"\033[1m\033[31mPositive = {positive}\033[0m", end=" ")
+        print(f"\033[1m\033[34mNegative = {negative}\033[0m")
+        print()
+        
+        assert positive + negative == 9
+
+    def get_elements(self):
+        entities = self.traditional_asc_mc()
+        fire: int = 0
+        earth: int = 0
+        air: int = 0
+        water: int = 0
+
+        for entity in entities:
+            if entity.posit_.sign_ in [Signs.aries_, Signs.leo_, Signs.sagittarius_]:
+                fire = fire + 1
+                if isinstance(entity, ChartPlanet): 
+                    print(f"\033[1m\033[31m{entity.planet_.name_}\033[0m")
+                elif isinstance(entity, ChartAngle): 
+                    print(f"\033[1m\033[31m{entity.angle_.name_}\033[0m")
+
+            if entity.posit_.sign_ in [Signs.taurus_, Signs.virgo_, Signs.capricorn_]:
+                earth = earth + 1
+                if isinstance(entity, ChartPlanet): 
+                    print(f"\033[1m\033[33m{entity.planet_.name_}\033[0m")
+                elif isinstance(entity, ChartAngle): 
+                    print(f"\033[1m\033[33m{entity.angle_.name_}\033[0m")
+
+            if entity.posit_.sign_ in [Signs.gemini_, Signs.libra_, Signs.aquarius_]:
+                air = air + 1
+                if isinstance(entity, ChartPlanet): 
+                    print(f"\033[1m\033[36m{entity.planet_.name_}\033[0m")
+                elif isinstance(entity, ChartAngle): 
+                    print(f"\033[1m\033[36m{entity.angle_.name_}\033[0m")
+
+            if entity.posit_.sign_ in [Signs.cancer_, Signs.scorpio_, Signs.pisces_]:
+                water = water + 1
+                if isinstance(entity, ChartPlanet): 
+                    print(f"\033[1m\033[34m{entity.planet_.name_}\033[0m")
+                elif isinstance(entity, ChartAngle): 
+                    print(f"\033[1m\033[34m{entity.angle_.name_}\033[0m")
+
+        print()
+        print(f"\033[1m\033[31mFire = {fire}\033[0m", end=" ")
+        print(f"\033[1m\033[33mEarth = {earth}\033[0m", end=" ")
+        print(f"\033[1m\033[36mAir = {air}\033[0m", end=" ")
+        print(f"\033[1m\033[34mWater = {water}\033[0m")
+        print()
+
+        assert fire + earth + air + water == 9
+
+    def get_modes(self):
+        entities = self.traditional_asc_mc()
+        cardinal: int = 0
+        fixed: int = 0
+        mutable: int = 0
+
+        for entity in entities:
+            if entity.posit_.sign_ in [Signs.aries_, Signs.cancer_, Signs.libra_, Signs.capricorn_]:
+                cardinal = cardinal + 1
+                if isinstance(entity, ChartPlanet): 
+                    print(f"\033[1m\033[31m{entity.planet_.name_}\033[0m")
+                elif isinstance(entity, ChartAngle): 
+                    print(f"\033[1m\033[31m{entity.angle_.name_}\033[0m")
+
+            if entity.posit_.sign_ in [Signs.taurus_, Signs.leo_, Signs.scorpio_, Signs.aquarius_]:
+                fixed = fixed + 1
+                if isinstance(entity, ChartPlanet): 
+                    print(f"\033[1m\033[33m{entity.planet_.name_}\033[0m")
+                elif isinstance(entity, ChartAngle): 
+                    print(f"\033[1m\033[33m{entity.angle_.name_}\033[0m")
+
+            if entity.posit_.sign_ in [Signs.gemini_, Signs.virgo_, Signs.pisces_]:
+                mutable = mutable + 1
+                if isinstance(entity, ChartPlanet): 
+                    print(f"\033[1m\033[36m{entity.planet_.name_}\033[0m")
+                elif isinstance(entity, ChartAngle): 
+                    print(f"\033[1m\033[36m{entity.angle_.name_}\033[0m")
+
+        print()
+        print(f"\033[1m\033[31mFire = {cardinal}\033[0m", end=" ")
+        print(f"\033[1m\033[33mEarth = {fixed}\033[0m", end=" ")
+        print(f"\033[1m\033[36mAir = {mutable}\033[0m", end=" ")
+        print()
+        
+        assert cardinal + fixed + mutable == 9
 
 if __name__ == "__main__":
 
     eclipitc_format = " position in `dd sign mm`: "
 
-    # TODO: Uncomment for production
+    # TODO: Uncomment for production, from Catherine's chart
     # Set up chart parameters 
     # sun_posit = get_ecliptic(Planets.sun_.name_ + eclipitc_format)
     # moon_posit = get_ecliptic(Planets.moon_.name_ + eclipitc_format)
@@ -154,3 +313,6 @@ if __name__ == "__main__":
                   asc_posit, mc_posit, north_node_posit)
     
     chart.get_aspects(Aspects.conjunction_)
+    chart.get_polarity()
+    chart.get_elements()
+    chart.get_modes()
