@@ -77,7 +77,11 @@ class Chart:
         self.calc_rest_chart()
 
     def load(self, path):
-        with open('./charts/' + path, newline='') as csvfile:
+
+        # TODO: If no path specified, provide a default chart or prompt to enter a chart
+        # from the command line
+
+        with open(path, newline='') as csvfile:
             reader = csv.reader(csvfile)
             lines = list(reader)
             sun = ChartPlanet(Planets.get(Planets, str(lines[0][0])), Ecliptic(int(lines[0][1]), Signs.get(Signs, lines[0][2]) ,int(lines[0][3])))
@@ -137,11 +141,9 @@ class Chart:
     def get_aspects(self, aspect: Aspect):
         entities = list(self.__dict__.items())[:-12] # Exlude house cusps
         
-        print()
-        print("*****************")
+        print("\n*****************")
         print("* ASPECTS TABLE *")
-        print("*****************")
-        print()
+        print("*****************\n")
 
         # For each entity compared to all other entities
         for _, (_, value_a) in enumerate(entities):
@@ -153,7 +155,7 @@ class Chart:
                 aspect = Aspects.get_aspect_from_angle(delta.to_decimal())
                 if aspect != None:
 
-                    # Entity a
+                    # Entity
                     if isinstance(value_a, ChartPlanet): 
                         print(f"{value_a.planet_.name_}", end=" ")
                     elif isinstance(value_a, ChartAngle): 
@@ -186,132 +188,303 @@ class Chart:
                         print("\033[1mTight\033[0m")
                     else:
                         print() # Add the missing end line
-            
-                    # TODO: Check for angular, rising and culminating planets!
+
+                    # TODO: Add angular, rising and culminating tags!
 
             print() # Separate entities with a new line
 
     def get_polarity(self):
-        entities = self.traditional_asc_mc()
-        positive: int = 0
-        negative: int = 0
+        print("* POLARITY *")
 
+        # In Polarities we count the 7 traditional planets plus the ascendant and mc
+        entities = self.traditional_asc_mc()
+        positive_list = []
+        negative_list = []
         for entity in entities:
+            # Positive
             if entity.posit_.sign_ in [Signs.aries_, Signs.leo_, Signs.sagittarius_, 
                                        Signs.gemini_, Signs.libra_, Signs.aquarius_]:
-                positive = positive + 1
                 if isinstance(entity, ChartPlanet): 
-                    print(f"\033[1m\033[31m{entity.planet_.name_}\033[0m")
+                    positive_list.append(entity.planet_.name_)
                 elif isinstance(entity, ChartAngle): 
-                    print(f"\033[1m\033[31m{entity.angle_.name_}\033[0m")
+                    positive_list.append(entity.angle_.name_)
 
-            if entity.posit_.sign_ in [Signs.taurus_, Signs.virgo_, Signs.capricorn_,
+            # Negative
+            elif entity.posit_.sign_ in [Signs.taurus_, Signs.virgo_, Signs.capricorn_,
                                        Signs.cancer_, Signs.scorpio_, Signs.pisces_]:
-                negative = negative + 1
                 if isinstance(entity, ChartPlanet): 
-                    print(f"\033[1m\033[34m{entity.planet_.name_}\033[0m")
+                    negative_list.append(entity.planet_.name_)
                 elif isinstance(entity, ChartAngle): 
-                    print(f"\033[1m\033[34m{entity.angle_.name_}\033[0m")
+                    negative_list.append(entity.angle_.name_)
 
+        print("Positive: ", end=" ")
+        for positive in positive_list:
+            print(f"\033[1m\033[31m{positive}\033[0m", end = " ")
         print()
-        print(f"\033[1m\033[31mPositive = {positive}\033[0m", end=" ")
-        print(f"\033[1m\033[34mNegative = {negative}\033[0m")
+        print("Negative: ", end=" ")
+        for negative in negative_list:
+            print(f"\033[1m\033[34m{negative}\033[0m", end = " ")
         print()
-        
-        assert positive + negative == 9
+
+        print(f"==> \033[1m\033[31mPositive = {len(positive_list)}\033[0m", end=" ")
+        print(f"\033[1m\033[34mNegative = {len(negative_list)}\033[0m\n")        
+        assert len(positive_list) + len(negative_list) == 9
 
     def get_elements(self):
+        print("* ELEMENTS *")
+
+        # In Elements we count the 7 traditional planets plus the ascendant and mc
         entities = self.traditional_asc_mc()
-        fire: int = 0
-        earth: int = 0
-        air: int = 0
-        water: int = 0
-
+        fire_list= []
+        earth_list = []
+        air_list = []
+        water_list = []
         for entity in entities:
+            # Fire
             if entity.posit_.sign_ in [Signs.aries_, Signs.leo_, Signs.sagittarius_]:
-                fire = fire + 1
                 if isinstance(entity, ChartPlanet): 
-                    print(f"\033[1m\033[31m{entity.planet_.name_}\033[0m")
+                    fire_list.append(entity.planet_.name_)
                 elif isinstance(entity, ChartAngle): 
-                    print(f"\033[1m\033[31m{entity.angle_.name_}\033[0m")
-
-            if entity.posit_.sign_ in [Signs.taurus_, Signs.virgo_, Signs.capricorn_]:
-                earth = earth + 1
+                    fire_list.append(entity.angle_.name_)
+            
+            # Earth
+            elif entity.posit_.sign_ in [Signs.taurus_, Signs.virgo_, Signs.capricorn_]:
                 if isinstance(entity, ChartPlanet): 
-                    print(f"\033[1m\033[33m{entity.planet_.name_}\033[0m")
+                    earth_list.append(entity.planet_.name_)
                 elif isinstance(entity, ChartAngle): 
-                    print(f"\033[1m\033[33m{entity.angle_.name_}\033[0m")
-
-            if entity.posit_.sign_ in [Signs.gemini_, Signs.libra_, Signs.aquarius_]:
-                air = air + 1
+                    earth_list.append(entity.angle_.name_)
+            
+            # Air
+            elif entity.posit_.sign_ in [Signs.gemini_, Signs.libra_, Signs.aquarius_]:
                 if isinstance(entity, ChartPlanet): 
-                    print(f"\033[1m\033[36m{entity.planet_.name_}\033[0m")
+                    air_list.append(entity.planet_.name_)
                 elif isinstance(entity, ChartAngle): 
-                    print(f"\033[1m\033[36m{entity.angle_.name_}\033[0m")
-
-            if entity.posit_.sign_ in [Signs.cancer_, Signs.scorpio_, Signs.pisces_]:
-                water = water + 1
+                    air_list.append(entity.angle_.name_)
+            
+            # Water
+            elif entity.posit_.sign_ in [Signs.cancer_, Signs.scorpio_, Signs.pisces_]:
                 if isinstance(entity, ChartPlanet): 
-                    print(f"\033[1m\033[34m{entity.planet_.name_}\033[0m")
+                    water_list.append(entity.planet_.name_)
                 elif isinstance(entity, ChartAngle): 
-                    print(f"\033[1m\033[34m{entity.angle_.name_}\033[0m")
+                    water_list.append(entity.angle_.name_)
 
+        print("Fire: ", end=" ")
+        for fire in fire_list:
+            print(f"\033[1m\033[31m{fire}\033[0m", end = " ")
         print()
-        print(f"\033[1m\033[31mFire = {fire}\033[0m", end=" ")
-        print(f"\033[1m\033[33mEarth = {earth}\033[0m", end=" ")
-        print(f"\033[1m\033[36mAir = {air}\033[0m", end=" ")
-        print(f"\033[1m\033[34mWater = {water}\033[0m")
+        print("Earth: ", end=" ")
+        for earth in earth_list:
+            print(f"\033[1m\033[33m{earth}\033[0m", end = " ")
+        print()
+        print("Air: ", end=" ")
+        for air in air_list:
+            print(f"\033[1m\033[36m{air}\033[0m", end = " ")
+        print()
+        print("Water: ", end=" ")
+        for water in water_list:
+            print(f"\033[1m\033[34m{water}\033[0m", end = " ")
         print()
 
-        assert fire + earth + air + water == 9
+        print(f"==> \033[1m\033[31mFire = {len(fire_list)}\033[0m", end=" ")
+        print(f"\033[1m\033[33mEarth = {len(earth_list)}\033[0m", end=" ")
+        print(f"\033[1m\033[36mAir = {len(air_list)}\033[0m", end=" ")
+        print(f"\033[1m\033[34mWater = {len(water_list)}\033[0m\n")
+        assert len(fire_list) + len(earth_list) + len(air_list) + len(water_list) == 9
 
     def get_modes(self):
+        print("* MODES *")
+
+        # In modes we count the 7 traditional planets plus the ascendant and mc
         entities = self.traditional_asc_mc()
-        cardinal: int = 0
-        fixed: int = 0
-        mutable: int = 0
-
+        cardinal_list = []
+        fixed_list = []
+        mutable_list = []
         for entity in entities:
+            # Cardinals
             if entity.posit_.sign_ in [Signs.aries_, Signs.cancer_, Signs.libra_, Signs.capricorn_]:
-                cardinal = cardinal + 1
                 if isinstance(entity, ChartPlanet): 
-                    print(f"\033[1m\033[31m{entity.planet_.name_}\033[0m")
+                    cardinal_list.append(entity.planet_.name_)
                 elif isinstance(entity, ChartAngle): 
-                    print(f"\033[1m\033[31m{entity.angle_.name_}\033[0m")
-
+                    cardinal_list.append(entity.angle_.name_)
+            
+            # Fixed
             if entity.posit_.sign_ in [Signs.taurus_, Signs.leo_, Signs.scorpio_, Signs.aquarius_]:
-                fixed = fixed + 1
                 if isinstance(entity, ChartPlanet): 
-                    print(f"\033[1m\033[33m{entity.planet_.name_}\033[0m")
+                    fixed_list.append(entity.planet_.name_)
                 elif isinstance(entity, ChartAngle): 
-                    print(f"\033[1m\033[33m{entity.angle_.name_}\033[0m")
-
+                    fixed_list.append(entity.angle_.name_)
+            
+            # Mutable
             if entity.posit_.sign_ in [Signs.gemini_, Signs.virgo_, Signs.pisces_]:
-                mutable = mutable + 1
                 if isinstance(entity, ChartPlanet): 
-                    print(f"\033[1m\033[36m{entity.planet_.name_}\033[0m")
+                    mutable_list.append(entity.planet_.name_)
                 elif isinstance(entity, ChartAngle): 
-                    print(f"\033[1m\033[36m{entity.angle_.name_}\033[0m")
+                    mutable_list.append(entity.angle_.name_)
 
+        print("Cardinal: ", end=" ")
+        for cardinal in cardinal_list:
+            print(f"\033[1m\033[31m{cardinal}\033[0m", end = " ")
         print()
-        print(f"\033[1m\033[31mFire = {cardinal}\033[0m", end=" ")
-        print(f"\033[1m\033[33mEarth = {fixed}\033[0m", end=" ")
-        print(f"\033[1m\033[36mAir = {mutable}\033[0m", end=" ")
+        print("Fixed: ", end=" ")
+        for fixed in fixed_list:
+            print(f"\033[1m\033[33m{fixed}\033[0m", end = " ")
+        print()
+        print("Mutable: ", end=" ")
+        for mutable in mutable_list:
+            print(f"\033[1m\033[36m{mutable}\033[0m", end = " ")
         print()
         
-        assert cardinal + fixed + mutable == 9
+        print(f"==> \033[1m\033[31mCardinal = {len(cardinal_list)}\033[0m", end=" ")
+        print(f"\033[1m\033[33mFixed = {len(fixed_list)}\033[0m", end=" ")
+        print(f"\033[1m\033[36mMutable = {len(mutable_list)}\033[0m\n")
+        assert len(cardinal_list) + len(fixed_list) + len(mutable_list) == 9
 
     def get_hemispheres(self):
-        # TODO: Implement
-        pass
+        print("* HEMISPHERES *")
+
+        # In hemispheres we count all 10 planets plus Chiron
+        entities = self.all_planets()
+        
+        # North/South hemispheres division
+        northern_list = []
+        southern_list = []
+        shift: Ecliptic = self.asc_.posit_
+        for entity in entities:
+            if self.first_.posit_ - shift <= entity.posit_ - shift and entity.posit_ - shift < self.seventh_.posit_ - shift:
+                northern_list.append(entity.planet_.name_)
+            else:
+                southern_list.append(entity.planet_.name_)
+        print("Northern: ", end=" ")
+        for planet in northern_list:
+            print(f"\033[1m\033[31m{planet}\033[0m", end = " ")
+        print()
+        print("Southern: ", end=" ")
+        for planet in southern_list:
+            print(f"\033[1m\033[33m{planet}\033[0m", end= " ")
+        print()
+        print(f"==> \033[1m\033[31mNorthern = {len(northern_list)}\033[0m", end=" ")
+        print(f"\033[1m\033[33mSouthern = {len(southern_list)}\033[0m\n")
+        assert len(southern_list) + len(northern_list) == 11
+
+        # East/West hemispheres division
+        western_list = []
+        eastern_list = []
+        shift = self.fourth_.posit_
+        for entity in entities:
+            if self.fourth_.posit_ - shift <= entity.posit_ - shift and entity.posit_ - shift < self.tenth_.posit_ - shift:
+                western_list.append(entity.planet_.name_)
+            else:
+                eastern_list.append(entity.planet_.name_)
+        print("Eastern: ", end=" ")
+        for planet in eastern_list:
+            print(f"\033[1m\033[34m{planet}\033[0m", end= " ")
+        print()
+        print("Western: ", end=" ")
+        for planet in western_list:
+            print(f"\033[1m\033[36m{planet}\033[0m", end = " ")
+        print()
+
+        print(f"==> \033[1m\033[34mEastern = {len(eastern_list)}\033[0m", end=" ")
+        print(f"\033[1m\033[36mWestern = {len(western_list)}\033[0m\n")
+        assert len(eastern_list) + len(western_list) == 11        
 
     def get_triple_division(self):
-        # TODO: Implement
-        pass
+        print("* TRIPLICITIES *")
+
+        # In hemispheres we count all 10 planets plus Chiron
+        entities = self.all_planets()
+        personal_list = []
+        social_list = []
+        universal_list = []
+        for entity in entities:
+            # Personal
+            shift: Polar = self.asc_.posit_
+            if self.first_.posit_ - shift <= entity.posit_ - shift and entity.posit_ - shift < self.fifth_.posit_ - shift:
+                personal_list.append(entity.planet_.name_)
+                continue
+            
+            # Social
+            shift = self.fifth_.posit_
+            if self.fifth_.posit_ - shift <= entity.posit_ - shift and entity.posit_ - shift < self.ninth_.posit_ - shift:
+                social_list.append(entity.planet_.name_)
+                continue
+            
+            # Universal
+            universal_list.append(entity.planet_.name_)
+
+        print("Personal: ", end=" ")
+        for personal in personal_list:
+            print(f"\033[1m\033[31m{personal}\033[0m", end = " ")
+        print()
+        print("Social: ", end=" ")
+        for social in social_list:
+            print(f"\033[1m\033[33m{social}\033[0m", end = " ")
+        print()
+        print("Universal: ", end=" ")
+        for universal in universal_list:
+            print(f"\033[1m\033[36m{universal}\033[0m", end = " ")
+        print()
+
+        print(f"==> \033[1m\033[31mPersonal = {len(personal_list)}\033[0m", end=" ")
+        print(f"\033[1m\033[33mSocial = {len(social_list)}\033[0m", end=" ")
+        print(f"\033[1m\033[36mUniversal = {len(universal_list)}\033[0m\n")
+        assert len(personal_list) + len(social_list) + len(universal_list) == 11
     
     def get_quadrant_division(self):
-        # TODO: Implement
-        pass
+        print("* QUADRANTS *")
+
+        # In Quadrants we count all 10 planets plus Chiron
+        entities = self.all_planets()
+        development_list = []
+        expression_list = []
+        expansion_list = []
+        transcendence_list = []
+        for entity in entities:
+            # Self development
+            shift: Polar = self.asc_.posit_
+            if self.first_.posit_ - shift <= entity.posit_ - shift and entity.posit_ - shift < self.fourth_.posit_ - shift:
+                development_list.append(entity.planet_.name_)
+                continue
+            
+            # Self expression
+            shift = self.fourth_.posit_
+            if self.fourth_.posit_ - shift <= entity.posit_ - shift and entity.posit_ - shift < self.seventh_.posit_ - shift:
+                expression_list.append(entity.planet_.name_)
+                continue
+            
+            # Self expansion
+            shift = self.seventh_.posit_
+            if self.seventh_.posit_ - shift <= entity.posit_ - shift and entity.posit_ - shift < self.tenth_.posit_ - shift:
+                expansion_list.append(entity.planet_.name_)
+                continue
+
+            # Self transcendence
+            transcendence_list.append(entity.planet_.name_)
+
+        print("Self development: ", end=" ")
+        for development in development_list:
+            print(f"\033[1m\033[31m{development}\033[0m", end = " ")
+        print()
+        print("Self expression: ", end=" ")
+        for expression in expression_list:
+            print(f"\033[1m\033[33m{expression}\033[0m", end = " ")
+        print()
+        print("Expansion: ", end=" ")
+        for expansion in expansion_list:
+            print(f"\033[1m\033[36m{expansion}\033[0m", end = " ")
+        print()
+        print("Transcendence: ", end=" ")
+        for transcendence in transcendence_list:
+            print(f"\033[1m\033[34m{transcendence}\033[0m", end = " ")
+        print()
+
+        print(f"==> \033[1m\033[31mSelf development = {len(development_list)}\033[0m", end=" ")
+        print(f"\033[1m\033[33mSelf expression = {len(expression_list)}\033[0m", end=" ")
+        print(f"\033[1m\033[36mSelf expansion = {len(expansion_list)}\033[0m", end= " ")
+        print(f"\033[1m\033[34mSelf trsnscendence = {len(transcendence_list)}\033[0m\n")
+        
+        assert len(development_list) + len(expression_list) + \
+            len(expansion_list) + len(transcendence_list) == 11
 
 if __name__ == "__main__":
 
@@ -372,8 +545,13 @@ if __name__ == "__main__":
                   neptune_posit, pluto_posit, chiron_posit, 
                   asc_posit, mc_posit, north_node_posit)
 
+    # Override with a chart from the archives
+    chart.load("./charts/giota.csv")
+    
     chart.get_aspects(Aspects.conjunction_)
     chart.get_polarity()
     chart.get_elements()
-    
-    chart.load("giota.csv")
+    chart.get_modes()
+    chart.get_hemispheres()
+    chart.get_triple_division()
+    chart.get_quadrant_division()
