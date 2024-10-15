@@ -244,7 +244,7 @@ def get_polar(prompt):
             elif min < 0 or min > 59:
                 print("Minutes must be [0-60)")
             else:
-                return (deg, min)
+                return Polar(deg, min)
         except ValueError:
             print("Invalid input! Please enter two valid numbers separated by a space.")
 
@@ -263,7 +263,7 @@ def get_ecliptic(prompt):
             elif min < 0 or min > 59:
                 print("Minutes must be [0-60)")
             else:
-                return (deg, sign, min)
+                return Ecliptic(deg, sign, min)
         except ValueError:
             print("Invalid input! Please enter number-sign-number separated by a spaces.")
 
