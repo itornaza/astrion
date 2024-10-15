@@ -53,60 +53,71 @@ class ChartHouse:
 
 class Chart:
 
-
-    # All planets + Asc + MC + NN
-    def __init__(self, path: str):
-        # TODO: Reconfigure the constructor to handle both chart data from file
-        # and from cli. If cli, offer an option to save the chart to the database
-        # TODO: Convert this function to something like:
-        # def __init__(self, path = 0):
-        # if path == 0:
-        #   input(self)
-        # else
-        #   load(self)
-        # And set up there for member functions and call calc_rest_chart for the rest
-        self.load(path)
+    def __init__(self, path: str = ""):
+        if path == "":
+            self.input()
+        else:
+            self.load(path)
 
     def input(self):
         """Get the chart data from the user via the cli"""
 
         # User input
         eclipitc_format = " position in `dd sign mm`: "
-        sun_posit = get_ecliptic(Planets.sun_.name_ + eclipitc_format)
-        moon_posit = get_ecliptic(Planets.moon_.name_ + eclipitc_format)
-        mercury_posit = get_ecliptic(Planets.mercury_.name_ + eclipitc_format)
-        venus_posit = get_ecliptic(Planets.venus_.name_ + eclipitc_format)
-        mars_posit = get_ecliptic(Planets.mars_.name_ + eclipitc_format)
-        jupiter_posit = get_ecliptic(Planets.jupiter_.name_ + eclipitc_format)
-        saturn_posit = get_ecliptic(Planets.saturn_.name_ + eclipitc_format)
-        uranus_posit = get_ecliptic(Planets.uranus_.name_ + eclipitc_format)
-        neptune_posit = get_ecliptic(Planets.neptune_.name_ + eclipitc_format)
-        pluto_posit = get_ecliptic(Planets.pluto_.name_ + eclipitc_format)
-        chiron_posit = get_ecliptic(Planets.chiron_.name_ + eclipitc_format)
-        asc_posit = get_ecliptic(Angles.asc_.name_ + eclipitc_format)
-        mc_posit = get_ecliptic(Angles.mc_.name_ + eclipitc_format)
-        north_node_posit = get_ecliptic(LunarNodes.north_node_.name_ + eclipitc_format)
-        
+        sun_posit: Ecliptic = get_ecliptic(Planets.sun_.name_ + eclipitc_format)
+        moon_posit: Ecliptic = get_ecliptic(Planets.moon_.name_ + eclipitc_format)
+        mercury_posit: Ecliptic= get_ecliptic(Planets.mercury_.name_ + eclipitc_format)
+        venus_posit: Ecliptic = get_ecliptic(Planets.venus_.name_ + eclipitc_format)
+        mars_posit: Ecliptic = get_ecliptic(Planets.mars_.name_ + eclipitc_format)
+        jupiter_posit: Ecliptic = get_ecliptic(Planets.jupiter_.name_ + eclipitc_format)
+        saturn_posit: Ecliptic = get_ecliptic(Planets.saturn_.name_ + eclipitc_format)
+        uranus_posit: Ecliptic = get_ecliptic(Planets.uranus_.name_ + eclipitc_format)
+        neptune_posit: Ecliptic = get_ecliptic(Planets.neptune_.name_ + eclipitc_format)
+        pluto_posit: Ecliptic = get_ecliptic(Planets.pluto_.name_ + eclipitc_format)
+        chiron_posit: Ecliptic = get_ecliptic(Planets.chiron_.name_ + eclipitc_format)
+        asc_posit: Ecliptic = get_ecliptic(Angles.asc_.name_ + eclipitc_format)
+        mc_posit: Ecliptic = get_ecliptic(Angles.mc_.name_ + eclipitc_format)
+        north_node_posit: Ecliptic = get_ecliptic(LunarNodes.north_node_.name_ + eclipitc_format)
+
         # Member variable declarations
-        self.sun_ = ChartPlanet(Planets.sun_.name_, sun_posit)
-        self.moon_ = ChartPlanet(Planets.moon_.name_, moon_posit)
-        self.mercury_ = ChartPlanet(Planets.mercury_.name_, mercury_posit)
-        self.venus_ = ChartPlanet(Planets.venus_.name_, venus_posit)
-        self.mars_ = ChartPlanet(Planets.mars_.name_, mars_posit)
-        self.jupiter_ = ChartPlanet(Planets.jupiter_.name_, jupiter_posit)
-        self.saturn_= ChartPlanet(Planets.saturn_.name_, saturn_posit)
-        self.uranus_ = ChartPlanet(Planets.uranus_.name_, uranus_posit)
-        self.neptune_ = ChartPlanet(Planets.neptune_.name_, neptune_posit)
-        self.pluto_ = ChartPlanet(Planets.pluto_.name_, pluto_posit)
-        self.chiron_ = ChartPlanet(Planets.chiron_.name_, chiron_posit)
-        self.asc_ = ChartAngle(Angles.asc_.name_, asc_posit)
-        self.mc_ = ChartAngle(Angles.mc_.name_, mc_posit)
-        self.north_node_ = ChartLunarNode(LunarNodes.north_node_.name_, north_node_posit)
+        self.sun_ = ChartPlanet(Planets.sun_, sun_posit)
+        self.moon_ = ChartPlanet(Planets.moon_, moon_posit)
+        self.mercury_ = ChartPlanet(Planets.mercury_, mercury_posit)
+        self.venus_ = ChartPlanet(Planets.venus_, venus_posit)
+        self.mars_ = ChartPlanet(Planets.mars_, mars_posit)
+        self.jupiter_ = ChartPlanet(Planets.jupiter_, jupiter_posit)
+        self.saturn_= ChartPlanet(Planets.saturn_, saturn_posit)
+        self.uranus_ = ChartPlanet(Planets.uranus_, uranus_posit)
+        self.neptune_ = ChartPlanet(Planets.neptune_, neptune_posit)
+        self.pluto_ = ChartPlanet(Planets.pluto_, pluto_posit)
+        self.chiron_ = ChartPlanet(Planets.chiron_, chiron_posit)
+        self.asc_ = ChartAngle(Angles.asc_, asc_posit)
+        self.mc_ = ChartAngle(Angles.mc_, mc_posit)
+        self.north_node_ = ChartLunarNode(LunarNodes.north_node_, north_node_posit)
 
         # Calculate all other entities from the provided ones
         self.calc_rest_chart()
 
-    def load(self, path):
+        # Prepare data to export into the file
+        entities = self.all_planets_asc_mc_nn()
+        data = []
+        for entity in entities:
+            if isinstance(entity, ChartPlanet):
+                data.append([entity.planet_.name_, entity.posit_.deg_, entity.posit_.sign_.name_, entity.posit_.min_])
+            elif isinstance(entity, ChartAngle):
+                data.append([entity.angle_.name_, entity.posit_.deg_, entity.posit_.sign_.name_, entity.posit_.min_])
+            elif isinstance(entity, ChartLunarNode):
+                data.append([entity.lunar_node_.name_, entity.posit_.deg_, entity.posit_.sign_.name_, entity.posit_.min_])
+
+        # TODO: Ask the user for file name
+        # Open a file for writing
+        with open('./charts/output.csv', mode='w', newline='') as file:
+            writer = csv.writer(file)
+            # Write each row of data
+            for row in data:
+                writer.writerow(row)
+
+    def load(self, path: str):
         """Get the chart data data from a file specified from the user"""
 
         with open(path, newline='') as csvfile:
@@ -206,10 +217,8 @@ class Chart:
 
     def get_aspects(self, aspect: Aspect):
         entities = list(self.__dict__.items())[:-12] # Exlude house cusps
-        
-        print("\n*****************")
-        print("* ASPECTS TABLE *")
-        print("*****************\n")
+
+        print("\n* ASPECTS TABLE *\n")
 
         # For each entity compared to all other entities
         for _, (_, value_a) in enumerate(entities):
@@ -575,8 +584,9 @@ if __name__ == "__main__":
     # print(f"{north_node.lunar_node_.name_}: ", end=" "); north_node.posit_.print()
    
     # TODO: Add icloud as default location?
-    chart = Chart("/Users/ioannis/Library/Mobile Documents/com~apple~CloudDocs/Astrion/charts/giota.csv")
-    
+    # chart = Chart("/Users/ioannis/Library/Mobile Documents/com~apple~CloudDocs/Astrion/charts/giota.csv")
+    chart = Chart()
+
     chart.get_aspects(Aspects.conjunction_)
     chart.get_polarity()
     chart.get_elements()

@@ -306,15 +306,11 @@ def aspect_from_ecliptic_angless_handler():
     calc_ecliptic_angles.calculate_aspect_from_angle()
     
 def polar_to_ecliptic_handler():
-    a: Polar = calc_planet_position.get_polar("Enter angle `dd mm`: ")
-    assert isinstance(a[0], float) and isinstance(a[1], float)
-    p = Polar(a[0], a[1])
+    p: Polar = calc_planet_position.get_polar("Enter angle `dd mm`: ")
     e: Ecliptic = to_ecliptic(p)
     e.print()
 
 def ecliptic_to_polar_handler():
-    a: Ecliptic = calc_ecliptic_angles.get_ecliptic("Enter angle `dd sign mm`: ")
-    assert isinstance(a[0], int) and isinstance(a[1], Sign) and isinstance(a[2], int)
-    e = Ecliptic(a[0], a[1], a[2]) 
+    e: Ecliptic = calc_ecliptic_angles.get_ecliptic("Enter angle `dd sign mm`: ")
     p: Polar = to_polar(e)
     p.print()
