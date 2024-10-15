@@ -38,6 +38,17 @@ class Aspects:
     semisextile_ = Aspect(SEMISEXTILE, 30, "1:12", [2, 3], 2, "Nothing", NA)
     quincunx_ = Aspect(QUINCUNX, 150, "5:12", [2, 3, 5], 2, "Nothing", NA)
 
+    # TODO: Add a custom aspect that can be set from the user at execution time and 
+    # persistently stored
+
+    # TODO: add this functionality to the custom aspect
+    # - Get favorite number
+    # - 360 / favorite number
+    # - Report in the chart
+    
+    # TODO: Make the orbs configurable from the user as well with an option to be
+    # reset to defaults
+
     aspects_ = [conjunction_, opposition_, trine_, square_,
                 sextile_, semisquare_, sesquiquadrate_, 
                 semisextile_, quincunx_]
