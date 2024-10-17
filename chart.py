@@ -3,20 +3,23 @@
 #
 
 import csv
+import os
 
 from pangle import Ecliptic, Polar, to_polar, get_ecliptic
 from planets import *
 from angles import *
 from houses import *
 from lunar_nodes import *
+from lunar_phases import *
 from aspects import *
 from signs import *
 
 class ChartPlanet:
     
     def __init__(self, planet: Planet, posit: Ecliptic):
-        self.planet_ = planet
-        self.posit_ = posit
+        self.planet_: Planet = planet
+        self.posit_: Ecliptic = posit 
+        self.house_: House = None # House that the planet is
 
     def __eq__(self, other):
         if isinstance(other, ChartPlanet):
@@ -26,8 +29,9 @@ class ChartPlanet:
 class ChartAngle:
     
     def __init__(self, angle: Angle, posit: Ecliptic):
-        self.angle_ = angle
-        self.posit_ = posit
+        self.angle_: Angle = angle
+        self.posit_: Ecliptic = posit
+        self.house_: House = None
 
     def __eq__(self, other):
         if isinstance(other, ChartAngle):
@@ -37,8 +41,9 @@ class ChartAngle:
 class ChartLunarNode:
 
     def __init__(self, lunar_node: LunarNode, posit: Ecliptic):
-        self.lunar_node_ = lunar_node
-        self.posit_ = posit
+        self.lunar_node_: LunarNode = lunar_node
+        self.posit_: Ecliptic = posit
+        self.house_: House = None
 
     def __eq__(self, other):
         if isinstance(other, ChartLunarNode):
@@ -53,16 +58,17 @@ class ChartHouse:
 
 class Chart:
 
-    def __init__(self, path: str = ""):
-        if path == "":
-            self.input()
-        else:
-            self.load(path)
+    DOCUMENTS = os.path.join(os.path.expanduser("~"), "Documents") + "/Astrion/charts/"
 
-    def input(self):
+    def __init__(self, path: str = "", placidus: bool = True):
+        self.input(placidus) if (path == "") else self.load(path, placidus)
+        self.planets_in_houses()
+        # TODO: Find houses of angles and lunar nodes as well
+
+    def input(self, placidus: bool):
         """Get the chart data from the user via the cli"""
 
-        # User input
+        # User input for any house system
         eclipitc_format = " position in `dd sign mm`: "
         sun_posit: Ecliptic = get_ecliptic(Planets.sun_.name_ + eclipitc_format)
         moon_posit: Ecliptic = get_ecliptic(Planets.moon_.name_ + eclipitc_format)
@@ -78,6 +84,14 @@ class Chart:
         asc_posit: Ecliptic = get_ecliptic(Angles.asc_.name_ + eclipitc_format)
         mc_posit: Ecliptic = get_ecliptic(Angles.mc_.name_ + eclipitc_format)
         north_node_posit: Ecliptic = get_ecliptic(LunarNodes.north_node_.name_ + eclipitc_format)
+
+        # Extra steps for placidus
+        if placidus:
+            # Get the remaining cusps required for the user's house system
+            second_posit: Ecliptic = get_ecliptic(Houses.second_.name_ + eclipitc_format)
+            third_posit: Ecliptic = get_ecliptic(Houses.third_.name_ + eclipitc_format)
+            fifth_posit: Ecliptic = get_ecliptic(Houses.fifth_.name_ + eclipitc_format)
+            sixth_posit: Ecliptic = get_ecliptic(Houses.sixth_.name_ + eclipitc_format)
 
         # Member variable declarations
         self.sun_ = ChartPlanet(Planets.sun_, sun_posit)
@@ -95,35 +109,59 @@ class Chart:
         self.mc_ = ChartAngle(Angles.mc_, mc_posit)
         self.north_node_ = ChartLunarNode(LunarNodes.north_node_, north_node_posit)
 
-        # Calculate all other entities from the provided ones
-        self.calc_rest_chart()
+        # Extra steps for placidus
+        if placidus:
+            # Member variable declarations  for placidus cusps calculations
+            self.second_ = ChartHouse(Houses.second_, second_posit)
+            self.third_ = ChartHouse(Houses.third_, third_posit)
+            self.fifth_ = ChartHouse(Houses.fifth_, fifth_posit)
+            self.sixth_ = ChartHouse(Houses.sixth_, sixth_posit)
+
+        # For any house system, calculate all other cusps
+        self.calc_rest_chart(placidus)
 
         # Prepare data to export into the file
         entities = self.all_planets_asc_mc_nn()
         data = []
         for entity in entities:
             if isinstance(entity, ChartPlanet):
-                data.append([entity.planet_.name_, entity.posit_.deg_, entity.posit_.sign_.name_, entity.posit_.min_])
+                data.append([entity.planet_.name_, entity.posit_.deg_, 
+                             entity.posit_.sign_.name_, entity.posit_.min_])
+                
             elif isinstance(entity, ChartAngle):
-                data.append([entity.angle_.name_, entity.posit_.deg_, entity.posit_.sign_.name_, entity.posit_.min_])
+                data.append([entity.angle_.name_, entity.posit_.deg_, 
+                             entity.posit_.sign_.name_, entity.posit_.min_])
+                
             elif isinstance(entity, ChartLunarNode):
-                data.append([entity.lunar_node_.name_, entity.posit_.deg_, entity.posit_.sign_.name_, entity.posit_.min_])
+                data.append([entity.lunar_node_.name_, entity.posit_.deg_, 
+                             entity.posit_.sign_.name_, entity.posit_.min_])
+                
+        # Export the extra information needed for placidus
+        if placidus:
+            # Add the cusps to the data that will be added to the new file
+            for cusp in [self.second_, self.third_, self.fifth_, self.sixth_]:
+                data.append(cusp.house_.name_, cusp.posit_.deg_, 
+                            cusp.posit_.sign_.name_, cusp.posit_.min_)
 
-        # TODO: Ask the user for file name
-        # Open a file for writing
-        with open('./charts/output.csv', mode='w', newline='') as file:
+        # Export chart data to custom file found in the 
+        # ~/Documents/Astrion/charts' directory
+        filename = input("Enter the file name (without extension): ")
+        print("The file will be saved in: " + self.DOCUMENTS + ".csv")
+        with open(self.DOCUMENTS + filename + '.csv', mode='w', newline='') as file:
             writer = csv.writer(file)
-            # Write each row of data
             for row in data:
                 writer.writerow(row)
 
-    def load(self, path: str):
+    def load(self, filename: str, placidus: bool):
         """Get the chart data data from a file specified from the user"""
 
-        with open(path, newline='') as csvfile:
+        with open(self.DOCUMENTS + filename, newline='') as csvfile:
             reader = csv.reader(csvfile)
             lines = list(reader)
 
+            assert len(lines) >= 14, "Chart data for equal houses not present in the file"
+
+            # Entities needed for all house systems
             self.sun_ = ChartPlanet(Planets.get(Planets, str(lines[0][0])), 
                     Ecliptic(int(lines[0][1]), Signs.get(Signs, lines[0][2]),
                     int(lines[0][3])))
@@ -167,7 +205,7 @@ class Chart:
             self.chiron_ = ChartPlanet(Planets.get(Planets, str(lines[10][0])), 
                     Ecliptic(int(lines[10][1]), Signs.get(Signs, lines[10][2]),
                     int(lines[10][3])))
-            
+
             self.asc_ = ChartAngle(Angles.get(Angles, str(lines[11][0])), 
                     Ecliptic(int(lines[11][1]), Signs.get(Signs, lines[11][2]),
                     int(lines[11][3])))
@@ -180,27 +218,131 @@ class Chart:
                     Ecliptic(int(lines[13][1]), Signs.get(Signs, lines[13][2]),
                     int(lines[13][3])))
 
-            self.calc_rest_chart()
+            # Get the cusps required for the placidus calculations
+            if placidus:
+                assert len(lines) >= 18 , "Chart data for placidus are not present in the file" 
 
-    def calc_rest_chart(self):
+                self.second_ = ChartHouse(Houses.get(Houses, str(lines[14][0])), 
+                    Ecliptic(int(lines[14][1]), Signs.get(Signs, lines[14][2]),
+                    int(lines[14][3])))
+                self.third_ = ChartHouse(Houses.get(Houses, str(lines[15][0])), 
+                    Ecliptic(int(lines[15][1]), Signs.get(Signs, lines[15][2]),
+                    int(lines[15][3])))
+                self.fifth_ = ChartHouse(Houses.get(Houses, str(lines[16][0])), 
+                    Ecliptic(int(lines[16][1]), Signs.get(Signs, lines[16][2]),
+                    int(lines[16][3])))
+                self.sixth_ = ChartHouse(Houses.get(Houses, str(lines[17][0])), 
+                    Ecliptic(int(lines[17][1]), Signs.get(Signs, lines[17][2]),
+                    int(lines[17][3])))
+
+            # For any house system, calculate all other cusps
+            self.calc_rest_chart(placidus)
+
+    def calc_rest_chart(self, placidus: bool):
+        """Given the basic chart data, calculates the rest of the house cusps
+        and angles for the chart"""
+
+        # Remember that Asc, MC, NN are given, so get the rest of the angles
+        # and the South node
         self.south_node_ = ChartLunarNode(LunarNodes.south_node_, self.north_node_.posit_ + 180)
         self.dsc_ = ChartAngle(Angles.dsc_, self.asc_.posit_ + 180)
         self.ic_ = ChartAngle(Angles.ic_, self.mc_.posit_ - 180)
 
-        # Equal house system cusps
-        self.first_ = ChartHouse(Houses.first_, self.asc_.posit_)
-        self.second_ = ChartHouse(Houses.second_, self.asc_.posit_ + 30)
-        self.third_ = ChartHouse(Houses.third_, self.asc_.posit_ + 60)
-        self.fourth_ = ChartHouse(Houses.fourth_, self.asc_.posit_ + 90)
-        self.fifth_ = ChartHouse(Houses.fifth_, self.asc_.posit_ + 120)
-        self.sixth_ = ChartHouse(Houses.sixth_, self.asc_.posit_ + 150)
-        self.seventh_ = ChartHouse(Houses.seventh_, self.asc_.posit_ + 180)
-        self.eight_ = ChartHouse(Houses.eight_, self.asc_.posit_ + 210)
-        self.ninth_ = ChartHouse(Houses.ninth_, self.asc_.posit_ + 240)
-        self.tenth_ = ChartHouse(Houses.tenth_, self.asc_.posit_ + 270)
-        self.eleventh_ = ChartHouse(Houses.eleventh_, self.asc_.posit_ + 300)
-        self.twelvth_ = ChartHouse(Houses.twelvth_, self.asc_.posit_ + 330)
+        if placidus:
+            self.first_ = ChartHouse(Houses.first_, self.asc_.posit_)
+            # 2 and 3 are already defined by the user
+            self.fourth_ = ChartHouse(Houses.fourth_, self.ic_.posit_)
+            # 5 and 6 are already defined by the user
+            self.seventh_ = ChartHouse(Houses.seventh_, self.dsc_.posit_)
+            self.eight_ = ChartHouse(Houses.eight_, self.second_.posit_ + 180)
+            self.ninth_ = ChartHouse(Houses.ninth_, self.third_.posit_ + 180)
+            self.tenth_ = ChartHouse(Houses.tenth_, self.mc_.posit_)
+            self.eleventh_ = ChartHouse(Houses.eleventh_, self.fifth_.posit_ + 180)
+            self.twelvth_ = ChartHouse(Houses.twelvth_, self.sixth_.posit_ + 180)
+        else:
+            # Equal house system cusps
+            self.first_ = ChartHouse(Houses.first_, self.asc_.posit_)
+            self.second_ = ChartHouse(Houses.second_, self.first_.posit_ + 30)
+            self.third_ = ChartHouse(Houses.third_, self.first_.posit_ + 60)
+            self.fourth_ = ChartHouse(Houses.fourth_, self.first_.posit_ + 90)
+            self.fifth_ = ChartHouse(Houses.fifth_, self.first_.posit_ + 120)
+            self.sixth_ = ChartHouse(Houses.sixth_, self.first_.posit_ + 150)
+            self.seventh_ = ChartHouse(Houses.seventh_, self.first_.posit_ + 180)
+            self.eight_ = ChartHouse(Houses.eight_, self.first_.posit_ + 210)
+            self.ninth_ = ChartHouse(Houses.ninth_, self.first_.posit_ + 240)
+            self.tenth_ = ChartHouse(Houses.tenth_, self.first_.posit_ + 270)
+            self.eleventh_ = ChartHouse(Houses.eleventh_, self.first_.posit_ + 300)
+            self.twelvth_ = ChartHouse(Houses.twelvth_, self.first_.posit_ + 330)
 
+        print("* HOUSE CUSPS *")
+        for house in self.all_houses():
+            print("Cusp", house.house_.id_, ": ", end=" "); 
+            house.posit_.print()
+        print()
+
+    def planets_in_houses(self):
+        """Finds the houses that each of the planets is placed into"""
+        for planet in self.all_planets():
+            shift: Polar = self.first_.posit_
+            if self.first_.posit_ - shift <= planet.posit_ - shift and \
+                planet.posit_ - shift < self.second_.posit_ - shift:
+                planet.house_ = self.first_
+            shift = self.second_.posit_
+            if self.second_.posit_ - shift <= planet.posit_ - shift and \
+                planet.posit_ - shift < self.third_.posit_ - shift:
+                planet.house_ = self.second_
+            shift = self.third_.posit_
+            if self.third_.posit_ - shift <= planet.posit_ - shift and \
+                planet.posit_ - shift < self.fourth_.posit_ - shift:
+                planet.house_ = self.third_
+            shift = self.fourth_.posit_
+            if self.fourth_.posit_ - shift <= planet.posit_ - shift and \
+                planet.posit_ - shift < self.fifth_.posit_ - shift:
+                planet.house_ = self.fourth_
+            shift = self.fifth_.posit_
+            if self.fifth_.posit_ - shift <= planet.posit_ - shift and \
+                planet.posit_ - shift < self.sixth_.posit_ - shift:
+                planet.house_ = self.fifth_
+            shift = self.sixth_.posit_
+            if self.sixth_.posit_ - shift <= planet.posit_ - shift and \
+                planet.posit_ - shift < self.seventh_.posit_ - shift:
+                planet.house_ = self.sixth_
+            shift = self.seventh_.posit_
+            if self.seventh_.posit_ - shift <= planet.posit_ - shift and \
+                planet.posit_ - shift < self.eight_.posit_ - shift:
+                planet.house_ = self.seventh_
+            shift = self.eight_.posit_
+            if self.eight_.posit_ - shift <= planet.posit_ - shift and \
+                planet.posit_ - shift < self.ninth_.posit_ - shift:
+                planet.house_ = self.eight_
+            shift = self.ninth_.posit_
+            if self.ninth_.posit_ - shift <= planet.posit_ - shift and \
+                planet.posit_ - shift < self.tenth_.posit_ - shift:
+                planet.house_ = self.ninth_
+            shift = self.tenth_.posit_
+            if self.tenth_.posit_ - shift <= planet.posit_ - shift and \
+                planet.posit_ - shift < self.eleventh_.posit_ - shift:
+                planet.house_ = self.tenth_
+            shift = self.eleventh_.posit_
+            if self.eleventh_.posit_ - shift <= planet.posit_ - shift and \
+                planet.posit_ - shift < self.twelvth_.posit_ - shift:
+                planet.house_ = self.eleventh_
+
+            # TODO: Print to check
+
+    def angles_in_houses(self):
+        # TODO
+        pass
+
+    def lunar_nodes_in_houses(self):
+        # TODO
+        pass
+
+    def all_houses(self):
+        return [self.first_, self.second_, self.third_, self.fourth_, self.fifth_,
+                self.sixth_, self.seventh_, self.eight_, self.ninth_, self.tenth_,
+                self.eleventh_, self.twelvth_]
+    
     def traditional_asc_mc(self):
         return [self.sun_, self.moon_, self.mercury_, self.venus_, self.mars_, 
                 self.jupiter_, self.saturn_, self.asc_, self.mc_]
@@ -300,7 +442,6 @@ class Chart:
         for negative in negative_list:
             print(f"\033[1m\033[34m{negative}\033[0m", end = " ")
         print()
-
         print(f"==> \033[1m\033[31mPositive = {len(positive_list)}\033[0m", end=" ")
         print(f"\033[1m\033[34mNegative = {len(negative_list)}\033[0m\n")        
         assert len(positive_list) + len(negative_list) == 9
@@ -359,7 +500,6 @@ class Chart:
         for water in water_list:
             print(f"\033[1m\033[34m{water}\033[0m", end = " ")
         print()
-
         print(f"==> \033[1m\033[31mFire = {len(fire_list)}\033[0m", end=" ")
         print(f"\033[1m\033[33mEarth = {len(earth_list)}\033[0m", end=" ")
         print(f"\033[1m\033[36mAir = {len(air_list)}\033[0m", end=" ")
@@ -408,7 +548,6 @@ class Chart:
         for mutable in mutable_list:
             print(f"\033[1m\033[36m{mutable}\033[0m", end = " ")
         print()
-        
         print(f"==> \033[1m\033[31mCardinal = {len(cardinal_list)}\033[0m", end=" ")
         print(f"\033[1m\033[33mFixed = {len(fixed_list)}\033[0m", end=" ")
         print(f"\033[1m\033[36mMutable = {len(mutable_list)}\033[0m\n")
@@ -425,7 +564,9 @@ class Chart:
         southern_list = []
         shift: Ecliptic = self.asc_.posit_
         for entity in entities:
-            if self.first_.posit_ - shift <= entity.posit_ - shift and entity.posit_ - shift < self.seventh_.posit_ - shift:
+            if self.first_.posit_ - shift <= entity.posit_ - shift and \
+                entity.posit_ - shift < self.seventh_.posit_ - shift:
+
                 northern_list.append(entity.planet_.name_)
             else:
                 southern_list.append(entity.planet_.name_)
@@ -446,7 +587,9 @@ class Chart:
         eastern_list = []
         shift = self.fourth_.posit_
         for entity in entities:
-            if self.fourth_.posit_ - shift <= entity.posit_ - shift and entity.posit_ - shift < self.tenth_.posit_ - shift:
+            if self.fourth_.posit_ - shift <= entity.posit_ - shift \
+                and entity.posit_ - shift < self.tenth_.posit_ - shift:
+                
                 western_list.append(entity.planet_.name_)
             else:
                 eastern_list.append(entity.planet_.name_)
@@ -458,7 +601,6 @@ class Chart:
         for planet in western_list:
             print(f"\033[1m\033[36m{planet}\033[0m", end = " ")
         print()
-
         print(f"==> \033[1m\033[34mEastern = {len(eastern_list)}\033[0m", end=" ")
         print(f"\033[1m\033[36mWestern = {len(western_list)}\033[0m\n")
         assert len(eastern_list) + len(western_list) == 11        
@@ -474,13 +616,17 @@ class Chart:
         for entity in entities:
             # Personal
             shift: Polar = self.asc_.posit_
-            if self.first_.posit_ - shift <= entity.posit_ - shift and entity.posit_ - shift < self.fifth_.posit_ - shift:
+            if self.first_.posit_ - shift <= entity.posit_ - shift and \
+                entity.posit_ - shift < self.fifth_.posit_ - shift:
+                
                 personal_list.append(entity.planet_.name_)
                 continue
             
             # Social
             shift = self.fifth_.posit_
-            if self.fifth_.posit_ - shift <= entity.posit_ - shift and entity.posit_ - shift < self.ninth_.posit_ - shift:
+            if self.fifth_.posit_ - shift <= entity.posit_ - shift and \
+                entity.posit_ - shift < self.ninth_.posit_ - shift:
+                
                 social_list.append(entity.planet_.name_)
                 continue
             
@@ -499,7 +645,6 @@ class Chart:
         for universal in universal_list:
             print(f"\033[1m\033[36m{universal}\033[0m", end = " ")
         print()
-
         print(f"==> \033[1m\033[31mPersonal = {len(personal_list)}\033[0m", end=" ")
         print(f"\033[1m\033[33mSocial = {len(social_list)}\033[0m", end=" ")
         print(f"\033[1m\033[36mUniversal = {len(universal_list)}\033[0m\n")
@@ -517,19 +662,25 @@ class Chart:
         for entity in entities:
             # Self development
             shift: Polar = self.asc_.posit_
-            if self.first_.posit_ - shift <= entity.posit_ - shift and entity.posit_ - shift < self.fourth_.posit_ - shift:
+            if self.first_.posit_ - shift <= entity.posit_ - shift and \
+                entity.posit_ - shift < self.fourth_.posit_ - shift:
+                
                 development_list.append(entity.planet_.name_)
                 continue
             
             # Self expression
             shift = self.fourth_.posit_
-            if self.fourth_.posit_ - shift <= entity.posit_ - shift and entity.posit_ - shift < self.seventh_.posit_ - shift:
+            if self.fourth_.posit_ - shift <= entity.posit_ - shift and \
+                entity.posit_ - shift < self.seventh_.posit_ - shift:
+                
                 expression_list.append(entity.planet_.name_)
                 continue
             
             # Self expansion
             shift = self.seventh_.posit_
-            if self.seventh_.posit_ - shift <= entity.posit_ - shift and entity.posit_ - shift < self.tenth_.posit_ - shift:
+            if self.seventh_.posit_ - shift <= entity.posit_ - shift and \
+                entity.posit_ - shift < self.tenth_.posit_ - shift:
+                
                 expansion_list.append(entity.planet_.name_)
                 continue
 
@@ -552,17 +703,45 @@ class Chart:
         for transcendence in transcendence_list:
             print(f"\033[1m\033[34m{transcendence}\033[0m", end = " ")
         print()
-
         print(f"==> \033[1m\033[31mSelf development = {len(development_list)}\033[0m", end=" ")
         print(f"\033[1m\033[33mSelf expression = {len(expression_list)}\033[0m", end=" ")
         print(f"\033[1m\033[36mSelf expansion = {len(expansion_list)}\033[0m", end= " ")
         print(f"\033[1m\033[34mSelf trsnscendence = {len(transcendence_list)}\033[0m\n")
-        
         assert len(development_list) + len(expression_list) + \
             len(expansion_list) + len(transcendence_list) == 11
 
-    def get_lunar_phase():
-        # TODO
+    def get_lunar_phase(self):
+        delta: Polar = to_polar(self.moon_.posit_ - self.sun_.posit_)
+        lunar_phase  = LunarPhases.get_from_angle(LunarPhases, delta.deg_)
+        print("* LUNAR PHASE *")
+        print(lunar_phase.name_ + ":", end=" ")
+        delta.print()
+        print()
+
+    def get_dignities_debilities(self):
+        print("* DIGNITIES & DEBILITIES *")
+        for planet in self.all_planets():
+            if planet.posit_.sign_.name_ in planet.planet_.ruler_:
+                print(planet.planet_.name_, f"in \033[1m\033[36mrulership\033[0m")
+            elif planet.posit_.sign_.name_ in planet.planet_.exaltated_:
+                print(planet.planet_.name_, f"in \033[1m\033[36mexaltation\033[0m")
+            elif planet.posit_.sign_.name_ in planet.planet_.detriment_:
+                print(planet.planet_.name_, f"in \033[1m\033[31mdetriment\033[0m")
+            elif planet.posit_.sign_.name_ in planet.planet_.fall_:
+                print(planet.planet_.name_, f"in \033[1m\033[31mfall\033[0m")
+        print()
+
+    def get_mutual_reception(self):
+        # For every planet except Chiron
+
+        # Examine the sign of the cusp of the house the planet is in
+
+        # Get the planetary ruler of the house from the sign of cusp
+
+        # Get the house or houses that this planet rules
+
+        # For every planet in these houses, check if any of them rule
+        # the house we started with
         pass
 
 if __name__ == "__main__":
@@ -583,14 +762,16 @@ if __name__ == "__main__":
     # print(f"{mc.angle_.name_}: ", end=" "); mc.posit_.print()
     # print(f"{north_node.lunar_node_.name_}: ", end=" "); north_node.posit_.print()
    
-    # TODO: Add icloud as default location?
-    # chart = Chart("/Users/ioannis/Library/Mobile Documents/com~apple~CloudDocs/Astrion/charts/giota.csv")
-    chart = Chart()
+    # Charts are placed by default in ~/Documents/Astrion/charts
+    chart = Chart("giota.csv", True)
+    # chart = Chart(True)
 
-    chart.get_aspects(Aspects.conjunction_)
+    # chart.get_aspects(Aspects.conjunction_)
     chart.get_polarity()
     chart.get_elements()
     chart.get_modes()
     chart.get_hemispheres()
     chart.get_triple_division()
     chart.get_quadrant_division()
+    chart.get_lunar_phase()
+    chart.get_dignities_debilities()

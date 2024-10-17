@@ -2,7 +2,7 @@
 # constants
 #
 
-VERSION = "v3.0"
+VERSION = "v4.0"
 
 # Menu map
 M_ASTRION = "0"
@@ -38,7 +38,7 @@ GEMINI = "Gemini"
 CANCER = "Cancer"
 LEO = "Leo" 
 VIRGO = "Virgo" 
-LIBRA = "libra" 
+LIBRA = "Libra" 
 SCORPIO = "Scorpio"
 SAGITTARIUS = "Sagittarius" 
 CAPRICORN = "Capricorn"
