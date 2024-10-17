@@ -26,14 +26,14 @@ class LunarPhases:
 
     new_moon_ = LunarPhase(NEW_MOON, WAXING, [0.0, 45.0], [0.0, 3.5], [CONJUNCTION, SEMISEXTILE, SEMISQUARE])
     crescent_ = LunarPhase(CRESCENT, WAXING, [45.0, 90.0], [3.5, 7.0], [SEMISQUARE, SEXTILE, SQUARE])
-    firs_quarter_ = LunarPhase(FIRST_QUARTER, WAXING, [90.0, 135.0], [7.0, 10.5], [SQUARE, TRINE, SESQUIQUADRATE])
+    first_quarter_ = LunarPhase(FIRST_QUARTER, WAXING, [90.0, 135.0], [7.0, 10.5], [SQUARE, TRINE, SESQUIQUADRATE])
     gibbous_ = LunarPhase(GIBBOUS, WAXING, [135.0, 180.0], [10.5, 14.0], [SESQUIQUADRATE, QUINCUNX, OPPOSITION])
     full_moon_ = LunarPhase(FULL_MOON, WANNING, [180.0, 225.0], [14.0, 17.5], [OPPOSITION, QUINCUNX, SESQUIQUADRATE])
     disseminating_ = LunarPhase(DISSEMINATING, WANNING, [225.0, 270.0], [17.5, 21.0], [SESQUIQUADRATE, TRINE, SQUARE])
     last_quarter_ = LunarPhase(LAST_QUARTER, WANNING, [270.0, 315.0], [21.0, 24.5], [SQUARE, SEXTILE, SEMISQUARE])
     balsamic_ = LunarPhase(BALSAMIC, WANNING, [315.0, 0.0], [24.5, 28.0], [SEMISQUARE, SEMISEXTILE, CONJUNCTION])
 
-    lunar_phases_ = [new_moon_, crescent_, firs_quarter_, gibbous_,
+    lunar_phases_ = [new_moon_, crescent_, first_quarter_, gibbous_,
                      full_moon_, disseminating_, last_quarter_, balsamic_]
 
     def get(self, input):
@@ -51,7 +51,7 @@ class LunarPhases:
         elif crescent.fullmatch(input):
             lunar_phase = self.crescent_
         elif first_quarter.fullmatch(input):
-            lunar_phase = self.firs_quarter_
+            lunar_phase = self.first_quarter_
         elif gibbous.fullmatch(input):
             lunar_phase = self.gibbous_
         elif full_moon.fullmatch(input):
@@ -66,6 +66,24 @@ class LunarPhases:
             return None
         return lunar_phase
         
+    def get_from_angle(self, angle: int):
+        if angle >= self.new_moon_.arc_ahead_of_sun_[0] and angle < self.new_moon_.arc_ahead_of_sun_[1]:
+            return self.new_moon_
+        elif angle >= self.crescent_.arc_ahead_of_sun_[0] and angle < self.crescent_.arc_ahead_of_sun_[1]:
+            return self.crescent_
+        elif angle >= self.first_quarter_.arc_ahead_of_sun_[0] and angle < self.first_quarter_.arc_ahead_of_sun_[1]:
+            return self.first_quarter_
+        elif angle >= self.gibbous_.arc_ahead_of_sun_[0] and angle < self.gibbous_.arc_ahead_of_sun_[1]:
+            return self.gibbous_
+        elif angle >= self.full_moon_.arc_ahead_of_sun_[0] and angle < self.full_moon_.arc_ahead_of_sun_[1]:
+            return self.full_moon_
+        elif angle >= self.disseminating_.arc_ahead_of_sun_[0] and angle < self.disseminating_.arc_ahead_of_sun_[1]:
+            return self.disseminating_
+        elif angle >= self.last_quarter_.arc_ahead_of_sun_[0] and angle < self.last_quarter_.arc_ahead_of_sun_[1]:
+            return self.last_quarter_
+        elif angle >= self.balsamic_.arc_ahead_of_sun_[0] and angle < self.balsamic_.arc_ahead_of_sun_[1]:
+            return self.balsamic_
+
     def print(self, lunar_phase):
         LunarPhase.print(lunar_phase)
     
