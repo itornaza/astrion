@@ -20,6 +20,7 @@ class ChartPlanet:
         self.planet_: Planet = planet
         self.posit_: Ecliptic = posit 
         self.house_: ChartHouse # House that the planet is
+        self.ruled_houses_ =  [] # int: The id of houses the planet rules
 
     def __eq__(self, other):
         if isinstance(other, ChartPlanet):
@@ -63,6 +64,7 @@ class Chart:
     def __init__(self, path: str = "", placidus: bool = True):
         self.input(placidus) if (path == "") else self.load(path, placidus)
         self.entities_in_houses()
+        self.rulerships()
 
     def input(self, placidus: bool):
         """Get the chart data from the user via the cli"""
@@ -321,6 +323,23 @@ class Chart:
             elif isinstance(entity, ChartLunarNode):
                 print(entity.lunar_node_.name_ + " in " + entity.posit_.sign_.name_ + 
                       " in " + str(entity.house_.house_.id_))
+        print()
+
+    def rulerships(self):
+        """Finds and assigns to each planet the house or houses each of them rule"""
+        for planet in self.all_planets_except_chiron():
+            for house in self.all_houses():
+                if planet.planet_.name_ == house.posit_.sign_.ruler_:
+                    planet.ruled_houses_.append(house.house_.id_)
+                elif planet.planet_.name_ in house.posit_.sign_.ruler_:
+                    planet.ruled_houses_.append(house.house_.id_)
+
+        print("/* RULERSHIPS */")
+        for planet in self.all_planets_except_chiron():
+            print(planet.planet_.name_, " rules ", end= " ")
+            for house_id in planet.ruled_houses_:
+                print(house_id, " ", end = " ")
+            print()
         print()
 
     def all_houses(self):
@@ -728,18 +747,21 @@ class Chart:
         print()
 
     def get_mutual_receptions(self):
+        print("* MUTUAL RECEPTIONS *")
         for planet in self.all_planets_except_chiron():
-            # Examine the sign of the cusp of the house the planet is in
-            print(planet.house_.posit_.sign_.name_, end= " ")    
-
-            # Get the planetary ruler of the house from the sign of cusp
-            print(planet.house_.posit_.sign_.ruler_)
-
-            # Get the house or houses that this planet rules
-
-            # For every planet in these houses, check if any of them rule
-            # the house we started with
-        pass
+            for other_house in planet.ruled_houses_:
+                for other_planet in self.all_planets_except_chiron():
+                    if planet == other_planet:
+                        continue # Skip testing with itself
+                    if other_planet.house_.house_.id_ == other_house:
+                        for h in other_planet.ruled_houses_:
+                            if h == planet.house_.house_.id_:
+                                print(planet.planet_.name_, " in ", planet.posit_.sign_, " in ", planet.house_.house_.id_, " and ", 
+                                      other_planet.planet_.name_, " in ", other_planet.posit_.sign_, " in ", other_planet.house_.house_.id_)
+                            else:
+                                print(planet.planet_.name_, " in ", planet.posit_.sign_.name_, " in ", planet.house_.house_.id_, " and ", 
+                                      other_planet.planet_.name_, " in ", other_planet.posit_.sign_.name_, " in ", other_planet.house_.house_.id_,
+                                      "NOT mutualy recepted")
 
 if __name__ == "__main__":
 
