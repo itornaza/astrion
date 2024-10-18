@@ -19,8 +19,8 @@ class ChartPlanet:
     def __init__(self, planet: Planet, posit: Ecliptic):
         self.planet_: Planet = planet
         self.posit_: Ecliptic = posit 
-        self.house_: ChartHouse # House that the planet is
-        self.ruled_houses_ =  [] # int: The id of houses the planet rules
+        self.house_: ChartHouse # ChartHouse: that the planet is
+        self.ruled_houses_ = [] # int: ids of houses the planet rules
 
     def __eq__(self, other):
         if isinstance(other, ChartPlanet):
@@ -57,16 +57,26 @@ class ChartHouse:
         self.house_ = house
         self.posit_ = posit # This is the cusp position
 
+    def __eq__(self, other):
+        if isinstance(other, ChartHouse):
+            return self.house_.id_ == other.house_.id_
+        return False
+
 class Chart:
 
     DOCUMENTS = os.path.join(os.path.expanduser("~"), "Documents") + "/Astrion/charts/"
 
-    def __init__(self, path: str = "", placidus: bool = True):
-        self.input(placidus) if (path == "") else self.load(path, placidus)
-        self.entities_in_houses()
-        self.rulerships()
+    ###########################################################################
+    #                             INITIALIZATION                              #
+    ###########################################################################
 
-    def input(self, placidus: bool):
+    def __init__(self, path: str = "", placidus: bool = True):
+        """placidus: True for Placidus and False for Equal house systems"""
+        self._input(placidus) if (path == "") else self._load(path, placidus)
+        self._entities_in_houses()
+        self._rulerships()
+
+    def _input(self, placidus: bool):
         """Get the chart data from the user via the cli"""
 
         # User input for any house system
@@ -119,10 +129,10 @@ class Chart:
             self.sixth_ = ChartHouse(Houses.sixth_, sixth_posit)
 
         # For any house system, calculate all other cusps
-        self.calc_rest_chart(placidus)
+        self._calc_rest_chart(placidus)
 
         # Prepare data to export into the file
-        entities = self.all_planets_asc_mc_nn()
+        entities = self._all_planets_asc_mc_nn()
         data = []
         for entity in entities:
             if isinstance(entity, ChartPlanet):
@@ -151,7 +161,7 @@ class Chart:
             for row in data:
                 writer.writerow(row)
 
-    def load(self, filename: str, placidus: bool):
+    def _load(self, filename: str, placidus: bool):
         """Get the chart data data from a file specified from the user"""
 
         with open(self.DOCUMENTS + filename, newline='') as csvfile:
@@ -220,9 +230,9 @@ class Chart:
                     int(lines[17][3])))
 
             # For any house system, calculate all other cusps
-            self.calc_rest_chart(placidus)
+            self._calc_rest_chart(placidus)
 
-    def calc_rest_chart(self, placidus: bool):
+    def _calc_rest_chart(self, placidus: bool):
         """Given the basic chart data, calculates the rest of the house cusps
         and angles for the chart"""
 
@@ -258,15 +268,18 @@ class Chart:
             self.eleventh_ = ChartHouse(Houses.eleventh_, self.first_.posit_ + 300)
             self.twelvth_ = ChartHouse(Houses.twelvth_, self.first_.posit_ + 330)
 
-        print("* HOUSE CUSPS *")
-        for house in self.all_houses():
+        if placidus:
+            print("\n* PLACIDUS HOUSE CUSPS *")
+        else:
+            print("\n* EQUAL HOUSE CUSPS *")
+        for house in self._all_houses():
             print("Cusp", house.house_.id_, ": ", end=" "); 
             house.posit_.print()
         print()
 
-    def entities_in_houses(self):
+    def _entities_in_houses(self):
         """Finds the houses that each of the entities is placed into"""
-        for entity in self.all_entities():
+        for entity in self._all_entities():
             shift: Polar = self.first_.posit_
             if self.first_.posit_ - shift <= entity.posit_ - shift and \
                 entity.posit_ - shift < self.second_.posit_ - shift:
@@ -311,9 +324,13 @@ class Chart:
             if self.eleventh_.posit_ - shift <= entity.posit_ - shift and \
                 entity.posit_ - shift < self.twelvth_.posit_ - shift:
                 entity.house_ = self.eleventh_
+            shift = self.twelvth_.posit_
+            if self.twelvth_.posit_ - shift <= entity.posit_ - shift and \
+                entity.posit_ - shift < self.first_.posit_ - shift:
+                entity.house_ = self.twelvth_
 
         print("* ENTITIES IN SIGNS & HOUSES *")
-        for entity in self.all_entities():
+        for entity in self._all_entities():
             if isinstance(entity, ChartPlanet):
                 print(entity.planet_.name_ + " in " + entity.posit_.sign_.name_ +
                       " in " + str(entity.house_.house_.id_))
@@ -325,61 +342,60 @@ class Chart:
                       " in " + str(entity.house_.house_.id_))
         print()
 
-    def rulerships(self):
+    def _rulerships(self):
         """Finds and assigns to each planet the house or houses each of them rule"""
-        for planet in self.all_planets_except_chiron():
-            for house in self.all_houses():
+        for planet in self._all_planets_except_chiron():
+            for house in self._all_houses():
                 if planet.planet_.name_ == house.posit_.sign_.ruler_:
                     planet.ruled_houses_.append(house.house_.id_)
                 elif planet.planet_.name_ in house.posit_.sign_.ruler_:
                     planet.ruled_houses_.append(house.house_.id_)
 
-        print("/* RULERSHIPS */")
-        for planet in self.all_planets_except_chiron():
-            print(planet.planet_.name_, " rules ", end= " ")
-            for house_id in planet.ruled_houses_:
-                print(house_id, " ", end = " ")
-            print()
-        print()
+    ###########################################################################
+    #                                HELPERS                                  #
+    ###########################################################################
 
-    def all_houses(self):
+    def _all_houses(self):
         return [self.first_, self.second_, self.third_, self.fourth_, self.fifth_,
                 self.sixth_, self.seventh_, self.eight_, self.ninth_, self.tenth_,
                 self.eleventh_, self.twelvth_]
 
-    def traditional_asc_mc(self):
+    def _traditional_asc_mc(self):
         return [self.sun_, self.moon_, self.mercury_, self.venus_, self.mars_, 
                 self.jupiter_, self.saturn_, self.asc_, self.mc_]
 
-    def all_planets(self):
+    def _all_planets(self):
         return [self.sun_, self.moon_, self.mercury_, self.venus_, self.mars_, 
                 self.jupiter_, self.saturn_, self.uranus_, self.neptune_,
                 self.pluto_, self.chiron_]
 
-    def all_planets_except_chiron(self):
+    def _all_planets_except_chiron(self):
         return [self.sun_, self.moon_, self.mercury_, self.venus_, self.mars_, 
                 self.jupiter_, self.saturn_, self.uranus_, self.neptune_,
                 self.pluto_]
 
-    def all_planets_asc_mc_nn(self):
+    def _all_planets_asc_mc_nn(self):
         return [self.sun_, self.moon_, self.mercury_, self.venus_, self.mars_, 
                 self.jupiter_, self.saturn_, self.uranus_, self.neptune_,
                 self.pluto_, self.chiron_, self.asc_, self.mc_, self.north_node_]
     
-    def all_entities(self):
+    def _all_entities(self):
         return [self.sun_, self.moon_, self.mercury_, self.venus_, self.mars_, 
                 self.jupiter_, self.saturn_, self.uranus_, self.neptune_,
                 self.pluto_, self.chiron_, self.asc_, self.dsc_, self.mc_, self.ic_,
                 self.north_node_, self.south_node_]
 
-    def get_aspects(self, aspect: Aspect):
-        entities = list(self.__dict__.items())[:-12] # Exlude house cusps
+    ###########################################################################
+    #                                   API                                   #
+    ###########################################################################
 
-        print("\n* ASPECTS TABLE *\n")
+    def get_aspects(self):
+        entities = self._all_entities()
+        print("* ASPECTS TABLE *\n")
 
         # For each entity compared to all other entities
-        for _, (_, value_a) in enumerate(entities):
-            for _, (_, value_b) in enumerate(entities):
+        for value_a in entities:
+            for value_b in entities:
                 if value_a == value_b:
                     continue
                 
@@ -387,7 +403,7 @@ class Chart:
                 aspect = Aspects.get_aspect_from_angle(delta.to_decimal())
                 if aspect != None:
 
-                    # Entity
+                    # Entity a
                     if isinstance(value_a, ChartPlanet): 
                         print(f"{value_a.planet_.name_}", end=" ")
                     elif isinstance(value_a, ChartAngle): 
@@ -429,7 +445,7 @@ class Chart:
         print("* POLARITY *")
 
         # In Polarities we count the 7 traditional planets plus the ascendant and mc
-        entities = self.traditional_asc_mc()
+        entities = self._traditional_asc_mc()
         positive_list = []
         negative_list = []
         for entity in entities:
@@ -465,7 +481,7 @@ class Chart:
         print("* ELEMENTS *")
 
         # In Elements we count the 7 traditional planets plus the ascendant and mc
-        entities = self.traditional_asc_mc()
+        entities = self._traditional_asc_mc()
         fire_list= []
         earth_list = []
         air_list = []
@@ -525,7 +541,7 @@ class Chart:
         print("* MODES *")
 
         # In modes we count the 7 traditional planets plus the ascendant and mc
-        entities = self.traditional_asc_mc()
+        entities = self._traditional_asc_mc()
         cardinal_list = []
         fixed_list = []
         mutable_list = []
@@ -545,7 +561,7 @@ class Chart:
                     fixed_list.append(entity.angle_.name_)
             
             # Mutable
-            if entity.posit_.sign_ in [Signs.gemini_, Signs.virgo_, Signs.pisces_]:
+            if entity.posit_.sign_ in [Signs.gemini_, Signs.virgo_, Signs.sagittarius_, Signs.pisces_]:
                 if isinstance(entity, ChartPlanet): 
                     mutable_list.append(entity.planet_.name_)
                 elif isinstance(entity, ChartAngle): 
@@ -572,7 +588,7 @@ class Chart:
         print("* HEMISPHERES *")
 
         # In hemispheres we count all 10 planets plus Chiron
-        entities = self.all_planets()
+        entities = self._all_planets()
         
         # North/South hemispheres division
         northern_list = []
@@ -624,7 +640,7 @@ class Chart:
         print("* TRIPLICITIES *")
 
         # In hemispheres we count all 10 planets plus Chiron
-        entities = self.all_planets()
+        entities = self._all_planets()
         personal_list = []
         social_list = []
         universal_list = []
@@ -669,7 +685,7 @@ class Chart:
         print("* QUADRANTS *")
 
         # In Quadrants we count all 10 planets plus Chiron
-        entities = self.all_planets()
+        entities = self._all_planets()
         development_list = []
         expression_list = []
         expansion_list = []
@@ -735,7 +751,7 @@ class Chart:
 
     def get_dignities_debilities(self):
         print("* DIGNITIES & DEBILITIES *")
-        for planet in self.all_planets():
+        for planet in self._all_planets():
             if planet.posit_.sign_.name_ in planet.planet_.ruler_:
                 print(planet.planet_.name_, f"in \033[1m\033[36mrulership\033[0m")
             elif planet.posit_.sign_.name_ in planet.planet_.exaltated_:
@@ -746,46 +762,56 @@ class Chart:
                 print(planet.planet_.name_, f"in \033[1m\033[31mfall\033[0m")
         print()
 
+    def get_rulerships(self):
+        print("/* RULERSHIPS */")
+        for planet in self._all_planets_except_chiron():
+            print(planet.planet_.name_, "rules:", end= " ")
+            if planet.ruled_houses_ == []:
+                print("None")
+            else:
+                for house_id in planet.ruled_houses_:
+                    print(house_id, end = " ")
+                print()
+        print()
+
     def get_mutual_receptions(self):
+        """Finds and reports all mutual receptions"""
         print("* MUTUAL RECEPTIONS *")
-        for planet in self.all_planets_except_chiron():
+        mutual_receptions: bool = False
+        unvisited_planets = self._all_planets_except_chiron()
+        
+        for planet in self._all_planets_except_chiron():
+            # Only test planet with next ones in order to avoid duplicates
+            unvisited_planets = unvisited_planets[1:]
             for other_house in planet.ruled_houses_:
-                for other_planet in self.all_planets_except_chiron():
-                    if planet == other_planet:
-                        continue # Skip testing with itself
+                for other_planet in unvisited_planets:
                     if other_planet.house_.house_.id_ == other_house:
-                        for h in other_planet.ruled_houses_:
-                            if h == planet.house_.house_.id_:
-                                print(planet.planet_.name_, " in ", planet.posit_.sign_, " in ", planet.house_.house_.id_, " and ", 
-                                      other_planet.planet_.name_, " in ", other_planet.posit_.sign_, " in ", other_planet.house_.house_.id_)
-                            else:
-                                print(planet.planet_.name_, " in ", planet.posit_.sign_.name_, " in ", planet.house_.house_.id_, " and ", 
-                                      other_planet.planet_.name_, " in ", other_planet.posit_.sign_.name_, " in ", other_planet.house_.house_.id_,
-                                      "NOT mutualy recepted")
+                        for other_planet_ruled_house in other_planet.ruled_houses_:
+                            if other_planet_ruled_house == planet.house_.house_.id_:
+                                mutual_receptions = True
+                                print(planet.planet_.name_, "in", 
+                                    planet.posit_.sign_.name_, "in", 
+                                    planet.house_.house_.id_, "and", 
+                                    other_planet.planet_.name_, "in", 
+                                    other_planet.posit_.sign_.name_, "in", 
+                                    other_planet.house_.house_.id_)
+        if mutual_receptions == False:
+            print("None")
+        print()
 
 if __name__ == "__main__":
-
-    # TODO: Move to debug code
-    # print(f"{sun.planet_.name_}: ", end=" "); sun.posit_.print()
-    # print(f"{moon.planet_.name_}: ", end=" "); moon.posit_.print()
-    # print(f"{mercury.planet_.name_}: ", end=" "); mercury.posit_.print()
-    # print(f"{venus.planet_.name_}: ", end=" "); venus.posit_.print()
-    # print(f"{mars.planet_.name_}: ", end=" "); mars.posit_.print()
-    # print(f"{jupiter.planet_.name_}: ", end=" "); jupiter.posit_.print()
-    # print(f"{saturn.planet_.name_}: ", end=" "); saturn.posit_.print()
-    # print(f"{uranus.planet_.name_}: ", end=" "); uranus.posit_.print()
-    # print(f"{neptune.planet_.name_}: ", end=" "); neptune.posit_.print()
-    # print(f"{pluto.planet_.name_}: ", end=" "); pluto.posit_.print()
-    # print(f"{chiron.planet_.name_}: ", end=" "); chiron.posit_.print()
-    # print(f"{asc.angle_.name_}: ", end=" "); asc.posit_.print()
-    # print(f"{mc.angle_.name_}: ", end=" "); mc.posit_.print()
-    # print(f"{north_node.lunar_node_.name_}: ", end=" "); north_node.posit_.print()
    
+    # TODO: Before integrating get filename or direct imput from the user
     # Charts are placed by default in ~/Documents/Astrion/charts
-    chart = Chart("giota.csv", True)
+    
+    # Load a chart from file: True for Placidus, False for Equal
+    chart = Chart("taylor.csv", False)
+    
+    # Load a chart manually and save it to file
     # chart = Chart(True)
 
-    # chart.get_aspects(Aspects.conjunction_)
+    # Call all functions of the API
+    chart.get_aspects()
     chart.get_polarity()
     chart.get_elements()
     chart.get_modes()
@@ -794,4 +820,5 @@ if __name__ == "__main__":
     chart.get_quadrant_division()
     chart.get_lunar_phase()
     chart.get_dignities_debilities()
+    chart.get_rulerships()
     chart.get_mutual_receptions()
