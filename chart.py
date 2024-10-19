@@ -14,6 +14,7 @@ from lunar_phases import *
 from aspects import *
 from signs import *
 
+DOCUMENTS = os.path.join(os.path.expanduser("~"), "Documents") + "/astrion-data/charts/"
 class ChartPlanet:
     
     def __init__(self, planet: Planet, posit: Ecliptic):
@@ -64,15 +65,14 @@ class ChartHouse:
 
 class Chart:
 
-    DOCUMENTS = os.path.join(os.path.expanduser("~"), "Documents") + "/Astrion/charts/"
-
     ###########################################################################
     #                             INITIALIZATION                              #
     ###########################################################################
 
     def __init__(self, path: str = "", placidus: bool = True):
         """placidus: True for Placidus and False for Equal house systems"""
-        self._input(placidus) if (path == "") else self._load(path, placidus)
+        self.placidus = placidus
+        self._input(self.placidus) if (path == "") else self._load(path, self.placidus)
         self._entities_in_houses()
         self._rulerships()
 
@@ -149,23 +149,26 @@ class Chart:
         if placidus:
             # Add the cusps to the data that will be added to the new file
             for cusp in [self.second_, self.third_, self.fifth_, self.sixth_]:
-                data.append(cusp.house_.name_, cusp.posit_.deg_, 
-                            cusp.posit_.sign_.name_, cusp.posit_.min_)
+                data.append([cusp.house_.name_, cusp.posit_.deg_, 
+                            cusp.posit_.sign_.name_, cusp.posit_.min_])
 
-        # Export chart data to custom file found in the 
-        # ~/Documents/Astrion/charts' directory
-        filename = input("Enter the file name (without extension): ")
-        print("The file will be saved in: " + self.DOCUMENTS + ".csv")
-        with open(self.DOCUMENTS + filename + '.csv', mode='w', newline='') as file:
-            writer = csv.writer(file)
-            for row in data:
-                writer.writerow(row)
+        option = input("Would you like to save the data? (Y/n): ")
+        if option == 'Y':
+            # Export chart data to custom file in default location
+            filename = input("Enter the file name (without extension): ")
+            print("The file will be saved in: " + DOCUMENTS + ".csv")
+            header = ['Planet', 'Degrees', 'Sign', 'Minutes']
+            with open(DOCUMENTS + filename + '.csv', mode='w', newline='') as file:
+                writer = csv.writer(file)
+                writer.writerow(header) # Write the header first
+                writer.writerows(data)
 
     def _load(self, filename: str, placidus: bool):
         """Get the chart data data from a file specified from the user"""
 
-        with open(self.DOCUMENTS + filename, newline='') as csvfile:
+        with open(DOCUMENTS + filename, newline='') as csvfile:
             reader = csv.reader(csvfile)
+            next(reader) # Skip the header row
             lines = list(reader)
             assert len(lines) >= 14, "Chart data for equal houses not present in the file"
 
@@ -268,15 +271,6 @@ class Chart:
             self.eleventh_ = ChartHouse(Houses.eleventh_, self.first_.posit_ + 300)
             self.twelvth_ = ChartHouse(Houses.twelvth_, self.first_.posit_ + 330)
 
-        if placidus:
-            print("\n* PLACIDUS HOUSE CUSPS *")
-        else:
-            print("\n* EQUAL HOUSE CUSPS *")
-        for house in self._all_houses():
-            print("Cusp", house.house_.id_, ": ", end=" "); 
-            house.posit_.print()
-        print()
-
     def _entities_in_houses(self):
         """Finds the houses that each of the entities is placed into"""
         for entity in self._all_entities():
@@ -329,19 +323,6 @@ class Chart:
                 entity.posit_ - shift < self.first_.posit_ - shift:
                 entity.house_ = self.twelvth_
 
-        print("* ENTITIES IN SIGNS & HOUSES *")
-        for entity in self._all_entities():
-            if isinstance(entity, ChartPlanet):
-                print(entity.planet_.name_ + " in " + entity.posit_.sign_.name_ +
-                      " in " + str(entity.house_.house_.id_))
-            elif isinstance(entity, ChartAngle):
-                print(entity.angle_.name_ + " in " + entity.posit_.sign_.name_ +
-                      " in " + str(entity.house_.house_.id_))
-            elif isinstance(entity, ChartLunarNode):
-                print(entity.lunar_node_.name_ + " in " + entity.posit_.sign_.name_ + 
-                      " in " + str(entity.house_.house_.id_))
-        print()
-
     def _rulerships(self):
         """Finds and assigns to each planet the house or houses each of them rule"""
         for planet in self._all_planets_except_chiron():
@@ -389,11 +370,47 @@ class Chart:
     #                                   API                                   #
     ###########################################################################
 
-    def get_aspects(self):
-        entities = self._all_entities()
-        print("* ASPECTS TABLE *\n")
+    def get_filename():
+        print("astrion-data at: " + DOCUMENTS)
+        filename = input("Enter a file without extension: ")
+        filename = filename + '.csv'
+        while not os.path.exists(DOCUMENTS + filename):
+            print("File " + "\"" + filename + "\"" + " does not exist.", end= " ")
+            filename = input("Try again: ")
+            filename = filename + '.csv'
+        return filename
 
-        # For each entity compared to all other entities
+    def get_house_system():
+        option = input("Placidus? (Y/n): ")
+        return (True if option == 'Y' else  False)
+
+    def get_house_cusps(self):
+        if self.placidus:
+            print("\n* PLACIDUS HOUSE CUSPS *")
+        else:
+            print("\n* EQUAL HOUSE CUSPS *")
+        for house in self._all_houses():
+            print("Cusp", house.house_.id_, ": ", end=" "); 
+            house.posit_.print()
+        print()        
+
+    def get_entities_in_signs_and_houses(self):
+        print("* ENTITIES IN SIGNS & HOUSES *")
+        for entity in self._all_entities():
+            if isinstance(entity, ChartPlanet):
+                print(entity.planet_.name_ + " in " + entity.posit_.sign_.name_ +
+                      " in " + str(entity.house_.house_.id_))
+            elif isinstance(entity, ChartAngle):
+                print(entity.angle_.name_ + " in " + entity.posit_.sign_.name_ +
+                      " in " + str(entity.house_.house_.id_))
+            elif isinstance(entity, ChartLunarNode):
+                print(entity.lunar_node_.name_ + " in " + entity.posit_.sign_.name_ + 
+                      " in " + str(entity.house_.house_.id_))
+        print()
+
+    def get_aspects(self):
+        print("* ASPECTS TABLE *\n")
+        entities = self._all_entities()
         for value_a in entities:
             for value_b in entities:
                 if value_a == value_b:
@@ -443,8 +460,6 @@ class Chart:
 
     def get_polarity(self):
         print("* POLARITY *")
-
-        # In Polarities we count the 7 traditional planets plus the ascendant and mc
         entities = self._traditional_asc_mc()
         positive_list = []
         negative_list = []
@@ -539,8 +554,6 @@ class Chart:
 
     def get_modes(self):
         print("* MODES *")
-
-        # In modes we count the 7 traditional planets plus the ascendant and mc
         entities = self._traditional_asc_mc()
         cardinal_list = []
         fixed_list = []
@@ -586,8 +599,6 @@ class Chart:
 
     def get_hemispheres(self):
         print("* HEMISPHERES *")
-
-        # In hemispheres we count all 10 planets plus Chiron
         entities = self._all_planets()
         
         # North/South hemispheres division
@@ -638,8 +649,6 @@ class Chart:
 
     def get_triple_division(self):
         print("* TRIPLICITIES *")
-
-        # In hemispheres we count all 10 planets plus Chiron
         entities = self._all_planets()
         personal_list = []
         social_list = []
@@ -683,8 +692,6 @@ class Chart:
     
     def get_quadrant_division(self):
         print("* QUADRANTS *")
-
-        # In Quadrants we count all 10 planets plus Chiron
         entities = self._all_planets()
         development_list = []
         expression_list = []
@@ -779,7 +786,6 @@ class Chart:
         print("* MUTUAL RECEPTIONS *")
         mutual_receptions: bool = False
         unvisited_planets = self._all_planets_except_chiron()
-        
         for planet in self._all_planets_except_chiron():
             # Only test planet with next ones in order to avoid duplicates
             unvisited_planets = unvisited_planets[1:]
@@ -799,18 +805,22 @@ class Chart:
             print("None")
         print()
 
-if __name__ == "__main__":
-   
-    # TODO: Before integrating get filename or direct imput from the user
-    # Charts are placed by default in ~/Documents/Astrion/charts
-    
-    # Load a chart from file: True for Placidus, False for Equal
-    chart = Chart("taylor.csv", False)
-    
-    # Load a chart manually and save it to file
-    # chart = Chart(True)
+    # TODO: Add a function to calculate all dispositor chains and check if
+    # all of them end up in the same
 
-    # Call all functions of the API
+    # TODO: Report the Chart ruler
+
+if __name__ == "__main__":
+    
+    # Provide the following options to the user
+    # 1. Load a chart from file: True for Placidus, False for Equal
+    chart = Chart(Chart.get_filename(), Chart.get_house_system())
+    # 2. Load a chart manually and save it to file
+    # chart = Chart("", Chart.get_house_system())
+
+    # Call all functions of the API, assign threse to menu options
+    chart.get_house_cusps()
+    chart.get_entities_in_signs_and_houses()
     chart.get_aspects()
     chart.get_polarity()
     chart.get_elements()

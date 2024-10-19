@@ -70,6 +70,8 @@ while (True):
                 print_signs_ops_menu()
             elif sub_choice == "C" or sub_choice == "c": 
                 print_calculator_menu() 
+            elif sub_choice == "*":
+                print_chart_menu()
             elif sub_choice == "Q" or sub_choice == "q" or \
                  sub_choice == "Quit" or sub_choice == "quit": 
                 os.system("clear")
@@ -102,12 +104,72 @@ while (True):
                 print_signs_ops_menu() 
             elif sub_choice == "C" or sub_choice == "c": 
                 print_calculator_menu() 
+            elif sub_choice == "*":
+                print_chart_menu()
             elif sub_choice == "Q" or sub_choice == "q" or \
                  sub_choice == "Quit" or sub_choice == "quit": 
                 os.system("clear")
                 sys.exit(0)
             else: 
                 print(E_CALC_MENU)
+
+    elif menu_choice == "*": 
+        
+        # Chart menu
+        print_chart_menu()
+        while(True):
+            sub_choice = input("> ")
+            print_chart_menu()
+            if sub_choice == "1":
+                chart_new_chart_handler()
+            elif sub_choice == "2":
+                chart_load_chart_handler()
+            elif sub_choice == "3":
+                chart_house_cusps_handler()
+            elif sub_choice == "4":
+                chart_placements_handler()
+            elif sub_choice == "5":
+                chart_aspects_handler()
+            elif sub_choice == "6":
+                chart_polarity_handler()
+            elif sub_choice == "7":
+                chart_elements_handler()
+            elif sub_choice == "8":
+                chart_mode_handler()
+            elif sub_choice == "9":
+                chart_hemispheres_handler()
+            elif sub_choice == "10":
+                chart_triple_handler()
+            elif sub_choice == "11":
+                chart_quadrant_handler()
+            elif sub_choice == "12":
+                chart_lunar_phase_handler()
+            elif sub_choice == "13":
+                chart_dignities_debilities_handler()
+            elif sub_choice == "14":
+                chart_rulerships_handler()
+            elif sub_choice == "15":
+                chart_mutual_reception_handler()
+            elif sub_choice == "16":
+                chart_all_handler()
+
+            # Exit submenu options
+            elif sub_choice == "M" or sub_choice == "m" or \
+                    sub_choice == "Menu" or sub_choice ==  "menu": 
+                print_menu()
+                break
+            elif sub_choice == "S" or sub_choice == "s": 
+                print_signs_ops_menu() 
+            elif sub_choice == "C" or sub_choice == "c": 
+                print_calculator_menu() 
+            elif sub_choice == "*":
+                print_chart_menu()
+            elif sub_choice == "Q" or sub_choice == "q" or \
+                 sub_choice == "Quit" or sub_choice == "quit": 
+                os.system("clear")
+                sys.exit(0)
+            else: 
+                print(E_CHART_MENU)
 
     # Exit menu options
     elif menu_choice == "Q" or menu_choice == "q" or \

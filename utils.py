@@ -20,6 +20,7 @@ from lunar_nodes import *
 from hemispheres import *
 from trisectors import *
 from quadrants import *
+from chart import *
 
 from pangle import *
 import calc_planet_position
@@ -47,16 +48,18 @@ def print_menu():
     print("+--------------------------------------------------+")
     print("|   ---===  * Astrion Menu (", VERSION, ") *  ===---      |")
     print("+-----------------------+--------------------------+")
-    print("| 1.  Keywords          | 6.  Angle                |")
-    print("| 2.  Planet            | 7.  Polarity             |")
-    print("| 3.  Sign              | 8.  Mode                 |")
-    print("| 4.  House             | 9.  Element              |")
-    print("| 5.  Aspect            | 10. Aspects in pattern   |")
-    print("|                       | 11. Lunar phase          |")
+    print("| 1.  Keywords          | 7.  Polarity             |")
+    print("| 2.  Planet            | 8.  Mode                 |")
+    print("| 3.  Sign              | 9.  Element              |")
+    print("| 4.  House             | 10. Aspects in pattern   |")
+    print("| 5.  Aspect            | 11. Lunar phase          |")
+    print("| 6.  Angle             | 12. Chart                |")
     print("|                       |                          |")
     print("+-----------+-----------+---+-----------+----------+")
     print("| m.  Menu  |  s.  Sign ops |  c. Calc  | q.  Quit |")
     print("+-----------+---------------+-----------+----------+")
+    print("|              *. Chart analysis                   |")
+    print("+--------------------------------------------------+")
 
 # Keywords
 def keywords_handler():
@@ -209,6 +212,133 @@ def lunar_phase_handler():
     lunar_phase = LunarPhases.get(LunarPhases, lp)
     LunarPhases.print(LunarPhases, lunar_phase) if lunar_phase else print(E_LUNAR_PHASE)
 
+def print_chart_menu():
+    os.system("clear")
+    print("+--------------------------------------------------+")
+    print("|          ---===  * Chart Menu *  ===---          |")
+    print("+-----------------------+--------------------------+")
+    print("| 1.  New chart         | 9.  Hemispheres          |")
+    print("| 2.  Load chart        | 10.  Triples              |")
+    print("| 3.  House cusps       | 11. Quadrants            |")
+    print("| 4.  Placements        | 12. Lunar phase          |")
+    print("| 5.  Aspects           | 13. Dignities/Debilities |")
+    print("| 6.  Polarity          | 14. Rulerships           |")
+    print("| 7.  Elements          | 15. Mutual reception     |")
+    print("| 8.  Modes             | 16. All                  |")
+    print("+-----------+-----------+---+-----------+----------+")
+    print("| m.  Menu  |  s.  Sign ops |  c. Calc  | q.  Quit |")
+    print("+-----------+---------------+-----------+----------+")
+    print("|              *. Chart analysis                   |")
+    print("+--------------------------------------------------+")
+
+# Global chart variable used by all handlers below to access objects
+# data
+chart = None
+
+def chart_new_chart_handler():
+    global chart
+    chart = Chart("", Chart.get_house_system())
+
+def chart_load_chart_handler():
+    global chart
+    chart = Chart(Chart.get_filename(), Chart.get_house_system())    
+    
+def chart_house_cusps_handler():
+    if chart is not None:
+        chart.get_house_cusps()
+    else: 
+        print("Load or input chart data using menu options 1 or 2")
+
+def chart_placements_handler():
+    if chart is not None:
+        chart.get_entities_in_signs_and_houses()
+    else: 
+        print("Load or input chart data using menu options 1 or 2")
+
+def chart_aspects_handler():
+    if chart is not None:
+        chart.get_aspects()
+    else: 
+        print("Load or input chart data using menu options 1 or 2")
+
+def chart_polarity_handler():
+    if chart is not None:
+        chart.get_polarity()
+    else: 
+        print("Load or input chart data using menu options 1 or 2")
+
+def chart_elements_handler():
+    if chart is not None:
+        chart.get_elements()
+    else: 
+        print("Load or input chart data using menu options 1 or 2")
+
+def chart_mode_handler():
+    if chart is not None:
+        chart.get_modes()
+    else: 
+        print("Load or input chart data using menu options 1 or 2")
+
+def chart_hemispheres_handler():
+    if chart is not None:
+        chart.get_hemispheres()
+    else: 
+        print("Load or input chart data using menu options 1 or 2")
+    
+def chart_triple_handler():
+    if chart is not None:
+        chart.get_triple_division()
+    else: 
+        print("Load or input chart data using menu options 1 or 2")
+
+def chart_quadrant_handler():
+    if chart is not None:
+        chart.get_quadrant_division()
+    else: 
+        print("Load or input chart data using menu options 1 or 2")
+
+def chart_lunar_phase_handler():
+    if chart is not None:
+        chart.get_lunar_phase()
+    else: 
+        print("Load or input chart data using menu options 1 or 2")
+
+def chart_dignities_debilities_handler():
+    if chart is not None:
+        chart.get_dignities_debilities()
+    else: 
+        print("Load or input chart data using menu options 1 or 2")
+
+def chart_rulerships_handler():
+    if chart is not None:
+        chart.get_rulerships()
+    else: 
+        print("Load or input chart data using menu options 1 or 2")
+
+def chart_mutual_reception_handler():
+    if chart is not None:
+        chart.get_mutual_receptions()
+    else: 
+        print("Load or input chart data using menu options 1 or 2")
+
+def chart_all_handler():
+    if chart is not None:
+        chart.get_house_cusps()
+        chart.get_entities_in_signs_and_houses()
+        chart.get_aspects()
+        chart.get_polarity()
+        chart.get_elements()
+        chart.get_modes()
+        chart.get_hemispheres()
+        chart.get_triple_division()
+        chart.get_quadrant_division()
+        chart.get_lunar_phase()
+        chart.get_dignities_debilities()
+        chart.get_rulerships()
+        chart.get_mutual_receptions()
+    else: 
+        print("Load or input chart data using menu options 1 or 2")
+
 def print_signs_ops_menu():
     os.system("clear")
     print("+--------------------------------------------------+")
@@ -222,6 +352,8 @@ def print_signs_ops_menu():
     print("+-----------+-----------+---+-----------+----------+")
     print("| m.  Menu  |  s.  Sign ops |  c. Calc  | q.  Quit |")
     print("+-----------+---------------+-----------+----------+")
+    print("|              *. Chart analysis                   |")
+    print("+--------------------------------------------------+")
 
 # Compare two signs
 def compare_signs_handler():
@@ -296,6 +428,8 @@ def print_calculator_menu():
     print("+-----------+-----------+---+-----------+----------+")
     print("| m.  Menu  |  s.  Sign ops |  c. Calc  | q.  Quit |")
     print("+-----------+---------------+-----------+----------+")
+    print("|              *. Chart analysis                   |")
+    print("+--------------------------------------------------+")
 
 # Planet calculator handler
 def planet_calculator_handler():
