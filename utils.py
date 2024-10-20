@@ -218,7 +218,7 @@ def print_chart_menu():
     print("|          ---===  * Chart Menu *  ===---          |")
     print("+-----------------------+--------------------------+")
     print("| 1.  New chart         | 9.  Hemispheres          |")
-    print("| 2.  Load chart        | 10.  Triples              |")
+    print("| 2.  Load chart        | 10.  Triples             |")
     print("| 3.  House cusps       | 11. Quadrants            |")
     print("| 4.  Placements        | 12. Lunar phase          |")
     print("| 5.  Aspects           | 13. Dignities/Debilities |")

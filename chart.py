@@ -5,18 +5,17 @@
 import csv
 import os
 
-from pangle import Ecliptic, Polar, to_polar, get_ecliptic
-from planets import *
 from angles import *
+from aspects import *
 from houses import *
 from lunar_nodes import *
 from lunar_phases import *
-from aspects import *
+from pangle import Ecliptic, Polar, to_polar, get_ecliptic
+from planets import *
 from signs import *
 
 DOCUMENTS = os.path.join(os.path.expanduser("~"), "Documents") + "/astrion-data/charts/"
 class ChartPlanet:
-    
     def __init__(self, planet: Planet, posit: Ecliptic):
         self.planet_: Planet = planet
         self.posit_: Ecliptic = posit 
@@ -29,7 +28,6 @@ class ChartPlanet:
         return False
 
 class ChartAngle:
-    
     def __init__(self, angle: Angle, posit: Ecliptic):
         self.angle_: Angle = angle
         self.posit_: Ecliptic = posit
@@ -41,7 +39,6 @@ class ChartAngle:
         return False
 
 class ChartLunarNode:
-
     def __init__(self, lunar_node: LunarNode, posit: Ecliptic):
         self.lunar_node_: LunarNode = lunar_node
         self.posit_: Ecliptic = posit
@@ -53,7 +50,6 @@ class ChartLunarNode:
         return False
 
 class ChartHouse:
-    
     def __init__(self, house: House, posit: Ecliptic):
         self.house_ = house
         self.posit_ = posit # This is the cusp position
@@ -64,7 +60,6 @@ class ChartHouse:
         return False
 
 class Chart:
-
     ###########################################################################
     #                             INITIALIZATION                              #
     ###########################################################################
@@ -152,9 +147,9 @@ class Chart:
                 data.append([cusp.house_.name_, cusp.posit_.deg_, 
                             cusp.posit_.sign_.name_, cusp.posit_.min_])
 
+        # Optionally, export chart data to custom file in default location
         option = input("Would you like to save the data? (Y/n): ")
         if option == 'Y':
-            # Export chart data to custom file in default location
             filename = input("Enter the file name (without extension): ")
             print("The file will be saved in: " + DOCUMENTS + ".csv")
             header = ['Planet', 'Degrees', 'Sign', 'Minutes']
@@ -165,7 +160,6 @@ class Chart:
 
     def _load(self, filename: str, placidus: bool):
         """Get the chart data data from a file specified from the user"""
-
         with open(DOCUMENTS + filename, newline='') as csvfile:
             reader = csv.reader(csvfile)
             next(reader) # Skip the header row
@@ -238,7 +232,6 @@ class Chart:
     def _calc_rest_chart(self, placidus: bool):
         """Given the basic chart data, calculates the rest of the house cusps
         and angles for the chart"""
-
         # Remember that Asc, MC, NN are given, so get the rest of the angles
         # and the South node
         self.south_node_ = ChartLunarNode(LunarNodes.south_node_, self.north_node_.posit_ + 180)
@@ -256,7 +249,7 @@ class Chart:
             self.tenth_ = ChartHouse(Houses.tenth_, self.mc_.posit_)
             self.eleventh_ = ChartHouse(Houses.eleventh_, self.fifth_.posit_ + 180)
             self.twelvth_ = ChartHouse(Houses.twelvth_, self.sixth_.posit_ + 180)
-        else:
+        else: 
             # Equal house system cusps
             self.first_ = ChartHouse(Houses.first_, self.asc_.posit_)
             self.second_ = ChartHouse(Houses.second_, self.first_.posit_ + 30)
@@ -406,21 +399,19 @@ class Chart:
             elif isinstance(entity, ChartLunarNode):
                 print(entity.lunar_node_.name_ + " in " + entity.posit_.sign_.name_ + 
                       " in " + str(entity.house_.house_.id_))
-        print()
+        print() # Each entry in a separate line
 
     def get_aspects(self):
         print("* ASPECTS TABLE *\n")
         entities = self._all_entities()
         for value_a in entities:
             for value_b in entities:
-                if value_a == value_b:
+                if value_a == value_b: 
                     continue
-                
                 delta: Polar = to_polar(value_a.posit_.diff(value_b.posit_))
                 aspect = Aspects.get_aspect_from_angle(delta.to_decimal())
                 if aspect != None:
-
-                    # Entity a
+                    # Entity A
                     if isinstance(value_a, ChartPlanet): 
                         print(f"{value_a.planet_.name_}", end=" ")
                     elif isinstance(value_a, ChartAngle): 
@@ -436,7 +427,7 @@ class Chart:
                     else:
                         print(aspect.name_, end=" ")
 
-                    # Entity b
+                    # Entity B
                     if isinstance(value_b, ChartPlanet): 
                         print(f"{value_b.planet_.name_}", end=" ")
                     elif isinstance(value_b, ChartAngle): 
@@ -447,7 +438,6 @@ class Chart:
                     # Aspect details
                     aspect_polar: Polar = Polar(aspect.angle_, 0)
                     orb = aspect_polar.diff(delta)
-
                     print(f"({orb.deg_:.0f}° {orb.min_:.0f}')", end=" ")
                     if orb <= Polar(1, 0):
                         print("\033[1mTight\033[0m")
@@ -455,11 +445,9 @@ class Chart:
                         print() # Add the missing end line
 
                     # TODO: Add angular, rising and culminating tags!
-
-            print() # Separate entities with a new line
+            print() # Separate combinations with a new line
 
     def get_polarity(self):
-        print("* POLARITY *")
         entities = self._traditional_asc_mc()
         positive_list = []
         negative_list = []
@@ -480,6 +468,7 @@ class Chart:
                 elif isinstance(entity, ChartAngle): 
                     negative_list.append(entity.angle_.name_)
 
+        print("* POLARITY *")
         print("Positive: ", end=" ")
         for positive in positive_list:
             print(f"\033[1m\033[31m{positive}\033[0m", end = " ")
@@ -489,12 +478,11 @@ class Chart:
             print(f"\033[1m\033[34m{negative}\033[0m", end = " ")
         print()
         print(f"==> \033[1m\033[31mPositive = {len(positive_list)}\033[0m", end=" ")
-        print(f"\033[1m\033[34mNegative = {len(negative_list)}\033[0m\n")        
+        print(f"\033[1m\033[34mNegative = {len(negative_list)}\033[0m\n")  
+
         assert len(positive_list) + len(negative_list) == 9
 
     def get_elements(self):
-        print("* ELEMENTS *")
-
         # In Elements we count the 7 traditional planets plus the ascendant and mc
         entities = self._traditional_asc_mc()
         fire_list= []
@@ -530,6 +518,7 @@ class Chart:
                 elif isinstance(entity, ChartAngle): 
                     water_list.append(entity.angle_.name_)
 
+        print("* ELEMENTS *")
         print("Fire: ", end=" ")
         for fire in fire_list:
             print(f"\033[1m\033[31m{fire}\033[0m", end = " ")
@@ -550,10 +539,10 @@ class Chart:
         print(f"\033[1m\033[33mEarth = {len(earth_list)}\033[0m", end=" ")
         print(f"\033[1m\033[36mAir = {len(air_list)}\033[0m", end=" ")
         print(f"\033[1m\033[34mWater = {len(water_list)}\033[0m\n")
+
         assert len(fire_list) + len(earth_list) + len(air_list) + len(water_list) == 9
 
     def get_modes(self):
-        print("* MODES *")
         entities = self._traditional_asc_mc()
         cardinal_list = []
         fixed_list = []
@@ -580,6 +569,7 @@ class Chart:
                 elif isinstance(entity, ChartAngle): 
                     mutable_list.append(entity.angle_.name_)
 
+        print("* MODES *")
         print("Cardinal: ", end=" ")
         for cardinal in cardinal_list:
             print(f"\033[1m\033[31m{cardinal}\033[0m", end = " ")
@@ -595,11 +585,12 @@ class Chart:
         print(f"==> \033[1m\033[31mCardinal = {len(cardinal_list)}\033[0m", end=" ")
         print(f"\033[1m\033[33mFixed = {len(fixed_list)}\033[0m", end=" ")
         print(f"\033[1m\033[36mMutable = {len(mutable_list)}\033[0m\n")
+
         assert len(cardinal_list) + len(fixed_list) + len(mutable_list) == 9
 
     def get_hemispheres(self):
-        print("* HEMISPHERES *")
         entities = self._all_planets()
+        print("* HEMISPHERES *")
         
         # North/South hemispheres division
         northern_list = []
@@ -608,21 +599,9 @@ class Chart:
         for entity in entities:
             if self.first_.posit_ - shift <= entity.posit_ - shift and \
                 entity.posit_ - shift < self.seventh_.posit_ - shift:
-
                 northern_list.append(entity.planet_.name_)
             else:
                 southern_list.append(entity.planet_.name_)
-        print("Northern: ", end=" ")
-        for planet in northern_list:
-            print(f"\033[1m\033[31m{planet}\033[0m", end = " ")
-        print()
-        print("Southern: ", end=" ")
-        for planet in southern_list:
-            print(f"\033[1m\033[33m{planet}\033[0m", end= " ")
-        print()
-        print(f"==> \033[1m\033[31mNorthern = {len(northern_list)}\033[0m", end=" ")
-        print(f"\033[1m\033[33mSouthern = {len(southern_list)}\033[0m\n")
-        assert len(southern_list) + len(northern_list) == 11
 
         # East/West hemispheres division
         western_list = []
@@ -635,6 +614,17 @@ class Chart:
                 western_list.append(entity.planet_.name_)
             else:
                 eastern_list.append(entity.planet_.name_)
+
+        print("Northern: ", end=" ")
+        for planet in northern_list:
+            print(f"\033[1m\033[31m{planet}\033[0m", end = " ")
+        print()
+        print("Southern: ", end=" ")
+        for planet in southern_list:
+            print(f"\033[1m\033[33m{planet}\033[0m", end= " ")
+        print()
+        print(f"==> \033[1m\033[31mNorthern = {len(northern_list)}\033[0m", end=" ")
+        print(f"\033[1m\033[33mSouthern = {len(southern_list)}\033[0m\n")
         print("Eastern: ", end=" ")
         for planet in eastern_list:
             print(f"\033[1m\033[34m{planet}\033[0m", end= " ")
@@ -645,10 +635,11 @@ class Chart:
         print()
         print(f"==> \033[1m\033[34mEastern = {len(eastern_list)}\033[0m", end=" ")
         print(f"\033[1m\033[36mWestern = {len(western_list)}\033[0m\n")
+        
+        assert len(southern_list) + len(northern_list) == 11
         assert len(eastern_list) + len(western_list) == 11        
 
     def get_triple_division(self):
-        print("* TRIPLICITIES *")
         entities = self._all_planets()
         personal_list = []
         social_list = []
@@ -658,7 +649,6 @@ class Chart:
             shift: Polar = self.asc_.posit_
             if self.first_.posit_ - shift <= entity.posit_ - shift and \
                 entity.posit_ - shift < self.fifth_.posit_ - shift:
-                
                 personal_list.append(entity.planet_.name_)
                 continue
             
@@ -666,13 +656,13 @@ class Chart:
             shift = self.fifth_.posit_
             if self.fifth_.posit_ - shift <= entity.posit_ - shift and \
                 entity.posit_ - shift < self.ninth_.posit_ - shift:
-                
                 social_list.append(entity.planet_.name_)
                 continue
             
             # Universal
             universal_list.append(entity.planet_.name_)
-
+        
+        print("* TRIPLICITIES *")
         print("Personal: ", end=" ")
         for personal in personal_list:
             print(f"\033[1m\033[31m{personal}\033[0m", end = " ")
@@ -691,7 +681,6 @@ class Chart:
         assert len(personal_list) + len(social_list) + len(universal_list) == 11
     
     def get_quadrant_division(self):
-        print("* QUADRANTS *")
         entities = self._all_planets()
         development_list = []
         expression_list = []
@@ -702,7 +691,6 @@ class Chart:
             shift: Polar = self.asc_.posit_
             if self.first_.posit_ - shift <= entity.posit_ - shift and \
                 entity.posit_ - shift < self.fourth_.posit_ - shift:
-                
                 development_list.append(entity.planet_.name_)
                 continue
             
@@ -710,7 +698,6 @@ class Chart:
             shift = self.fourth_.posit_
             if self.fourth_.posit_ - shift <= entity.posit_ - shift and \
                 entity.posit_ - shift < self.seventh_.posit_ - shift:
-                
                 expression_list.append(entity.planet_.name_)
                 continue
             
@@ -718,13 +705,13 @@ class Chart:
             shift = self.seventh_.posit_
             if self.seventh_.posit_ - shift <= entity.posit_ - shift and \
                 entity.posit_ - shift < self.tenth_.posit_ - shift:
-                
                 expansion_list.append(entity.planet_.name_)
                 continue
 
             # Self transcendence
             transcendence_list.append(entity.planet_.name_)
 
+        print("* QUADRANTS *")
         print("Self development: ", end=" ")
         for development in development_list:
             print(f"\033[1m\033[31m{development}\033[0m", end = " ")
@@ -745,6 +732,7 @@ class Chart:
         print(f"\033[1m\033[33mSelf expression = {len(expression_list)}\033[0m", end=" ")
         print(f"\033[1m\033[36mSelf expansion = {len(expansion_list)}\033[0m", end= " ")
         print(f"\033[1m\033[34mSelf trsnscendence = {len(transcendence_list)}\033[0m\n")
+
         assert len(development_list) + len(expression_list) + \
             len(expansion_list) + len(transcendence_list) == 11
 
@@ -779,7 +767,7 @@ class Chart:
                 for house_id in planet.ruled_houses_:
                     print(house_id, end = " ")
                 print()
-        print()
+        print() # Each planet in a separate line
 
     def get_mutual_receptions(self):
         """Finds and reports all mutual receptions"""
@@ -808,13 +796,14 @@ class Chart:
     # TODO: Add a function to calculate all dispositor chains and check if
     # all of them end up in the same
 
-    # TODO: Report the Chart ruler
+    # TODO: Add a function to report the Chart ruler
 
 if __name__ == "__main__":
     
-    # Provide the following options to the user
+    # Provide the following options to the user:
     # 1. Load a chart from file: True for Placidus, False for Equal
     chart = Chart(Chart.get_filename(), Chart.get_house_system())
+    # or,
     # 2. Load a chart manually and save it to file
     # chart = Chart("", Chart.get_house_system())
 
