@@ -5,6 +5,36 @@
 import sys
 from utils import *
 
+###############################################################################
+#                                 HELPERS                                     #
+###############################################################################
+
+def exit_submenu(sub_choice: str, error_report: str) -> bool:
+    """Helper function to exit submenus for code reuse. The return variable
+    is used to break the while loop that the caller of this function is"""
+    break_loop = False
+    if sub_choice == "M" or sub_choice == "m" or \
+       sub_choice == "Menu" or sub_choice ==  "menu": 
+        print_menu()
+        break_loop = True
+    elif sub_choice == "S" or sub_choice == "s": 
+        print_signs_ops_menu()
+    elif sub_choice == "C" or sub_choice == "c": 
+        print_calculator_menu() 
+    elif sub_choice == "*":
+        print_chart_menu()
+    elif sub_choice == "Q" or sub_choice == "q" or \
+            sub_choice == "Quit" or sub_choice == "quit": 
+        os.system("clear")
+        sys.exit(0)
+    else: 
+        print(error_report)
+    return break_loop
+
+###############################################################################
+#                              CLI - MAIN LOOP                                #
+###############################################################################
+
 # Print all headers
 print_header(0.2, 0.8)
 print_menu()    
@@ -61,23 +91,8 @@ while (True):
             elif sub_choice == "7": 
                 element_and_polarity_handler()
             
-            # Exit submenu options
-            elif sub_choice == "M" or sub_choice == "m" or \
-                    sub_choice == "Menu" or sub_choice ==  "menu": 
-                print_menu()
+            elif exit_submenu(sub_choice, E_SUB_MENU):
                 break
-            elif sub_choice == "S" or sub_choice == "s": 
-                print_signs_ops_menu()
-            elif sub_choice == "C" or sub_choice == "c": 
-                print_calculator_menu() 
-            elif sub_choice == "*":
-                print_chart_menu()
-            elif sub_choice == "Q" or sub_choice == "q" or \
-                 sub_choice == "Quit" or sub_choice == "quit": 
-                os.system("clear")
-                sys.exit(0)
-            else: 
-                print(E_SUB_MENU)
 
     elif menu_choice == "C" or menu_choice == "c": 
 
@@ -94,24 +109,9 @@ while (True):
                 ecliptic_to_polar_handler()
             elif sub_choice == "4":
                 polar_to_ecliptic_handler()
-
-            # Exit submenu options
-            elif sub_choice == "M" or sub_choice == "m" or \
-                    sub_choice == "Menu" or sub_choice ==  "menu": 
-                print_menu()
+            
+            elif exit_submenu(sub_choice, E_CALC_MENU):
                 break
-            elif sub_choice == "S" or sub_choice == "s": 
-                print_signs_ops_menu() 
-            elif sub_choice == "C" or sub_choice == "c": 
-                print_calculator_menu() 
-            elif sub_choice == "*":
-                print_chart_menu()
-            elif sub_choice == "Q" or sub_choice == "q" or \
-                 sub_choice == "Quit" or sub_choice == "quit": 
-                os.system("clear")
-                sys.exit(0)
-            else: 
-                print(E_CALC_MENU)
 
     elif menu_choice == "*": 
         
@@ -152,24 +152,9 @@ while (True):
                 chart_mutual_reception_handler()
             elif sub_choice == "16":
                 chart_all_handler()
-
-            # Exit submenu options
-            elif sub_choice == "M" or sub_choice == "m" or \
-                    sub_choice == "Menu" or sub_choice ==  "menu": 
-                print_menu()
+            
+            elif exit_submenu(sub_choice, E_CHART_MENU):
                 break
-            elif sub_choice == "S" or sub_choice == "s": 
-                print_signs_ops_menu() 
-            elif sub_choice == "C" or sub_choice == "c": 
-                print_calculator_menu() 
-            elif sub_choice == "*":
-                print_chart_menu()
-            elif sub_choice == "Q" or sub_choice == "q" or \
-                 sub_choice == "Quit" or sub_choice == "quit": 
-                os.system("clear")
-                sys.exit(0)
-            else: 
-                print(E_CHART_MENU)
 
     # Exit menu options
     elif menu_choice == "Q" or menu_choice == "q" or \
