@@ -439,12 +439,27 @@ class Chart:
                     aspect_polar: Polar = Polar(aspect.angle_, 0)
                     orb = aspect_polar.diff(delta)
                     print(f"({orb.deg_:.0f}° {orb.min_:.0f}')", end=" ")
+                    
+                    # Tight aspect
                     if orb <= Polar(1, 0):
-                        print("\033[1mTight\033[0m")
-                    else:
-                        print() # Add the missing end line
-
-                    # TODO: Add angular, rising and culminating tags!
+                        print("\033[1mTight\033[0m", end=" ")
+                    # Angular planet
+                    if (isinstance(value_a, ChartAngle) and isinstance(value_b, ChartPlanet)) or \
+                        (isinstance(value_a, ChartPlanet) and isinstance(value_b, ChartAngle)): 
+                        if aspect.name_ == CONJUNCTION:
+                            print("\033[1mAngular\033[0m", end=" ")
+                            if isinstance(value_a, ChartAngle):
+                                if value_a.angle_.name_ == MC:
+                                    print("\033[1mCulminating\033[0m", end=" ")
+                                elif value_a.angle_.name_ == ASC:
+                                    print("\033[1mRising\033[0m", end=" ")
+                            elif isinstance(value_b, ChartAngle):
+                                if value_b.angle_.name_ == MC:
+                                    print("\033[1mCulminating\033[0m", end=" ")
+                                elif value_b.angle_.name_ == ASC:
+                                    print("\033[1mRising\033[0m", end=" ")
+                    print() # Add the missing end line
+                    
             print() # Separate combinations with a new line
 
     def get_polarity(self):
