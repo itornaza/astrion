@@ -59,6 +59,37 @@ class ChartHouse:
             return self.house_.id_ == other.house_.id_
         return False
 
+class ChartAspects(Aspects):
+    """Extends the Aspects class so the aspects_ member now includes
+    a custom aspect as well that is define through a user lucky number"""
+    def __init__(self):
+        super().__init__()
+        
+        # Inquire if user wants a custom aspect based on a random number
+        option = input("Custom aspect? (Y/n): ")
+        if option != 'Y': 
+            print("Boring! Anyway continuing with the usual aspects only...")
+            self.custom_: Aspect = None
+            return
+        
+        # Get lucky numner and orb
+        while True:
+            lucky_number = input("Lucky number? ")
+            orb = input("Orb? ")
+            try:
+                # Try to convert the input to a float
+                lucky_number = float(lucky_number) 
+                orb = int(orb)
+                angle = 360.0 / lucky_number
+                break
+            except ValueError:
+                print("Not a number! Please try again")
+            except ZeroDivisionError:
+                print("Lucky number cannot be zero")
+        
+        # Add the custom aspect to the existing aspects list
+        self.custom_ = Aspect(CUSTOM, angle, NA, NA, orb, NA, NA)
+
 class Chart:
     ###########################################################################
     #                             INITIALIZATION                              #
@@ -68,6 +99,7 @@ class Chart:
         """placidus: True for Placidus and False for Equal house systems"""
         self.placidus = placidus
         self._input(self.placidus) if (path == "") else self._load(path, self.placidus)
+        self.aspects = ChartAspects()
         self._entities_in_houses()
         self._rulerships()
 
@@ -410,6 +442,16 @@ class Chart:
                     continue
                 delta: Polar = to_polar(value_a.posit_.diff(value_b.posit_))
                 aspect = Aspects.get_aspect_from_angle(delta.to_decimal())
+
+                # First check against the custom aspect cause it will override other
+                # aspects in conflicting arcs
+                if self.aspects.custom_ != None:
+                    angle = delta.to_decimal()
+                    if  angle <= self.aspects.custom_.angle_ + self.aspects.custom_.orb_ and \
+                        angle >= self.aspects.custom_.angle_ - self.aspects.custom_.orb_:
+                        aspect = self.aspects.custom_
+
+                # Now check against the standard aspects
                 if aspect != None:
                     # Entity A
                     if isinstance(value_a, ChartPlanet): 
@@ -424,6 +466,8 @@ class Chart:
                         print(f"\033[1m\033[31m{aspect.name_}\033[0m", end=" ")
                     elif aspect.name_ in [SEXTILE, TRINE]:
                         print(f"\033[1m\033[34m{aspect.name_}\033[0m", end=" ")
+                    elif aspect.name_ == CUSTOM:
+                        print(f"\033[1m\033[33m{aspect.name_}\033[0m", end=" ")
                     else:
                         print(aspect.name_, end=" ")
 
