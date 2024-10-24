@@ -72,7 +72,7 @@ class ChartAspects(Aspects):
             self.custom_: Aspect = None
             return
         
-        # Get lucky numner and orb
+        # Get lucky numbner and orb
         while True:
             lucky_number = input("Lucky number? ")
             orb = input("Orb? ")
@@ -196,6 +196,7 @@ class Chart:
             reader = csv.reader(csvfile)
             next(reader) # Skip the header row
             lines = list(reader)
+            # TODO: Make the error user friendly and return control to user
             assert len(lines) >= 14, "Chart data for equal houses not present in the file"
 
             # Entities needed for all house systems
@@ -244,6 +245,7 @@ class Chart:
 
             # Get the cusps required for the placidus calculations
             if placidus:
+                # TODO: Make the error user friendly and return control to user
                 assert len(lines) >= 18 , "Chart data for placidus are not present in the file" 
                 self.second_ = ChartHouse(Houses.get(Houses, str(lines[14][0])), 
                     Ecliptic(int(lines[14][1]), Signs.get(Signs, lines[14][2]),
@@ -409,6 +411,10 @@ class Chart:
         option = input("Placidus? (Y/n): ")
         return (True if option == 'Y' else  False)
 
+    def get_chart_ruler(self):
+        print("\n* CHART RULER *")
+        print(self.asc_.posit_.sign_.ruler_)
+
     def get_house_cusps(self):
         if self.placidus:
             print("\n* PLACIDUS HOUSE CUSPS *")
@@ -433,6 +439,7 @@ class Chart:
                       " in " + str(entity.house_.house_.id_))
         print() # Each entry in a separate line
 
+    # TODO: Get unique aspects on another function. Not dublicated as in here
     def get_aspects(self):
         print("* ASPECTS TABLE *\n")
         entities = self._all_entities()
@@ -853,9 +860,11 @@ class Chart:
         print()
 
     # TODO: Add a function to calculate all dispositor chains and check if
-    # all of them end up in the same
-
-    # TODO: Add a function to report the Chart ruler
+    # all of them end up in the same one
+    def get_dispositors(self):
+        # For all planets get the sign and then the ruler until self ruled?
+        for planet in self._all_planets_except_chiron():
+            print(planet.posit_.sign_.ruler_)
 
 if __name__ == "__main__":
     
@@ -867,6 +876,7 @@ if __name__ == "__main__":
     # chart = Chart("", Chart.get_house_system())
 
     # Call all functions of the API, assign threse to menu options
+    chart.get_chart_ruler()
     chart.get_house_cusps()
     chart.get_entities_in_signs_and_houses()
     chart.get_aspects()
