@@ -69,6 +69,7 @@ SEMISQUARE = "Semisquare"
 SESQUIQUADRATE = "Sesquiquadrate"
 SEMISEXTILE = "Semisextile" 
 QUINCUNX = "Quincunx"
+CUSTOM = "Custom"
 
 # Angles
 ASC = "Asc"

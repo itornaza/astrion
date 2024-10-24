@@ -28,6 +28,9 @@ class Aspect:
 
 class Aspects:
 
+    # TODO: Make the orbs configurable from the user as well with an option to be
+    # reset to defaults
+
     conjunction_ = Aspect(CONJUNCTION, 0, "1:1", 1, 8, "Sign", NA)    
     opposition_ = Aspect(OPPOSITION, 180, "1:2", 2, 8, ["Polarity", "Mode"], [["Cardinal", "Fixed", "Mutable"], ["Positive", "Negative"]])
     trine_ = Aspect(TRINE, 120, "1:3", 3, 8, "Element", ["Fire", "Earth", "Air", "Water"])
@@ -37,17 +40,6 @@ class Aspects:
     sesquiquadrate_ = Aspect(SESQUIQUADRATE, 135, "3:8", [2, 3], 2, NA, NA)
     semisextile_ = Aspect(SEMISEXTILE, 30, "1:12", [2, 3], 2, "Nothing", NA)
     quincunx_ = Aspect(QUINCUNX, 150, "5:12", [2, 3, 5], 2, "Nothing", NA)
-
-    # TODO: Add a custom aspect that can be set from the user at execution time and 
-    # persistently stored
-
-    # TODO: add this functionality to the custom aspect
-    # - Get favorite number
-    # - 360 / favorite number
-    # - Report in the chart
-    
-    # TODO: Make the orbs configurable from the user as well with an option to be
-    # reset to defaults
 
     aspects_ = [conjunction_, opposition_, trine_, square_,
                 sextile_, semisquare_, sesquiquadrate_, 
