@@ -199,6 +199,9 @@ class Chart:
             # TODO: Make the error user friendly and return control to user
             assert len(lines) >= 14, "Chart data for equal houses not present in the file"
 
+            # TODO: Apply checks on the file data to report if the file is corrupted
+            # or not in the correct format
+
             # Entities needed for all house systems
             self.sun_ = ChartPlanet(Planets.get(Planets, str(lines[0][0])), 
                     Ecliptic(int(lines[0][1]), Signs.get(Signs, lines[0][2]),
@@ -439,7 +442,10 @@ class Chart:
                       " in " + str(entity.house_.house_.id_))
         print() # Each entry in a separate line
 
-    # TODO: Get unique aspects on another function. Not dublicated as in here
+    # TODO: Get unique aspects on another function. Not dublicated as in here.
+    # Check in get_mutual_receptions() for a similar implementation
+
+    # TODO: Get rid of aspects between axis entities like NN-SS oppositions...
     def get_aspects(self):
         print("* ASPECTS TABLE *\n")
         entities = self._all_entities()
@@ -486,15 +492,16 @@ class Chart:
                     elif isinstance(value_b, ChartLunarNode): 
                         print(f"{value_b.lunar_node_.name_}", end=" ")
                         
-                    # Aspect details
+                    # Orb
                     aspect_polar: Polar = Polar(aspect.angle_, 0)
                     orb = aspect_polar.diff(delta)
                     print(f"({orb.deg_:.0f}° {orb.min_:.0f}')", end=" ")
                     
-                    # Tight aspect
+                    # Tight
                     if orb <= Polar(1, 0):
                         print("\033[1mTight\033[0m", end=" ")
-                    # Angular planet
+                    
+                    # Angular, rising, culminating
                     if (isinstance(value_a, ChartAngle) and isinstance(value_b, ChartPlanet)) or \
                         (isinstance(value_a, ChartPlanet) and isinstance(value_b, ChartAngle)): 
                         if aspect.name_ == CONJUNCTION:
@@ -510,7 +517,6 @@ class Chart:
                                 elif value_b.angle_.name_ == ASC:
                                     print("\033[1mRising\033[0m", end=" ")
                     print() # Add the missing end line
-                    
             print() # Separate combinations with a new line
 
     def get_polarity(self):
@@ -865,6 +871,11 @@ class Chart:
         # For all planets get the sign and then the ruler until self ruled?
         for planet in self._all_planets_except_chiron():
             print(planet.posit_.sign_.ruler_)
+
+    # TODO: In utils.py, add an option to save the full report in a file
+    # Open a file in write mode like so:
+    # with open("output.txt", "w") as file: 
+    #     print("This will go to the file", file=file)
 
 if __name__ == "__main__":
     
