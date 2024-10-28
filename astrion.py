@@ -156,7 +156,7 @@ while (True):
             elif exit_submenu(sub_choice, E_CHART_MENU):
                 break
 
-    # Exit menu options
+    # Exit main menu options
     elif menu_choice == "Q" or menu_choice == "q" or \
          menu_choice == "Quit" or menu_choice == "quit": 
         os.system("clear")
