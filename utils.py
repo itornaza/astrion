@@ -43,6 +43,10 @@ def print_header(t1_header, t2_credits):
     time.sleep(t2_credits)
     os.system("clear")
 
+###############################################################################
+#                               MAIN MENU                                     #
+###############################################################################
+
 def print_menu():
     os.system("clear")
     print("+--------------------------------------------------+")
@@ -212,7 +216,132 @@ def lunar_phase_handler():
     lunar_phase = LunarPhases.get(LunarPhases, lp)
     LunarPhases.print(LunarPhases, lunar_phase) if lunar_phase else print(E_LUNAR_PHASE)
 
-def print_chart_menu():
+###############################################################################
+#                              SIGN OPS MENU                                  #
+###############################################################################
+
+def print_signs_ops_menu():
+    os.system("clear")
+    print("+--------------------------------------------------+")
+    print("|        ---===  * Signs Ops Menu *  ===---        |")
+    print("+-----------------------+--------------------------+")
+    print("| 1.  Keyword           | 5.  Polarity + mode      |")
+    print("| 2.  Sign              | 6.  Mode + element       |")
+    print("| 3.  Compare signs     | 7.  Element + mode       |")
+    print("| 4.  Two in common     |                          |")
+    print("|                       |                          |")
+    print("+-----------+-----------+---+-----------+----------+")
+    print("| m.  Menu  |  s.  Sign ops |  c. Calc  | q.  Quit |")
+    print("+-----------+---------------+-----------+----------+")
+    print("|              *. Chart analysis                   |")
+    print("+--------------------------------------------------+")
+
+# Compare two signs
+def compare_signs_handler():
+    user_input = input(I_KEYWORDS)
+    signs_list = user_input.split(',')
+    
+    # Check number of signs
+    if len(signs_list) != 2:
+        print(E_NUMBER_OF_SIGNS)
+        return
+    
+    sign_a = Signs.get(Signs, signs_list[0])
+    sign_b = Signs.get(Signs, signs_list[1])
+    
+    # Check valid signs
+    if sign_a and sign_b:
+        Signs.print_common_attributes(Signs, sign_a, sign_b)
+    else:
+        print(E_SIGN)
+
+# Find signs with two common attributes
+def three_in_common_handler():
+    s = input(I_SIGN) 
+    sign = Signs.get(Signs, s)
+    if sign: 
+        list = Signs.find_two_common_attributes(Signs, sign)
+        if len(list) > 0:
+            sign_names = []
+            for s in list:
+                sign_names.append(s.name_)
+            print("\nFound", len(list), "matching signs:", sign_names)
+            for s in list:
+                Signs.print_common_attributes(Signs, sign, s)
+    else:
+        print(E_SIGN)
+
+# Find polarity and mode equivalent sign
+def polarity_and_mode_handler():
+    s = input(I_SIGN) 
+    sign = Signs.get(Signs, s)
+    if sign: 
+        Signs.print_polarity_mode(Signs, sign.polarity_, sign.mode_)
+    else:
+        print(E_SIGN)
+
+# Find polarity and mode equivalent sign
+def mode_and_element_handler():
+    s = input(I_SIGN) 
+    sign = Signs.get(Signs, s)
+    if sign: 
+        Signs.print_mode_element(Signs, sign.mode_, sign.element_)
+    else:
+        print(E_SIGN)
+
+# Find element and polarity equivalent sign
+def element_and_polarity_handler():
+    s = input(I_SIGN) 
+    sign = Signs.get(Signs, s)
+    if sign: 
+        Signs.print_element_polarity(Signs,  sign.element_, sign.polarity_)
+    else:
+        print(E_SIGN)
+
+###############################################################################
+#                             CALCULATOR MENU                                 #
+###############################################################################
+
+def print_calculator_menu():
+    os.system("clear")
+    print("+--------------------------------------------------+")
+    print("|        ---===  * Calculator Menu *  ===---       |")
+    print("+-----------------------+--------------------------+")
+    print("| 1. Planet positions   | 3. Ecliptic to polar     |")
+    print("| 2. Aspect from angles | 4. Polar to ecliptic     |")
+    print("|                       |                          |")
+    print("+-----------+-----------+---+-----------+----------+")
+    print("| m.  Menu  |  s.  Sign ops |  c. Calc  | q.  Quit |")
+    print("+-----------+---------------+-----------+----------+")
+    print("|              *. Chart analysis                   |")
+    print("+--------------------------------------------------+")
+
+# Planet calculator handler
+def planet_calculator_handler():
+    calc_planet_position.calculate_position()
+
+# Aspect from ecliptic angles handler
+def aspect_from_ecliptic_angless_handler():
+    calc_ecliptic_angles.calculate_aspect_from_angle()
+    
+def polar_to_ecliptic_handler():
+    p: Polar = calc_planet_position.get_polar("Enter angle `dd mm`: ")
+    e: Ecliptic = to_ecliptic(p)
+    e.print()
+
+def ecliptic_to_polar_handler():
+    e: Ecliptic = calc_ecliptic_angles.get_ecliptic("Enter angle `dd sign mm`: ")
+    p: Polar = to_polar(e)
+    p.print()
+
+###############################################################################
+#                               CHART MENU                                    #
+###############################################################################
+
+# Global chart variable used by all handlers below to access objects data
+chart = None
+
+def print_chart_full_menu():
     os.system("clear")
     print("+--------------------------------------------------+")
     print("|          ---===  * Chart Menu *  ===---          |")
@@ -231,9 +360,21 @@ def print_chart_menu():
     print("|              *. Chart analysis                   |")
     print("+--------------------------------------------------+")
 
-# Global chart variable used by all handlers below to access objects
-# data
-chart = None
+def print_chart_short_menu():
+    os.system("clear")
+    print("+--------------------------------------------------+")
+    print("|          ---===  * Chart Menu *  ===---          |")
+    print("+-----------------------+--------------------------+")
+    print("| 1.  New chart         |                          |")
+    print("| 2.  Load chart        |                          |")
+    print("+-----------+-----------+---+-----------+----------+")
+    print("| m.  Menu  |  s.  Sign ops |  c. Calc  | q.  Quit |")
+    print("+-----------+---------------+-----------+----------+")
+    print("|              *. Chart analysis                   |")
+    print("+--------------------------------------------------+")
+
+def print_chart_menu():
+    print_chart_full_menu() if chart else print_chart_short_menu()
 
 def chart_new_chart_handler():
     global chart
@@ -338,113 +479,3 @@ def chart_all_handler():
         chart.get_mutual_receptions()
     else: 
         print("Load or input chart data using menu options 1 or 2")
-
-def print_signs_ops_menu():
-    os.system("clear")
-    print("+--------------------------------------------------+")
-    print("|        ---===  * Signs Ops Menu *  ===---        |")
-    print("+-----------------------+--------------------------+")
-    print("| 1.  Keyword           | 5.  Polarity + mode      |")
-    print("| 2.  Sign              | 6.  Mode + element       |")
-    print("| 3.  Compare signs     | 7.  Element + mode       |")
-    print("| 4.  Two in common     |                          |")
-    print("|                       |                          |")
-    print("+-----------+-----------+---+-----------+----------+")
-    print("| m.  Menu  |  s.  Sign ops |  c. Calc  | q.  Quit |")
-    print("+-----------+---------------+-----------+----------+")
-    print("|              *. Chart analysis                   |")
-    print("+--------------------------------------------------+")
-
-# Compare two signs
-def compare_signs_handler():
-    user_input = input(I_KEYWORDS)
-    signs_list = user_input.split(',')
-    
-    # Check number of signs
-    if len(signs_list) != 2:
-        print(E_NUMBER_OF_SIGNS)
-        return
-    
-    sign_a = Signs.get(Signs, signs_list[0])
-    sign_b = Signs.get(Signs, signs_list[1])
-    
-    # Check valid signs
-    if sign_a and sign_b:
-        Signs.print_common_attributes(Signs, sign_a, sign_b)
-    else:
-        print(E_SIGN)
-
-# Find signs with two common attributes
-def three_in_common_handler():
-    s = input(I_SIGN) 
-    sign = Signs.get(Signs, s)
-    if sign: 
-        list = Signs.find_two_common_attributes(Signs, sign)
-        if len(list) > 0:
-            sign_names = []
-            for s in list:
-                sign_names.append(s.name_)
-            print("\nFound", len(list), "matching signs:", sign_names)
-            for s in list:
-                Signs.print_common_attributes(Signs, sign, s)
-    else:
-        print(E_SIGN)
-
-# Find polarity and mode equivalent sign
-def polarity_and_mode_handler():
-    s = input(I_SIGN) 
-    sign = Signs.get(Signs, s)
-    if sign: 
-        Signs.print_polarity_mode(Signs, sign.polarity_, sign.mode_)
-    else:
-        print(E_SIGN)
-
-# Find polarity and mode equivalent sign
-def mode_and_element_handler():
-    s = input(I_SIGN) 
-    sign = Signs.get(Signs, s)
-    if sign: 
-        Signs.print_mode_element(Signs, sign.mode_, sign.element_)
-    else:
-        print(E_SIGN)
-
-# Find element and polarity equivalent sign
-def element_and_polarity_handler():
-    s = input(I_SIGN) 
-    sign = Signs.get(Signs, s)
-    if sign: 
-        Signs.print_element_polarity(Signs,  sign.element_, sign.polarity_)
-    else:
-        print(E_SIGN)
-
-def print_calculator_menu():
-    os.system("clear")
-    print("+--------------------------------------------------+")
-    print("|        ---===  * Calculator Menu *  ===---       |")
-    print("+-----------------------+--------------------------+")
-    print("| 1. Planet positions   | 3. Ecliptic to polar     |")
-    print("| 2. Aspect from angles | 4. Polar to ecliptic     |")
-    print("|                       |                          |")
-    print("+-----------+-----------+---+-----------+----------+")
-    print("| m.  Menu  |  s.  Sign ops |  c. Calc  | q.  Quit |")
-    print("+-----------+---------------+-----------+----------+")
-    print("|              *. Chart analysis                   |")
-    print("+--------------------------------------------------+")
-
-# Planet calculator handler
-def planet_calculator_handler():
-    calc_planet_position.calculate_position()
-
-# Aspect from ecliptic angles handler
-def aspect_from_ecliptic_angless_handler():
-    calc_ecliptic_angles.calculate_aspect_from_angle()
-    
-def polar_to_ecliptic_handler():
-    p: Polar = calc_planet_position.get_polar("Enter angle `dd mm`: ")
-    e: Ecliptic = to_ecliptic(p)
-    e.print()
-
-def ecliptic_to_polar_handler():
-    e: Ecliptic = calc_ecliptic_angles.get_ecliptic("Enter angle `dd sign mm`: ")
-    p: Polar = to_polar(e)
-    p.print()

@@ -69,9 +69,9 @@ while (True):
     elif menu_choice == "M" or menu_choice == "m" or \
          menu_choice == "Menu" or menu_choice ==  "menu": 
         print_menu()
+    
+    # Signs Ops Menu
     elif menu_choice == "S" or menu_choice == "s": 
-
-        # Signs Ops Menu
         print_signs_ops_menu() 
         while (True):
             sub_choice = input("> ")
@@ -90,13 +90,11 @@ while (True):
                 mode_and_element_handler()
             elif sub_choice == "7": 
                 element_and_polarity_handler()
-            
             elif exit_submenu(sub_choice, E_SUB_MENU):
                 break
 
+    # Calculator Menu
     elif menu_choice == "C" or menu_choice == "c": 
-
-        # Calculator Menu
         print_calculator_menu()
         while (True):
             sub_choice = input("> ")
@@ -109,13 +107,11 @@ while (True):
                 ecliptic_to_polar_handler()
             elif sub_choice == "4":
                 polar_to_ecliptic_handler()
-            
             elif exit_submenu(sub_choice, E_CALC_MENU):
                 break
-
+    
+    # Chart menu
     elif menu_choice == "*": 
-        
-        # Chart menu
         print_chart_menu()
         while(True):
             sub_choice = input("> ")
@@ -152,7 +148,6 @@ while (True):
                 chart_mutual_reception_handler()
             elif sub_choice == "16":
                 chart_all_handler()
-            
             elif exit_submenu(sub_choice, E_CHART_MENU):
                 break
 
