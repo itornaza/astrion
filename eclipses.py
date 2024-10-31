@@ -2,8 +2,17 @@
 # eclipses
 #
 
+# TODO: Get astronomical data from an API???
+
 class Eclipse:
     # TODO
+    pass
+
+class ChartEclipse:
+    # TODO: Implement and move to chart
+    # Prenatal solar eclipse position in sign and house, date, conjunct
+    # and opposed planets, number of days prior to birth, planetary ruler
+    # planets conjunct horizon
     pass
 
 class Eclipses:

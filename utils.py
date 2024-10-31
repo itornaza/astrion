@@ -383,7 +383,9 @@ def chart_new_chart_handler():
 def chart_load_chart_handler():
     global chart
     chart = Chart(Chart.get_filename(), Chart.get_house_system())    
-    
+
+# TODO: Add the chart ruler here
+
 def chart_house_cusps_handler():
     if chart is not None:
         chart.get_house_cusps()
