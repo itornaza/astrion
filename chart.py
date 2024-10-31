@@ -2,6 +2,8 @@
 # chart
 #
 
+# TODO: Get astronomical data from an API???
+
 import csv
 import os
 
@@ -879,15 +881,7 @@ class Chart:
     #     print("This will go to the file", file=file)
 
 if __name__ == "__main__":
-    
-    # Provide the following options to the user:
-    # 1. Load a chart from file: True for Placidus, False for Equal
     chart = Chart(Chart.get_filename(), Chart.get_house_system())
-    # or,
-    # 2. Load a chart manually and save it to file
-    # chart = Chart("", Chart.get_house_system())
-
-    # Call all functions of the API, assign threse to menu options
     chart.get_chart_ruler()
     chart.get_house_cusps()
     chart.get_entities_in_signs_and_houses()
