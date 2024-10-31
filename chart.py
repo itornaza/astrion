@@ -14,7 +14,8 @@ from pangle import Ecliptic, Polar, to_polar, get_ecliptic
 from planets import *
 from signs import *
 
-DOCUMENTS = os.path.join(os.path.expanduser("~"), "Documents") + "/astrion-data/charts/"
+# Global location that all charts are stored
+CHARTS = os.path.join(os.path.expanduser("~"), "Documents") + "/astrion-data/charts/"
 class ChartPlanet:
     def __init__(self, planet: Planet, posit: Ecliptic):
         self.planet_: Planet = planet
@@ -183,16 +184,16 @@ class Chart:
         option = input("Would you like to save the data? (Y/n): ")
         if option == 'Y':
             filename = input("Enter the file name (without extension): ")
-            print("The file will be saved in: " + DOCUMENTS + ".csv")
+            print("The file will be saved in: " + CHARTS + ".csv")
             header = ['Planet', 'Degrees', 'Sign', 'Minutes']
-            with open(DOCUMENTS + filename + '.csv', mode='w', newline='') as file:
+            with open(CHARTS + filename + '.csv', mode='w', newline='') as file:
                 writer = csv.writer(file)
                 writer.writerow(header) # Write the header first
                 writer.writerows(data)
 
     def _load(self, filename: str, placidus: bool):
         """Get the chart data data from a file specified from the user"""
-        with open(DOCUMENTS + filename, newline='') as csvfile:
+        with open(CHARTS + filename, newline='') as csvfile:
             reader = csv.reader(csvfile)
             next(reader) # Skip the header row
             lines = list(reader)
@@ -401,10 +402,10 @@ class Chart:
     ###########################################################################
 
     def get_filename():
-        print("astrion-data at: " + DOCUMENTS)
+        print("astrion-data at: " + CHARTS)
         filename = input("Enter a file without extension: ")
         filename = filename + '.csv'
-        while not os.path.exists(DOCUMENTS + filename):
+        while not os.path.exists(CHARTS + filename):
             print("File " + "\"" + filename + "\"" + " does not exist.", end= " ")
             filename = input("Try again: ")
             filename = filename + '.csv'
