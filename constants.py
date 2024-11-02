@@ -2,6 +2,10 @@
 # constants
 #
 
+# TODO: Define a astrion.config file in the default data folder for user options
+# on orbs and whatever else can be configurable. Then load these options and assign
+# them to constants below to be used throughout the application
+
 VERSION = "v4.0"
 
 # Menu map
@@ -19,6 +23,7 @@ M_PATTERN = "10"
 M_LUNAR_PHASE = "11"
 
 # Planets
+EARTH = "Earth"
 SUN = "Sun"
 MOON = "Moon"
 MERCURY = "Mercury"

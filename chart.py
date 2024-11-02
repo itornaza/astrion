@@ -75,12 +75,11 @@ class ChartAspects(Aspects):
             self.custom_: Aspect = None
             return
         
-        # Get lucky numbner and orb
+        # Get lucky numbner and orb from the user
         while True:
             lucky_number = input("Lucky number? ")
             orb = input("Orb? ")
             try:
-                # Try to convert the input to a float
                 lucky_number = float(lucky_number) 
                 orb = int(orb)
                 angle = 360.0 / lucky_number
@@ -416,6 +415,8 @@ class Chart:
     def get_house_system():
         option = input("Placidus? (Y/n): ")
         return (True if option == 'Y' else  False)
+
+    # TODO: Add the chart ruler functionality to astrion and utils
 
     def get_chart_ruler(self):
         print("\n* CHART RULER *")
