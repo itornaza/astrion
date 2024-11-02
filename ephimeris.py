@@ -11,7 +11,8 @@ from constants import *
 class Ephimeris():
     def __init__(self, utc_time):
         """Get all planet longitudes for a given UTC time. Note that Chiron
-        is not supported in skyfield"""
+        is not supported in skyfield. The provided longitude is given by
+        the library directly in tropical zodiac"""
 
         # Load ephimeris
         self.ephimeris_ = load('de440.bsp') 
@@ -44,17 +45,6 @@ class Ephimeris():
 
     def print_planet_position(self, planet, long):
         print(planet + ": {:.5f}°".format(long.degrees))
-
-    # TODO
-    def get_aries_zero(self):
-        ts = load.timescale()
-        equinox_date = datetime(2024, 3, 20, 12, 0, 0, tzinfo=timezone.utc)
-        t = ts.utc(equinox_date.year, equinox_date.month, equinox_date.day)
-        j2000_epoch = ts.utc(2000, 1, 1, 12, 0, 0)
-        days_since_j2000 = t - j2000_epoch
-        _, long, _ = self.sun_.frame_latlon(ecliptic_frame)
-        tropical_long = (long - (360 * days_since_j2000 / 36525)) % 360
-        print(f"Ecliptic Longitude: {tropical_long} degrees")
 
 if __name__ == "__main__":
     ts = load.timescale()
