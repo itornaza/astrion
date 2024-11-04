@@ -2,6 +2,8 @@
 # pangle
 #
 
+from skyfield.units import Angle # type: ignore
+
 from signs import Sign, Signs
 import unittest
 
@@ -119,6 +121,16 @@ class Ecliptic:
         self.sign: Sign = Signs.get_sign_from_degree(Signs, polar.deg_)
         self.deg_ = self.sign.degrees_ - polar.deg_
         self.min_ = polar.min_
+
+    def from_angle(self, angle: Angle):
+        deg = int(angle.degrees)
+        min = round((angle.degrees - deg) * 60)
+        return to_ecliptic(Polar(deg, min))
+    
+    def from_float(self, num: float):
+        deg = int(num)
+        min = round((num - deg) * 60)
+        return to_ecliptic(Polar(deg, min))
 
     def from_minutes(self, min: int):
         deg = (min // 60) % 360
