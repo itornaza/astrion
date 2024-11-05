@@ -3,7 +3,7 @@
 #
 
 from datetime import datetime, timezone, timedelta
-from skyfield.api import load  # type: ignore
+from skyfield.api import Topos, load  # type: ignore
 from skyfield.framelib import ecliptic_frame # type: ignore
 
 from constants import *
@@ -13,7 +13,7 @@ from client import *
 class Ephimeris():
     # https://rhodesmill.org/skyfield/examples.html
 
-    def __init__(self, bday: datetime):
+    def __init__(self, bday: datetime, bplace: Birthplace):
         """Get all planet longitudes for a given UTC time. Note that Chiron
         is not supported in skyfield. The provided longitude is given by
         the library directly in tropical zodiac"""
@@ -29,6 +29,9 @@ class Ephimeris():
         self.uranus_: Ecliptic
         self.neptune_: Ecliptic
         self.pluto_: Ecliptic
+
+        # TODO: Get the Ascendant
+        self.asc_: Ecliptic
 
         # Load ephimeris
         self.ephimeris_ = load('de440.bsp') 
@@ -62,6 +65,11 @@ class Ephimeris():
         self.uranus_ = Ecliptic.from_angle(Ecliptic, uranus_long)
         self.neptune_ = Ecliptic.from_angle(Ecliptic, neptune_long)
         self.pluto_ = Ecliptic.from_angle(Ecliptic, pluto_long)
+
+        # TODO: Implement the Ascendant
+        observer_location = Topos(latitude_degrees=bplace.lat_, longitude_degrees=bplace.long_, elevation_m=bplace.h_)
+        _, asc_long, _ = (self.earth_ + observer_location).observe(self.ephimeris_[SUN]).apparent().frame_latlon(ecliptic_frame)
+        self.asc_ = Ecliptic.from_angle(Ecliptic, asc_long)
 
     def print(self):
         longs = [self.sun_, self.moon_, self.mercury_, self.venus_, self.mars_,
