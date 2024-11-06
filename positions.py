@@ -9,7 +9,7 @@ from client import *
 class Positions():
     def __init__(self):
         self.client_ = Client()
-        self.all_planets_except_chiron_ = Ephimeris(self.client_.bday_)
+        self.all_planets_except_chiron_ = Ephimeris(self.client_.bday_, self.client_.bplace_)
         self.chiron_ = Horizons(self.client_.bday_)
 
     def print(self):

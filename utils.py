@@ -346,14 +346,15 @@ def print_chart_full_menu():
     print("+--------------------------------------------------+")
     print("|          ---===  * Chart Menu *  ===---          |")
     print("+-----------------------+--------------------------+")
-    print("| 1.  New chart         | 9.  Hemispheres          |")
-    print("| 2.  Load chart        | 10. Triples              |")
-    print("| 3.  House cusps       | 11. Quadrants            |")
-    print("| 4.  Placements        | 12. Lunar phase          |")
-    print("| 5.  Aspects           | 13. Dignities/Debilities |")
-    print("| 6.  Polarity          | 14. Rulerships           |")
-    print("| 7.  Elements          | 15. Mutual reception     |")
-    print("| 8.  Modes             | 16. All                  |")
+    print("| 1.  New chart         | 10. Hemispheres          |")
+    print("| 2.  Load chart        | 11. Triples              |")
+    print("| 3.  Chart ruler       | 12. Quadrants            |")
+    print("| 4.  House cusps       | 13. Lunar phase          |")
+    print("| 5.  Placements        | 14. Dignities/Debilities |")
+    print("| 6.  Aspects           | 15. Rulerships           |")
+    print("| 7.  Polarity          | 16. Mutual receptions    |")
+    print("| 8.  Elements          | 17. All                  |")
+    print("| 9.  Modes             | 18. Export               |")
     print("+-----------+-----------+---+-----------+----------+")
     print("| m.  Menu  |  s.  Sign ops |  c. Calc  | q.  Quit |")
     print("+-----------+---------------+-----------+----------+")
@@ -384,7 +385,11 @@ def chart_load_chart_handler():
     global chart
     chart = Chart(Chart.get_filename(), Chart.get_house_system())    
 
-# TODO: Add the chart ruler here
+def chart_ruler__handler():
+    if chart is not None:
+        chart.get_chart_ruler()
+    else: 
+        print("Load or input chart data using menu options 1 or 2")
 
 def chart_house_cusps_handler():
     if chart is not None:
@@ -479,5 +484,11 @@ def chart_all_handler():
         chart.get_dignities_debilities()
         chart.get_rulerships()
         chart.get_mutual_receptions()
+    else: 
+        print("Load or input chart data using menu options 1 or 2")
+
+def chart_export_handler():
+    if chart is not None:
+        chart.export()
     else: 
         print("Load or input chart data using menu options 1 or 2")
