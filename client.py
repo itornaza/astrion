@@ -12,6 +12,7 @@ class Identity():
     def set_identity(self):
         self.name_ = input("Name: ")
         self.lastname_ = input("Last name: ")
+        return self
 
 class Birthplace():
     def __init__(self):
@@ -20,9 +21,10 @@ class Birthplace():
         self.h_: float
 
     def set_birthplace(self):
-        prompt = "Please enter Longitude Latitude Elevation separated by space: "
+        prompt = "Please enter 'Longitude/Latitude/Elevation' separated by space: "
         while True:
             try:
+                # Check if floats
                 user_input = input(prompt)
                 long, lat, h = map(float, user_input.split(" "))
                 if long < 0 or long > 359.9999999999:
@@ -35,18 +37,26 @@ class Birthplace():
                     self.long_ = long
                     self.lat_ = lat
                     self.h_ = h
-                    break
+                    return self
             except ValueError:
-                print("Invalid input! " + prompt)
+                try:
+                    # If floats fail, check if integers
+                    self.long_ = int(long)
+                    self.lat_ = int(lat)
+                    self.h_ = int(h)
+                    return self
+                except ValueError:
+                    # Error if not an integer or float
+                    print("Invalid input! " + prompt)
 
 class Client():
     def __init__(self):
-        self.client_: Identity = Identity.set_identity(Identity)
+        self.id_: Identity = Identity.set_identity(Identity)
         self.bday_: datetime = self._get_date_utc()
         self.bplace_: Birthplace = Birthplace.set_birthplace(Birthplace)
 
     def _get_date_utc(self):
-        prompt = "Please enter YYYY-MM-DD-HH-MM in UTC separated by a dash (-): "
+        prompt = "Please enter 'YYYY-MM-DD-HH-MM' in UTC separated by a dash (-): "
         while True:
             try:
                 user_input = input(prompt)
@@ -65,6 +75,10 @@ class Client():
 
     def print(self):
         print("\n* CLIENT *\n")
-        print(self.name_ + self.lastname_)
+        print(self.id_.name_ + self.id_.lastname_)
         print(self.bday_.strftime('%Y-%m-%dT%H:%M'))
-        print(f"Long: {self.long_}° / Lat: {self.lat_}°")
+        print(f"Long: {self.bplace_.long_}° / Lat: {self.bplace_.lat_}°, / h: {self.bplace_.h_}")
+
+if __name__ == "__main__":
+    client = Client()
+    client.print()

@@ -2,7 +2,7 @@
 # ephimeris
 #
 
-from datetime import datetime, timezone, timedelta
+from datetime import datetime
 from skyfield.api import Topos, load  # type: ignore
 from skyfield.framelib import ecliptic_frame # type: ignore
 
@@ -29,16 +29,19 @@ class Ephimeris():
         self.uranus_: Ecliptic
         self.neptune_: Ecliptic
         self.pluto_: Ecliptic
-
-        # TODO: Get the Ascendant
-        self.asc_: Ecliptic
+        
+        # TODO: Get the Angles
+        # self.asc_: Ecliptic
+        
+        # TODO: Get all the rest of the placidous house cusps and from there 
+        # export the rest of the angles
 
         # Load ephimeris
         self.ephimeris_ = load('de440.bsp') 
         ts = load.timescale()
         
         # Time set up
-        # TODO: Caution!!! It will create UTC out of the date
+        # Caution!!! It will create UTC out of the date
         t = ts.utc(bday.year, bday.month, bday.day, bday.hour, bday.minute)
         self.earth_ = self.ephimeris_[EARTH].at(t)
 
@@ -67,9 +70,9 @@ class Ephimeris():
         self.pluto_ = Ecliptic.from_angle(Ecliptic, pluto_long)
 
         # TODO: Implement the Ascendant
-        observer_location = Topos(latitude_degrees=bplace.lat_, longitude_degrees=bplace.long_, elevation_m=bplace.h_)
-        _, asc_long, _ = (self.earth_ + observer_location).observe(self.ephimeris_[SUN]).apparent().frame_latlon(ecliptic_frame)
-        self.asc_ = Ecliptic.from_angle(Ecliptic, asc_long)
+        # observer_location = Topos(latitude_degrees=bplace.lat_, longitude_degrees=bplace.long_, elevation_m=bplace.h_)
+        # _, asc_long, _ = observer_location.?????????
+        # self.asc_ = Ecliptic.from_angle(Ecliptic, asc_long)
 
     def print(self):
         longs = [self.sun_, self.moon_, self.mercury_, self.venus_, self.mars_,

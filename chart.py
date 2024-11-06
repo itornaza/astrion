@@ -6,6 +6,7 @@
 
 import csv
 import os
+import sys
 
 from angles import *
 from aspects import *
@@ -18,6 +19,7 @@ from signs import *
 
 # Global location that all charts are stored
 CHARTS = os.path.join(os.path.expanduser("~"), "Documents") + "/astrion-data/charts/"
+REPORTS = os.path.join(os.path.expanduser("~"), "Documents") + "/astrion-data/reports/"
 class ChartPlanet:
     def __init__(self, planet: Planet, posit: Ecliptic):
         self.planet_: Planet = planet
@@ -416,24 +418,22 @@ class Chart:
         option = input("Placidus? (Y/n): ")
         return (True if option == 'Y' else  False)
 
-    # TODO: Add the chart ruler functionality to astrion and utils
-
     def get_chart_ruler(self):
-        print("\n* CHART RULER *")
+        print("\n* \033[1;32mCHART RULER\033[0m *")
         print(self.asc_.posit_.sign_.ruler_)
 
     def get_house_cusps(self):
         if self.placidus:
-            print("\n* PLACIDUS HOUSE CUSPS *")
+            print("\n* \033[1;32mPLACIDUS HOUSE CUSPS\033[0m *")
         else:
-            print("\n* EQUAL HOUSE CUSPS *")
+            print("\n* \033[1;32mEQUAL HOUSE CUSPS\033[0m *")
         for house in self._all_houses():
             print("Cusp", house.house_.id_, ": ", end=" "); 
             house.posit_.print()
         print()        
 
     def get_entities_in_signs_and_houses(self):
-        print("* ENTITIES IN SIGNS & HOUSES *")
+        print("* \033[1;32mENTITIES IN SIGNS & HOUSES\033[0m *")
         for entity in self._all_entities():
             if isinstance(entity, ChartPlanet):
                 print(entity.planet_.name_ + " in " + entity.posit_.sign_.name_ +
@@ -451,7 +451,7 @@ class Chart:
 
     # TODO: Get rid of aspects between axis entities like NN-SS oppositions...
     def get_aspects(self):
-        print("* ASPECTS TABLE *\n")
+        print("* \033[1;32mASPECTS TABLE\033[0m *")
         entities = self._all_entities()
         for value_a in entities:
             for value_b in entities:
@@ -544,7 +544,7 @@ class Chart:
                 elif isinstance(entity, ChartAngle): 
                     negative_list.append(entity.angle_.name_)
 
-        print("* POLARITY *")
+        print("* \033[1;32mPOLARITY\033[0m *")
         print("Positive: ", end=" ")
         for positive in positive_list:
             print(f"\033[1m\033[31m{positive}\033[0m", end = " ")
@@ -594,7 +594,7 @@ class Chart:
                 elif isinstance(entity, ChartAngle): 
                     water_list.append(entity.angle_.name_)
 
-        print("* ELEMENTS *")
+        print("* \033[1;32mELEMENTS\033[0m *")
         print("Fire: ", end=" ")
         for fire in fire_list:
             print(f"\033[1m\033[31m{fire}\033[0m", end = " ")
@@ -645,7 +645,7 @@ class Chart:
                 elif isinstance(entity, ChartAngle): 
                     mutable_list.append(entity.angle_.name_)
 
-        print("* MODES *")
+        print("* \033[1;32mMODES\033[0m *")
         print("Cardinal: ", end=" ")
         for cardinal in cardinal_list:
             print(f"\033[1m\033[31m{cardinal}\033[0m", end = " ")
@@ -666,7 +666,7 @@ class Chart:
 
     def get_hemispheres(self):
         entities = self._all_planets()
-        print("* HEMISPHERES *")
+        print("* \033[1;32mHEMISPHERES\033[0m *")
         
         # North/South hemispheres division
         northern_list = []
@@ -738,7 +738,7 @@ class Chart:
             # Universal
             universal_list.append(entity.planet_.name_)
         
-        print("* TRIPLICITIES *")
+        print("* \033[1;32mTRIPLICITIES\033[0m *")
         print("Personal: ", end=" ")
         for personal in personal_list:
             print(f"\033[1m\033[31m{personal}\033[0m", end = " ")
@@ -787,7 +787,7 @@ class Chart:
             # Self transcendence
             transcendence_list.append(entity.planet_.name_)
 
-        print("* QUADRANTS *")
+        print("* \033[1;32mQUADRANTS\033[0m *")
         print("Self development: ", end=" ")
         for development in development_list:
             print(f"\033[1m\033[31m{development}\033[0m", end = " ")
@@ -815,13 +815,13 @@ class Chart:
     def get_lunar_phase(self):
         delta: Polar = to_polar(self.moon_.posit_ - self.sun_.posit_)
         lunar_phase  = LunarPhases.get_from_angle(LunarPhases, delta.deg_)
-        print("* LUNAR PHASE *")
+        print("* \033[1;32mLUNAR PHASE\033[0m *")
         print(lunar_phase.name_ + ":", end=" ")
         delta.print()
         print()
 
     def get_dignities_debilities(self):
-        print("* DIGNITIES & DEBILITIES *")
+        print("* \033[1;32mDIGNITIES & DEBILITIES\033[0m *")
         for planet in self._all_planets():
             if planet.posit_.sign_.name_ in planet.planet_.ruler_:
                 print(planet.planet_.name_, f"in \033[1m\033[36mrulership\033[0m")
@@ -834,7 +834,7 @@ class Chart:
         print()
 
     def get_rulerships(self):
-        print("/* RULERSHIPS */")
+        print("* \033[1;32mRULERSHIPS\033[0m *")
         for planet in self._all_planets_except_chiron():
             print(planet.planet_.name_, "rules:", end= " ")
             if planet.ruled_houses_ == []:
@@ -847,7 +847,7 @@ class Chart:
 
     def get_mutual_receptions(self):
         """Finds and reports all mutual receptions"""
-        print("* MUTUAL RECEPTIONS *")
+        print("* \033[1;32mMUTUAL RECEPTIONS\033[0m *")
         mutual_receptions: bool = False
         unvisited_planets = self._all_planets_except_chiron()
         for planet in self._all_planets_except_chiron():
@@ -876,24 +876,62 @@ class Chart:
         for planet in self._all_planets_except_chiron():
             print(planet.posit_.sign_.ruler_)
 
-    # TODO: In utils.py, add an option to save the full report in a file
-    # Open a file in write mode like so:
-    # with open("output.txt", "w") as file: 
-    #     print("This will go to the file", file=file)
+    def export(self):
+        """Write all of the information we computed to a file"""
+        with open(f"{REPORTS}/report.txt", "w") as report_txt: 
+            stdout = sys.stdout
+            sys.stdout = report_txt
+            
+            try:
+                # 3.
+                self.get_chart_ruler()
+                # 4.
+                self.get_house_cusps()
+                # 5.
+                self.get_entities_in_signs_and_houses()
+                # 6.
+                self.get_aspects()
+                # 7.
+                self.get_polarity()
+                # 8.
+                self.get_elements()
+                # 9.
+                self.get_modes()
+                # 10.
+                self.get_hemispheres()
+                # 11.
+                self.get_triple_division()
+                # 12.
+                self.get_quadrant_division()
+                # 13.
+                self.get_lunar_phase()
+                # 14.
+                self.get_dignities_debilities()
+                # 15.
+                self.get_rulerships()
+                # 16.
+                self.get_mutual_receptions()
+            finally:
+                sys.stdout = stdout
+        
+        clean_file(f"{REPORTS}/report.txt")
 
-if __name__ == "__main__":
-    chart = Chart(Chart.get_filename(), Chart.get_house_system())
-    chart.get_chart_ruler()
-    chart.get_house_cusps()
-    chart.get_entities_in_signs_and_houses()
-    chart.get_aspects()
-    chart.get_polarity()
-    chart.get_elements()
-    chart.get_modes()
-    chart.get_hemispheres()
-    chart.get_triple_division()
-    chart.get_quadrant_division()
-    chart.get_lunar_phase()
-    chart.get_dignities_debilities()
-    chart.get_rulerships()
-    chart.get_mutual_receptions()
+###########################################################################
+#                             FILE UTILITIES                              #
+###########################################################################
+
+def remove_ansi_escape_sequences(text):
+    ansi_escape = re.compile(r'\033.*?m')
+    return ansi_escape.sub('', text)
+
+def clean_file(file_path):
+    """Clean the content of a file by removing ANSI sequences"""
+    try:
+        with open(file_path, 'r') as file:
+            content = file.read()
+        cleaned_content = remove_ansi_escape_sequences(content)
+        with open(file_path, 'w') as file:
+            file.write(cleaned_content)
+        print(f"File {file_path} cleaned successfully.")
+    except Exception as e:
+        print(f"Error: {e}")
