@@ -50,6 +50,9 @@ class Birthplace():
                     print("Invalid input! " + prompt)
 
 class Client():
+
+    # TODO: Investigate Client and Chart relationships.
+
     def __init__(self):
         self.id_: Identity = Identity.set_identity(Identity)
         self.bday_: datetime = self._get_date_utc()

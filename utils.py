@@ -346,15 +346,16 @@ def print_chart_full_menu():
     print("+--------------------------------------------------+")
     print("|          ---===  * Chart Menu *  ===---          |")
     print("+-----------------------+--------------------------+")
-    print("| 1.  New chart         | 10. Hemispheres          |")
-    print("| 2.  Load chart        | 11. Triples              |")
-    print("| 3.  Chart ruler       | 12. Quadrants            |")
-    print("| 4.  House cusps       | 13. Lunar phase          |")
-    print("| 5.  Placements        | 14. Dignities/Debilities |")
-    print("| 6.  Aspects           | 15. Rulerships           |")
-    print("| 7.  Polarity          | 16. Mutual receptions    |")
-    print("| 8.  Elements          | 17. All                  |")
-    print("| 9.  Modes             | 18. Export               |")
+    print("| 1.  Calculate chart   | 11. Hemispheres          |")
+    print("| 2.  Input chart       | 12. Triples              |")
+    print("| 3.  Load chart        | 13. Quadrants            |")
+    print("| 4.  Chart ruler       | 14. Lunar phase          |")
+    print("| 5.  House cusps       | 15. Dignities/Debilities |")
+    print("| 6.  Placements        | 16. Rulerships           |")
+    print("| 7.  Aspects           | 17. Mutual receptions    |")
+    print("| 8.  Polarity          | 18. All                  |")
+    print("| 9.  Elements          | 19. All to file          |")
+    print("| 10. Modes             |                          |")
     print("+-----------+-----------+---+-----------+----------+")
     print("| m.  Menu  |  s.  Sign ops |  c. Calc  | q.  Quit |")
     print("+-----------+---------------+-----------+----------+")
@@ -366,8 +367,9 @@ def print_chart_short_menu():
     print("+--------------------------------------------------+")
     print("|          ---===  * Chart Menu *  ===---          |")
     print("+-----------------------+--------------------------+")
-    print("| 1.  New chart         |                          |")
-    print("| 2.  Load chart        |                          |")
+    print("| 1.  Calculate chart   |                          |")
+    print("| 2.  Input chart       |                          |")
+    print("| 3.  Load chart        |                          |")
     print("+-----------+-----------+---+-----------+----------+")
     print("| m.  Menu  |  s.  Sign ops |  c. Calc  | q.  Quit |")
     print("+-----------+---------------+-----------+----------+")
@@ -377,11 +379,16 @@ def print_chart_short_menu():
 def print_chart_menu():
     print_chart_full_menu() if chart else print_chart_short_menu()
 
-def chart_new_chart_handler():
+def chart_calculate_handler():
+    # TODO: Get the planet positions and the house cusps from the client's birthday
+    # and birthplace from the corresponding APIs in the `positions` module.
+    pass
+
+def chart_input_handler():
     global chart
     chart = Chart("", Chart.get_house_system())
 
-def chart_load_chart_handler():
+def chart_load__handler():
     global chart
     chart = Chart(Chart.get_filename(), Chart.get_house_system())    
 
@@ -487,8 +494,9 @@ def chart_all_handler():
     else: 
         print("Load or input chart data using menu options 1 or 2")
 
-def chart_export_handler():
+def chart_report_handler():
     if chart is not None:
-        chart.export()
+        chart.report()
+        print(f"Created: {REPORTS}report.txt ")
     else: 
         print("Load or input chart data using menu options 1 or 2")

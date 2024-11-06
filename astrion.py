@@ -118,42 +118,49 @@ while (True):
         while(True):
             sub_choice = input("> ")
             print_chart_menu()
+            # TODO: Create a menu for getting the chart from birthdate and 
+            # birthplace
             if sub_choice == "1":
-                chart_new_chart_handler()
+                chart_calculate_handler()
+                print_chart_menu()
             elif sub_choice == "2":
-                chart_load_chart_handler()
+                chart_input_handler()
+                print_chart_menu()
             elif sub_choice == "3":
-                chart_ruler__handler()
+                chart_load__handler()
+                print_chart_menu()
             elif sub_choice == "4":
-                chart_house_cusps_handler()
+                chart_ruler__handler()
             elif sub_choice == "5":
-                chart_placements_handler()
+                chart_house_cusps_handler()
             elif sub_choice == "6":
-                chart_aspects_handler()
+                chart_placements_handler()
             elif sub_choice == "7":
-                chart_polarity_handler()
+                chart_aspects_handler()
             elif sub_choice == "8":
-                chart_elements_handler()
+                chart_polarity_handler()
             elif sub_choice == "9":
-                chart_mode_handler()
+                chart_elements_handler()
             elif sub_choice == "10":
-                chart_hemispheres_handler()
+                chart_mode_handler()
             elif sub_choice == "11":
-                chart_triple_handler()
+                chart_hemispheres_handler()
             elif sub_choice == "12":
-                chart_quadrant_handler()
+                chart_triple_handler()
             elif sub_choice == "13":
-                chart_lunar_phase_handler()
+                chart_quadrant_handler()
             elif sub_choice == "14":
-                chart_dignities_debilities_handler()
+                chart_lunar_phase_handler()
             elif sub_choice == "15":
-                chart_rulerships_handler()
+                chart_dignities_debilities_handler()
             elif sub_choice == "16":
-                chart_mutual_reception_handler()
+                chart_rulerships_handler()
             elif sub_choice == "17":
-                chart_all_handler()
+                chart_mutual_reception_handler()
             elif sub_choice == "18":
-                chart_export_handler()
+                chart_all_handler()
+            elif sub_choice == "19":
+                chart_report_handler()
             elif exit_submenu(sub_choice, E_CHART_MENU):
                 break
 

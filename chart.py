@@ -99,6 +99,10 @@ class Chart:
     #                             INITIALIZATION                              #
     ###########################################################################
 
+    # TODO: Consider getting all the Client initialization here so we can 
+    # improve the report with the Clients name etc. This will make it like 
+    # a chart based compared to client based system.
+
     def __init__(self, path: str = "", placidus: bool = True):
         """placidus: True for Placidus and False for Equal house systems"""
         self.placidus = placidus
@@ -184,15 +188,7 @@ class Chart:
                             cusp.posit_.sign_.name_, cusp.posit_.min_])
 
         # Optionally, export chart data to custom file in default location
-        option = input("Would you like to save the data? (Y/n): ")
-        if option == 'Y':
-            filename = input("Enter the file name (without extension): ")
-            print("The file will be saved in: " + CHARTS + ".csv")
-            header = ['Planet', 'Degrees', 'Sign', 'Minutes']
-            with open(CHARTS + filename + '.csv', mode='w', newline='') as file:
-                writer = csv.writer(file)
-                writer.writerow(header) # Write the header first
-                writer.writerows(data)
+        self._export(data)
 
     def _load(self, filename: str, placidus: bool):
         """Get the chart data data from a file specified from the user"""
@@ -269,6 +265,12 @@ class Chart:
 
             # For any house system, calculate all other cusps
             self._calc_rest_chart(placidus)
+
+    # TODO: Create a third option for the constructor to use, like the _input()
+    # and _load(), say _from_place_and_date() and hand it over to the APIs to
+    # calculate the planets and house cusps positions. Then give the user the
+    # option to save the calculations to a file as we did in the _input() after
+    # making the corresponding code available through a helper function
 
     def _calc_rest_chart(self, placidus: bool):
         """Given the basic chart data, calculates the rest of the house cusps
@@ -365,40 +367,6 @@ class Chart:
                     planet.ruled_houses_.append(house.house_.id_)
                 elif planet.planet_.name_ in house.posit_.sign_.ruler_:
                     planet.ruled_houses_.append(house.house_.id_)
-
-    ###########################################################################
-    #                                HELPERS                                  #
-    ###########################################################################
-
-    def _all_houses(self):
-        return [self.first_, self.second_, self.third_, self.fourth_, self.fifth_,
-                self.sixth_, self.seventh_, self.eight_, self.ninth_, self.tenth_,
-                self.eleventh_, self.twelvth_]
-
-    def _traditional_asc_mc(self):
-        return [self.sun_, self.moon_, self.mercury_, self.venus_, self.mars_, 
-                self.jupiter_, self.saturn_, self.asc_, self.mc_]
-
-    def _all_planets(self):
-        return [self.sun_, self.moon_, self.mercury_, self.venus_, self.mars_, 
-                self.jupiter_, self.saturn_, self.uranus_, self.neptune_,
-                self.pluto_, self.chiron_]
-
-    def _all_planets_except_chiron(self):
-        return [self.sun_, self.moon_, self.mercury_, self.venus_, self.mars_, 
-                self.jupiter_, self.saturn_, self.uranus_, self.neptune_,
-                self.pluto_]
-
-    def _all_planets_asc_mc_nn(self):
-        return [self.sun_, self.moon_, self.mercury_, self.venus_, self.mars_, 
-                self.jupiter_, self.saturn_, self.uranus_, self.neptune_,
-                self.pluto_, self.chiron_, self.asc_, self.mc_, self.north_node_]
-    
-    def _all_entities(self):
-        return [self.sun_, self.moon_, self.mercury_, self.venus_, self.mars_, 
-                self.jupiter_, self.saturn_, self.uranus_, self.neptune_,
-                self.pluto_, self.chiron_, self.asc_, self.dsc_, self.mc_, self.ic_,
-                self.north_node_, self.south_node_]
 
     ###########################################################################
     #                                   API                                   #
@@ -876,7 +844,7 @@ class Chart:
         for planet in self._all_planets_except_chiron():
             print(planet.posit_.sign_.ruler_)
 
-    def export(self):
+    def report(self):
         """Write all of the information we computed to a file"""
         with open(f"{REPORTS}/report.txt", "w") as report_txt: 
             stdout = sys.stdout
@@ -914,24 +882,66 @@ class Chart:
             finally:
                 sys.stdout = stdout
         
-        clean_file(f"{REPORTS}/report.txt")
+        self._clean_file(f"{REPORTS}/report.txt")
 
-###########################################################################
-#                             FILE UTILITIES                              #
-###########################################################################
+    ###########################################################################
+    #                                HELPERS                                  #
+    ###########################################################################
 
-def remove_ansi_escape_sequences(text):
-    ansi_escape = re.compile(r'\033.*?m')
-    return ansi_escape.sub('', text)
+    def _all_houses(self):
+        return [self.first_, self.second_, self.third_, self.fourth_, self.fifth_,
+                self.sixth_, self.seventh_, self.eight_, self.ninth_, self.tenth_,
+                self.eleventh_, self.twelvth_]
 
-def clean_file(file_path):
-    """Clean the content of a file by removing ANSI sequences"""
-    try:
-        with open(file_path, 'r') as file:
-            content = file.read()
-        cleaned_content = remove_ansi_escape_sequences(content)
-        with open(file_path, 'w') as file:
-            file.write(cleaned_content)
-        print(f"File {file_path} cleaned successfully.")
-    except Exception as e:
-        print(f"Error: {e}")
+    def _traditional_asc_mc(self):
+        return [self.sun_, self.moon_, self.mercury_, self.venus_, self.mars_, 
+                self.jupiter_, self.saturn_, self.asc_, self.mc_]
+
+    def _all_planets(self):
+        return [self.sun_, self.moon_, self.mercury_, self.venus_, self.mars_, 
+                self.jupiter_, self.saturn_, self.uranus_, self.neptune_,
+                self.pluto_, self.chiron_]
+
+    def _all_planets_except_chiron(self):
+        return [self.sun_, self.moon_, self.mercury_, self.venus_, self.mars_, 
+                self.jupiter_, self.saturn_, self.uranus_, self.neptune_,
+                self.pluto_]
+
+    def _all_planets_asc_mc_nn(self):
+        return [self.sun_, self.moon_, self.mercury_, self.venus_, self.mars_, 
+                self.jupiter_, self.saturn_, self.uranus_, self.neptune_,
+                self.pluto_, self.chiron_, self.asc_, self.mc_, self.north_node_]
+    
+    def _all_entities(self):
+        return [self.sun_, self.moon_, self.mercury_, self.venus_, self.mars_, 
+                self.jupiter_, self.saturn_, self.uranus_, self.neptune_,
+                self.pluto_, self.chiron_, self.asc_, self.dsc_, self.mc_, self.ic_,
+                self.north_node_, self.south_node_]
+    
+    def _export(self, data):
+        """Optionally exports the csv file containing the planets and house cusps 
+        positions"""
+        option = input("Would you like to save the data? (Y/n): ")
+        if option == 'Y':
+            filename = input("Enter the file name (without extension): ")
+            header = ['Planet', 'Degrees', 'Sign', 'Minutes']
+            with open(CHARTS + filename + '.csv', mode='w', newline='') as file:
+                writer = csv.writer(file)
+                writer.writerow(header) # Write the header first
+                writer.writerows(data)
+                print("Saved at: " + CHARTS + filename + ".csv")
+
+    def _remove_ansi_escape_sequences(self, text):
+        ansi_escape = re.compile(r'\033.*?m')
+        return ansi_escape.sub('', text)
+
+    def _clean_file(self, file_path):
+        """Clean the content of a file by removing ANSI sequences"""
+        try:
+            with open(file_path, 'r') as file:
+                content = file.read()
+            cleaned_content = self._remove_ansi_escape_sequences(content)
+            with open(file_path, 'w') as file:
+                file.write(cleaned_content)
+        except Exception as e:
+            print(f"Error: {e}")
