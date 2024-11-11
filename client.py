@@ -15,35 +15,32 @@ class Identity():
         return self
 
 class Birthplace():
-    def __init__(self):
-        self.lat_: float
-        self.long_: float
-        self.h_: float
+    def __init__(self, lat, long):
+        assert abs(lat) < 90, "Latitude must be [0-90)"
+        assert abs(long) < 180, "Longitude must be [0-180)"
+        self.long_: float = long
+        self.lat_: float = lat
 
     def set_birthplace(self):
-        prompt = "Please enter 'Longitude/Latitude/Elevation' separated by space: "
+        prompt = "Please enter 'Latitude/Longitude' separated by space: "
         while True:
             try:
                 # Check if floats
                 user_input = input(prompt)
-                long, lat, h = map(float, user_input.split(" "))
-                if long < 0 or long > 359.9999999999:
-                    print("Longitude must be [0-360)")
-                elif lat < 0 or lat > 89.999999999:
-                    print("Latitude must be [0-90)")
-                elif h < 0 or h > 8850:
-                    print("Latitude must be [0-8850) meters")
+                lat, long = map(float, user_input.split(" "))
+                if abs(lat) > 89.9999999999:
+                    print("Latitude must be [0-90) in decimal, (-) for South")
+                elif abs(long) > 179.9999999999:
+                    print("Longitude must be [0-180) in decimal, (-) for West")
                 else:
-                    self.long_ = long
                     self.lat_ = lat
-                    self.h_ = h
+                    self.long_ = long
                     return self
             except ValueError:
                 try:
                     # If floats fail, check if integers
                     self.long_ = int(long)
                     self.lat_ = int(lat)
-                    self.h_ = int(h)
                     return self
                 except ValueError:
                     # Error if not an integer or float
@@ -80,7 +77,7 @@ class Client():
         print("\n* CLIENT *\n")
         print(self.id_.name_ + self.id_.lastname_)
         print(self.bday_.strftime('%Y-%m-%dT%H:%M'))
-        print(f"Long: {self.bplace_.long_}° / Lat: {self.bplace_.lat_}°, / h: {self.bplace_.h_}")
+        print(f"Long: {self.bplace_.long_}° / Lat: {self.bplace_.lat_}°")
 
 if __name__ == "__main__":
     client = Client()
