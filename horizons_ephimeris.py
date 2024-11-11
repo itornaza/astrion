@@ -1,16 +1,16 @@
 #
-# horizons
+# horizons_ephimeris
 #
 
-from datetime import datetime, timezone, timedelta
+from datetime import datetime, timedelta
 import re
 import urllib.parse
 import urllib.request
 from urllib.error import HTTPError, URLError
 
+from client import *
 from constants import *
 from pangle import Ecliptic
-from client import *
 
 class HorizonsError(Exception):
     """Exception raised when the NASA API response does not contain floats"""
@@ -18,7 +18,7 @@ class HorizonsError(Exception):
         self.message = message
         super().__init__(self.message)
 
-class Horizons():
+class HorizonsEphimeris():
     # https://ssd-api.jpl.nasa.gov/doc/horizons.html
     # https://ssd.jpl.nasa.gov/horizons/manual.html
 

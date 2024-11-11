@@ -20,6 +20,7 @@ from signs import *
 # Global location that all charts are stored
 CHARTS = os.path.join(os.path.expanduser("~"), "Documents") + "/astrion-data/charts/"
 REPORTS = os.path.join(os.path.expanduser("~"), "Documents") + "/astrion-data/reports/"
+
 class ChartPlanet:
     def __init__(self, planet: Planet, posit: Ecliptic):
         self.planet_: Planet = planet
