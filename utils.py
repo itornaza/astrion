@@ -380,9 +380,9 @@ def print_chart_menu():
     print_chart_full_menu() if chart else print_chart_short_menu()
 
 def chart_calculate_handler():
-    # TODO: Get the planet positions and the house cusps from the client's birthday
-    # and birthplace from the corresponding APIs in the `positions` module.
-    pass
+    global chart
+    # TODO: Force Placidus until implementing Swiss Ephimeris Equal set up
+    chart = Chart("ephimeris", True)
 
 def chart_input_handler():
     global chart

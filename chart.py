@@ -2,8 +2,6 @@
 # chart
 #
 
-# TODO: Get astronomical data from an API???
-
 import csv
 import os
 import sys
@@ -11,6 +9,7 @@ import sys
 from angles import *
 from aspects import *
 from houses import *
+from ephimeris_handler import *
 from lunar_nodes import *
 from lunar_phases import *
 from pangle import Ecliptic, Polar, to_polar, get_ecliptic
@@ -107,13 +106,25 @@ class Chart:
     def __init__(self, path: str = "", placidus: bool = True):
         """placidus: True for Placidus and False for Equal house systems"""
         self.placidus = placidus
-        self._input(self.placidus) if (path == "") else self._load(path, self.placidus)
+
+        # Get and branch on choice to select either _input, _load, _calc
+        if path == "":
+            self._input(self.placidus)
+        elif path == "ephimeris":
+            self._calc()
+        else:
+            self._load(path, self.placidus)
+        
+        # Calculate entities relationships 
         self.aspects = ChartAspects()
         self._entities_in_houses()
         self._rulerships()
 
     def _input(self, placidus: bool):
         """Get the chart data from the user via the cli"""
+
+        # Get the Name of the client in case we want to save the file later
+        client_id = Identity.set_identity(Identity)
 
         # User input for any house system
         eclipitc_format = " position in `dd sign mm`: "
@@ -167,29 +178,8 @@ class Chart:
         # For any house system, calculate all other cusps
         self._calc_rest_chart(placidus)
 
-        # Prepare data to export into the file
-        entities = self._all_planets_asc_mc_nn()
-        data = []
-        for entity in entities:
-            if isinstance(entity, ChartPlanet):
-                data.append([entity.planet_.name_, entity.posit_.deg_, 
-                             entity.posit_.sign_.name_, entity.posit_.min_])
-            elif isinstance(entity, ChartAngle):
-                data.append([entity.angle_.name_, entity.posit_.deg_, 
-                             entity.posit_.sign_.name_, entity.posit_.min_])
-            elif isinstance(entity, ChartLunarNode):
-                data.append([entity.lunar_node_.name_, entity.posit_.deg_, 
-                             entity.posit_.sign_.name_, entity.posit_.min_])
-                
-        # Export the extra information needed for placidus
-        if placidus:
-            # Add the cusps to the data that will be added to the new file
-            for cusp in [self.second_, self.third_, self.fifth_, self.sixth_]:
-                data.append([cusp.house_.name_, cusp.posit_.deg_, 
-                            cusp.posit_.sign_.name_, cusp.posit_.min_])
-
         # Optionally, export chart data to custom file in default location
-        self._export(data)
+        self._export(client_id, placidus)
 
     def _load(self, filename: str, placidus: bool):
         """Get the chart data data from a file specified from the user"""
@@ -267,11 +257,52 @@ class Chart:
             # For any house system, calculate all other cusps
             self._calc_rest_chart(placidus)
 
-    # TODO: Create a third option for the constructor to use, like the _input()
-    # and _load(), say _from_place_and_date() and hand it over to the APIs to
-    # calculate the planets and house cusps positions. Then give the user the
-    # option to save the calculations to a file as we did in the _input() after
-    # making the corresponding code available through a helper function
+    def _calc(self):
+        # Note: cusp index is actual house number - 1
+        eph = EphimerisHandler()
+
+        # Set all planets except Chiron
+        self.sun_ = ChartPlanet(Planets.sun_, eph.all_planets_except_chiron_.sun_)
+        self.moon_ = ChartPlanet(Planets.moon_, eph.all_planets_except_chiron_.moon_)
+        self.mercury_ = ChartPlanet(Planets.mercury_, eph.all_planets_except_chiron_.mercury_)
+        self.venus_ = ChartPlanet(Planets.venus_, eph.all_planets_except_chiron_.venus_)
+        self.mars_ = ChartPlanet(Planets.mars_, eph.all_planets_except_chiron_.mars_)
+        self.saturn_ = ChartPlanet(Planets.saturn_, eph.all_planets_except_chiron_.jupiter_)
+        self.jupiter_ = ChartPlanet(Planets.jupiter_, eph.all_planets_except_chiron_.saturn_)
+        self.uranus_ = ChartPlanet(Planets.uranus_, eph.all_planets_except_chiron_.uranus_)
+        self.neptune_ = ChartPlanet(Planets.neptune_, eph.all_planets_except_chiron_.neptune_)
+        self.pluto_ = ChartPlanet(Planets.pluto_, eph.all_planets_except_chiron_.pluto_)
+        
+        # Set Chiron
+        self.chiron_ = ChartPlanet(Planets.chiron_, eph.chiron_.chiron_)
+
+        # Set the Houses
+        self.first_ = ChartHouse(Houses.first_, eph.houses_and_nodes_.cusps_[0])
+        self.second_ = ChartHouse(Houses.second_, eph.houses_and_nodes_.cusps_[1])
+        self.third_ = ChartHouse(Houses.third_, eph.houses_and_nodes_.cusps_[2])
+        self.fourth_ = ChartHouse(Houses.fourth_, eph.houses_and_nodes_.cusps_[3])
+        self.fifth_ = ChartHouse(Houses.fifth_, eph.houses_and_nodes_.cusps_[4])
+        self.sixth_ = ChartHouse(Houses.sixth_, eph.houses_and_nodes_.cusps_[5])
+        self.seventh_ = ChartHouse(Houses.seventh_, eph.houses_and_nodes_.cusps_[6])
+        self.eight_ = ChartHouse(Houses.eight_, eph.houses_and_nodes_.cusps_[7])
+        self.ninth_ = ChartHouse(Houses.ninth_, eph.houses_and_nodes_.cusps_[8])
+        self.tenth_ = ChartHouse(Houses.tenth_, eph.houses_and_nodes_.cusps_[9])
+        self.eleventh_ = ChartHouse(Houses.eleventh_, eph.houses_and_nodes_.cusps_[10])
+        self.twelvth_ = ChartHouse(Houses.twelvth_, eph.houses_and_nodes_.cusps_[11])
+
+        # Set the Angles
+        self.asc_ = ChartAngle(Angles.asc_, eph.houses_and_nodes_.cusps_[0])
+        self.ic_ = ChartAngle(Angles.asc_, eph.houses_and_nodes_.cusps_[3])
+        self.dsc_ = ChartAngle(Angles.asc_, eph.houses_and_nodes_.cusps_[6])
+        self.mc_ = ChartAngle(Angles.asc_, eph.houses_and_nodes_.cusps_[9])
+
+        # Set the Lunar Nodes
+        self.north_node_ = ChartLunarNode(LunarNodes.north_node_, eph.houses_and_nodes_.nodes_[0])
+        self.south_node_ = ChartLunarNode(LunarNodes.south_node_, eph.houses_and_nodes_.nodes_[1])
+
+        # Optional Export with the patients name as filename, True for Placidus
+        client_id = eph.client_.id_
+        self._export(client_id, True) 
 
     def _calc_rest_chart(self, placidus: bool):
         """Given the basic chart data, calculates the rest of the house cusps
@@ -405,14 +436,17 @@ class Chart:
         print("* \033[1;32mENTITIES IN SIGNS & HOUSES\033[0m *")
         for entity in self._all_entities():
             if isinstance(entity, ChartPlanet):
-                print(entity.planet_.name_ + " in " + entity.posit_.sign_.name_ +
-                      " in " + str(entity.house_.house_.id_))
+                print(entity.planet_.name_ + " in " + entity.posit_.sign_.name_ + 
+                      " in " + str(entity.house_.house_.id_), end="   @")
+                entity.posit_.print()
             elif isinstance(entity, ChartAngle):
                 print(entity.angle_.name_ + " in " + entity.posit_.sign_.name_ +
-                      " in " + str(entity.house_.house_.id_))
+                      " in " + str(entity.house_.house_.id_), end="   @")
+                entity.posit_.print()
             elif isinstance(entity, ChartLunarNode):
                 print(entity.lunar_node_.name_ + " in " + entity.posit_.sign_.name_ + 
-                      " in " + str(entity.house_.house_.id_))
+                      " in " + str(entity.house_.house_.id_), end="   @")
+                entity.posit_.print()
         print() # Each entry in a separate line
 
     # TODO: Get unique aspects on another function. Not dublicated as in here.
@@ -919,12 +953,36 @@ class Chart:
                 self.pluto_, self.chiron_, self.asc_, self.dsc_, self.mc_, self.ic_,
                 self.north_node_, self.south_node_]
     
-    def _export(self, data):
+    # TODO: Generalize to use both from _input and _calc
+    def _export(self, client_id: Identity, placidus: bool):
         """Optionally exports the csv file containing the planets and house cusps 
         positions"""
         option = input("Would you like to save the data? (Y/n): ")
         if option == 'Y':
-            filename = input("Enter the file name (without extension): ")
+
+            # Prepare data to export into the file
+            entities = self._all_planets_asc_mc_nn()
+            data = []
+            for entity in entities:
+                if isinstance(entity, ChartPlanet):
+                    data.append([entity.planet_.name_, entity.posit_.deg_, 
+                                entity.posit_.sign_.name_, entity.posit_.min_])
+                elif isinstance(entity, ChartAngle):
+                    data.append([entity.angle_.name_, entity.posit_.deg_, 
+                                entity.posit_.sign_.name_, entity.posit_.min_])
+                elif isinstance(entity, ChartLunarNode):
+                    data.append([entity.lunar_node_.name_, entity.posit_.deg_, 
+                             entity.posit_.sign_.name_, entity.posit_.min_])
+                
+            # Export the extra information needed for placidus
+            if placidus:
+                # Add the cusps to the data that will be added to the new file
+                for cusp in [self.second_, self.third_, self.fifth_, self.sixth_]:
+                    data.append([cusp.house_.name_, cusp.posit_.deg_, 
+                                cusp.posit_.sign_.name_, cusp.posit_.min_])
+
+
+            filename = client_id.name_ + "-" + client_id.lastname_
             header = ['Planet', 'Degrees', 'Sign', 'Minutes']
             with open(CHARTS + filename + '.csv', mode='w', newline='') as file:
                 writer = csv.writer(file)

@@ -118,8 +118,6 @@ while (True):
         while(True):
             sub_choice = input("> ")
             print_chart_menu()
-            # TODO: Create a menu for getting the chart from birthdate and 
-            # birthplace
             if sub_choice == "1":
                 chart_calculate_handler()
                 print_chart_menu()
