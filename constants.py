@@ -6,7 +6,7 @@
 # on orbs and whatever else can be configurable. Then load these options and assign
 # them to constants below to be used throughout the application
 
-VERSION = "v4.0"
+VERSION = "v5.0"
 
 # Menu map
 M_ASTRION = "0"
