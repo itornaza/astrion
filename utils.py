@@ -112,6 +112,7 @@ def print_object(object):
         if isinstance(object, Aspect):
             Aspects.print_keywords(Aspects, object.name_) 
         if isinstance(object, Angle):
+            # TODO: Debug, not printing the asc, dsc, mc, ic
             Angles.print_keywords(Angles, object.name_) 
         if isinstance(object, Polarity):
             Polarities.print_keywords(Polarities, object.name_) 
