@@ -799,7 +799,7 @@ class Keywords:
             "yin", 
             "introvert", 
             "self-reflective"
-        ],
+        ]
     }
 
     modes_ = {

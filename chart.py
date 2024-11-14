@@ -16,9 +16,10 @@ from pangle import Ecliptic, Polar, to_polar, get_ecliptic
 from planets import *
 from signs import *
 
-# Global location that all charts are stored
-CHARTS = os.path.join(os.path.expanduser("~"), "Documents") + "/astrion-data/charts/"
-REPORTS = os.path.join(os.path.expanduser("~"), "Documents") + "/astrion-data/reports/"
+# Global astrion storage locations
+ASTRION_DATA = os.path.join(os.path.expanduser("~"), "Documents") + "/astrion-data/"
+CHARTS = ASTRION_DATA + "charts/"
+REPORTS = ASTRION_DATA + "reports/"
 
 class ChartPlanet:
     def __init__(self, planet: Planet, posit: Ecliptic):
@@ -413,6 +414,10 @@ class Chart:
             filename = input("Try again: ")
             filename = filename + '.csv'
         return filename
+
+    def get_client_id(self):
+        # TODO: Print the name and lastname only on the outout document
+        pass
 
     def get_house_system():
         option = input("Placidus? (Y/n): ")
@@ -952,13 +957,16 @@ class Chart:
                 self.jupiter_, self.saturn_, self.uranus_, self.neptune_,
                 self.pluto_, self.chiron_, self.asc_, self.dsc_, self.mc_, self.ic_,
                 self.north_node_, self.south_node_]
-    
-    # TODO: Generalize to use both from _input and _calc
+
     def _export(self, client_id: Identity, placidus: bool):
         """Optionally exports the csv file containing the planets and house cusps 
         positions"""
         option = input("Would you like to save the data? (Y/n): ")
         if option == 'Y':
+            # Check if our default directory to store data exists, otherwise create it
+            if not os.path.exists(ASTRION_DATA):
+                os.makedirs(ASTRION_DATA)
+                print(f"Created default storage directory: {ASTRION_DATA}")
 
             # Prepare data to export into the file
             entities = self._all_planets_asc_mc_nn()
@@ -981,7 +989,7 @@ class Chart:
                     data.append([cusp.house_.name_, cusp.posit_.deg_, 
                                 cusp.posit_.sign_.name_, cusp.posit_.min_])
 
-
+            # Export to file named after our client
             filename = client_id.name_ + "-" + client_id.lastname_
             header = ['Planet', 'Degrees', 'Sign', 'Minutes']
             with open(CHARTS + filename + '.csv', mode='w', newline='') as file:
