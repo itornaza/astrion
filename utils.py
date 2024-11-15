@@ -10,7 +10,7 @@ from planets import *
 from signs import *
 from houses import *
 from aspects import *
-from angles import *
+import angles
 from elements import *
 from polarities import *
 from modes import *
@@ -102,6 +102,7 @@ def get_object_from_keyword(k):
 
 # Generic version to print any valid object's keywords
 def print_object(object):
+
     if object:
         if isinstance(object, Planet):
             Planets.print_keywords(Planets, object.name_) 
@@ -111,8 +112,8 @@ def print_object(object):
             Houses.print_keywords(Houses, object.name_) 
         if isinstance(object, Aspect):
             Aspects.print_keywords(Aspects, object.name_) 
-        if isinstance(object, Angle):
-            # TODO: Debug, not printing the asc, dsc, mc, ic
+        if isinstance(object, angles.Angle): 
+            # Do not confuse with Astronomical Angle definitions elsewhere
             Angles.print_keywords(Angles, object.name_) 
         if isinstance(object, Polarity):
             Polarities.print_keywords(Polarities, object.name_) 
