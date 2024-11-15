@@ -48,4 +48,4 @@ class Hemispheres:
     def print_keywords(self, keyword):
         print("\nKeyword list for hemisphere " + keyword.upper() + ":\n")
         for k in Keywords.hemispheres_[keyword]:
-            print("\n\t- " + k)
+            print("\t- " + k)

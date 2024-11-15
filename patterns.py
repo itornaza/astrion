@@ -83,4 +83,4 @@ class Patterns:
     def print_keywords(self, keyword):
         print("\nKeyword list for pattern " + keyword.upper() + ":\n")
         for k in Keywords.patterns_[keyword]:
-            print("\n\t- " + k)
+            print("\t- " + k)

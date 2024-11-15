@@ -10,7 +10,7 @@ from angles import *
 from aspects import *
 from houses import *
 from ephimeris_handler import *
-from lunar_nodes import *
+from lunar_nodes import LunarNode, LunarNodes
 from lunar_phases import *
 from pangle import Ecliptic, Polar, to_polar, get_ecliptic
 from planets import *
@@ -454,29 +454,40 @@ class Chart:
                 entity.posit_.print()
         print() # Each entry in a separate line
 
-    # TODO: Get unique aspects on another function. Not dublicated as in here.
-    # Check in get_mutual_receptions() for a similar implementation
+    def get_aspects(self, unique: bool):
+        """Returns either all aspects for each entity, or just the unique ones
+        depending on the unique flag"""
 
-    # TODO: Get rid of aspects between axis entities like NN-SS oppositions...
-    def get_aspects(self):
         print("* \033[1;32mASPECTS TABLE\033[0m *")
         entities = self._all_entities()
+        unvisited = self._all_entities()
         for value_a in entities:
-            for value_b in entities:
+            if unique: 
+                unvisited = unvisited[1:]
+            for value_b in unvisited:
+                # Skip nonsensical cases
                 if value_a == value_b: 
+                    # Skip conjunctions with self (like Sun conjunction Sun)
                     continue
+                if type(value_a) == ChartLunarNode and type(value_b) == ChartLunarNode:
+                    # Skip oppositions between Lunar Nodes
+                    continue
+                if type(value_a) == ChartAngle and type(value_b) == ChartAngle:
+                    # Skip aspects between Angles
+                    continue
+
+                # Get the actual aspect
                 delta: Polar = to_polar(value_a.posit_.diff(value_b.posit_))
                 aspect = Aspects.get_aspect_from_angle(delta.to_decimal())
 
-                # First check against the custom aspect cause it will override other
-                # aspects in conflicting arcs
+                # Check against the custom aspect cause it will override standards
                 if self.aspects.custom_ != None:
                     angle = delta.to_decimal()
                     if  angle <= self.aspects.custom_.angle_ + self.aspects.custom_.orb_ and \
                         angle >= self.aspects.custom_.angle_ - self.aspects.custom_.orb_:
                         aspect = self.aspects.custom_
 
-                # Now check against the standard aspects
+                # Check against the standard aspects
                 if aspect != None:
                     # Entity A
                     if isinstance(value_a, ChartPlanet): 
@@ -891,34 +902,20 @@ class Chart:
             sys.stdout = report_txt
             
             try:
-                # 3.
                 self.get_chart_ruler()
-                # 4.
                 self.get_house_cusps()
-                # 5.
                 self.get_entities_in_signs_and_houses()
-                # 6.
-                self.get_aspects()
-                # 7.
                 self.get_polarity()
-                # 8.
                 self.get_elements()
-                # 9.
                 self.get_modes()
-                # 10.
                 self.get_hemispheres()
-                # 11.
                 self.get_triple_division()
-                # 12.
                 self.get_quadrant_division()
-                # 13.
                 self.get_lunar_phase()
-                # 14.
                 self.get_dignities_debilities()
-                # 15.
                 self.get_rulerships()
-                # 16.
                 self.get_mutual_receptions()
+                self.get_aspects(True) # Unique aspects
             finally:
                 sys.stdout = stdout
         
