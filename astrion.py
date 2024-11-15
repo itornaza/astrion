@@ -134,30 +134,34 @@ while (True):
             elif sub_choice == "6":
                 chart_placements_handler()
             elif sub_choice == "7":
-                chart_aspects_handler()
+                # All aspects
+                chart_aspects_handler(False)
             elif sub_choice == "8":
-                chart_polarity_handler()
+                # Uniique aspects
+                chart_aspects_handler(True)
             elif sub_choice == "9":
-                chart_elements_handler()
+                chart_polarity_handler()
             elif sub_choice == "10":
-                chart_mode_handler()
+                chart_elements_handler()
             elif sub_choice == "11":
-                chart_hemispheres_handler()
+                chart_mode_handler()
             elif sub_choice == "12":
-                chart_triple_handler()
+                chart_hemispheres_handler()
             elif sub_choice == "13":
-                chart_quadrant_handler()
+                chart_triple_handler()
             elif sub_choice == "14":
-                chart_lunar_phase_handler()
+                chart_quadrant_handler()
             elif sub_choice == "15":
-                chart_dignities_debilities_handler()
+                chart_lunar_phase_handler()
             elif sub_choice == "16":
-                chart_rulerships_handler()
+                chart_dignities_debilities_handler()
             elif sub_choice == "17":
-                chart_mutual_reception_handler()
+                chart_rulerships_handler()
             elif sub_choice == "18":
-                chart_all_handler()
+                chart_mutual_reception_handler()
             elif sub_choice == "19":
+                chart_all_handler()
+            elif sub_choice == "20":
                 chart_report_handler()
             elif exit_submenu(sub_choice, E_CHART_MENU):
                 break

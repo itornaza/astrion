@@ -124,4 +124,4 @@ class Aspects:
     def print_keywords(self, keyword):
         print("\nKeyword list for a " + keyword.upper() + " aspect:\n")
         for k in Keywords.aspects_[keyword]:
-            print("\n\t- " + k)
+            print("\t- " + k)

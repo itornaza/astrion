@@ -44,4 +44,4 @@ class Trisectors:
     def print_keywords(self, keyword):
         print("\nKeyword list for trisector " + keyword.upper() + ":\n")
         for k in Keywords.trisectors_[keyword]:
-            print("\n\t- " + k)
+            print("\t- " + k)

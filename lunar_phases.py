@@ -90,4 +90,4 @@ class LunarPhases:
     def print_keywords(self, keyword):
         print("\nKeyword list for lunar phase " + keyword.upper() + ":\n")
         for k in Keywords.lunar_phases_[keyword]:
-            print("\n\t- " + k)
+            print("\t- " + k)

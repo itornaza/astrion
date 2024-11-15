@@ -44,4 +44,4 @@ class LunarNodes:
     def print_keywords(self, keyword):
         print("\nKeyword list for lunar node " + keyword.upper() + ":\n")
         for k in Keywords.lunar_nodes_[keyword]:
-            print("\n\t- " + k)
+            print("\t- " + k)

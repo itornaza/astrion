@@ -348,16 +348,16 @@ def print_chart_full_menu():
     print("+--------------------------------------------------+")
     print("|          ---===  * Chart Menu *  ===---          |")
     print("+-----------------------+--------------------------+")
-    print("| 1.  Calculate chart   | 11. Hemispheres          |")
-    print("| 2.  Input chart       | 12. Triples              |")
-    print("| 3.  Load chart        | 13. Quadrants            |")
-    print("| 4.  Chart ruler       | 14. Lunar phase          |")
-    print("| 5.  House cusps       | 15. Dignities/Debilities |")
-    print("| 6.  Placements        | 16. Rulerships           |")
-    print("| 7.  Aspects           | 17. Mutual receptions    |")
-    print("| 8.  Polarity          | 18. All                  |")
-    print("| 9.  Elements          | 19. All to file          |")
-    print("| 10. Modes             |                          |")
+    print("| 1.  Calculate chart   | 11. Modes                |")
+    print("| 2.  Input chart       | 12. Hemispheres          |")
+    print("| 3.  Load chart        | 13. Triples              |")
+    print("| 4.  Chart ruler       | 14. Quadrants            |")
+    print("| 5.  House cusps       | 15. Lunar phase          |")
+    print("| 6.  Placements        | 16. Dignities/Debilities |")
+    print("| 7.  Aspects (all)     | 17. Rulerships           |")
+    print("| 8.  Aspects (unique)  | 18. Mutual receptions    |")
+    print("| 9.  Polarity          | 19. All                  |")
+    print("| 10. Elements          | 20. All to file          |")
     print("+-----------+-----------+---+-----------+----------+")
     print("| m.  Menu  |  s.  Sign ops |  c. Calc  | q.  Quit |")
     print("+-----------+---------------+-----------+----------+")
@@ -412,9 +412,9 @@ def chart_placements_handler():
     else: 
         print("Load or input chart data using menu options 1 or 2")
 
-def chart_aspects_handler():
+def chart_aspects_handler(unique: bool):
     if chart is not None:
-        chart.get_aspects()
+        chart.get_aspects(unique)
     else: 
         print("Load or input chart data using menu options 1 or 2")
 
@@ -482,7 +482,6 @@ def chart_all_handler():
     if chart is not None:
         chart.get_house_cusps()
         chart.get_entities_in_signs_and_houses()
-        chart.get_aspects()
         chart.get_polarity()
         chart.get_elements()
         chart.get_modes()
@@ -493,6 +492,7 @@ def chart_all_handler():
         chart.get_dignities_debilities()
         chart.get_rulerships()
         chart.get_mutual_receptions()
+        chart.get_aspects(True) # Print only the unique aspects
     else: 
         print("Load or input chart data using menu options 1 or 2")
 

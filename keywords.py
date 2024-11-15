@@ -1076,7 +1076,7 @@ class Keywords:
             "Difficulties if emotional climate rises too fast or too height",
             "Tempering of passion with dissernment is neccessary for lasting achievement",
             "May become lost within their own cause or loose touch with personal responsibility "
-            "creating a sense of pwerlessness"
+            "creating a sense of powerlessness"
         ],
         
         LAST_QUARTER: [

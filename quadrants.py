@@ -49,4 +49,4 @@ class Quadrants:
     def print_keywords(self, keyword):
         print("\nKeyword list for quadrant " + keyword.upper() + ":\n")
         for k in Keywords.quadrants_[keyword]:
-            print("\n\t- " + k)
+            print("\t- " + k)
