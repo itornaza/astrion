@@ -1,0 +1,2 @@
+pyswisseph==2.10.3.2
+skyfield==1.49
