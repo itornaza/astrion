@@ -3,12 +3,13 @@
 #
 
 import re
-from constants import *
-from keywords import Keywords
-from elements import *
-from polarities import *
-from modes import *
+
 from aspects import *
+from constants import *
+from elements import *
+from keywords import Keywords
+from modes import *
+from polarities import *
 
 class Sign:
 

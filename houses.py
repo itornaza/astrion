@@ -3,6 +3,7 @@
 #
 
 import re
+
 from constants import *
 from keywords import Keywords
 
