@@ -5,6 +5,7 @@
 # TODO: Start planning a functional test harness
 
 import sys
+
 from utils import *
 
 ###############################################################################

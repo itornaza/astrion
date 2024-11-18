@@ -5,26 +5,25 @@
 import os # os.system()
 import time # time.sleep()
 
-from constants import *
-from planets import *
-from signs import *
-from houses import *
-from aspects import *
 import angles
-from elements import *
-from polarities import *
-from modes import *
-from patterns import *
-from lunar_phases import *
-from lunar_nodes import *
-from hemispheres import *
-from trisectors import *
-from quadrants import *
-from chart import *
-
-from pangle import *
-import calc_planet_position
+from aspects import *
 import calc_ecliptic_angles
+import calc_planet_position
+from chart import *
+from constants import *
+from elements import *
+from hemispheres import *
+from houses import *
+from lunar_nodes import *
+from lunar_phases import *
+from modes import *
+from pangle import *
+from patterns import *
+from planets import *
+from polarities import *
+from signs import *
+from quadrants import *
+from trisectors import *
 
 def print_header(t1_header, t2_credits):
     os.system("clear")

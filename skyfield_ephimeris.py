@@ -6,9 +6,9 @@ from datetime import datetime
 from skyfield.api import load  # type: ignore
 from skyfield.framelib import ecliptic_frame # type: ignore
 
+from client import *
 from constants import *
 from pangle import Ecliptic
-from client import *
 
 class SkyfieldEphimeris():
     # https://rhodesmill.org/skyfield/examples.html

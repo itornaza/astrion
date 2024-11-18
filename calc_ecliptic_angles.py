@@ -2,11 +2,11 @@
 # calc_ecliptic_angles.py
 #
 
-__all__ = ['calculate_aspect_from_angle']
-
-from signs import *
 from aspects import *
 from pangle import Ecliptic, Polar, to_polar, get_ecliptic
+from signs import *
+
+__all__ = ['calculate_aspect_from_angle']
 
 def calculate_aspect_from_angle():
     """Calculates the aspect formed between two ecliptic angles"""
