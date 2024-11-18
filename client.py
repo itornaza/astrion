@@ -22,12 +22,12 @@ class Birthplace():
         self.lat_: float = lat
 
     def set_birthplace(self):
-        prompt = "Please enter 'Latitude/Longitude' separated by space: "
+        prompt = "Please enter 'Latitude/Longitude': "
         while True:
             try:
                 # Check if floats
                 user_input = input(prompt)
-                lat, long = map(float, user_input.split(" "))
+                lat, long = map(float, user_input.split("/"))
                 if abs(lat) > 89.9999999999:
                     print("Latitude must be [0-90) in decimal, (-) for South")
                 elif abs(long) > 179.9999999999:
@@ -56,11 +56,14 @@ class Client():
         self.bplace_: Birthplace = Birthplace.set_birthplace(Birthplace)
 
     def _get_date_utc(self):
-        prompt = "Please enter 'YYYY-MM-DD-HH-MM' in UTC separated by a dash (-): "
+        date_prompt = "Please enter 'YYYY-MM-DD' UTC: "
+        time_prompt = "Enter 'HH:MM' UTC: "
         while True:
             try:
-                user_input = input(prompt)
-                year, month, day, hour, min = map(int, user_input.split("-"))
+                date_input = input(date_prompt)
+                year, month, day = map(int, date_input.split("-"))
+                time_input = input(time_prompt)
+                hour, min = map(int, time_input.split(":"))
                 if month < 1 or month > 12:
                     print("Month must be [1-12]")
                 elif hour < 0 or hour > 23:
@@ -71,7 +74,7 @@ class Client():
                     return datetime(year, month, day, hour, min, 0, 
                                     tzinfo=timezone.utc)
             except ValueError:
-                print("Invalid input! " + prompt)
+                print("Invalid input! Check date and time of birth")
 
     def print(self):
         print("\n* CLIENT *\n")
