@@ -60,6 +60,9 @@ class ChartSolarEclipse(SolarEclipse):
     """Can be any eclipse on the chart, like previous solar, next lunar, 
     prenatal, etc"""
 
+    # TODO: Implement and integrate with the rest of the chart to find 
+    # the eclipse significators 
+
     def __init__(self, bday: datetime, bplace: Birthplace):
         saros, category, posit = self.prenatal(bday)
         super().__init__(saros, category, posit)
