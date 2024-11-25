@@ -8,6 +8,7 @@ import sys
 
 from angles import *
 from aspects import *
+from eclipses import SolarEclipse
 from ephimeris_handler import *
 from houses import *
 from lunar_nodes import LunarNode, LunarNodes
@@ -54,6 +55,56 @@ class ChartLunarNode:
         if isinstance(other, ChartLunarNode):
             return self.lunar_node_.name_ == other.lunar_node_.name_
         return False
+
+class ChartSolarEclipse(SolarEclipse):
+    """Can be any eclipse on the chart, like previous solar, next lunar, 
+    prenatal, etc"""
+
+    def __init__(self, bday: datetime, bplace: Birthplace):
+        saros, category, posit = self.prenatal(bday)
+        super().__init__(saros, category, posit)
+        self.house_: ChartHouse
+        self.delta_days_: int
+
+    def prenatal(bday, bplace):
+        # TODO: Prenatal solar eclipse position in sign and house, date, conjunct
+        # and opposed planets, number of days prior to birth, planetary ruler
+        # planets conjunct horizon
+
+        # Convert birthdate to Julian Day
+        jd_birth = swe.julday(bday.year, bday.month, bday.day, 
+                              bday.hour + bday.minute / 60.0)
+        
+        # Start from six months before birth to ensure we capture the last eclipse
+        start_jd = jd_birth - 182  # 182 days is approximately 6 months
+
+        # Function to check for solar eclipse
+        def check_eclipse(jd):
+            ret, tret, _ = swe.sol_eclipse_when_loc(jd, swe.FLG_SWIEPH, 0, 0, 0)
+            if ret != swe.ERR:
+                return tret[0]  # Time of maximum eclipse
+            return None
+
+        # Look for the last solar eclipse before birth
+        eclipse_jd = None
+        current_jd = start_jd
+        while current_jd < jd_birth:
+            potential_eclipse = check_eclipse(current_jd)
+            if potential_eclipse:
+                if potential_eclipse < jd_birth:
+                    eclipse_jd = potential_eclipse
+                else:
+                    break
+            current_jd += 1  # Increment by one day
+
+        if eclipse_jd:
+            year, month, day, hour, min, sec = swe.revjul(eclipse_jd)
+            return datetime(year, month, day, int(hour), int(min), int(sec))
+        else:
+            return None
+        
+        # TODO: From the datetime of the eclipse, get the position of the 
+        # Sun/Moon conjunction to get the posit of the eclipse
 
 class ChartHouse:
     def __init__(self, house: House, posit: Ecliptic):
