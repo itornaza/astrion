@@ -479,6 +479,7 @@ def chart_mutual_reception_handler():
 
 def chart_all_handler():
     if chart is not None:
+        chart.get_chart_ruler()
         chart.get_house_cusps()
         chart.get_entities_in_signs_and_houses()
         chart.get_polarity()
@@ -491,7 +492,7 @@ def chart_all_handler():
         chart.get_dignities_debilities()
         chart.get_rulerships()
         chart.get_mutual_receptions()
-        chart.get_aspects(True) # Print only the unique aspects
+        chart.get_aspects(True) # Unique aspects
     else: 
         print("Load or input chart data using menu options 1 or 2")
 
