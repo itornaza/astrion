@@ -480,6 +480,7 @@ class Chart:
     def get_chart_ruler(self):
         print("\n* \033[1;32mCHART RULER\033[0m *")
         print(self.asc_.posit_.sign_.ruler_)
+        print()
 
     def get_house_cusps(self):
         if self.placidus:
@@ -492,7 +493,7 @@ class Chart:
         print()        
 
     def get_entities_in_signs_and_houses(self):
-        print("* \033[1;32mENTITIES IN SIGNS & HOUSES\033[0m *")
+        print("\n* \033[1;32mENTITIES IN SIGNS & HOUSES\033[0m *")
         for entity in self._all_entities():
             if isinstance(entity, ChartPlanet):
                 print(entity.planet_.name_ + " in " + entity.posit_.sign_.name_ + 
@@ -506,13 +507,13 @@ class Chart:
                 print(entity.lunar_node_.name_ + " in " + entity.posit_.sign_.name_ + 
                       " in " + str(entity.house_.house_.id_), end="   @")
                 entity.posit_.print()
-        print() # Each entry in a separate line
+        print()
 
     def get_aspects(self, unique: bool):
         """Returns either all aspects for each entity, or just the unique ones
         depending on the unique flag"""
 
-        print("* \033[1;32mASPECTS TABLE\033[0m *")
+        print("\n* \033[1;32mASPECTS TABLE\033[0m *")
         entities = self._all_entities()
         unvisited = self._all_entities()
         for value_a in entities:
@@ -617,7 +618,7 @@ class Chart:
                 elif isinstance(entity, ChartAngle): 
                     negative_list.append(entity.angle_.name_)
 
-        print("* \033[1;32mPOLARITY\033[0m *")
+        print("\n* \033[1;32mPOLARITY\033[0m *")
         print("Positive: ", end=" ")
         for positive in positive_list:
             print(f"\033[1m\033[31m{positive}\033[0m", end = " ")
@@ -667,7 +668,7 @@ class Chart:
                 elif isinstance(entity, ChartAngle): 
                     water_list.append(entity.angle_.name_)
 
-        print("* \033[1;32mELEMENTS\033[0m *")
+        print("\n* \033[1;32mELEMENTS\033[0m *")
         print("Fire: ", end=" ")
         for fire in fire_list:
             print(f"\033[1m\033[31m{fire}\033[0m", end = " ")
@@ -718,7 +719,7 @@ class Chart:
                 elif isinstance(entity, ChartAngle): 
                     mutable_list.append(entity.angle_.name_)
 
-        print("* \033[1;32mMODES\033[0m *")
+        print("\n* \033[1;32mMODES\033[0m *")
         print("Cardinal: ", end=" ")
         for cardinal in cardinal_list:
             print(f"\033[1m\033[31m{cardinal}\033[0m", end = " ")
@@ -739,7 +740,7 @@ class Chart:
 
     def get_hemispheres(self):
         entities = self._all_planets()
-        print("* \033[1;32mHEMISPHERES\033[0m *")
+        print("\n* \033[1;32mHEMISPHERES\033[0m *")
         
         # North/South hemispheres division
         northern_list = []
@@ -811,7 +812,7 @@ class Chart:
             # Universal
             universal_list.append(entity.planet_.name_)
         
-        print("* \033[1;32mTRIPLICITIES\033[0m *")
+        print("\n* \033[1;32mTRIPLICITIES\033[0m *")
         print("Personal: ", end=" ")
         for personal in personal_list:
             print(f"\033[1m\033[31m{personal}\033[0m", end = " ")
@@ -860,7 +861,7 @@ class Chart:
             # Self transcendence
             transcendence_list.append(entity.planet_.name_)
 
-        print("* \033[1;32mQUADRANTS\033[0m *")
+        print("\n* \033[1;32mQUADRANTS\033[0m *")
         print("Self development: ", end=" ")
         for development in development_list:
             print(f"\033[1m\033[31m{development}\033[0m", end = " ")
@@ -888,13 +889,13 @@ class Chart:
     def get_lunar_phase(self):
         delta: Polar = to_polar(self.moon_.posit_ - self.sun_.posit_)
         lunar_phase  = LunarPhases.get_from_angle(LunarPhases, delta.deg_)
-        print("* \033[1;32mLUNAR PHASE\033[0m *")
+        print("\n* \033[1;32mLUNAR PHASE\033[0m *")
         print(lunar_phase.name_ + ":", end=" ")
         delta.print()
         print()
 
     def get_dignities_debilities(self):
-        print("* \033[1;32mDIGNITIES & DEBILITIES\033[0m *")
+        print("\n* \033[1;32mDIGNITIES & DEBILITIES\033[0m *")
         for planet in self._all_planets():
             if planet.posit_.sign_.name_ in planet.planet_.ruler_:
                 print(planet.planet_.name_, f"in \033[1m\033[36mrulership\033[0m")
@@ -907,7 +908,7 @@ class Chart:
         print()
 
     def get_rulerships(self):
-        print("* \033[1;32mRULERSHIPS\033[0m *")
+        print("\n* \033[1;32mRULERSHIPS\033[0m *")
         for planet in self._all_planets_except_chiron():
             print(planet.planet_.name_, "rules:", end= " ")
             if planet.ruled_houses_ == []:
@@ -920,7 +921,7 @@ class Chart:
 
     def get_mutual_receptions(self):
         """Finds and reports all mutual receptions"""
-        print("* \033[1;32mMUTUAL RECEPTIONS\033[0m *")
+        print("\n* \033[1;32mMUTUAL RECEPTIONS\033[0m *")
         mutual_receptions: bool = False
         unvisited_planets = self._all_planets_except_chiron()
         for planet in self._all_planets_except_chiron():
