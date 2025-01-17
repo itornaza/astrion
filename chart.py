@@ -699,21 +699,24 @@ class Chart:
         mutable_list = []
         for entity in entities:
             # Cardinals
-            if entity.posit_.sign_ in [Signs.aries_, Signs.cancer_, Signs.libra_, Signs.capricorn_]:
+            if entity.posit_.sign_ in [Signs.aries_, Signs.cancer_, Signs.libra_, 
+                                       Signs.capricorn_]:
                 if isinstance(entity, ChartPlanet): 
                     cardinal_list.append(entity.planet_.name_)
                 elif isinstance(entity, ChartAngle): 
                     cardinal_list.append(entity.angle_.name_)
             
             # Fixed
-            if entity.posit_.sign_ in [Signs.taurus_, Signs.leo_, Signs.scorpio_, Signs.aquarius_]:
+            if entity.posit_.sign_ in [Signs.taurus_, Signs.leo_, Signs.scorpio_, 
+                                       Signs.aquarius_]:
                 if isinstance(entity, ChartPlanet): 
                     fixed_list.append(entity.planet_.name_)
                 elif isinstance(entity, ChartAngle): 
                     fixed_list.append(entity.angle_.name_)
             
             # Mutable
-            if entity.posit_.sign_ in [Signs.gemini_, Signs.virgo_, Signs.sagittarius_, Signs.pisces_]:
+            if entity.posit_.sign_ in [Signs.gemini_, Signs.virgo_, Signs.sagittarius_, 
+                                       Signs.pisces_]:
                 if isinstance(entity, ChartPlanet): 
                     mutable_list.append(entity.planet_.name_)
                 elif isinstance(entity, ChartAngle): 
