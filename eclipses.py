@@ -5,8 +5,9 @@
 from pangle import Ecliptic
 
 class Saros:
-    def __init__(self, id: int, saros_type: str):
+    def __init__(self, id: int, cycle: int, saros_type: str):
         self.id_ = id
+        seld.cycle_ = cycle
         self.type_ = saros_type
 
 class EclipseType:
