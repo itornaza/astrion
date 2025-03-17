@@ -1159,7 +1159,7 @@ class Keywords:
         SOUTH: [
             "Relationships with external world",
             "Public life style",
-            "(-) Difficullty exploring the inner world"
+            "(-) Difficulty exploring the inner world"
         ],
 
         EAST: [
@@ -1196,7 +1196,7 @@ class Keywords:
 
         UNIVERSAL: [
             "us-in-here",
-            "Exploring the wider world and relating to society through aquiring knowledge",
+            "Exploring the wider world and relating to society through acquiring knowledge",
             "Interaction with wider society and humanity",
             "Seeking integration with the greater whole"
         ]
@@ -1206,7 +1206,7 @@ class Keywords:
         SELF_DEVELOPMENT: [
             "Rawness, youthfulness and embracing of life",
             "Carry new energy and will to explore life",
-            "The individual is becomming a distinct personality",
+            "The individual is becoming a distinct personality",
             "Possession of physical body and questioning mind",
             "Seeks to understand through rational thinking"
         ],
@@ -1218,7 +1218,7 @@ class Keywords:
         ],
 
         SELF_EXPANSION: [
-            "Continues to expand awareness through merging ego with somene else",
+            "Continues to expand awareness through merging ego with someone else",
             "Finds philosophies which encompasses individual relationship",
             "Seek to widen one's thinking will be a quest for life"
         ],
