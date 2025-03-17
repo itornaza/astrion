@@ -884,7 +884,7 @@ class Chart:
         print(f"==> \033[1m\033[31mSelf development = {len(development_list)}\033[0m", end=" ")
         print(f"\033[1m\033[33mSelf expression = {len(expression_list)}\033[0m", end=" ")
         print(f"\033[1m\033[36mSelf expansion = {len(expansion_list)}\033[0m", end= " ")
-        print(f"\033[1m\033[34mSelf trsnscendence = {len(transcendence_list)}\033[0m\n")
+        print(f"\033[1m\033[34mSelf trasnscendence = {len(transcendence_list)}\033[0m\n")
 
         assert len(development_list) + len(expression_list) + \
             len(expansion_list) + len(transcendence_list) == 11
