@@ -114,7 +114,7 @@ class Keywords:
             "realism", 
             "intention", 
             "structure", 
-            "organisation", 
+            "organization", 
             "method", 
             "ambition", 
             "experience", 
@@ -148,7 +148,7 @@ class Keywords:
             "eccentricity", 
             "independence", 
             "alienation", 
-            "mechanisation", 
+            "mechanization", 
             "technology", 
             "breakthrough", 
             "revolution", 
@@ -213,8 +213,8 @@ class Keywords:
             "outgoing", 
             "work alone", 
             "lead", 
-            "imppatient", 
-            "childlike behaviour", 
+            "impatient", 
+            "childlike behavior", 
             "spontaneous"
         ],
         
@@ -249,7 +249,7 @@ class Keywords:
             "adaptable", 
             "diverse", 
             "quick-witted", 
-            "flirtarious", 
+            "flirtatious", 
             "unpredictable", 
             "duplicitous", 
             "shallow", 
@@ -349,8 +349,8 @@ class Keywords:
         ],
         
         SAGITTARIUS: [
-            "οptimistic", 
-            "enthousiastic", 
+            "optimistic", 
+            "enthusiastic", 
             "adventurous", 
             "philosophical", 
             "freedom-loving", 
@@ -365,7 +365,7 @@ class Keywords:
         
         CAPRICORN: [
             "patient", 
-            "organised", 
+            "organized", 
             "serious", 
             "conservative", 
             "controlled", 
@@ -449,14 +449,14 @@ class Keywords:
         THIRD: [
             "the early environment", 
             "siblings", 
-            "neighbours", 
+            "neighbors", 
             "school", 
             "learning and language", 
             "the mind", 
             "development of speech and language", 
             "learning", 
             "education (early schooling and school environment)", 
-            "our immediate surroundings and neighbourhood", 
+            "our immediate surroundings and neighborhood", 
             "short journeys", 
             "communication", 
             "facts", 
@@ -627,7 +627,7 @@ class Keywords:
             "clubs", 
             "groups", 
             "social contacts", 
-            "organisations/committees", 
+            "organizations/committees", 
             "social duties", 
             "political stance", 
             "humanitarian enterprises", 
@@ -681,7 +681,7 @@ class Keywords:
             "Feeling split between ...... and ......",
             "Unable to decide whether to ...... or ......",
             "The ability to develop a healthy balance between ...... and ...... ",
-            "Learning to recognise both ...... and ......"
+            "Learning to recognize both ...... and ......"
         ],
 
         TRINE: [
@@ -829,7 +829,7 @@ class Keywords:
             "stamina", 
             "loyalty", 
             "persistence", 
-            "perseverence", 
+            "perseverance", 
             "constant", 
             "patience", 
             "self-control", 
@@ -869,7 +869,7 @@ class Keywords:
         ],
 
         AIR: [
-            "civilised", 
+            "civilized", 
             "detaches", 
             "objective", 
             "impersonal", 
@@ -907,13 +907,13 @@ class Keywords:
             "A great deal of striving and effort to overcome challenges",
             "By no means indicative of an easy life",
             "May experience life as a great challenge",
-            "May see other people and the matterial world as obstacles to their progress"
+            "May see other people and the material world as obstacles to their progress"
         ],
 
         FINGER_OF_WORLD: [
             "The active challenge of the sesquiquadrates will tend to drive the individual to integrate "
             "and resolve through the focal point",
-            "The inherent conflict of the square is further aggrevated by the more minor frictions and "
+            "The inherent conflict of the square is further aggravated by the more minor frictions and "
             "obstacles indicated by both the sesquiquadrates",
             "Although the subject may never feel close to achieving their aims, they are likely to "
             "remain driven",
@@ -952,7 +952,7 @@ class Keywords:
         ],
 
         KITE: [
-            "Combines the ease, comfort and natural talent of the grand rine with the activity of the two "
+            "Combines the ease, comfort and natural talent of the grand trine with the activity of the two "
             "sextiles and the dynamic tension of the opposition",
             "The apex planet forming the two sextiles will be in different element from the planets in the "
             "grand trine and provides an outlet for the expression of the potential shown by the overall "
@@ -970,7 +970,7 @@ class Keywords:
             "The sextile aspect may indicate an opportunity for the above proposition to be accomplished "
             "with relatively less effort than might be usually be the case with the quincunx aspects",
             "Not until the apex planet is engaged with actively and continuously, and the irritations of "
-            "the quincunxes faced, that the potential of the yod trully come alive",
+            "the quincunxes faced, that the potential of the yod truly come alive",
             "A kind of fatedness is associated with yod"
         ],
 
@@ -983,13 +983,13 @@ class Keywords:
             "for using rather than ignoring their considerable gifts",
             "The person will be good at finding creative solutions to difficult dilemmas",
             "Their life may contain many paradoxes and situations which might on the surface "
-            "seem irreconciable, but there seems to be a facility for working creatively "
+            "seem irreconcilable, but there seems to be a facility for working creatively "
             "with such situations"
         ],
 
         GRAND_SEXTILE: [
             "This very rear pattern indicates a markedly versatile character who with little "
-            "effort may be especially able to create or discover opportunities to utilise the "
+            "effort may be especially able to create or discover opportunities to utilize the "
             "full range of their considerable resources",
         ],
 
@@ -1011,7 +1011,7 @@ class Keywords:
             "Subjective",
             "Energy levels likely to fluctuate",
             "Inner life may be more real than their external experiences",
-            "Perceive situations in symbolic terms making a network of ocnnections instinctively"
+            "Perceive situations in symbolic terms making a network of connections instinctively"
         ],
         
         CRESCENT: [
@@ -1020,7 +1020,7 @@ class Keywords:
             "Working hard to gain a foothold yet their pioneering spirit is somehow dashed against "
             "the rocks of destiny",
             "Ahead of their time",
-            "Heighly motivated and succesful if they can persist in the face of resistance",
+            "Highly motivated and successful if they can persist in the face of resistance",
             "May feel as if life is frequently two steps forward and one step back"
         ],
         
@@ -1031,9 +1031,9 @@ class Keywords:
             "Have more than their fair share of challenges in life",
             "Adventurous",
             "Willing to explore new ground",
-            "Hold theirselves back through overreflection or inner uncertainties",
-            "Trine or No aspect type: Are willing to embrace new potentials but less forcefull "
-            "on the dissmantling of the old",
+            "Hold their selves back through over reflection or inner uncertainties",
+            "Trine or No aspect type: Are willing to embrace new potentials but less forceful "
+            "on the dismantling of the old",
             "Square or cuspal Sesquiquadrate type: Burning bridges behind them as they thrive "
             "by tearing down the outmoded structures"
         ],
@@ -1057,9 +1057,9 @@ class Keywords:
             "Having a clear sense of themselves or a conscious sense of purpose",
             "Vital importance of personal relationships",
             "Relationships might be important in their lives or rejected altogether",
-            "Pattern of life experiences rising to a peak folowed by a crisis",
+            "Pattern of life experiences rising to a peak followed by a crisis",
             "Illumination or revelation through psychic insight for some",
-            "Know the joy of fullfilment, reconciliation and achievement or the pull or stalking opposing "
+            "Know the joy of fulfillment, reconciliation and achievement or the pull or stalking opposing "
             "circumstances especially for opposition types",
             "Perceive ways to rise above difficulties",
             "Move forward and transform themselves and possibly other people",
@@ -1069,7 +1069,7 @@ class Keywords:
         DISSEMINATING: [
             "Teachers",
             "Communicators",
-            "The crusadres of the lunation cycle",
+            "The crusaders of the lunation cycle",
             "Passionate desire to share experiences that make impression on them",
             "Want to demonstrate their acquired knowledge",
             "Awareness of participating on a greater whole",
@@ -1078,7 +1078,7 @@ class Keywords:
             "Uplifted by a cause, movement, religion or philosophy",
             "Capacity to translate vision to action",
             "Difficulties if emotional climate rises too fast or too height",
-            "Tempering of passion with dissernment is neccessary for lasting achievement",
+            "Tempering of passion with discernment is necessary for lasting achievement",
             "May become lost within their own cause or loose touch with personal responsibility "
             "creating a sense of powerlessness"
         ],
@@ -1087,10 +1087,10 @@ class Keywords:
             "Thoughtfull",
             "Philosophical",
             "Want to consolidate and actualize their ideologies",
-            "Important to conserve a personal or social principle that they fight to maintain if neccessary",
+            "Important to conserve a personal or social principle that they fight to maintain if necessary",
             "Inflexible and defensive in the face of criticism",
             "Can perceive a seed future arising from the ashes of the past",
-            "Pioneering spirit obehind future systems of thought or concrete manifestations that may "
+            "Pioneering spirit behind future systems of thought or concrete manifestations that may "
             "outlast them individually",
             "Reformers attuned to the nature of progress setting up some lasting legacy",
             "Ironic sense of humour"
@@ -1099,11 +1099,11 @@ class Keywords:
         BALSAMIC: [
             "Need for space, quite and solitude",
             "Capable of immense sacrifice surrendering even this need if occasion calls for it",
-            "Feeling like a melting pot in which something grester than themselves is being gestated",
+            "Feeling like a melting pot in which something greater than themselves is being gestated",
             "Creative inspiration",
             "Prophetic vision",
             "May simply feel confused, lost or overstretched",
-            "Desire to revolutionize and transform intensly felt sometimes to the extreme",
+            "Desire to revolutionize and transform intensely felt sometimes to the extreme",
             "Reaches out to the future and outgrows the past in a conscious manner",
             "Bridge between past and future",
             "Aware both of the endings inherent in the beginnings and the beginnings inherent in endings",
@@ -1117,7 +1117,7 @@ class Keywords:
             "Life journey",
             "Evolution process",
             "Connection between past, present and future",
-            "An alchemical factory to transform deeply engraved behaviours into new sources of energy",
+            "An alchemical factory to transform deeply engraved behaviors into new sources of energy",
             "Soft aspects: Indicate a flow of energy that is likely to provide support for the journey "
             "of the Nodal Axis",
             "Hard aspects: Are likely to be experienced as a more active force"
@@ -1126,13 +1126,13 @@ class Keywords:
         NORTH_NODE: [
             "Aspiration to be more than already are",
             "Experiences that stimulate us and inspire our progress",
-            "Pathway towards personal wisedom",
+            "Pathway towards personal wisdom",
             "Where we break new ground",
             "Engage with something that we do not feel  naturally well equipped",
             "Takes work and application of intention and will",
-            "We draw uppon energies greater than ourselves",
-            "Allow unrecognised possibilities to come to light",
-            "Becomming aware of the dreams we have but never realized"
+            "We draw upon energies greater than ourselves",
+            "Allow unrecognized possibilities to come to light",
+            "Becoming aware of the dreams we have but never realized"
         ],
         
         SOUTH_NODE: [
@@ -1164,7 +1164,7 @@ class Keywords:
 
         EAST: [
             "Primarily subjective approach to life",
-            "Focus on personal rresponse to experiences",
+            "Focus on personal response to experiences",
             "(-) Relationships to others dominate their lives" 
         ],
 
@@ -1212,7 +1212,7 @@ class Keywords:
         ],
 
         SELF_EXPRESSION: [
-            "Emerginf identity seeks to express itself",
+            "Emerging identity seeks to express itself",
             "Will work to discover personal talents",
             "Refines and seeks to perfect talents"
         ],
